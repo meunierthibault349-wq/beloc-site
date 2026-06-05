@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BeLoc — Location de Véhicules Premium en Auvergne-Rhône-Alpes</title>
+<meta name="description" content="BeLoc, location de véhicules luxe et hautes performances en Auvergne-Rhône-Alpes. Audi RS3, Golf R, Alpine. Réservation 100% en ligne." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='120' height='120' rx='16' fill='%230D0D0D'/%3E%3Ctext x='50%25' y='62%25' font-family='serif' font-size='62' font-weight='700' fill='%23C9A96E' text-anchor='middle' dominant-baseline='middle'%3EB%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+
+/* ================================================================
+   BELOC — Location de Véhicules Premium
+   Palette : Noir #0D0D0D · Or #C9A96E · Blanc cassé #F0EDE8
+   Type : Cormorant Garamond (titres) · Inter (corps)
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0D0D0D;
+  --black-2:  #141414;
+  --black-3:  #1C1C1C;
+  --black-4:  #242424;
+  --gold:     #C9A96E;
+  --gold-2:   #E0C48A;
+  --gold-dim: rgba(201,169,110,0.15);
+  --cream:    #F0EDE8;
+  --cream-2:  #D4CFC8;
+  --muted:    rgba(240,237,232,0.45);
+  --border:   rgba(201,169,110,0.18);
+  --border-2: rgba(240,237,232,0.08);
+  --red:      #C0392B;
+
+  --font-title: 'Cormorant Garamond', Georgia, serif;
+  --font-body:  'Inter', system-ui, sans-serif;
+
+  --max: 1200px;
+  --nav-h: 72px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ────────────────────────────────────────────────────── */
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  transition: background .4s, backdrop-filter .4s;
+}
+
+nav.scrolled {
+  background: rgba(13,13,13,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-2);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+
+.logo span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cream-2);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.btn-nav {
+  background: var(--gold);
+  color: var(--black) !important;
+  padding: 10px 24px;
+  border-radius: 2px;
+  font-weight: 600 !important;
+  transition: background .2s !important;
+}
+
+.btn-nav:hover { background: var(--gold-2) !important; color: var(--black) !important; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--cream);
+  transition: .3s;
+}
+
+/* ── HERO ───────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(13,13,13,.85) 0%, rgba(13,13,13,.55) 50%, rgba(13,13,13,.88) 100%),
+    linear-gradient(135deg, #1a0a00 0%, #0d0d0d 40%, #0a0f1a 100%);
+}
+
+/* Véhicule silhouette décorative */
+.hero-accent {
+  position: absolute;
+  right: -60px;
+  bottom: 0;
+  width: 70%;
+  height: 80%;
+  background: linear-gradient(135deg, transparent 30%, rgba(201,169,110,.04) 100%);
+  border-left: 1px solid rgba(201,169,110,.06);
+  transform: skewX(-8deg);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 860px;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .5;
+}
+
+.hero h1 {
+  font-family: var(--font-title);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 2px;
+  transition: background .25s, transform .2s;
+}
+
+.btn-primary:hover { background: var(--gold-2); transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-block;
+  border: 1px solid rgba(201,169,110,.4);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 2px;
+  transition: border-color .25s, color .25s;
+}
+
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { opacity: .4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(.7); }
+}
+
+/* ── STATS BAND ─────────────────────────────────────────────── */
+
+.stats-band {
+  background: var(--black-2);
+  border-top: 1px solid var(--border-2);
+  border-bottom: 1px solid var(--border-2);
+  padding: 32px 40px;
+}
+
+.stats-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-title);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: var(--border-2);
+}
+
+/* ── FLEET ──────────────────────────────────────────────────── */
+
+section { padding: 100px 40px; }
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 600;
+  line-height: 1.08;
+  color: var(--cream);
+  margin-bottom: 20px;
+}
+
+.section-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+#fleet {
+  background: var(--black);
+}
+
+.fleet-header {
+  max-width: var(--max);
+  margin: 0 auto 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.fleet-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.fleet-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--black-3);
+}
+
+.fleet-card:first-child,
+.fleet-card:nth-child(4) {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+
+.fleet-card-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+
+.fleet-card:hover .fleet-card-bg {
+  transform: scale(1.04);
+}
+
+/* Gradient backgrounds per vehicle */
+.card-rs3 .fleet-card-bg {
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #0d0d0d 100%);
+}
+.card-golf-r .fleet-card-bg {
+  background: linear-gradient(135deg, #0a0f20 0%, #0e1830 40%, #0d0d0d 100%);
+}
+.card-golf-8 .fleet-card-bg {
+  background: linear-gradient(135deg, #0f0f14 0%, #18182a 40%, #0d0d0d 100%);
+}
+.card-clio-alpine .fleet-card-bg {
+  background: linear-gradient(135deg, #0a1a0a 0%, #0d200d 40%, #0d0d0d 100%);
+}
+.card-clio-5 .fleet-card-bg {
+  background: linear-gradient(135deg, #14100a 0%, #221a0f 40%, #0d0d0d 100%);
+}
+
+.fleet-card-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 80px;
+  opacity: .07;
+  transition: opacity .3s;
+  user-select: none;
+}
+
+.fleet-card:hover .fleet-card-icon { opacity: .12; }
+
+.fleet-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,.96) 0%, rgba(13,13,13,.3) 50%, transparent 100%);
+}
+
+.fleet-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 28px 24px;
+}
+
+.fleet-card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.fleet-card-tag.tag-new { background: #2d9a4e; color: #fff; }
+.fleet-card-tag.tag-sport { background: var(--red); color: #fff; }
+
+.fleet-card-name {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.fleet-card-specs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.fleet-spec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.fleet-spec-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.fleet-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fleet-card-price {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.fleet-card-price span {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.btn-reserve {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid rgba(201,169,110,.35);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 2px;
+  transition: background .2s, color .2s;
+}
+
+.btn-reserve:hover { background: var(--gold); color: var(--black); }
+
+/* Photo placeholder overlay */
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: .18;
+}
+
+.photo-placeholder-icon {
+  font-size: 48px;
+}
+
+.photo-placeholder-text {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+/* ── HOW IT WORKS ────────────────────────────────────────────── */
+
+#how {
+  background: var(--black-2);
+  border-top: 1px solid var(--border-2);
+}
+
+.how-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.how-header .section-sub {
+  margin: 0 auto;
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 64px;
+}
+
+.how-step {
+  padding: 40px 32px;
+  background: var(--black-3);
+  position: relative;
+}
+
+.how-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.how-step:hover::before { opacity: 1; }
+
+.how-step-num {
+  font-family: var(--font-title);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: .2;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.how-step-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.how-step-title {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.how-step-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.how-cta {
+  text-align: center;
+}
+
+/* ── EXPERIENCE ──────────────────────────────────────────────── */
+
+#experience {
+  background: var(--black);
+  overflow: hidden;
+}
+
+.experience-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.experience-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.experience-visual-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a0800 0%, #0d0d0d 60%, #0a0f1a 100%);
+}
+
+.experience-visual-frame {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.experience-visual-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: .6;
+}
+
+.corner-tl { top: 16px; left: 16px; border-width: 1px 0 0 1px; }
+.corner-tr { top: 16px; right: 16px; border-width: 1px 1px 0 0; }
+.corner-bl { bottom: 16px; left: 16px; border-width: 0 0 1px 1px; }
+.corner-br { bottom: 16px; right: 16px; border-width: 0 1px 1px 0; }
+
+.experience-content { }
+
+.experience-list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.experience-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--black-2);
+  border: 1px solid var(--border-2);
+  border-radius: 2px;
+  transition: border-color .2s;
+}
+
+.experience-item:hover { border-color: var(--border); }
+
+.experience-item-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.experience-item-title {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.experience-item-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── ZONE ────────────────────────────────────────────────────── */
+
+#zone {
+  background: var(--black-2);
+  border-top: 1px solid var(--border-2);
+  padding: 80px 40px;
+}
+
+.zone-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.zone-map {
+  aspect-ratio: 1;
+  background: var(--black-3);
+  border: 1px solid var(--border-2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+
+.zone-map-pin {
+  font-size: 48px;
+}
+
+.zone-cities {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zone-city {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 13px;
+  color: var(--cream-2);
+  letter-spacing: .05em;
+}
+
+/* ── RESERVATION ─────────────────────────────────────────────── */
+
+#reservation {
+  background: var(--black);
+  padding: 100px 40px;
+}
+
+.reservation-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reservation-inner .section-title { margin-bottom: 12px; }
+.reservation-inner .section-sub { margin: 0 auto 56px; }
+
+.reservation-form {
+  background: var(--black-2);
+  border: 1px solid var(--border-2);
+  border-radius: 2px;
+  padding: 48px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+.form-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-control {
+  background: var(--black-3);
+  border: 1px solid var(--border-2);
+  border-radius: 2px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-control:focus { border-color: var(--gold); }
+.form-control option { background: var(--black-3); }
+
+.form-control::placeholder { color: rgba(240,237,232,.2); }
+
+.form-submit {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-full {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 48px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background .25s, transform .2s;
+}
+
+.btn-full:hover { background: var(--gold-2); transform: translateY(-1px); }
+
+.form-reassurance {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-reassurance span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+
+#faq {
+  background: var(--black-2);
+  border-top: 1px solid var(--border-2);
+  padding: 100px 40px;
+}
+
+.faq-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.faq-item {
+  background: var(--black-3);
+  border: 1px solid var(--border-2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  padding: 22px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: color .2s;
+}
+
+.faq-question:hover { color: var(--gold); }
+
+.faq-icon {
+  font-size: 20px;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform .3s;
+  line-height: 1;
+}
+
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+
+.faq-item.open .faq-answer { max-height: 200px; }
+
+.faq-answer-inner {
+  padding: 0 24px 22px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  border-top: 1px solid var(--border-2);
+  padding-top: 16px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+
+footer {
+  background: var(--black-2);
+  border-top: 1px solid var(--border-2);
+  padding: 48px 40px 32px;
+}
+
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border-2);
+  margin-bottom: 28px;
+}
+
+.footer-brand .logo { font-size: 24px; }
+
+.footer-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  max-width: 220px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.footer-col a:hover { color: var(--cream); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.footer-legal a:hover { color: var(--cream); }
+
+/* ── MOBILE NAV ──────────────────────────────────────────────── */
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(13,13,13,.98);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: .02em;
+  transition: color .2s;
+}
+
+.mobile-menu a:hover { color: var(--gold); }
+
+.mobile-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 8px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .fleet-grid { grid-template-columns: 1fr 1fr; }
+  .fleet-card:first-child, .fleet-card:nth-child(4) { grid-column: span 2; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+  .experience-inner { grid-template-columns: 1fr; gap: 48px; }
+  .zone-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-h: 60px; }
+
+  nav { padding: 0 20px; }
+  section { padding: 72px 20px; }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero h1 { font-size: clamp(40px, 11vw, 64px); }
+
+  .stats-band { padding: 24px 20px; }
+  .stat-divider { display: none; }
+
+  .fleet-grid { grid-template-columns: 1fr; gap: 2px; }
+  .fleet-card:first-child, .fleet-card:nth-child(4) { grid-column: span 1; aspect-ratio: 16/9; }
+
+  .fleet-header { flex-direction: column; align-items: flex-start; }
+
+  .how-steps { grid-template-columns: 1fr; }
+
+  .form-row { grid-template-columns: 1fr; }
+  .reservation-form { padding: 28px 20px; }
+
+  #zone { padding: 72px 20px; }
+  #faq { padding: 72px 20px; }
+
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ─────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">Be<span>Loc</span></a>
+    <ul class="nav-links">
+      <li><a href="#fleet">Notre flotte</a></li>
+      <li><a href="#how">Comment ça marche</a></li>
+      <li><a href="#experience">Pourquoi nous</a></li>
+      <li><a href="#zone">Zone</a></li>
+      <li><a href="#reservation" class="btn-nav">Réserver</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#fleet" class="mobile-link">Notre flotte</a>
+  <a href="#how" class="mobile-link">Comment ça marche</a>
+  <a href="#experience" class="mobile-link">Pourquoi nous</a>
+  <a href="#zone" class="mobile-link">Notre zone</a>
+  <a href="#reservation" class="mobile-link">Réserver</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Auvergne-Rhône-Alpes</div>
+    <h1>Conduisez<br /><em>l'extraordinaire.</em><br />Pour un jour.</h1>
+    <p class="hero-sub">Véhicules hautes performances et premium en location. 100% en ligne, sans agence, sans compromis.</p>
+    <div class="hero-ctas">
+      <a href="#fleet" class="btn-primary">Voir la flotte</a>
+      <a href="#how" class="btn-outline">Comment ça marche</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── STATS BAND ─────────────────────────────────────────────── -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Véhicules disponibles</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">En ligne</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">ARA</div>
+      <div class="stat-label">Région couverte</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">24h</div>
+      <div class="stat-label">Confirmation</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FLEET ──────────────────────────────────────────────────── -->
+<section id="fleet">
+  <div class="fleet-header">
+    <div>
+      <div class="section-eyebrow">Notre flotte</div>
+      <h2 class="section-title">Choisissez<br />votre monture.</h2>
+    </div>
+    <p class="section-sub">Des véhicules sélectionnés pour leur caractère, leurs performances et leur prestige. Millésimes récents, état impeccable.</p>
+  </div>
+
+  <div class="fleet-grid">
+
+    <!-- Audi RS3 — flagship -->
+    <div class="fleet-card card-rs3">
+      <div class="fleet-card-bg"></div>
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🚗</div>
+        <div class="photo-placeholder-text">Photo Audi RS3</div>
+      </div>
+      <div class="fleet-card-overlay"></div>
+      <div class="fleet-card-content">
+        <span class="fleet-card-tag tag-sport">Phare de flotte</span>
+        <div class="fleet-card-name">Audi RS3 2025</div>
+        <div class="fleet-card-specs">
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>400 ch</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>0-100 en 3,8 s</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>Quattro AWD</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>5 places</div>
+        </div>
+        <div class="fleet-card-footer">
+          <div class="fleet-card-price">À partir de 350€ <span>/ jour</span></div>
+          <a href="#reservation" class="btn-reserve">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Golf 8R -->
+    <div class="fleet-card card-golf-r">
+      <div class="fleet-card-bg"></div>
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🚗</div>
+        <div class="photo-placeholder-text">Photo Golf 8R</div>
+      </div>
+      <div class="fleet-card-overlay"></div>
+      <div class="fleet-card-content">
+        <span class="fleet-card-tag tag-sport">Sport</span>
+        <div class="fleet-card-name">Golf 8R 2025</div>
+        <div class="fleet-card-specs">
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>333 ch</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>4Motion AWD</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>5 places</div>
+        </div>
+        <div class="fleet-card-footer">
+          <div class="fleet-card-price">À partir de 250€ <span>/ jour</span></div>
+          <a href="#reservation" class="btn-reserve">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Golf 8 -->
+    <div class="fleet-card card-golf-8">
+      <div class="fleet-card-bg"></div>
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🚗</div>
+        <div class="photo-placeholder-text">Photo Golf 8</div>
+      </div>
+      <div class="fleet-card-overlay"></div>
+      <div class="fleet-card-content">
+        <span class="fleet-card-tag">Premium</span>
+        <div class="fleet-card-name">Golf 8 2025</div>
+        <div class="fleet-card-specs">
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>150 ch</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>DSG7</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>5 places</div>
+        </div>
+        <div class="fleet-card-footer">
+          <div class="fleet-card-price">À partir de 140€ <span>/ jour</span></div>
+          <a href="#reservation" class="btn-reserve">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clio 6 Alpine — wide -->
+    <div class="fleet-card card-clio-alpine">
+      <div class="fleet-card-bg"></div>
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🚗</div>
+        <div class="photo-placeholder-text">Photo Clio 6 Alpine</div>
+      </div>
+      <div class="fleet-card-overlay"></div>
+      <div class="fleet-card-content">
+        <span class="fleet-card-tag tag-new">Nouveau 2026</span>
+        <div class="fleet-card-name">Clio 6 Alpine 2026</div>
+        <div class="fleet-card-specs">
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>130 ch</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>Série Alpine</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>5 places</div>
+        </div>
+        <div class="fleet-card-footer">
+          <div class="fleet-card-price">À partir de 120€ <span>/ jour</span></div>
+          <a href="#reservation" class="btn-reserve">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clio 5 -->
+    <div class="fleet-card card-clio-5">
+      <div class="fleet-card-bg"></div>
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🚗</div>
+        <div class="photo-placeholder-text">Photo Clio 5</div>
+      </div>
+      <div class="fleet-card-overlay"></div>
+      <div class="fleet-card-content">
+        <span class="fleet-card-tag">Accès</span>
+        <div class="fleet-card-name">Clio 5 2025</div>
+        <div class="fleet-card-specs">
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>90 ch</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>Automatique</div>
+          <div class="fleet-spec"><div class="fleet-spec-dot"></div>5 places</div>
+        </div>
+        <div class="fleet-card-footer">
+          <div class="fleet-card-price">À partir de 90€ <span>/ jour</span></div>
+          <a href="#reservation" class="btn-reserve">Réserver</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
+<section id="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <div class="section-eyebrow">Processus</div>
+      <h2 class="section-title">Simple. Rapide.<br /><em>En ligne.</em></h2>
+      <p class="section-sub">De la sélection du véhicule à la remise des clés, tout se passe en quelques clics. Aucune agence à visiter.</p>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-icon">🔍</div>
+        <div class="how-step-title">Je choisis</div>
+        <p class="how-step-text">Je parcours la flotte, je compare les modèles et je sélectionne le véhicule qui correspond à mon envie.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-icon">📅</div>
+        <div class="how-step-title">Je réserve</div>
+        <p class="how-step-text">Je choisis mes dates, mon lieu de prise en charge, et je règle en ligne en toute sécurité.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-icon">🔑</div>
+        <div class="how-step-title">Je récupère</div>
+        <p class="how-step-text">Je récupère le véhicule au point convenu. Remise des clés rapide, état des lieux complet.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <div class="how-step-icon">🏎️</div>
+        <div class="how-step-title">Je profite</div>
+        <p class="how-step-text">Je roule. Assistance disponible 7j/7 si besoin. Je restitue le véhicule à la date prévue.</p>
+      </div>
+    </div>
+
+    <div class="how-cta">
+      <a href="#reservation" class="btn-primary">Commencer une réservation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="experience-inner">
+    <div class="experience-visual">
+      <div class="experience-visual-bg"></div>
+      <div class="experience-visual-corner corner-tl"></div>
+      <div class="experience-visual-corner corner-tr"></div>
+      <div class="experience-visual-corner corner-bl"></div>
+      <div class="experience-visual-corner corner-br"></div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.12;font-size:96px;">🚗</div>
+    </div>
+    <div class="experience-content">
+      <div class="section-eyebrow">Pourquoi BeLoc</div>
+      <h2 class="section-title">Une expérience<br />pensée différemment.</h2>
+      <div class="experience-list">
+        <div class="experience-item">
+          <div class="experience-item-icon">🌐</div>
+          <div>
+            <div class="experience-item-title">100% en ligne</div>
+            <p class="experience-item-text">Pas de file d'attente, pas d'agence à visiter. Réservation, paiement et documents, tout depuis votre téléphone.</p>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="experience-item-icon">✨</div>
+          <div>
+            <div class="experience-item-title">Flotte récente et entretenue</div>
+            <p class="experience-item-text">Millésimes 2025-2026, kilométrage maîtrisé, entretien rigoureux. Vous montez dans un véhicule impeccable, toujours.</p>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="experience-item-icon">🛡️</div>
+          <div>
+            <div class="experience-item-title">Assistance & sérénité</div>
+            <p class="experience-item-text">Assistance disponible 7j/7 pendant votre location. Assurance tous risques incluse. Vous roulez l'esprit libre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ZONE ───────────────────────────────────────────────────── -->
+<section id="zone">
+  <div class="zone-inner">
+    <div>
+      <div class="section-eyebrow">Disponibilité</div>
+      <h2 class="section-title">Toute<br />l'Auvergne-<br />Rhône-Alpes.</h2>
+      <p class="section-sub">BeLoc opère sur l'ensemble de la région. Prise en charge au point de votre choix, dans les grandes villes comme dans les zones plus rurales.</p>
+      <div class="zone-cities">
+        <div class="zone-city">Lyon</div>
+        <div class="zone-city">Clermont-Ferrand</div>
+        <div class="zone-city">Grenoble</div>
+        <div class="zone-city">Saint-Étienne</div>
+        <div class="zone-city">Vichy</div>
+        <div class="zone-city">Annecy</div>
+        <div class="zone-city">Chambéry</div>
+        <div class="zone-city">Valence</div>
+      </div>
+    </div>
+    <div class="zone-map">
+      <div class="zone-map-pin">📍</div>
+      <div>Auvergne-Rhône-Alpes</div>
+      <div style="font-size:11px;opacity:.5;">Carte interactive à venir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESERVATION ────────────────────────────────────────────── -->
+<section id="reservation">
+  <div class="reservation-inner">
+    <div class="section-eyebrow">Réservation</div>
+    <h2 class="section-title">Prêt à<br /><em>prendre le volant ?</em></h2>
+    <p class="section-sub">Complétez le formulaire ci-dessous, nous revenons vers vous sous 24h pour confirmer la disponibilité et finaliser votre location.</p>
+
+    <form class="reservation-form" id="reservationForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Véhicule souhaité</label>
+          <select class="form-control" name="vehicle" required>
+            <option value="" disabled selected>Choisissez un modèle</option>
+            <option value="rs3">Audi RS3 2025 — dès 350€/j</option>
+            <option value="golf-r">Golf 8R 2025 — dès 250€/j</option>
+            <option value="golf-8">Golf 8 2025 — dès 140€/j</option>
+            <option value="clio-alpine">Clio 6 Alpine 2026 — dès 120€/j</option>
+            <option value="clio-5">Clio 5 2025 — dès 90€/j</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lieu de prise en charge</label>
+          <select class="form-control" name="location">
+            <option value="" disabled selected>Votre ville</option>
+            <option>Lyon</option>
+            <option>Clermont-Ferrand</option>
+            <option>Grenoble</option>
+            <option>Saint-Étienne</option>
+            <option>Vichy</option>
+            <option>Annecy</option>
+            <option>Chambéry</option>
+            <option>Valence</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date de début</label>
+          <input type="date" class="form-control" name="date_start" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date de fin</label>
+          <input type="date" class="form-control" name="date_end" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Prénom & Nom</label>
+          <input type="text" class="form-control" name="name" placeholder="Jean Dupont" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input type="tel" class="form-control" name="phone" placeholder="+33 6 00 00 00 00" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" placeholder="jean@email.com" required />
+        </div>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-full">Envoyer ma demande</button>
+      </div>
+
+      <div class="form-reassurance">
+        <span>🔒 Paiement sécurisé</span>
+        <span>✓ Réponse sous 24h</span>
+        <span>✓ Assurance incluse</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────────────────────────────── -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <div class="section-eyebrow">Questions fréquentes</div>
+      <h2 class="section-title">Vous avez<br />des questions ?</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Quels documents sont nécessaires pour louer ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Un permis de conduire valide (au moins 3 ans pour les modèles sport), une pièce d'identité et une carte bancaire pour la caution. Tout se transmet en ligne avant la prise en charge.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Y a-t-il un âge minimum pour louer ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">21 ans minimum, avec au moins 2 ans de permis pour la Clio 5 et la Golf 8. 25 ans requis pour la Golf 8R, la Clio Alpine et l'Audi RS3.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Où se fait la remise des clés ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">La remise des clés se fait au point convenu lors de votre réservation. Nous intervenons dans toute la région Auvergne-Rhône-Alpes. Des frais de déplacement peuvent s'appliquer selon la localisation.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          L'assurance est-elle incluse ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Oui, tous nos véhicules sont assurés tous risques. Une franchise s'applique en cas de sinistre. Vous pouvez réduire ou annuler cette franchise lors de la réservation.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Peut-on louer pour plusieurs jours ou un weekend ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolument. Nous proposons des tarifs à la journée, au weekend et à la semaine. Des réductions sont appliquées pour les locations de 3 jours et plus.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">Be<span>Loc</span></a>
+        <p class="footer-tagline">Location de véhicules premium en Auvergne-Rhône-Alpes. 100% en ligne.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#fleet">Notre flotte</a></li>
+            <li><a href="#how">Comment ça marche</a></li>
+            <li><a href="#experience">Pourquoi BeLoc</a></li>
+            <li><a href="#zone">Notre zone</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#reservation">Faire une réservation</a></li>
+            <li><a href="mailto:contact@beloc.fr">contact@beloc.fr</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 BeLoc. Tous droits réservés. Site réalisé par <a href="#" style="color:var(--gold);text-decoration:none;">Lumi</a>.</div>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Nav scroll ────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── Mobile menu ───────────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// ── FAQ accordion ─────────────────────────────────────────────
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── Form submission ───────────────────────────────────────────
+document.getElementById('reservationForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-full');
+  btn.textContent = 'Demande envoyée ✓';
+  btn.style.background = '#2d9a4e';
+  btn.disabled = true;
+});
+</script>
+</body>
+</html>
