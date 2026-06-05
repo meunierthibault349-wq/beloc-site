@@ -611,7 +611,7 @@ a { color: inherit; text-decoration: none; }
 .toast svg { width: 17px; height: 17px; color: var(--gold); }
 
 /* ============================================================
-   RESPONSIVE
+   TABLETTE / PETIT DESKTOP — 1080px
    ============================================================ */
 @media (max-width: 1080px) {
   .ftr-grid { grid-template-columns: 1fr 1fr; gap: 36px 28px; }
@@ -623,100 +623,204 @@ a { color: inherit; text-decoration: none; }
   .book-layout { grid-template-columns: 1fr; }
   .summary { position: static; order: -1; }
 }
-@media (max-width: 760px) {
-  :root { --gutter: 20px; }
 
-  /* Header */
-  .hdr-nav, .hdr-phone { display: none; }
-  .hdr-right .btn { display: none; }
-  .burger { display: inline-flex; }
-  .hdr-inner { height: 62px; }
-  .pad-top { padding-top: 62px; }
-
-  /* Hero */
-  .hero { min-height: 100svh; }
-  .hero h1 { font-size: clamp(40px, 11vw, 72px); margin-top: 16px; }
-  .hero-content { padding-bottom: clamp(72px, 12vh, 96px); }
-  .hero-sub { flex-direction: column; align-items: stretch; gap: 14px; margin-top: 28px; }
-  .hero-sub .btn { width: 100%; justify-content: center; }
-  .hero-sub .tlink { display: none; }
-  .hero-stats { gap: 0; justify-content: space-between; border-top: 1px solid rgba(244,241,234,.08); padding-top: 22px; margin-top: 28px; }
-  .hero-stat .n { font-size: 28px; }
-  .hero-stat .l { font-size: 9.5px; letter-spacing: .1em; }
-  .hero-scroll { display: none; }
-
-  /* Sections */
-  .section { padding-block: clamp(48px, 8vw, 80px); }
-  .section-tight { padding-block: clamp(36px, 6vw, 60px); }
-  .shead { flex-direction: column; align-items: flex-start; }
-  .shead h2 { font-size: clamp(30px, 9vw, 52px); }
-
-  /* Fleet rail */
-  .card-w-rail { flex: 0 0 82vw; }
-  .filters { top: 62px; }
-  .hero-stats { margin-top: 32px !important; }
-
-  /* Hero gradient mobile — couverture sombre pleine largeur sur toute la zone texte */
-  .hero-media::after {
-    background:
-      linear-gradient(180deg,
-        rgba(8,8,10,.55) 0%,
-        rgba(8,8,10,.15) 18%,
-        rgba(8,8,10,.65) 48%,
-        rgba(8,8,10,.90) 78%,
-        rgba(8,8,10,.80) 92%,
-        #FAFBFC 100%),
-      linear-gradient(to bottom, rgba(8,8,10,.25), rgba(8,8,10,.25));
+/* ============================================================
+   MOBILE — refonte complète ≤ 768px
+   Conçu pour iPhone / Android portrait, touch-first
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 20px;
+    --radius: 6px;
+    --radius-lg: 10px;
   }
 
-  /* Grids */
-  .steps { grid-template-columns: 1fr; }
-  .assure { grid-template-columns: 1fr; gap: 28px; }
-  .fleet-grid { grid-template-columns: 1fr; }
-  .howsteps { grid-template-columns: 1fr; }
-  .howstep { min-height: auto; }
-  .specsheet { grid-template-columns: 1fr; }
-  .about-hero, .contact-grid { grid-template-columns: 1fr; }
-  .about-figures { grid-template-columns: 1fr; gap: 22px; }
+  /* ---- Header ---- */
+  .hdr-nav, .hdr-phone, .hdr-right .btn { display: none; }
+  .burger { display: inline-flex; }
+  .hdr-inner { height: 60px; }
+  .pad-top { padding-top: 60px; }
 
-  /* Booking */
+  /* ---- Hero : dégradé uniforme, lisible sur toute la largeur ---- */
+  .hero { min-height: 100svh; align-items: flex-end; }
+  .hero-media::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(5,5,7,.50) 0%,
+      rgba(5,5,7,.12) 22%,
+      rgba(5,5,7,.50) 50%,
+      rgba(5,5,7,.88) 76%,
+      rgba(5,5,7,.92) 90%,
+      rgba(5,5,7,.60) 100%
+    );
+  }
+  .hero-content {
+    padding-bottom: max(72px, env(safe-area-inset-bottom, 0px) + 48px);
+    padding-bottom: clamp(72px, 12vh, 100px);
+  }
+  .hero h1 {
+    font-size: clamp(36px, 10.5vw, 60px);
+    margin-top: 10px;
+    line-height: 1.04;
+  }
+  .hero-h1 .l1 { max-width: 100%; }
+  .hero-sub {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .hero-sub .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
+  .hero-sub .tlink { display: none; }
+  .hero-sub > div:last-child { display: none; }
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,.14);
+    padding-top: 18px;
+    margin-top: 24px;
+  }
+  .hero-stat .n { font-size: 24px; }
+  .hero-stat .l { font-size: 9px; letter-spacing: .08em; }
+  .hero-scroll { display: none; }
+
+  /* ---- Sections ---- */
+  .section { padding-block: 48px 56px; }
+  .section-tight { padding-block: 36px 44px; }
+  .shead { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 24px; }
+  .shead h2 { font-size: clamp(26px, 8vw, 42px); margin-top: 6px; }
+  .shead .lede { font-size: 14.5px; max-width: 100%; }
+  .shead > *:last-child:not(:first-child) { display: none; }
+
+  /* ---- Flotte carousel ---- */
+  .card-w-rail { flex: 0 0 86vw; }
+  .rail { gap: 14px; }
+  .rail-pad { padding-inline: var(--gutter); }
+
+  /* ---- Véhicule card ---- */
+  .vcard-name { font-size: 24px; }
+  .vcard-specs { gap: 12px; }
+  .vspec .v { font-size: 18px; }
+  .price .amt { font-size: 26px; }
+
+  /* ---- Comment ça marche ---- */
+  .steps { grid-template-columns: 1fr; }
+  .step { padding: 26px 20px; gap: 12px; }
+  .step h3 { font-size: 22px; }
+  .step p { font-size: 14px; }
+
+  /* ---- Assurance ---- */
+  .assure { grid-template-columns: 1fr; gap: 20px; }
+  .assure-item h4 { font-size: 20px; }
+  .assure-item p { font-size: 14px; }
+
+  /* ---- Flotte catalogue ---- */
+  .fleet-grid { grid-template-columns: 1fr; gap: 18px; }
+  .filters { top: 60px; }
+  .filters-inner { gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .chip-row { flex-wrap: nowrap; }
+  .sortsel { display: none; }
+
+  /* ---- Fiche véhicule ---- */
+  .detail-layout { grid-template-columns: 1fr; }
+  .detail-side { position: static; }
+  .specsheet { grid-template-columns: 1fr 1fr; }
+  .detail-thumbs { flex-wrap: wrap; gap: 8px; }
+  .detail-thumb { flex: 1 1 calc(33% - 6px); }
+
+  /* ---- Réservation ---- */
+  .book-layout { grid-template-columns: 1fr; }
+  .summary { position: static; order: -1; }
   .field-row, .field-row-3 { grid-template-columns: 1fr; }
+  .stepper { overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .stepper::-webkit-scrollbar { display: none; }
   .stepper-item .lbl { display: none; }
-  .stepper { overflow-x: auto; padding-bottom: 4px; }
-  .stepper-line { min-width: 12px; }
+  .stepper-line { min-width: 10px; }
   .sticky-cta { display: flex; }
   .sticky-cta .btn { flex: 1; justify-content: center; }
+  .sticky-cta { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+  .buybox { padding: 20px; }
+  .tier { padding: 14px; }
+  .tier-r { font-size: 21px; }
 
-  /* Detail */
-  .detail-thumbs { flex-wrap: wrap; }
-  .detail-thumb { flex: 1 1 calc(33% - 8px); }
+  /* ---- Comment ça marche (howsteps) ---- */
+  .howsteps { grid-template-columns: 1fr; }
+  .howstep { min-height: auto; padding: 26px 20px; gap: 12px; }
+  .howstep .n { font-size: 44px; }
+  .howstep h3 { font-size: 21px; }
+  .howstep p { font-size: 14px; }
 
-  /* Footer */
-  .ftr-grid { grid-template-columns: 1fr; gap: 28px; }
+  /* ---- FAQ ---- */
+  .faq-q { font-size: clamp(16px, 4.5vw, 21px); padding: 18px 0; }
+  .faq-a-inner { font-size: 14px; padding-bottom: 20px; }
+
+  /* ---- À propos ---- */
+  .about-hero { grid-template-columns: 1fr; gap: 28px; }
+  .about-figures { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .figure .n { font-size: clamp(26px, 6.5vw, 42px); }
+  .figure .l { font-size: 10px; }
+
+  /* ---- Contact ---- */
+  .contact-grid { grid-template-columns: 1fr; }
+
+  /* ---- CTA banner ---- */
+  .cta-banner { padding: 36px 22px; border-radius: var(--radius); }
+  .cta-banner h2 { font-size: clamp(24px, 7.5vw, 38px); max-width: 100%; }
+
+  /* ---- Footer ---- */
+  .ftr-grid { grid-template-columns: 1fr; gap: 26px; }
   .ftr-brand { grid-column: auto; }
-  .ftr-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .ftr-bottom .links { gap: 16px; }
+  .ftr-brand .lede { font-size: 14px; max-width: 100%; margin-bottom: 18px; }
+  .ftr-pay { gap: 6px; }
+  .paychip { font-size: 9px; padding: 5px 7px; }
+  .ftr-bottom { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 36px; }
+  .ftr-bottom .links { gap: 14px; flex-wrap: wrap; }
 
-  /* Drawer */
+  /* ---- Drawer ---- */
+  .drawer { padding: 24px var(--gutter) 32px; }
+  .drawer-top { margin-bottom: 36px; }
   .drawer-nav a { font-size: 30px; padding: 12px 0; }
+  .drawer-foot .btn { font-size: 14px; padding: 14px 20px; }
 
-  /* Typography & misc */
-  .lede { font-size: 15px; }
+  /* ---- Typo & divers ---- */
+  .lede { font-size: 14.5px; }
   .wordmark { font-size: 20px; }
-  .cta-banner { padding: 40px 24px; }
-  .cta-banner h2 { font-size: clamp(28px, 8vw, 44px); }
+  .eyebrow { font-size: 10px; letter-spacing: .22em; gap: 8px; }
+  .eyebrow::before { width: 18px; }
+  .eyebrow.center::after { width: 18px; }
+  .btn-lg { padding: 15px 22px; font-size: 15px; }
+
+  /* ---- Confirmation ---- */
+  .confirm-check { width: 70px; height: 70px; }
+  .confirm-check svg { width: 32px; height: 32px; }
+
+  /* ---- Scrollbar masquée sur rail ---- */
+  .rail { -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+  .card-w-rail { scroll-snap-align: start; }
 }
 
-@media (max-width: 430px) {
-  .hero h1 { font-size: clamp(36px, 12vw, 56px); }
-  .hero-stat { flex: 1; text-align: center; }
-  .hero-stat .n { font-size: 26px; }
-  .vcard-specs { gap: 12px; }
-  .vcard-name { font-size: 24px; }
-  .price .amt { font-size: 26px; }
-  .btn-lg { padding: 15px 24px; font-size: 14px; }
-  .buybox { padding: 18px; }
-  .tier { padding: 14px; }
-  .tier-r { font-size: 20px; }
-  .faq-q { font-size: clamp(17px, 5vw, 22px); padding: 20px 0; }
+/* ============================================================
+   PETIT MOBILE — ≤ 390px (iPhone SE, Galaxy compact)
+   ============================================================ */
+@media (max-width: 390px) {
+  :root { --gutter: 16px; }
+  .hero h1 { font-size: clamp(32px, 11vw, 48px); }
+  .hero-stat .n { font-size: 21px; }
+  .hero-stat { flex: 1; }
+  .hero-stats { gap: 0; }
+  .shead h2 { font-size: clamp(23px, 9vw, 36px); }
+  .vcard-name { font-size: 21px; }
+  .price .amt { font-size: 22px; }
+  .btn-lg { padding: 13px 18px; font-size: 14px; }
+  .buybox { padding: 16px; }
+  .tier { padding: 11px 12px; }
+  .tier-r { font-size: 18px; }
+  .faq-q { font-size: clamp(15px, 4.5vw, 19px); padding: 16px 0; }
+  .drawer-nav a { font-size: 26px; }
+  .howstep .n { font-size: 38px; }
+  .about-figures { grid-template-columns: 1fr; }
+  .figure .n { font-size: clamp(28px, 7vw, 40px); }
+  .specsheet { grid-template-columns: 1fr; }
+  .stepper-line { min-width: 8px; }
 }
