@@ -92,6 +92,7 @@ function HomePage(props) {
         raf = 0;
       });
     };
+    if (window.innerWidth <= 760) return;
     el.style.transform = "scale(1.08)";
     window.addEventListener("scroll", onScroll, {
       passive: true
@@ -153,10 +154,7 @@ function HomePage(props) {
   }, "4,9 \xB7 100% en ligne")))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 3
   }, /*#__PURE__*/React.createElement("div", {
-    className: "hero-stats",
-    style: {
-      marginTop: 48
-    }
+    className: "hero-stats"
   }, /*#__PURE__*/React.createElement("div", {
     className: "hero-stat"
   }, /*#__PURE__*/React.createElement("div", {
