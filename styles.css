@@ -628,6 +628,7 @@ a { color: inherit; text-decoration: none; }
 
   /* Header */
   .hdr-nav, .hdr-phone { display: none; }
+  .hdr-right .btn { display: none; }
   .burger { display: inline-flex; }
   .hdr-inner { height: 62px; }
   .pad-top { padding-top: 62px; }
