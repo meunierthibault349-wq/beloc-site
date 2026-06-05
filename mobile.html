@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0F172A" />
+  <title>BeLoc — Location premium · Auvergne-Rhône-Alpes</title>
+  <meta name="description" content="Location de véhicules premium en Auvergne-Rhône-Alpes. Réservez en ligne en 3 minutes." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2563EB;
+      --blue-hover: #1D4ED8;
+      --red: #EF4444;
+      --dark: #0F172A;
+      --card-bg: #FFFFFF;
+      --page-bg: #F8FAFC;
+      --text: #0F172A;
+      --text-dim: #64748B;
+      --border: #E2E8F0;
+      --selected: #EFF6FF;
+      --selected-border: #2563EB;
+      --green: #22C55E;
+      --serif: 'Space Grotesk', sans-serif;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--dark);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 580px;
+      background-color: #0B0B0D;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,7,.55) 0%,
+        rgba(5,5,7,.15) 25%,
+        rgba(5,5,7,.70) 60%,
+        rgba(5,5,7,.92) 88%
+      );
+      z-index: 1;
+    }
+
+    .hero-top {
+      position: relative;
+      z-index: 2;
+      padding: 20px 20px 0;
+    }
+
+    .hero-logo {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px 36px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 1.05;
+      color: #fff;
+      max-width: 12ch;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 28px;
+    }
+
+    .btn-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 52px;
+      min-height: 52px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.1px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      touch-action: manipulation;
+      transition: background 0.15s ease, transform 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-cta:active {
+      background: #DC2626;
+      transform: scale(0.98);
+    }
+
+    /* ─── TUNNEL SECTION ────────────────────────────────────────── */
+    #tunnel {
+      background: var(--page-bg);
+      min-height: 100vh;
+      padding-bottom: 48px;
+    }
+
+    /* ─── STEPPER ───────────────────────────────────────────────── */
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 24px 0;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      background: var(--page-bg);
+      z-index: 10;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      flex: 1;
+      position: relative;
+    }
+
+    .step-item::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: calc(50% + 18px);
+      right: calc(-50% + 18px);
+      height: 2px;
+      background: var(--border);
+      transition: background 0.3s ease;
+      z-index: 0;
+    }
+
+    .step-item:last-child::before {
+      display: none;
+    }
+
+    .step-item.completed::before {
+      background: var(--blue);
+    }
+
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid var(--border);
+      background: #fff;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
+      transition: all 0.25s ease;
+    }
+
+    .step-item.active .step-circle {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .step-item.completed .step-circle {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .step-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-align: center;
+      letter-spacing: 0.1px;
+    }
+
+    .step-item.active .step-label {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .step-item.completed .step-label {
+      color: var(--green);
+    }
+
+    /* ─── STEP PANELS ───────────────────────────────────────────── */
+    .step-panel {
+      display: none;
+      padding: 24px 16px 0;
+      animation: fadeSlideUp 0.3s ease forwards;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .step-hint {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    /* ─── VEHICLE CARDS ─────────────────────────────────────────── */
+    .vehicle-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .vehicle-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .vehicle-card:active {
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+
+    .vehicle-card.selected {
+      border-color: var(--selected-border);
+      background: var(--selected);
+    }
+
+    .vehicle-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #e2e8f0;
+    }
+
+    .vehicle-card-body {
+      padding: 12px 14px 14px;
+    }
+
+    .vehicle-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .vehicle-name {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .vehicle-brand {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    .vehicle-price {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    .vehicle-price span {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-dim);
+    }
+
+    .vehicle-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--sans);
+      letter-spacing: 0.1px;
+    }
+
+    .badge-sport {
+      background: rgba(239,68,68,.1);
+      color: #DC2626;
+    }
+
+    .badge-citadine {
+      background: rgba(37,99,235,.1);
+      color: var(--blue);
+    }
+
+    .badge-polyvalente {
+      background: rgba(34,197,94,.1);
+      color: #16A34A;
+    }
+
+    .btn-select {
+      height: 36px;
+      min-height: 36px;
+      padding: 0 16px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1.5px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .vehicle-card.selected .btn-select {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ─── NEXT BUTTON ───────────────────────────────────────────── */
+    .btn-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 52px;
+      min-height: 52px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
+      margin-top: 8px;
+    }
+
+    .btn-next:active {
+      transform: scale(0.98);
+    }
+
+    .btn-next:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 44px;
+      min-height: 44px;
+      background: transparent;
+      color: var(--text-dim);
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 10px;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-back:active {
+      border-color: var(--text-dim);
+    }
+
+    /* ─── DATES & OPTIONS (STEP 2) ──────────────────────────────── */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.1px;
+    }
+
+    .form-input {
+      display: block;
+      width: 100%;
+      height: 52px;
+      font-size: 16px;
+      font-family: var(--sans);
+      color: var(--text);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 0 14px;
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--blue);
+    }
+
+    .form-input.error {
+      border-color: var(--red);
+    }
+
+    .form-error {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--red);
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-error.visible {
+      display: block;
+    }
+
+    .price-summary {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 4px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price-summary-label {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+    }
+
+    .price-summary-value {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .price-summary-value.hidden {
+      display: none;
+    }
+
+    .price-summary-placeholder {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      font-style: italic;
+    }
+
+    .options-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text);
+      margin: 20px 0 12px;
+    }
+
+    .option-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .option-card.selected {
+      border-color: var(--blue);
+      background: var(--selected);
+    }
+
+    .option-card-info {
+      flex: 1;
+    }
+
+    .option-card-name {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .option-card-price {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .option-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .option-card.selected .option-checkbox {
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .option-checkbox svg {
+      display: none;
+    }
+
+    .option-card.selected .option-checkbox svg {
+      display: block;
+    }
+
+    /* ─── FORM (STEP 3) ─────────────────────────────────────────── */
+    .recap-box {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .recap-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recap-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .recap-row:last-child { margin-bottom: 0; }
+
+    .recap-key {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .recap-val {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .recap-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1.5px solid var(--border);
+    }
+
+    .recap-total-key {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .recap-total-val {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--red);
+    }
+
+    .fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .fields-grid .form-group {
+      margin-bottom: 0;
+    }
+
+    .fields-full {
+      margin-bottom: 16px;
+    }
+
+    .btn-confirm {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 52px;
+      min-height: 52px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease, transform 0.1s ease;
+      margin-top: 8px;
+    }
+
+    .btn-confirm:active {
+      background: #DC2626;
+      transform: scale(0.98);
+    }
+
+    /* ─── CONFIRMATION STATE ────────────────────────────────────── */
+    #confirmation {
+      display: none;
+      padding: 48px 24px;
+      text-align: center;
+      animation: fadeSlideUp 0.4s ease forwards;
+    }
+
+    #confirmation.visible {
+      display: block;
+    }
+
+    .confirm-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(34,197,94,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popIn {
+      0%   { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confirm-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .confirm-subtitle {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      max-width: 28ch;
+      margin: 0 auto;
+    }
+
+    .confirm-vehicle {
+      margin-top: 28px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .confirm-vehicle-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .confirm-vehicle-info {
+      padding: 14px;
+    }
+
+    .confirm-vehicle-name {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .confirm-vehicle-detail {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── SECTION 1 : HERO ──────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <img
+      class="hero-img"
+      src="assets/rs3-action.avif"
+      alt="Audi RS3 en action"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-top">
+      <div class="hero-logo">BeLoc.</div>
+    </div>
+
+    <div class="hero-bottom">
+      <h1 class="hero-title">Conduis l'extraordinaire.</h1>
+      <p class="hero-subtitle">Location premium en ligne&nbsp;· Auvergne-Rhône-Alpes</p>
+      <a href="#tunnel" class="btn-cta" role="button" aria-label="Réserver maintenant — aller au formulaire">
+        Réserver maintenant &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 2 : TUNNEL ───────────────────────────────────── -->
+  <section id="tunnel" aria-label="Tunnel de réservation">
+
+    <!-- STEPPER -->
+    <nav class="stepper" aria-label="Étapes de réservation">
+      <div class="step-item active" id="stepper-1" role="button" tabindex="0" aria-label="Étape 1 : Choisir un véhicule" onclick="goToStep(1)">
+        <div class="step-circle">1</div>
+        <span class="step-label">Véhicule</span>
+      </div>
+      <div class="step-item" id="stepper-2" role="button" tabindex="-1" aria-label="Étape 2 : Choisir les dates" onclick="goToStep(2)">
+        <div class="step-circle">2</div>
+        <span class="step-label">Dates</span>
+      </div>
+      <div class="step-item" id="stepper-3" role="button" tabindex="-1" aria-label="Étape 3 : Confirmation" onclick="goToStep(3)">
+        <div class="step-circle">3</div>
+        <span class="step-label">Confirmation</span>
+      </div>
+    </nav>
+
+    <!-- ÉTAPE 1 : VÉHICULES -->
+    <div class="step-panel active" id="panel-1" role="region" aria-label="Choisir un véhicule">
+      <h2 class="step-title">Choisissez votre véhicule</h2>
+      <p class="step-hint">Sélectionnez le véhicule de votre choix pour continuer.</p>
+
+      <div class="vehicle-list" id="vehicle-list" role="list">
+        <!-- Cards injectées par JS -->
+      </div>
+
+      <button class="btn-next" id="btn-next-1" onclick="nextStep()" disabled aria-label="Continuer vers les dates">
+        Continuer &rarr;
+      </button>
+    </div>
+
+    <!-- ÉTAPE 2 : DATES & OPTIONS -->
+    <div class="step-panel" id="panel-2" role="region" aria-label="Choisir les dates">
+      <h2 class="step-title">Dates & options</h2>
+      <p class="step-hint">Choisissez vos dates de location et les options souhaitées.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="date-start">Date de début</label>
+        <input
+          class="form-input"
+          type="date"
+          id="date-start"
+          name="date-start"
+          autocomplete="off"
+          aria-required="true"
+        />
+        <span class="form-error" id="err-date-start">Veuillez choisir une date de début.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="date-end">Date de fin</label>
+        <input
+          class="form-input"
+          type="date"
+          id="date-end"
+          name="date-end"
+          autocomplete="off"
+          aria-required="true"
+        />
+        <span class="form-error" id="err-date-end">La date de fin doit être après la date de début.</span>
+      </div>
+
+      <div class="price-summary" id="price-summary" aria-live="polite">
+        <span class="price-summary-label" id="price-label">Durée &amp; prix</span>
+        <span class="price-summary-value hidden" id="price-value">—</span>
+        <span class="price-summary-placeholder" id="price-placeholder">Sélectionnez vos dates</span>
+      </div>
+
+      <p class="options-title">Options</p>
+
+      <div class="option-card" id="opt-driver" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('driver')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('driver');event.preventDefault();}">
+        <div class="option-card-info">
+          <div class="option-card-name">Conducteur supplémentaire</div>
+          <div class="option-card-price">+15 €&thinsp;/&thinsp;jour</div>
+        </div>
+        <div class="option-checkbox" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="option-card" id="opt-gps" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('gps')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('gps');event.preventDefault();}">
+        <div class="option-card-info">
+          <div class="option-card-name">GPS intégré</div>
+          <div class="option-card-price">+8 €&thinsp;/&thinsp;jour</div>
+        </div>
+        <div class="option-checkbox" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="option-card" id="opt-delivery" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('delivery')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('delivery');event.preventDefault();}">
+        <div class="option-card-info">
+          <div class="option-card-name">Livraison à domicile</div>
+          <div class="option-card-price">+49 € forfait</div>
+        </div>
+        <div class="option-checkbox" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <button class="btn-next" id="btn-next-2" onclick="nextStep()" style="margin-top:20px;" aria-label="Continuer vers la confirmation">
+        Continuer &rarr;
+      </button>
+      <button class="btn-back" onclick="prevStep()" aria-label="Retour au choix du véhicule">
+        &larr; Retour
+      </button>
+    </div>
+
+    <!-- ÉTAPE 3 : COORDONNÉES & CONFIRMATION -->
+    <div class="step-panel" id="panel-3" role="region" aria-label="Vos coordonnées">
+      <h2 class="step-title">Vos coordonnées</h2>
+      <p class="step-hint">Récapitulatif et informations de contact.</p>
+
+      <!-- Récapitulatif réservation -->
+      <div class="recap-box" id="recap-box" aria-label="Récapitulatif de votre réservation">
+        <div class="recap-title">Récapitulatif</div>
+        <div class="recap-row">
+          <span class="recap-key">Véhicule</span>
+          <span class="recap-val" id="recap-vehicle">—</span>
+        </div>
+        <div class="recap-row">
+          <span class="recap-key">Dates</span>
+          <span class="recap-val" id="recap-dates">—</span>
+        </div>
+        <div class="recap-row">
+          <span class="recap-key">Durée</span>
+          <span class="recap-val" id="recap-duration">—</span>
+        </div>
+        <div class="recap-row" id="recap-row-driver" style="display:none;">
+          <span class="recap-key">Conducteur suppl.</span>
+          <span class="recap-val" id="recap-driver-price">—</span>
+        </div>
+        <div class="recap-row" id="recap-row-gps" style="display:none;">
+          <span class="recap-key">GPS intégré</span>
+          <span class="recap-val" id="recap-gps-price">—</span>
+        </div>
+        <div class="recap-row" id="recap-row-delivery" style="display:none;">
+          <span class="recap-key">Livraison à domicile</span>
+          <span class="recap-val">+49 €</span>
+        </div>
+        <div class="recap-total-row">
+          <span class="recap-total-key">Total</span>
+          <span class="recap-total-val" id="recap-total">—</span>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="fields-grid" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label class="form-label" for="field-firstname">Prénom</label>
+          <input class="form-input" type="text" id="field-firstname" name="firstname" autocomplete="given-name" aria-required="true" placeholder="Marie" />
+          <span class="form-error" id="err-firstname">Champ requis.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="field-lastname">Nom</label>
+          <input class="form-input" type="text" id="field-lastname" name="lastname" autocomplete="family-name" aria-required="true" placeholder="Dupont" />
+          <span class="form-error" id="err-lastname">Champ requis.</span>
+        </div>
+      </div>
+
+      <div class="fields-full">
+        <label class="form-label" for="field-email">Email</label>
+        <input class="form-input" type="email" id="field-email" name="email" autocomplete="email" aria-required="true" placeholder="marie@email.com" />
+        <span class="form-error" id="err-email">Adresse email invalide.</span>
+      </div>
+
+      <div class="fields-full">
+        <label class="form-label" for="field-phone">Téléphone</label>
+        <input class="form-input" type="tel" id="field-phone" name="phone" autocomplete="tel" aria-required="true" placeholder="06 12 34 56 78" />
+        <span class="form-error" id="err-phone">Numéro de téléphone invalide.</span>
+      </div>
+
+      <button class="btn-confirm" id="btn-confirm" onclick="submitReservation()" aria-label="Confirmer la réservation">
+        Confirmer la réservation
+      </button>
+      <button class="btn-back" onclick="prevStep()" aria-label="Retour aux dates">
+        &larr; Retour
+      </button>
+    </div>
+
+    <!-- ÉTAT DE CONFIRMATION -->
+    <div id="confirmation" role="status" aria-live="polite">
+      <div class="confirm-icon" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+          <path d="M7 17.5L13.5 24L27 10" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="confirm-title">Demande envoyée !</h2>
+      <p class="confirm-subtitle">Nous vous contactons sous&nbsp;2h pour finaliser votre réservation.</p>
+      <div class="confirm-vehicle" id="confirm-vehicle-card">
+        <img class="confirm-vehicle-img" id="confirm-vehicle-img" src="" alt="" loading="lazy" />
+        <div class="confirm-vehicle-info">
+          <div class="confirm-vehicle-name" id="confirm-vehicle-name"></div>
+          <div class="confirm-vehicle-detail" id="confirm-vehicle-detail"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // ─── DONNÉES VÉHICULES ─────────────────────────────────────────
+    var VEHICLES = [
+      { id: 'rs3',    brand: 'Audi',    name: 'RS3',             type: 'Sport',       pricePerDay: 349, img: 'assets/rs3-action.avif' },
+      { id: 'golfr',  brand: 'VW',      name: 'Golf 8R',         type: 'Sport',       pricePerDay: 219, img: 'assets/golfr-track.jpg' },
+      { id: 'golf8',  brand: 'VW',      name: 'Golf 8',          type: 'Polyvalente', pricePerDay: 119, img: 'assets/golf8-black.png' },
+      { id: 'clio6',  brand: 'Renault', name: 'Clio 6 Alpine',   type: 'Sport',       pricePerDay: 129, img: 'assets/clio6-red.jpg' },
+      { id: 'clio5',  brand: 'Renault', name: 'Clio 5',          type: 'Citadine',    pricePerDay: 89,  img: 'assets/clio5-blue.jpg' }
+    ];
+
+    // ─── ÉTAT GLOBAL ───────────────────────────────────────────────
+    var state = {
+      step: 1,
+      maxReached: 1,
+      vehicle: null,
+      dateStart: null,
+      dateEnd: null,
+      options: { driver: false, gps: false, delivery: false }
+    };
+
+    // ─── INIT ──────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      renderVehicles();
+      initDateInputs();
+      updateStepperUI();
+    });
+
+    // ─── RENDER VÉHICULES ──────────────────────────────────────────
+    function badgeClass(type) {
+      var map = { 'Sport': 'badge-sport', 'Citadine': 'badge-citadine', 'Polyvalente': 'badge-polyvalente' };
+      return map[type] || 'badge-citadine';
+    }
+
+    function renderVehicles() {
+      var list = document.getElementById('vehicle-list');
+      var html = '';
+      VEHICLES.forEach(function (v) {
+        html += '<div class="vehicle-card" id="vcard-' + v.id + '" role="listitem" tabindex="0" '
+          + 'onclick="selectVehicle(\'' + v.id + '\')" '
+          + 'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){selectVehicle(\'' + v.id + '\');event.preventDefault();}" '
+          + 'aria-label="Sélectionner ' + v.brand + ' ' + v.name + ', ' + v.pricePerDay + ' euros par jour">'
+          + '<img class="vehicle-card-img" src="' + v.img + '" alt="' + v.brand + ' ' + v.name + '" loading="lazy" />'
+          + '<div class="vehicle-card-body">'
+          + '<div class="vehicle-card-top">'
+          + '<div>'
+          + '<div class="vehicle-name">' + v.name + '</div>'
+          + '<div class="vehicle-brand">' + v.brand + '</div>'
+          + '</div>'
+          + '<div class="vehicle-price">dès ' + v.pricePerDay + '€ <span>/ jour</span></div>'
+          + '</div>'
+          + '<div class="vehicle-card-bottom">'
+          + '<span class="badge ' + badgeClass(v.type) + '">' + v.type + '</span>'
+          + '<button class="btn-select" tabindex="-1" aria-hidden="true">Sélectionner</button>'
+          + '</div>'
+          + '</div>'
+          + '</div>';
+      });
+      list.innerHTML = html;
+    }
+
+    // ─── SÉLECTION VÉHICULE ────────────────────────────────────────
+    function selectVehicle(id) {
+      state.vehicle = id;
+      VEHICLES.forEach(function (v) {
+        var card = document.getElementById('vcard-' + v.id);
+        if (v.id === id) {
+          card.classList.add('selected');
+          card.setAttribute('aria-selected', 'true');
+        } else {
+          card.classList.remove('selected');
+          card.setAttribute('aria-selected', 'false');
+        }
+      });
+      document.getElementById('btn-next-1').disabled = false;
+    }
+
+    // ─── DATES ─────────────────────────────────────────────────────
+    function initDateInputs() {
+      var today = new Date();
+      var yyyy = today.getFullYear();
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, '0');
+      var todayStr = yyyy + '-' + mm + '-' + dd;
+
+      var startInput = document.getElementById('date-start');
+      var endInput = document.getElementById('date-end');
+      startInput.min = todayStr;
+      endInput.min = todayStr;
+
+      startInput.addEventListener('change', function () {
+        state.dateStart = startInput.value || null;
+        if (state.dateStart) {
+          endInput.min = state.dateStart;
+          if (state.dateEnd && state.dateEnd <= state.dateStart) {
+            state.dateEnd = null;
+            endInput.value = '';
+          }
+        }
+        updatePriceSummary();
+        clearError('date-start');
+      });
+
+      endInput.addEventListener('change', function () {
+        state.dateEnd = endInput.value || null;
+        updatePriceSummary();
+        clearError('date-end');
+      });
+    }
+
+    function getNbDays() {
+      if (!state.dateStart || !state.dateEnd) return 0;
+      var start = new Date(state.dateStart);
+      var end = new Date(state.dateEnd);
+      var diff = Math.round((end - start) / (1000 * 60 * 60 * 24));
+      return diff > 0 ? diff : 0;
+    }
+
+    function calcTotal() {
+      var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
+      if (!v) return 0;
+      var days = getNbDays();
+      if (days <= 0) return 0;
+      var total = v.pricePerDay * days;
+      if (state.options.driver) total += 15 * days;
+      if (state.options.gps) total += 8 * days;
+      if (state.options.delivery) total += 49;
+      return total;
+    }
+
+    function updatePriceSummary() {
+      var days = getNbDays();
+      var priceVal = document.getElementById('price-value');
+      var pricePlaceholder = document.getElementById('price-placeholder');
+      var priceLabel = document.getElementById('price-label');
+
+      if (days > 0) {
+        var total = calcTotal();
+        priceVal.textContent = days + ' jour' + (days > 1 ? 's' : '') + ' · ' + formatPrice(total);
+        priceVal.classList.remove('hidden');
+        pricePlaceholder.style.display = 'none';
+        priceLabel.textContent = 'Estimation';
+      } else {
+        priceVal.classList.add('hidden');
+        pricePlaceholder.style.display = '';
+        priceLabel.textContent = 'Durée & prix';
+      }
+    }
+
+    // ─── OPTIONS ───────────────────────────────────────────────────
+    function toggleOption(key) {
+      state.options[key] = !state.options[key];
+      var el = document.getElementById('opt-' + key);
+      if (state.options[key]) {
+        el.classList.add('selected');
+        el.setAttribute('aria-checked', 'true');
+      } else {
+        el.classList.remove('selected');
+        el.setAttribute('aria-checked', 'false');
+      }
+      updatePriceSummary();
+    }
+
+    // ─── FORMAT PRIX ───────────────────────────────────────────────
+    function formatPrice(n) {
+      return n.toLocaleString('fr-FR') + ' €';
+    }
+
+    function formatDate(str) {
+      if (!str) return '—';
+      var parts = str.split('-');
+      return parts[2] + '/' + parts[1] + '/' + parts[0];
+    }
+
+    // ─── STEPPER UI ────────────────────────────────────────────────
+    function updateStepperUI() {
+      for (var i = 1; i <= 3; i++) {
+        var item = document.getElementById('stepper-' + i);
+        var circle = item.querySelector('.step-circle');
+        item.classList.remove('active', 'completed');
+
+        if (i < state.step) {
+          item.classList.add('completed');
+          circle.innerHTML = '<svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          item.setAttribute('tabindex', '0');
+        } else if (i === state.step) {
+          item.classList.add('active');
+          circle.textContent = i;
+          item.setAttribute('tabindex', '0');
+        } else {
+          circle.textContent = i;
+          item.setAttribute('tabindex', i <= state.maxReached ? '0' : '-1');
+        }
+      }
+    }
+
+    // ─── NAVIGATION ────────────────────────────────────────────────
+    function goToStep(n) {
+      if (n > state.maxReached) return;
+      if (n === state.step) return;
+      state.step = n;
+      showPanel(n);
+    }
+
+    function showPanel(n) {
+      for (var i = 1; i <= 3; i++) {
+        var p = document.getElementById('panel-' + i);
+        p.classList.remove('active');
+      }
+      var target = document.getElementById('panel-' + n);
+      target.classList.add('active');
+      state.step = n;
+      updateStepperUI();
+      scrollToTunnel();
+    }
+
+    function scrollToTunnel() {
+      var tunnel = document.getElementById('tunnel');
+      if (tunnel) {
+        tunnel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function nextStep() {
+      if (state.step === 1) {
+        if (!state.vehicle) return;
+        state.step = 2;
+        if (state.maxReached < 2) state.maxReached = 2;
+        showPanel(2);
+      } else if (state.step === 2) {
+        if (!validateDates()) return;
+        updateRecap();
+        state.step = 3;
+        if (state.maxReached < 3) state.maxReached = 3;
+        showPanel(3);
+      }
+    }
+
+    function prevStep() {
+      if (state.step > 1) {
+        state.step--;
+        showPanel(state.step);
+      }
+    }
+
+    // ─── VALIDATION DATES ──────────────────────────────────────────
+    function validateDates() {
+      var ok = true;
+      if (!state.dateStart) {
+        showError('date-start');
+        document.getElementById('date-start').classList.add('error');
+        ok = false;
+      }
+      if (!state.dateEnd || getNbDays() < 1) {
+        showError('date-end');
+        document.getElementById('date-end').classList.add('error');
+        ok = false;
+      }
+      return ok;
+    }
+
+    function showError(id) {
+      var err = document.getElementById('err-' + id);
+      var input = document.getElementById(id) || document.getElementById('field-' + id);
+      if (err) err.classList.add('visible');
+      if (input) input.classList.add('error');
+    }
+
+    function clearError(id) {
+      var err = document.getElementById('err-' + id);
+      var input = document.getElementById(id) || document.getElementById('field-' + id);
+      if (err) err.classList.remove('visible');
+      if (input) input.classList.remove('error');
+    }
+
+    // ─── RECAP ÉTAPE 3 ─────────────────────────────────────────────
+    function updateRecap() {
+      var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
+      if (!v) return;
+      var days = getNbDays();
+
+      document.getElementById('recap-vehicle').textContent = v.brand + ' ' + v.name;
+      document.getElementById('recap-dates').textContent = formatDate(state.dateStart) + ' → ' + formatDate(state.dateEnd);
+      document.getElementById('recap-duration').textContent = days + ' jour' + (days > 1 ? 's' : '');
+
+      if (state.options.driver) {
+        document.getElementById('recap-row-driver').style.display = '';
+        document.getElementById('recap-driver-price').textContent = '+' + formatPrice(15 * days);
+      } else {
+        document.getElementById('recap-row-driver').style.display = 'none';
+      }
+
+      if (state.options.gps) {
+        document.getElementById('recap-row-gps').style.display = '';
+        document.getElementById('recap-gps-price').textContent = '+' + formatPrice(8 * days);
+      } else {
+        document.getElementById('recap-row-gps').style.display = 'none';
+      }
+
+      if (state.options.delivery) {
+        document.getElementById('recap-row-delivery').style.display = '';
+      } else {
+        document.getElementById('recap-row-delivery').style.display = 'none';
+      }
+
+      document.getElementById('recap-total').textContent = formatPrice(calcTotal());
+    }
+
+    // ─── VALIDATION FORMULAIRE CONTACT ────────────────────────────
+    function validateContact() {
+      var ok = true;
+
+      var firstname = document.getElementById('field-firstname').value.trim();
+      var lastname = document.getElementById('field-lastname').value.trim();
+      var email = document.getElementById('field-email').value.trim();
+      var phone = document.getElementById('field-phone').value.trim();
+
+      if (!firstname) { showError('firstname'); ok = false; } else { clearError('firstname'); }
+      if (!lastname) { showError('lastname'); ok = false; } else { clearError('lastname'); }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email'); ok = false; } else { clearError('email'); }
+      if (!phone || !/^[\d\s\+\-\.\(\)]{8,}$/.test(phone)) { showError('phone'); ok = false; } else { clearError('phone'); }
+
+      return ok;
+    }
+
+    // ─── SOUMISSION ────────────────────────────────────────────────
+    function submitReservation() {
+      if (!validateContact()) return;
+
+      var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
+      var days = getNbDays();
+
+      // Masquer les panels et stepper
+      document.querySelectorAll('.step-panel').forEach(function (p) { p.style.display = 'none'; });
+      document.querySelector('.stepper').style.display = 'none';
+
+      // Remplir la carte de confirmation
+      document.getElementById('confirm-vehicle-img').src = v.img;
+      document.getElementById('confirm-vehicle-img').alt = v.brand + ' ' + v.name;
+      document.getElementById('confirm-vehicle-name').textContent = v.brand + ' ' + v.name;
+      document.getElementById('confirm-vehicle-detail').textContent =
+        formatDate(state.dateStart) + ' → ' + formatDate(state.dateEnd)
+        + ' · ' + days + ' jour' + (days > 1 ? 's' : '')
+        + ' · ' + formatPrice(calcTotal());
+
+      // Afficher l'état de confirmation
+      var conf = document.getElementById('confirmation');
+      conf.classList.add('visible');
+      document.getElementById('tunnel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+
+</body>
+</html>
