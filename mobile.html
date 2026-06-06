@@ -3,59 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0F172A" />
+  <meta name="theme-color" content="#0A0A0C" />
   <title>BeLoc — Location premium · Auvergne-Rhône-Alpes</title>
-  <meta name="description" content="Location de véhicules premium en Auvergne-Rhône-Alpes. Réservez en ligne en 3 minutes." />
+  <meta name="description" content="Location de véhicules premium et hautes performances en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes, livraison en Auvergne-Rhône-Alpes." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── RESET & BASE ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue: #2563EB;
-      --blue-hover: #1D4ED8;
-      --red: #EF4444;
-      --dark: #0F172A;
-      --card-bg: #FFFFFF;
-      --page-bg: #F8FAFC;
-      --text: #0F172A;
-      --text-dim: #64748B;
-      --border: #E2E8F0;
-      --selected: #EFF6FF;
-      --selected-border: #2563EB;
-      --green: #22C55E;
-      --serif: 'Space Grotesk', sans-serif;
-      --sans: 'Inter', sans-serif;
+      --black:   #0A0A0C;
+      --dark:    #111114;
+      --dark-2:  #18181C;
+      --dark-3:  #222226;
+      --page-bg: #F7F8FA;
+      --white:   #FFFFFF;
+      --text:    #0F172A;
+      --text-2:  #475569;
+      --text-3:  #94A3B8;
+      --border:  #E1E7EF;
+      --blue:    #2563EB;
+      --blue-2:  #1D4ED8;
+      --red:     #EF4444;
+      --red-2:   #DC2626;
+      --green:   #22C55E;
+      --gold:    #C8A86B;
+      --gold-bg: rgba(200,168,107,0.10);
+      --select:  #EFF6FF;
+      --select-b:#2563EB;
+      --serif:   'Space Grotesk', sans-serif;
+      --sans:    'Inter', sans-serif;
+      --radius:  12px;
+      --radius-sm: 8px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     html, body {
-      margin: 0;
       overflow-x: hidden;
       font-family: var(--sans);
       color: var(--text);
-      background: var(--dark);
+      background: var(--black);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ─── HERO ──────────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── HEADER ───────────────────────────────────────────────────── */
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(env(safe-area-inset-top) + 10px) 20px 10px;
+      height: calc(env(safe-area-inset-top) + 56px);
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+
+    .header.solid {
+      background: rgba(10,10,12,0.90);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-logo {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 21px;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.4px;
+    }
+
+    .header-logo span { color: var(--gold); }
+
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      height: 36px;
+      padding: 0 14px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1px;
+      border-radius: 20px;
+      text-decoration: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .header-btn:active { background: var(--red-2); transform: scale(0.96); }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
     .hero {
       position: relative;
-      width: 100%;
-      height: 100svh;
-      min-height: 580px;
-      background-color: #0B0B0D;
+      height: 100dvh;
+      min-height: 620px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .hero-img {
@@ -64,428 +125,861 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center 25%;
       z-index: 0;
     }
 
-    .hero-overlay {
+    .hero-grad {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(5,5,7,.55) 0%,
-        rgba(5,5,7,.15) 25%,
-        rgba(5,5,7,.70) 60%,
-        rgba(5,5,7,.92) 88%
-      );
       z-index: 1;
+      background:
+        linear-gradient(to bottom,
+          rgba(10,10,12,.55) 0%,
+          rgba(10,10,12,.05) 30%,
+          rgba(10,10,12,.05) 50%,
+          rgba(10,10,12,.80) 75%,
+          rgba(10,10,12,.97) 100%
+        );
     }
 
-    .hero-top {
+    .hero-body {
       position: relative;
       z-index: 2;
-      padding: 20px 20px 0;
+      margin-top: auto;
+      padding: 0 24px calc(max(40px, env(safe-area-inset-bottom) + 24px));
     }
 
-    .hero-logo {
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: 22px;
-      color: #fff;
-      letter-spacing: -0.3px;
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      padding: 5px 12px;
+      border: 1px solid rgba(200,168,107,0.35);
+      border-radius: 20px;
+      background: rgba(200,168,107,0.07);
     }
 
-    .hero-bottom {
-      position: relative;
-      z-index: 2;
-      padding: 0 20px max(36px, calc(env(safe-area-inset-bottom) + 20px));
+    .hero-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .hero-tag-text {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
     .hero-title {
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 44px;
-      line-height: 1.05;
+      font-size: clamp(38px, 11vw, 56px);
+      line-height: 1.03;
+      letter-spacing: -1.8px;
       color: #fff;
-      max-width: 12ch;
-      margin-bottom: 12px;
-      letter-spacing: -1px;
+      margin-bottom: 14px;
     }
 
-    .hero-subtitle {
+    .hero-title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-sub {
       font-family: var(--sans);
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.70);
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.52);
       margin-bottom: 28px;
     }
 
-    .btn-cta {
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 54px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.1px;
+      border: none;
+      border-radius: 27px;
+      cursor: pointer;
+      text-decoration: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:active { background: var(--red-2); transform: scale(0.98); }
+
+    .btn-ghost {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 52px;
-      min-height: 52px;
-      background: var(--red);
-      color: #fff;
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 16px;
-      letter-spacing: 0.1px;
-      border: none;
-      border-radius: 6px;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.80);
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
       cursor: pointer;
       text-decoration: none;
       touch-action: manipulation;
-      transition: background 0.15s ease, transform 0.1s ease;
       -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s, transform 0.1s;
     }
 
-    .btn-cta:active {
-      background: #DC2626;
-      transform: scale(0.98);
+    .btn-ghost:active { background: rgba(255,255,255,0.13); transform: scale(0.98); }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.09);
     }
 
-    /* ─── TUNNEL SECTION ────────────────────────────────────────── */
-    #tunnel {
-      background: var(--page-bg);
-      min-height: 100vh;
-      padding-bottom: 48px;
+    .hero-stat {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.09);
     }
 
-    /* ─── STEPPER ───────────────────────────────────────────────── */
-    .stepper {
+    .hero-stat:last-child { border-right: none; }
+
+    .hero-stat-n {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .hero-stat-l {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.38);
+      text-transform: uppercase;
+    }
+
+    /* ── FLOTTE ───────────────────────────────────────────────────── */
+    .s-fleet {
+      background: var(--dark);
+      padding: 52px 0 56px;
+    }
+
+    .s-head {
+      padding: 0 24px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .s-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(22px, 6vw, 30px);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .s-title-light { color: #fff; }
+    .s-title-dark  { color: var(--text); }
+
+    .s-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 6px;
+    }
+
+    .s-sub-light { color: rgba(255,255,255,0.45); }
+    .s-sub-dark  { color: var(--text-2); }
+
+    .fleet-scroll {
+      display: flex;
+      gap: 14px;
+      padding: 4px 24px 4px;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 24px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+
+    .fleet-scroll::-webkit-scrollbar { display: none; }
+
+    /* Full-bleed card with overlay */
+    .f-card {
+      position: relative;
+      flex-shrink: 0;
+      width: 76vw;
+      max-width: 300px;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      scroll-snap-align: start;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.18s;
+    }
+
+    .f-card:active { transform: scale(0.97); }
+
+    .f-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: var(--dark-3);
+    }
+
+    .f-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,12,0) 30%,
+        rgba(10,10,12,0.70) 65%,
+        rgba(10,10,12,0.95) 100%
+      );
+    }
+
+    .f-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 18px 20px;
+    }
+
+    .f-card-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--sans);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .badge-sport     { background: rgba(239,68,68,.18); color: #FCA5A5; }
+    .badge-citadine  { background: rgba(59,130,246,.18); color: #93C5FD; }
+    .badge-polyvalente { background: rgba(34,197,94,.18); color: #86EFAC; }
+
+    .f-card-name {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.3px;
+    }
+
+    .f-card-brand {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 12px;
+    }
+
+    .f-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .f-card-price {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 17px;
+      color: #fff;
+    }
+
+    .f-card-price small {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.40);
+    }
+
+    .f-card-reserve {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 24px 0;
+      height: 34px;
+      padding: 0 14px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 12px;
+      border-radius: 17px;
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .f-card-reserve:active { background: var(--red-2); }
+
+    .fleet-flagship-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--gold);
+      color: #0A0A0C;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .fleet-dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 18px;
+    }
+
+    .fleet-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      transition: background 0.2s, width 0.25s;
+    }
+
+    .fleet-dot.on {
+      background: var(--gold);
+      width: 16px;
+      border-radius: 3px;
+    }
+
+    /* ── POURQUOI ─────────────────────────────────────────────────── */
+    .s-why {
+      background: var(--dark-2);
+      padding: 52px 0 56px;
+    }
+
+    .why-items {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
       gap: 0;
+    }
+
+    .why-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .why-row:last-child { border-bottom: none; }
+
+    .why-num {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 36px;
+      color: rgba(200,168,107,0.25);
+      line-height: 1;
+      min-width: 44px;
+      padding-top: 2px;
+    }
+
+    .why-text-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+
+    .why-text-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.55;
+    }
+
+    /* ── OCCASIONS ────────────────────────────────────────────────── */
+    .s-occasions {
+      background: var(--dark);
+      padding: 52px 0 56px;
+    }
+
+    .occ-scroll {
+      display: flex;
+      gap: 12px;
+      padding: 4px 24px 4px;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 24px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+
+    .occ-scroll::-webkit-scrollbar { display: none; }
+
+    .occ-card {
+      flex-shrink: 0;
+      width: 68vw;
+      max-width: 240px;
+      scroll-snap-align: start;
+      border-radius: var(--radius);
+      padding: 24px 20px 22px;
+      background: var(--dark-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .occ-card:active { transform: scale(0.97); border-color: rgba(200,168,107,0.3); }
+
+    .occ-icon {
+      font-size: 26px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .occ-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .occ-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.55;
+    }
+
+    /* ── AVIS ─────────────────────────────────────────────────────── */
+    .s-reviews {
+      background: var(--dark-2);
+      padding: 52px 0 56px;
+    }
+
+    .rev-list {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rev-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+    }
+
+    .rev-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .rev-author {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .rev-stars { display: flex; gap: 2px; }
+    .rev-stars svg { color: var(--gold); }
+
+    .rev-text {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .rev-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-bg);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    /* ── TUNNEL ───────────────────────────────────────────────────── */
+    #tunnel {
+      background: var(--page-bg);
+      padding-bottom: max(80px, calc(env(safe-area-inset-bottom) + 80px));
+    }
+
+    .tunnel-top {
+      padding: 36px 24px 0;
+      margin-bottom: 4px;
+    }
+
+    .tunnel-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .tunnel-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    /* STEPPER */
+    .stepper {
       position: sticky;
       top: 0;
+      z-index: 50;
       background: var(--page-bg);
-      z-index: 10;
-      padding-bottom: 24px;
       border-bottom: 1px solid var(--border);
+      padding: 16px 24px 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .step-track {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
     }
 
     .step-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
+      gap: 5px;
       flex: 1;
       position: relative;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .step-item::before {
+    .step-item::after {
       content: '';
       position: absolute;
-      top: 18px;
-      left: calc(50% + 18px);
-      right: calc(-50% + 18px);
+      top: 15px;
+      left: calc(50% + 16px);
+      right: calc(-50% + 16px);
       height: 2px;
       background: var(--border);
-      transition: background 0.3s ease;
-      z-index: 0;
+      transition: background 0.3s;
     }
 
-    .step-item:last-child::before {
-      display: none;
-    }
+    .step-item:last-child::after { display: none; }
+    .step-item.done::after { background: var(--blue); }
 
-    .step-item.completed::before {
-      background: var(--blue);
-    }
-
-    .step-circle {
-      width: 36px;
-      height: 36px;
+    .step-dot {
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--serif);
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
       border: 2px solid var(--border);
       background: #fff;
-      color: var(--text-dim);
+      color: var(--text-3);
       position: relative;
       z-index: 1;
-      transition: all 0.25s ease;
+      transition: all 0.25s;
     }
 
-    .step-item.active .step-circle {
-      border-color: var(--blue);
-      background: var(--blue);
-      color: #fff;
-    }
+    .step-item.active .step-dot { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .step-item.done .step-dot   { border-color: var(--green); background: var(--green); color: #fff; }
 
-    .step-item.completed .step-circle {
-      border-color: var(--green);
-      background: var(--green);
-      color: #fff;
-    }
-
-    .step-label {
+    .step-lbl {
       font-family: var(--sans);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
-      color: var(--text-dim);
-      text-align: center;
+      color: var(--text-3);
       letter-spacing: 0.1px;
     }
 
-    .step-item.active .step-label {
-      color: var(--blue);
-      font-weight: 600;
-    }
+    .step-item.active .step-lbl { color: var(--blue); font-weight: 600; }
+    .step-item.done .step-lbl   { color: var(--green); }
 
-    .step-item.completed .step-label {
-      color: var(--green);
-    }
+    /* PANELS */
+    .t-panel { display: none; padding: 24px 20px 0; animation: su 0.3s ease forwards; }
+    .t-panel.on { display: block; }
 
-    /* ─── STEP PANELS ───────────────────────────────────────────── */
-    .step-panel {
-      display: none;
-      padding: 24px 16px 0;
-      animation: fadeSlideUp 0.3s ease forwards;
-    }
-
-    .step-panel.active {
-      display: block;
-    }
-
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(16px); }
+    @keyframes su {
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .step-title {
+    .t-panel-title {
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 22px;
-      color: var(--dark);
-      margin-bottom: 4px;
+      font-size: 21px;
+      color: var(--text);
+      margin-bottom: 3px;
     }
 
-    .step-hint {
+    .t-panel-hint {
       font-family: var(--sans);
-      font-size: 14px;
-      color: var(--text-dim);
+      font-size: 13px;
+      color: var(--text-2);
       margin-bottom: 20px;
     }
 
-    /* ─── VEHICLE CARDS ─────────────────────────────────────────── */
-    .vehicle-list {
+    /* ── VEHICLE LIST (horizontal compact) ──────────────────────── */
+    .v-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+    .v-card {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .vehicle-card {
-      background: var(--card-bg);
+      align-items: center;
+      gap: 0;
+      background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
     }
 
-    .vehicle-card:active {
-      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    .v-card:active { box-shadow: 0 4px 16px rgba(0,0,0,.10); }
+
+    .v-card.sel {
+      border-color: var(--select-b);
+      background: var(--select);
     }
 
-    .vehicle-card.selected {
-      border-color: var(--selected-border);
-      background: var(--selected);
-    }
-
-    .vehicle-card-img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
+    .v-thumb {
+      width: 100px;
+      min-width: 100px;
+      aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
       background: #e2e8f0;
+      flex-shrink: 0;
     }
 
-    .vehicle-card-body {
-      padding: 12px 14px 14px;
+    .v-info {
+      flex: 1;
+      padding: 12px 14px 12px 14px;
+      min-width: 0;
     }
 
-    .vehicle-card-top {
+    .v-info-top {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 4px;
+      margin-bottom: 6px;
     }
 
-    .vehicle-name {
+    .v-name {
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 17px;
+      font-size: 16px;
       color: var(--text);
       line-height: 1.2;
     }
 
-    .vehicle-brand {
+    .v-brand {
       font-family: var(--sans);
-      font-size: 13px;
-      color: var(--text-dim);
-      font-weight: 400;
+      font-size: 12px;
+      color: var(--text-2);
     }
 
-    .vehicle-price {
+    .v-price {
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--red);
       white-space: nowrap;
     }
 
-    .vehicle-price span {
-      font-size: 12px;
+    .v-price small {
+      font-family: var(--sans);
+      font-size: 10px;
       font-weight: 400;
-      color: var(--text-dim);
+      color: var(--text-3);
     }
 
-    .vehicle-card-bottom {
+    .v-info-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .badge {
+    .v-badge {
       display: inline-flex;
       align-items: center;
-      padding: 3px 10px;
+      padding: 2px 8px;
       border-radius: 99px;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 600;
       font-family: var(--sans);
-      letter-spacing: 0.1px;
+      letter-spacing: 0.2px;
     }
 
-    .badge-sport {
-      background: rgba(239,68,68,.1);
-      color: #DC2626;
-    }
+    .vb-sport     { background: rgba(239,68,68,.10); color: #DC2626; }
+    .vb-citadine  { background: rgba(37,99,235,.10); color: #2563EB; }
+    .vb-polyvalente { background: rgba(34,197,94,.10); color: #16A34A; }
 
-    .badge-citadine {
-      background: rgba(37,99,235,.1);
-      color: var(--blue);
-    }
-
-    .badge-polyvalente {
-      background: rgba(34,197,94,.1);
-      color: #16A34A;
-    }
-
-    .btn-select {
-      height: 36px;
-      min-height: 36px;
-      padding: 0 16px;
+    .v-sel-btn {
+      height: 28px;
+      padding: 0 12px;
       font-family: var(--sans);
       font-weight: 600;
-      font-size: 13px;
-      border-radius: 6px;
+      font-size: 11px;
+      border-radius: 99px;
       border: 1.5px solid var(--blue);
       background: transparent;
       color: var(--blue);
       cursor: pointer;
       touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .v-card.sel .v-sel-btn { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* ── SELECTED VEHICLE CHIP (steps 2 & 3) ───────────────────── */
+    .sel-chip {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+    }
+
+    .sel-chip.vis { display: flex; }
+
+    .sel-chip-img {
+      width: 52px;
+      height: 38px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #e2e8f0;
+      flex-shrink: 0;
+    }
+
+    .sel-chip-name {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .sel-chip-price {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .sel-chip-change {
+      margin-left: auto;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--blue);
+      background: none;
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
       white-space: nowrap;
     }
 
-    .vehicle-card.selected .btn-select {
-      background: var(--blue);
-      color: #fff;
-    }
+    /* ── FORM ─────────────────────────────────────────────────────── */
+    .fg { margin-bottom: 14px; }
 
-    /* ─── NEXT BUTTON ───────────────────────────────────────────── */
-    .btn-next {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 52px;
-      min-height: 52px;
-      background: var(--blue);
-      color: #fff;
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
-      margin-top: 8px;
-    }
-
-    .btn-next:active {
-      transform: scale(0.98);
-    }
-
-    .btn-next:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-back {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 44px;
-      min-height: 44px;
-      background: transparent;
-      color: var(--text-dim);
-      font-family: var(--sans);
-      font-weight: 500;
-      font-size: 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      margin-top: 10px;
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-
-    .btn-back:active {
-      border-color: var(--text-dim);
-    }
-
-    /* ─── DATES & OPTIONS (STEP 2) ──────────────────────────────── */
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-label {
+    .fg-label {
       display: block;
       font-family: var(--sans);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       letter-spacing: 0.1px;
     }
 
-    .form-input {
+    .fg-input {
       display: block;
       width: 100%;
       height: 52px;
@@ -494,70 +988,49 @@
       color: var(--text);
       background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 0 14px;
       -webkit-appearance: none;
       appearance: none;
       outline: none;
-      transition: border-color 0.15s ease;
+      transition: border-color 0.15s;
     }
 
-    .form-input:focus {
-      border-color: var(--blue);
-    }
+    .fg-input:focus { border-color: var(--blue); }
+    .fg-input.err   { border-color: var(--red); }
 
-    .form-input.error {
-      border-color: var(--red);
-    }
-
-    .form-error {
+    .fg-err {
       font-family: var(--sans);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--red);
-      margin-top: 4px;
+      margin-top: 3px;
       display: none;
     }
 
-    .form-error.visible {
-      display: block;
-    }
+    .fg-err.vis { display: block; }
 
-    .price-summary {
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .fg-row .fg { margin-bottom: 0; }
+
+    /* Price summary */
+    .price-box {
       background: var(--dark);
-      color: #fff;
-      border-radius: 8px;
-      padding: 14px 16px;
+      border-radius: var(--radius);
+      padding: 16px 18px;
       margin: 4px 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
     }
 
-    .price-summary-label {
-      font-family: var(--sans);
-      font-size: 14px;
-      color: rgba(255,255,255,.7);
-    }
+    .price-box-label { font-family: var(--sans); font-size: 14px; color: rgba(255,255,255,0.55); }
+    .price-box-val   { font-family: var(--serif); font-weight: 700; font-size: 22px; color: #fff; }
+    .price-box-placeholder { font-family: var(--sans); font-size: 13px; color: rgba(255,255,255,0.30); font-style: italic; }
+    .price-box-val.hide, .price-box-placeholder.hide { display: none; }
 
-    .price-summary-value {
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: 20px;
-      color: #fff;
-    }
-
-    .price-summary-value.hidden {
-      display: none;
-    }
-
-    .price-summary-placeholder {
-      font-family: var(--sans);
-      font-size: 13px;
-      color: rgba(255,255,255,.45);
-      font-style: italic;
-    }
-
-    .options-title {
+    /* Options */
+    .options-hl {
       font-family: var(--serif);
       font-weight: 600;
       font-size: 16px;
@@ -565,11 +1038,11 @@
       margin: 20px 0 12px;
     }
 
-    .option-card {
-      background: var(--card-bg);
+    .opt-card {
+      background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
+      border-radius: var(--radius);
+      padding: 14px 16px;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -578,33 +1051,15 @@
       cursor: pointer;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .option-card.selected {
-      border-color: var(--blue);
-      background: var(--selected);
-    }
+    .opt-card.sel { border-color: var(--blue); background: var(--select); }
+    .opt-info { flex: 1; }
+    .opt-name  { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+    .opt-price { font-family: var(--sans); font-size: 13px; color: var(--text-2); }
 
-    .option-card-info {
-      flex: 1;
-    }
-
-    .option-card-name {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .option-card-price {
-      font-family: var(--sans);
-      font-size: 13px;
-      color: var(--text-dim);
-    }
-
-    .option-checkbox {
+    .opt-chk {
       width: 22px;
       height: 22px;
       border-radius: 6px;
@@ -614,38 +1069,29 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: border-color 0.15s ease, background 0.15s ease;
+      transition: all 0.15s;
     }
 
-    .option-card.selected .option-checkbox {
-      border-color: var(--blue);
-      background: var(--blue);
-    }
+    .opt-card.sel .opt-chk { border-color: var(--blue); background: var(--blue); }
+    .opt-chk svg { display: none; }
+    .opt-card.sel .opt-chk svg { display: block; }
 
-    .option-checkbox svg {
-      display: none;
-    }
-
-    .option-card.selected .option-checkbox svg {
-      display: block;
-    }
-
-    /* ─── FORM (STEP 3) ─────────────────────────────────────────── */
-    .recap-box {
+    /* RECAP */
+    .recap-card {
       background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
+      border-radius: var(--radius);
+      padding: 16px 18px;
       margin-bottom: 20px;
     }
 
-    .recap-title {
+    .recap-hl {
       font-family: var(--serif);
       font-weight: 700;
       font-size: 15px;
       color: var(--text);
-      margin-bottom: 10px;
-      padding-bottom: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -653,459 +1099,751 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
       gap: 8px;
     }
 
-    .recap-row:last-child { margin-bottom: 0; }
+    .recap-row:last-of-type { margin-bottom: 0; }
+    .recap-k { font-family: var(--sans); font-size: 13px; color: var(--text-2); }
+    .recap-v { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--text); text-align: right; }
 
-    .recap-key {
-      font-family: var(--sans);
-      font-size: 13px;
-      color: var(--text-dim);
-    }
-
-    .recap-val {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      text-align: right;
-    }
-
-    .recap-total-row {
+    .recap-total {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-top: 12px;
-      padding-top: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
       border-top: 1.5px solid var(--border);
     }
 
-    .recap-total-key {
+    .recap-total-k { font-family: var(--serif); font-weight: 700; font-size: 16px; color: var(--text); }
+    .recap-total-v { font-family: var(--serif); font-weight: 700; font-size: 22px; color: var(--red); }
+
+    /* BUTTONS */
+    .btn-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 54px;
+      background: var(--blue);
+      color: #fff;
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 15px;
-      color: var(--text);
+      font-size: 16px;
+      border: none;
+      border-radius: 27px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s, opacity 0.15s, transform 0.1s;
+      margin-top: 8px;
     }
 
-    .recap-total-val {
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--red);
+    .btn-next:active { transform: scale(0.98); }
+    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 46px;
+      background: transparent;
+      color: var(--text-2);
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 23px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 10px;
+      transition: border-color 0.15s;
     }
 
-    .fields-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .fields-grid .form-group {
-      margin-bottom: 0;
-    }
-
-    .fields-full {
-      margin-bottom: 16px;
-    }
+    .btn-back:active { border-color: var(--text-3); }
 
     .btn-confirm {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 52px;
-      min-height: 52px;
+      height: 54px;
       background: var(--red);
       color: #fff;
       font-family: var(--serif);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 16px;
       border: none;
-      border-radius: 6px;
+      border-radius: 27px;
       cursor: pointer;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
-      transition: background 0.15s ease, transform 0.1s ease;
+      transition: background 0.15s, transform 0.1s;
       margin-top: 8px;
     }
 
-    .btn-confirm:active {
-      background: #DC2626;
-      transform: scale(0.98);
+    .btn-confirm:active { background: var(--red-2); transform: scale(0.98); }
+
+    /* Trust row */
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 12px 0 0;
+      flex-wrap: wrap;
     }
 
-    /* ─── CONFIRMATION STATE ────────────────────────────────────── */
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .trust-item svg { color: var(--green); }
+
+    /* CONFIRMATION */
     #confirmation {
       display: none;
-      padding: 48px 24px;
+      padding: 56px 24px 40px;
       text-align: center;
-      animation: fadeSlideUp 0.4s ease forwards;
+      animation: su 0.4s ease forwards;
     }
 
-    #confirmation.visible {
-      display: block;
-    }
+    #confirmation.vis { display: block; }
 
-    .confirm-icon {
-      width: 72px;
-      height: 72px;
+    .conf-icon {
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
-      background: rgba(34,197,94,.12);
+      background: rgba(34,197,94,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 24px;
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation: pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
     }
 
-    @keyframes popIn {
+    @keyframes pop {
       0%   { transform: scale(0); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .confirm-title {
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: 26px;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
+    .conf-title  { font-family: var(--serif); font-weight: 700; font-size: 28px; color: var(--text); margin-bottom: 10px; }
+    .conf-sub    { font-family: var(--sans); font-size: 15px; color: var(--text-2); line-height: 1.65; max-width: 28ch; margin: 0 auto; }
 
-    .confirm-subtitle {
-      font-family: var(--sans);
-      font-size: 15px;
-      color: var(--text-dim);
-      line-height: 1.6;
-      max-width: 28ch;
-      margin: 0 auto;
-    }
-
-    .confirm-vehicle {
+    .conf-vehicle {
       margin-top: 28px;
-      background: var(--card-bg);
+      background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius);
       overflow: hidden;
+      text-align: left;
     }
 
-    .confirm-vehicle-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
+    .conf-vehicle-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .conf-vehicle-body { padding: 14px 16px; }
+    .conf-vehicle-name { font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--text); }
+    .conf-vehicle-detail { font-family: var(--sans); font-size: 13px; color: var(--text-2); margin-top: 4px; }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    .footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 44px 24px calc(max(32px, env(safe-area-inset-bottom) + 20px));
     }
 
-    .confirm-vehicle-info {
-      padding: 14px;
-    }
-
-    .confirm-vehicle-name {
+    .footer-logo {
       font-family: var(--serif);
       font-weight: 700;
-      font-size: 18px;
-      color: var(--text);
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 6px;
+      letter-spacing: -0.4px;
     }
 
-    .confirm-vehicle-detail {
+    .footer-logo span { color: var(--gold); }
+
+    .footer-tag {
       font-family: var(--sans);
       font-size: 13px;
-      color: var(--text-dim);
-      margin-top: 4px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 32px;
+      line-height: 1.55;
     }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+
+    .footer-link:hover { color: #fff; }
+
+    .footer-socials { display: flex; gap: 10px; margin-bottom: 32px; }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.60);
+      text-decoration: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s;
+    }
+
+    .footer-social:active { background: rgba(255,255,255,0.10); }
+
+    .footer-div { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 20px; }
+
+    .footer-legal { font-family: var(--sans); font-size: 12px; color: rgba(255,255,255,0.20); line-height: 1.6; }
   </style>
 </head>
 <body>
 
-  <!-- ─── SECTION 1 : HERO ──────────────────────────────────────── -->
-  <section class="hero" id="hero">
+  <!-- HEADER -->
+  <header class="header" id="hdr" role="banner">
+    <a href="#hero" class="header-logo" aria-label="BeLoc Accueil">BeLoc<span>.</span></a>
+    <a href="#tunnel" class="header-btn" aria-label="Réserver">Réserver &rarr;</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Accueil">
     <picture>
       <source srcset="assets/rs3-action.avif" type="image/avif" />
-      <img
-        class="hero-img"
-        src="assets/rs3-studio.jpg"
-        alt="Audi RS3 en action"
-        loading="eager"
-        decoding="async"
-      />
+      <img class="hero-img" src="assets/rs3-studio.jpg" alt="Audi RS3 en action" loading="eager" decoding="async" fetchpriority="high" />
     </picture>
-    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-grad" aria-hidden="true"></div>
 
-    <div class="hero-top">
-      <div class="hero-logo">BeLoc.</div>
-    </div>
+    <div class="hero-body">
+      <div class="hero-tag" aria-hidden="true">
+        <div class="hero-tag-dot"></div>
+        <span class="hero-tag-text">Auvergne-Rhône-Alpes</span>
+      </div>
 
-    <div class="hero-bottom">
-      <h1 class="hero-title">Conduis l'extraordinaire.</h1>
-      <p class="hero-subtitle">Location premium en ligne&nbsp;· Auvergne-Rhône-Alpes</p>
-      <a href="#tunnel" class="btn-cta" role="button" aria-label="Réserver maintenant — aller au formulaire">
-        Réserver maintenant &rarr;
-      </a>
+      <h1 class="hero-title">Conduis<br><em>l'extraordinaire.</em></h1>
+
+      <p class="hero-sub">Location premium 100&nbsp;% en ligne.<br>Réservation en 3&nbsp;minutes.</p>
+
+      <div class="hero-actions">
+        <a href="#tunnel" class="btn-primary" role="button">
+          Réserver maintenant &rarr;
+        </a>
+        <a href="#fleet" class="btn-ghost" role="button">Voir les véhicules</a>
+      </div>
+
+      <div class="hero-stats" aria-label="Chiffres clés">
+        <div class="hero-stat">
+          <div class="hero-stat-n">5</div>
+          <div class="hero-stat-l">Véhicules</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">7</div>
+          <div class="hero-stat-l">Villes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">3 min</div>
+          <div class="hero-stat-l">Réservation</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── SECTION 2 : TUNNEL ───────────────────────────────────── -->
-  <section id="tunnel" aria-label="Tunnel de réservation">
+  <!-- FLOTTE -->
+  <section class="s-fleet" id="fleet" aria-label="Notre flotte">
+    <div class="s-head">
+      <div class="eyebrow">La flotte</div>
+      <h2 class="s-title s-title-light">Choisissez votre sensation.</h2>
+      <p class="s-sub s-sub-light">5 véhicules. Des centaines de chevaux. Une réservation en ligne.</p>
+    </div>
 
-    <!-- STEPPER -->
-    <nav class="stepper" aria-label="Étapes de réservation">
-      <div class="step-item active" id="stepper-1" role="button" tabindex="0" aria-label="Étape 1 : Choisir un véhicule" onclick="goToStep(1)">
-        <div class="step-circle">1</div>
-        <span class="step-label">Véhicule</span>
+    <div class="fleet-scroll" id="fleet-scroll" role="list"></div>
+    <div class="fleet-dots" id="fleet-dots" aria-hidden="true"></div>
+  </section>
+
+  <!-- POURQUOI -->
+  <section class="s-why" aria-label="Pourquoi BeLoc">
+    <div class="s-head">
+      <div class="eyebrow">Pourquoi BeLoc</div>
+      <h2 class="s-title s-title-light">Simple. Rapide.<br>Sans surprise.</h2>
+    </div>
+    <ul class="why-items" role="list">
+      <li class="why-row">
+        <div class="why-num" aria-hidden="true">01</div>
+        <div>
+          <div class="why-text-title">Réservation 100&nbsp;% en ligne en 3&nbsp;minutes</div>
+          <div class="why-text-desc">Pas d'agence, pas d'attente. Tout se fait depuis votre téléphone, à n'importe quelle heure.</div>
+        </div>
+      </li>
+      <li class="why-row">
+        <div class="why-num" aria-hidden="true">02</div>
+        <div>
+          <div class="why-text-title">Livraison partout en Auvergne-Rhône-Alpes</div>
+          <div class="why-text-desc">On vous amène le véhicule à l'adresse de votre choix. Votre week-end commence à votre porte.</div>
+        </div>
+      </li>
+      <li class="why-row">
+        <div class="why-num" aria-hidden="true">03</div>
+        <div>
+          <div class="why-text-title">Zéro engagement, zéro mauvaise surprise</div>
+          <div class="why-text-desc">Tarifs transparents, annulation flexible. Vous savez exactement ce que vous payez avant de confirmer.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- OCCASIONS -->
+  <section class="s-occasions" aria-label="Pour quelle occasion">
+    <div class="s-head">
+      <div class="eyebrow">Pour quelle occasion</div>
+      <h2 class="s-title s-title-light">La bonne voiture pour chaque moment.</h2>
+    </div>
+    <div class="occ-scroll" role="list">
+      <div class="occ-card" role="listitem" tabindex="0" onclick="document.getElementById('tunnel').scrollIntoView({behavior:'smooth'})">
+        <span class="occ-icon" aria-hidden="true">🏁</span>
+        <div class="occ-title">Week-end sportif</div>
+        <div class="occ-desc">Partez sur les routes d'Auvergne au volant d'une RS3 ou d'une Golf&nbsp;R. L'adrénaline sans propriété.</div>
       </div>
-      <div class="step-item" id="stepper-2" role="button" tabindex="-1" aria-label="Étape 2 : Choisir les dates" onclick="goToStep(2)">
-        <div class="step-circle">2</div>
-        <span class="step-label">Dates</span>
+      <div class="occ-card" role="listitem" tabindex="0" onclick="document.getElementById('tunnel').scrollIntoView({behavior:'smooth'})">
+        <span class="occ-icon" aria-hidden="true">🎉</span>
+        <div class="occ-title">Événement spécial</div>
+        <div class="occ-desc">Anniversaire, mariage, soirée. Arrivez dans un véhicule qui marque les esprits.</div>
       </div>
-      <div class="step-item" id="stepper-3" role="button" tabindex="-1" aria-label="Étape 3 : Confirmation" onclick="goToStep(3)">
-        <div class="step-circle">3</div>
-        <span class="step-label">Confirmation</span>
+      <div class="occ-card" role="listitem" tabindex="0" onclick="document.getElementById('tunnel').scrollIntoView({behavior:'smooth'})">
+        <span class="occ-icon" aria-hidden="true">💼</span>
+        <div class="occ-title">Cadeau d'entreprise</div>
+        <div class="occ-desc">Incentive, team building, récompense client. Un cadeau dont on parle pendant des mois.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUNNEL -->
+  <section id="tunnel" aria-label="Tunnel de réservation">
+    <div class="tunnel-top">
+      <div class="tunnel-eyebrow">Réservation en ligne</div>
+      <div class="tunnel-title">Quel véhicule vous fait envie&nbsp;?</div>
+    </div>
+
+    <nav class="stepper" aria-label="Étapes">
+      <div class="step-track">
+        <div class="step-item active" id="st-1" role="button" tabindex="0" onclick="goToStep(1)" aria-label="Étape 1 : Véhicule">
+          <div class="step-dot">1</div>
+          <span class="step-lbl">Véhicule</span>
+        </div>
+        <div class="step-item" id="st-2" role="button" tabindex="-1" onclick="goToStep(2)" aria-label="Étape 2 : Dates">
+          <div class="step-dot">2</div>
+          <span class="step-lbl">Dates</span>
+        </div>
+        <div class="step-item" id="st-3" role="button" tabindex="-1" onclick="goToStep(3)" aria-label="Étape 3 : Confirmation">
+          <div class="step-dot">3</div>
+          <span class="step-lbl">Contact</span>
+        </div>
       </div>
     </nav>
 
-    <!-- ÉTAPE 1 : VÉHICULES -->
-    <div class="step-panel active" id="panel-1" role="region" aria-label="Choisir un véhicule">
-      <h2 class="step-title">Choisissez votre véhicule</h2>
-      <p class="step-hint">Sélectionnez le véhicule de votre choix pour continuer.</p>
-
-      <div class="vehicle-list" id="vehicle-list" role="list">
-        <!-- Cards injectées par JS -->
-      </div>
-
+    <!-- ÉTAPE 1 -->
+    <div class="t-panel on" id="panel-1" role="region" aria-label="Choisir un véhicule">
+      <h2 class="t-panel-title">Choisissez votre véhicule</h2>
+      <p class="t-panel-hint">Sélectionnez le véhicule de votre choix pour continuer.</p>
+      <div class="v-list" id="v-list" role="list"></div>
       <button class="btn-next" id="btn-next-1" onclick="nextStep()" disabled aria-label="Continuer vers les dates">
         Continuer &rarr;
       </button>
     </div>
 
-    <!-- ÉTAPE 2 : DATES & OPTIONS -->
-    <div class="step-panel" id="panel-2" role="region" aria-label="Choisir les dates">
-      <h2 class="step-title">Dates & options</h2>
-      <p class="step-hint">Choisissez vos dates de location et les options souhaitées.</p>
+    <!-- ÉTAPE 2 -->
+    <div class="t-panel" id="panel-2" role="region" aria-label="Choisir les dates">
+      <h2 class="t-panel-title">Dates &amp; options</h2>
+      <p class="t-panel-hint">Sélectionnez vos dates et les options souhaitées.</p>
 
-      <div class="form-group">
-        <label class="form-label" for="date-start">Date de début</label>
-        <input
-          class="form-input"
-          type="date"
-          id="date-start"
-          name="date-start"
-          autocomplete="off"
-          aria-required="true"
-        />
-        <span class="form-error" id="err-date-start">Veuillez choisir une date de début.</span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="date-end">Date de fin</label>
-        <input
-          class="form-input"
-          type="date"
-          id="date-end"
-          name="date-end"
-          autocomplete="off"
-          aria-required="true"
-        />
-        <span class="form-error" id="err-date-end">La date de fin doit être après la date de début.</span>
-      </div>
-
-      <div class="price-summary" id="price-summary" aria-live="polite">
-        <span class="price-summary-label" id="price-label">Durée &amp; prix</span>
-        <span class="price-summary-value hidden" id="price-value">—</span>
-        <span class="price-summary-placeholder" id="price-placeholder">Sélectionnez vos dates</span>
-      </div>
-
-      <p class="options-title">Options</p>
-
-      <div class="option-card" id="opt-driver" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('driver')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('driver');event.preventDefault();}">
-        <div class="option-card-info">
-          <div class="option-card-name">Conducteur supplémentaire</div>
-          <div class="option-card-price">+15 €&thinsp;/&thinsp;jour</div>
+      <!-- Selected vehicle chip -->
+      <div class="sel-chip" id="chip-2" aria-label="Véhicule sélectionné">
+        <img class="sel-chip-img" id="chip-2-img" src="" alt="" />
+        <div>
+          <div class="sel-chip-name" id="chip-2-name"></div>
+          <div class="sel-chip-price" id="chip-2-price"></div>
         </div>
-        <div class="option-checkbox" aria-hidden="true">
-          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <button class="sel-chip-change" onclick="goToStep(1)">Changer</button>
+      </div>
+
+      <div class="fg">
+        <label class="fg-label" for="d-start">Date de début</label>
+        <input class="fg-input" type="date" id="d-start" autocomplete="off" aria-required="true" />
+        <span class="fg-err" id="err-d-start">Veuillez choisir une date de début.</span>
+      </div>
+
+      <div class="fg">
+        <label class="fg-label" for="d-end">Date de fin</label>
+        <input class="fg-input" type="date" id="d-end" autocomplete="off" aria-required="true" />
+        <span class="fg-err" id="err-d-end">La date de fin doit être après la date de début.</span>
+      </div>
+
+      <div class="price-box" id="price-box" aria-live="polite">
+        <span class="price-box-label" id="price-label">Durée &amp; prix</span>
+        <span class="price-box-val hide" id="price-val"></span>
+        <span class="price-box-placeholder" id="price-ph">Sélectionnez vos dates</span>
+      </div>
+
+      <p class="options-hl">Options</p>
+
+      <div class="opt-card" id="opt-driver" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOpt('driver')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOpt('driver');event.preventDefault();}">
+        <div class="opt-info">
+          <div class="opt-name">Conducteur supplémentaire</div>
+          <div class="opt-price">+15&thinsp;€&thinsp;/&thinsp;jour</div>
+        </div>
+        <div class="opt-chk" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
 
-      <div class="option-card" id="opt-gps" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('gps')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('gps');event.preventDefault();}">
-        <div class="option-card-info">
-          <div class="option-card-name">GPS intégré</div>
-          <div class="option-card-price">+8 €&thinsp;/&thinsp;jour</div>
+      <div class="opt-card" id="opt-gps" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOpt('gps')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOpt('gps');event.preventDefault();}">
+        <div class="opt-info">
+          <div class="opt-name">GPS intégré</div>
+          <div class="opt-price">+8&thinsp;€&thinsp;/&thinsp;jour</div>
         </div>
-        <div class="option-checkbox" aria-hidden="true">
-          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <div class="opt-chk" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
 
-      <div class="option-card" id="opt-delivery" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOption('delivery')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOption('delivery');event.preventDefault();}">
-        <div class="option-card-info">
-          <div class="option-card-name">Livraison à domicile</div>
-          <div class="option-card-price">+49 € forfait</div>
+      <div class="opt-card" id="opt-delivery" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleOpt('delivery')" onkeydown="if(event.key===' '||event.key==='Enter'){toggleOpt('delivery');event.preventDefault();}">
+        <div class="opt-info">
+          <div class="opt-name">Livraison à domicile</div>
+          <div class="opt-price">+49&thinsp;€ forfait</div>
         </div>
-        <div class="option-checkbox" aria-hidden="true">
-          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <div class="opt-chk" aria-hidden="true">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
 
       <button class="btn-next" id="btn-next-2" onclick="nextStep()" style="margin-top:20px;" aria-label="Continuer vers la confirmation">
         Continuer &rarr;
       </button>
-      <button class="btn-back" onclick="prevStep()" aria-label="Retour au choix du véhicule">
-        &larr; Retour
-      </button>
+      <button class="btn-back" onclick="prevStep()">&larr; Retour</button>
     </div>
 
-    <!-- ÉTAPE 3 : COORDONNÉES & CONFIRMATION -->
-    <div class="step-panel" id="panel-3" role="region" aria-label="Vos coordonnées">
-      <h2 class="step-title">Vos coordonnées</h2>
-      <p class="step-hint">Récapitulatif et informations de contact.</p>
+    <!-- ÉTAPE 3 -->
+    <div class="t-panel" id="panel-3" role="region" aria-label="Vos coordonnées">
+      <h2 class="t-panel-title">Vos coordonnées</h2>
+      <p class="t-panel-hint">Récapitulatif et informations de contact.</p>
 
-      <!-- Récapitulatif réservation -->
-      <div class="recap-box" id="recap-box" aria-label="Récapitulatif de votre réservation">
-        <div class="recap-title">Récapitulatif</div>
+      <!-- Selected vehicle chip -->
+      <div class="sel-chip" id="chip-3" aria-label="Véhicule sélectionné">
+        <img class="sel-chip-img" id="chip-3-img" src="" alt="" />
+        <div>
+          <div class="sel-chip-name" id="chip-3-name"></div>
+          <div class="sel-chip-price" id="chip-3-price"></div>
+        </div>
+        <button class="sel-chip-change" onclick="goToStep(1)">Changer</button>
+      </div>
+
+      <div class="recap-card" id="recap-card" aria-label="Récapitulatif">
+        <div class="recap-hl">Récapitulatif</div>
         <div class="recap-row">
-          <span class="recap-key">Véhicule</span>
-          <span class="recap-val" id="recap-vehicle">—</span>
+          <span class="recap-k">Véhicule</span>
+          <span class="recap-v" id="rc-vehicle">—</span>
         </div>
         <div class="recap-row">
-          <span class="recap-key">Dates</span>
-          <span class="recap-val" id="recap-dates">—</span>
+          <span class="recap-k">Dates</span>
+          <span class="recap-v" id="rc-dates">—</span>
         </div>
         <div class="recap-row">
-          <span class="recap-key">Durée</span>
-          <span class="recap-val" id="recap-duration">—</span>
+          <span class="recap-k">Durée</span>
+          <span class="recap-v" id="rc-dur">—</span>
         </div>
-        <div class="recap-row" id="recap-row-driver" style="display:none;">
-          <span class="recap-key">Conducteur suppl.</span>
-          <span class="recap-val" id="recap-driver-price">—</span>
+        <div class="recap-row" id="rc-row-driver" style="display:none;">
+          <span class="recap-k">Conducteur suppl.</span>
+          <span class="recap-v" id="rc-driver">—</span>
         </div>
-        <div class="recap-row" id="recap-row-gps" style="display:none;">
-          <span class="recap-key">GPS intégré</span>
-          <span class="recap-val" id="recap-gps-price">—</span>
+        <div class="recap-row" id="rc-row-gps" style="display:none;">
+          <span class="recap-k">GPS intégré</span>
+          <span class="recap-v" id="rc-gps">—</span>
         </div>
-        <div class="recap-row" id="recap-row-delivery" style="display:none;">
-          <span class="recap-key">Livraison à domicile</span>
-          <span class="recap-val">+49 €</span>
+        <div class="recap-row" id="rc-row-delivery" style="display:none;">
+          <span class="recap-k">Livraison à domicile</span>
+          <span class="recap-v">+49&thinsp;€</span>
         </div>
-        <div class="recap-total-row">
-          <span class="recap-total-key">Total</span>
-          <span class="recap-total-val" id="recap-total">—</span>
-        </div>
-      </div>
-
-      <!-- Formulaire -->
-      <div class="fields-grid" style="margin-bottom:16px;">
-        <div class="form-group">
-          <label class="form-label" for="field-firstname">Prénom</label>
-          <input class="form-input" type="text" id="field-firstname" name="firstname" autocomplete="given-name" aria-required="true" placeholder="Marie" />
-          <span class="form-error" id="err-firstname">Champ requis.</span>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="field-lastname">Nom</label>
-          <input class="form-input" type="text" id="field-lastname" name="lastname" autocomplete="family-name" aria-required="true" placeholder="Dupont" />
-          <span class="form-error" id="err-lastname">Champ requis.</span>
+        <div class="recap-total">
+          <span class="recap-total-k">Total</span>
+          <span class="recap-total-v" id="rc-total">—</span>
         </div>
       </div>
 
-      <div class="fields-full">
-        <label class="form-label" for="field-email">Email</label>
-        <input class="form-input" type="email" id="field-email" name="email" autocomplete="email" aria-required="true" placeholder="marie@email.com" />
-        <span class="form-error" id="err-email">Adresse email invalide.</span>
+      <div class="fg-row">
+        <div class="fg">
+          <label class="fg-label" for="f-fname">Prénom</label>
+          <input class="fg-input" type="text" id="f-fname" autocomplete="given-name" aria-required="true" placeholder="Marie" />
+          <span class="fg-err" id="err-fname">Champ requis.</span>
+        </div>
+        <div class="fg">
+          <label class="fg-label" for="f-lname">Nom</label>
+          <input class="fg-input" type="text" id="f-lname" autocomplete="family-name" aria-required="true" placeholder="Dupont" />
+          <span class="fg-err" id="err-lname">Champ requis.</span>
+        </div>
       </div>
 
-      <div class="fields-full">
-        <label class="form-label" for="field-phone">Téléphone</label>
-        <input class="form-input" type="tel" id="field-phone" name="phone" autocomplete="tel" aria-required="true" placeholder="06 12 34 56 78" />
-        <span class="form-error" id="err-phone">Numéro de téléphone invalide.</span>
+      <div class="fg">
+        <label class="fg-label" for="f-email">Email</label>
+        <input class="fg-input" type="email" id="f-email" autocomplete="email" aria-required="true" placeholder="marie@email.com" />
+        <span class="fg-err" id="err-email">Adresse email invalide.</span>
       </div>
 
-      <button class="btn-confirm" id="btn-confirm" onclick="submitReservation()" aria-label="Confirmer la réservation">
+      <div class="fg">
+        <label class="fg-label" for="f-phone">Téléphone</label>
+        <input class="fg-input" type="tel" id="f-phone" autocomplete="tel" aria-required="true" placeholder="06 12 34 56 78" />
+        <span class="fg-err" id="err-phone">Numéro invalide.</span>
+      </div>
+
+      <button class="btn-confirm" id="btn-confirm" onclick="submitReservation()">
         Confirmer la réservation
       </button>
-      <button class="btn-back" onclick="prevStep()" aria-label="Retour aux dates">
-        &larr; Retour
-      </button>
+
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 4.5H12L9 7l1 4-3.5-2L3 11l1-4L1 4.5h4z" fill="currentColor"/></svg>
+          Annulation flexible
+        </div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 4.5H12L9 7l1 4-3.5-2L3 11l1-4L1 4.5h4z" fill="currentColor"/></svg>
+          Aucuns frais cachés
+        </div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 4.5H12L9 7l1 4-3.5-2L3 11l1-4L1 4.5h4z" fill="currentColor"/></svg>
+          Paiement sécurisé
+        </div>
+      </div>
+
+      <button class="btn-back" onclick="prevStep()" style="margin-top:16px;">&larr; Retour</button>
     </div>
 
-    <!-- ÉTAT DE CONFIRMATION -->
+    <!-- CONFIRMATION -->
     <div id="confirmation" role="status" aria-live="polite">
-      <div class="confirm-icon" aria-hidden="true">
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-          <path d="M7 17.5L13.5 24L27 10" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="conf-icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path d="M7 18.5L14 25L29 10" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <h2 class="confirm-title">Demande envoyée !</h2>
-      <p class="confirm-subtitle">Nous vous contactons sous&nbsp;2h pour finaliser votre réservation.</p>
-      <div class="confirm-vehicle" id="confirm-vehicle-card">
-        <img class="confirm-vehicle-img" id="confirm-vehicle-img" src="" alt="" loading="lazy" />
-        <div class="confirm-vehicle-info">
-          <div class="confirm-vehicle-name" id="confirm-vehicle-name"></div>
-          <div class="confirm-vehicle-detail" id="confirm-vehicle-detail"></div>
+      <h2 class="conf-title">Demande envoyée&nbsp;!</h2>
+      <p class="conf-sub">Nous vous contactons sous&nbsp;2h pour finaliser votre réservation.</p>
+      <div class="conf-vehicle" id="conf-vehicle">
+        <img class="conf-vehicle-img" id="conf-img" src="" alt="" loading="lazy" />
+        <div class="conf-vehicle-body">
+          <div class="conf-vehicle-name" id="conf-name"></div>
+          <div class="conf-vehicle-detail" id="conf-detail"></div>
         </div>
       </div>
     </div>
-
   </section>
 
+  <!-- AVIS -->
+  <section class="s-reviews" aria-label="Avis clients">
+    <div class="s-head">
+      <div class="eyebrow">Ils l'ont conduit</div>
+      <h2 class="s-title s-title-light">Ce que disent nos clients.</h2>
+    </div>
+    <div class="rev-list">
+      <article class="rev-card">
+        <div class="rev-top">
+          <span class="rev-author">Thomas B.</span>
+          <div class="rev-stars" aria-label="5 étoiles">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+          </div>
+        </div>
+        <p class="rev-text">"Expérience parfaite du début à la fin. La RS3 est livrée le matin, on roule l'après-midi. Franchement je comprends pas pourquoi j'ai attendu si longtemps."</p>
+        <span class="rev-tag">Audi RS3 2025</span>
+      </article>
+      <article class="rev-card">
+        <div class="rev-top">
+          <span class="rev-author">Camille D.</span>
+          <div class="rev-stars" aria-label="5 étoiles">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+          </div>
+        </div>
+        <p class="rev-text">"J'ai offert un week-end Golf R à mon copain pour son anniversaire. Réservation en 5 minutes, livraison à l'heure. Il en parle encore deux semaines après."</p>
+        <span class="rev-tag">VW Golf 8R 2025</span>
+      </article>
+      <article class="rev-card">
+        <div class="rev-top">
+          <span class="rev-author">Romain V.</span>
+          <div class="rev-stars" aria-label="5 étoiles">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+          </div>
+        </div>
+        <p class="rev-text">"Utilisé pour un séminaire d'équipe. La Clio Alpine comme véhicule de direction, effet immédiat. Tarif sérieux, équipe réactive, on repart avec eux en septembre."</p>
+        <span class="rev-tag">Renault Clio 6 Alpine</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-logo">BeLoc<span>.</span></div>
+    <p class="footer-tag">Location de véhicules premium en Auvergne-Rhône-Alpes.<br>100&nbsp;% en ligne. Sans agence. Sans attente.</p>
+
+    <div class="footer-links">
+      <a href="mailto:contact@beloc.fr" class="footer-link">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M2 7l7 4 7-4"/></svg>
+        contact@beloc.fr
+      </a>
+      <a href="tel:+33426001890" class="footer-link">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 11.5c-.8.8-1.7 1.3-2.5 1-1-.4-2.3-1.4-3.5-2.5S5.4 7.5 5 6.5c-.3-.8.2-1.7 1-2.5L7.5 2.5C8 2 8.6 2 9 2.4L11 4.4c.4.4.4 1 0 1.4l-1 1c.5 1 1.2 2 2 2.8s1.8 1.5 2.8 2l1-1c.4-.4 1-.4 1.4 0l2 2c.4.4.4 1 0 1.4L17.5 15c-.8.8-1.7 1.3-2.5 1-.8-.3-1-.5-1.5-1"/></svg>
+        +33 4 26 00 18 90
+      </a>
+    </div>
+
+    <div class="footer-socials">
+      <a href="#" class="footer-social" aria-label="Instagram BeLoc">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" class="footer-social" aria-label="LinkedIn BeLoc">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M12 11a3 3 0 0 1 6 0v5M16 16v-5"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-div"></div>
+    <p class="footer-legal">&copy; 2026 BeLoc &mdash; Tous droits réservés &mdash; Auvergne-Rhône-Alpes</p>
+  </footer>
+
   <script>
-    // ─── DONNÉES VÉHICULES ─────────────────────────────────────────
     var VEHICLES = [
-      { id: 'rs3',    brand: 'Audi',    name: 'RS3',             type: 'Sport',       pricePerDay: 349, img: 'assets/rs3-studio.jpg' },
-      { id: 'golfr',  brand: 'VW',      name: 'Golf 8R',         type: 'Sport',       pricePerDay: 219, img: 'assets/golfr-track.jpg' },
-      { id: 'golf8',  brand: 'VW',      name: 'Golf 8',          type: 'Polyvalente', pricePerDay: 119, img: 'assets/golf8-black.png' },
-      { id: 'clio6',  brand: 'Renault', name: 'Clio 6 Alpine',   type: 'Sport',       pricePerDay: 129, img: 'assets/clio6-red.jpg' },
-      { id: 'clio5',  brand: 'Renault', name: 'Clio 5',          type: 'Citadine',    pricePerDay: 89,  img: 'assets/clio5-blue.jpg' }
+      { id: 'rs3',   brand: 'Audi',    name: 'RS3',           type: 'Sport',       power: '400 ch', pricePerDay: 349, img: 'assets/rs3-studio.jpg',  flagship: true  },
+      { id: 'golfr', brand: 'VW',      name: 'Golf 8R',       type: 'Sport',       power: '320 ch', pricePerDay: 219, img: 'assets/golfr-track.jpg', flagship: false },
+      { id: 'golf8', brand: 'VW',      name: 'Golf 8',        type: 'Polyvalente', power: '150 ch', pricePerDay: 119, img: 'assets/golf8-black.png', flagship: false },
+      { id: 'clio6', brand: 'Renault', name: 'Clio 6 Alpine', type: 'Sport',       power: '160 ch', pricePerDay: 129, img: 'assets/clio6-red.jpg',   flagship: false },
+      { id: 'clio5', brand: 'Renault', name: 'Clio 5',        type: 'Citadine',    power: '100 ch', pricePerDay: 89,  img: 'assets/clio5-blue.jpg',  flagship: false }
     ];
 
-    // ─── ÉTAT GLOBAL ───────────────────────────────────────────────
     var state = {
-      step: 1,
-      maxReached: 1,
-      vehicle: null,
-      dateStart: null,
-      dateEnd: null,
+      step: 1, maxReached: 1,
+      vehicle: null, dateStart: null, dateEnd: null,
       options: { driver: false, gps: false, delivery: false }
     };
 
-    // ─── INIT ──────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', function () {
+      renderFleet();
       renderVehicles();
-      initDateInputs();
-      updateStepperUI();
+      initDates();
+      initHeader();
     });
 
-    // ─── RENDER VÉHICULES ──────────────────────────────────────────
-    function badgeClass(type) {
-      var map = { 'Sport': 'badge-sport', 'Citadine': 'badge-citadine', 'Polyvalente': 'badge-polyvalente' };
-      return map[type] || 'badge-citadine';
+    /* ─ Header scroll ─ */
+    function initHeader() {
+      var hdr = document.getElementById('hdr');
+      window.addEventListener('scroll', function () {
+        hdr.classList.toggle('solid', window.scrollY > 60);
+      }, { passive: true });
     }
 
+    /* ─ Badge class ─ */
+    function badgeCls(type) {
+      return { Sport: 'badge-sport', Citadine: 'badge-citadine', Polyvalente: 'badge-polyvalente' }[type] || 'badge-citadine';
+    }
+
+    function vBadgeCls(type) {
+      return { Sport: 'vb-sport', Citadine: 'vb-citadine', Polyvalente: 'vb-polyvalente' }[type] || 'vb-citadine';
+    }
+
+    /* ─ Fleet carousel ─ */
+    function renderFleet() {
+      var scroll = document.getElementById('fleet-scroll');
+      var dots   = document.getElementById('fleet-dots');
+      var html = '', dhtml = '';
+
+      VEHICLES.forEach(function (v, i) {
+        html += '<div class="f-card" role="listitem" tabindex="0"'
+          + ' aria-label="' + v.brand + ' ' + v.name + ', dès ' + v.pricePerDay + ' € par jour"'
+          + ' onclick="reserveFrom(\'' + v.id + '\')"'
+          + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){reserveFrom(\'' + v.id + '\');event.preventDefault();}">'
+          + '<img class="f-card-img" src="' + v.img + '" alt="' + v.brand + ' ' + v.name + '" loading="' + (i === 0 ? 'eager' : 'lazy') + '" />'
+          + '<div class="f-card-overlay"></div>'
+          + (v.flagship ? '<div class="fleet-flagship-badge">Flagship</div>' : '')
+          + '<div class="f-card-content">'
+          + '<div class="f-card-badge ' + badgeCls(v.type) + '">' + v.type + '</div>'
+          + '<div class="f-card-name">' + v.name + '</div>'
+          + '<div class="f-card-brand">' + v.brand + ' &middot; ' + v.power + '</div>'
+          + '<div class="f-card-bottom">'
+          + '<div class="f-card-price">dès ' + v.pricePerDay + '&thinsp;€ <small>/ jour</small></div>'
+          + '<button class="f-card-reserve" tabindex="-1" aria-hidden="true">Réserver</button>'
+          + '</div>'
+          + '</div>'
+          + '</div>';
+        dhtml += '<div class="fleet-dot' + (i === 0 ? ' on' : '') + '" id="fd-' + i + '"></div>';
+      });
+
+      scroll.innerHTML = html;
+      dots.innerHTML = dhtml;
+
+      scroll.addEventListener('scroll', function () {
+        var cw = (scroll.querySelector('.f-card').offsetWidth + 14);
+        var idx = Math.round(scroll.scrollLeft / cw);
+        VEHICLES.forEach(function (_, i) {
+          var d = document.getElementById('fd-' + i);
+          if (d) d.classList.toggle('on', i === idx);
+        });
+      }, { passive: true });
+    }
+
+    function reserveFrom(id) {
+      selectVehicle(id);
+      state.step = 1;
+      showPanel(1);
+      document.getElementById('tunnel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ─ Vehicle list (tunnel step 1) ─ */
     function renderVehicles() {
-      var list = document.getElementById('vehicle-list');
+      var list = document.getElementById('v-list');
       var html = '';
       VEHICLES.forEach(function (v) {
-        html += '<div class="vehicle-card" id="vcard-' + v.id + '" role="listitem" tabindex="0" '
-          + 'onclick="selectVehicle(\'' + v.id + '\')" '
-          + 'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){selectVehicle(\'' + v.id + '\');event.preventDefault();}" '
-          + 'aria-label="Sélectionner ' + v.brand + ' ' + v.name + ', ' + v.pricePerDay + ' euros par jour">'
-          + '<img class="vehicle-card-img" src="' + v.img + '" alt="' + v.brand + ' ' + v.name + '" loading="lazy" />'
-          + '<div class="vehicle-card-body">'
-          + '<div class="vehicle-card-top">'
-          + '<div>'
-          + '<div class="vehicle-name">' + v.name + '</div>'
-          + '<div class="vehicle-brand">' + v.brand + '</div>'
+        html += '<div class="v-card" id="vc-' + v.id + '" role="listitem" tabindex="0"'
+          + ' onclick="selectVehicle(\'' + v.id + '\')"'
+          + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){selectVehicle(\'' + v.id + '\');event.preventDefault();}">'
+          + '<img class="v-thumb" src="' + v.img + '" alt="' + v.brand + ' ' + v.name + '" loading="lazy" />'
+          + '<div class="v-info">'
+          + '<div class="v-info-top">'
+          + '<div><div class="v-name">' + v.name + '</div><div class="v-brand">' + v.brand + '</div></div>'
+          + '<div class="v-price">dès ' + v.pricePerDay + '€ <small>/ j</small></div>'
           + '</div>'
-          + '<div class="vehicle-price">dès ' + v.pricePerDay + '€ <span>/ jour</span></div>'
-          + '</div>'
-          + '<div class="vehicle-card-bottom">'
-          + '<span class="badge ' + badgeClass(v.type) + '">' + v.type + '</span>'
-          + '<button class="btn-select" tabindex="-1" aria-hidden="true">Sélectionner</button>'
+          + '<div class="v-info-bottom">'
+          + '<span class="v-badge ' + vBadgeCls(v.type) + '">' + v.type + '</span>'
+          + '<button class="v-sel-btn" tabindex="-1" aria-hidden="true">Choisir</button>'
           + '</div>'
           + '</div>'
           + '</div>';
@@ -1113,166 +1851,151 @@
       list.innerHTML = html;
     }
 
-    // ─── SÉLECTION VÉHICULE ────────────────────────────────────────
     function selectVehicle(id) {
       state.vehicle = id;
       VEHICLES.forEach(function (v) {
-        var card = document.getElementById('vcard-' + v.id);
-        if (v.id === id) {
-          card.classList.add('selected');
-          card.setAttribute('aria-selected', 'true');
-        } else {
-          card.classList.remove('selected');
-          card.setAttribute('aria-selected', 'false');
-        }
+        var c = document.getElementById('vc-' + v.id);
+        if (!c) return;
+        c.classList.toggle('sel', v.id === id);
+        c.setAttribute('aria-selected', v.id === id ? 'true' : 'false');
       });
-      document.getElementById('btn-next-1').disabled = false;
+      var btn = document.getElementById('btn-next-1');
+      if (btn) btn.disabled = false;
     }
 
-    // ─── DATES ─────────────────────────────────────────────────────
-    function initDateInputs() {
+    /* ─ Dates ─ */
+    function initDates() {
       var today = new Date();
-      var yyyy = today.getFullYear();
-      var mm = String(today.getMonth() + 1).padStart(2, '0');
-      var dd = String(today.getDate()).padStart(2, '0');
-      var todayStr = yyyy + '-' + mm + '-' + dd;
+      var td = today.getFullYear() + '-'
+        + String(today.getMonth() + 1).padStart(2, '0') + '-'
+        + String(today.getDate()).padStart(2, '0');
 
-      var startInput = document.getElementById('date-start');
-      var endInput = document.getElementById('date-end');
-      startInput.min = todayStr;
-      endInput.min = todayStr;
+      var ds = document.getElementById('d-start');
+      var de = document.getElementById('d-end');
+      ds.min = td; de.min = td;
 
-      startInput.addEventListener('change', function () {
-        state.dateStart = startInput.value || null;
+      ds.addEventListener('change', function () {
+        state.dateStart = ds.value || null;
         if (state.dateStart) {
-          endInput.min = state.dateStart;
-          if (state.dateEnd && state.dateEnd <= state.dateStart) {
-            state.dateEnd = null;
-            endInput.value = '';
-          }
+          de.min = state.dateStart;
+          if (state.dateEnd && state.dateEnd <= state.dateStart) { state.dateEnd = null; de.value = ''; }
         }
-        updatePriceSummary();
-        clearError('date-start');
+        updPrice(); clrErr('d-start');
       });
 
-      endInput.addEventListener('change', function () {
-        state.dateEnd = endInput.value || null;
-        updatePriceSummary();
-        clearError('date-end');
+      de.addEventListener('change', function () {
+        state.dateEnd = de.value || null;
+        updPrice(); clrErr('d-end');
       });
     }
 
-    function getNbDays() {
+    function days() {
       if (!state.dateStart || !state.dateEnd) return 0;
-      var start = new Date(state.dateStart);
-      var end = new Date(state.dateEnd);
-      var diff = Math.round((end - start) / (1000 * 60 * 60 * 24));
-      return diff > 0 ? diff : 0;
+      var d = Math.round((new Date(state.dateEnd) - new Date(state.dateStart)) / 86400000);
+      return d > 0 ? d : 0;
     }
 
-    function calcTotal() {
+    function total() {
       var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
       if (!v) return 0;
-      var days = getNbDays();
-      if (days <= 0) return 0;
-      var total = v.pricePerDay * days;
-      if (state.options.driver) total += 15 * days;
-      if (state.options.gps) total += 8 * days;
-      if (state.options.delivery) total += 49;
-      return total;
+      var d = days();
+      if (d <= 0) return 0;
+      var t = v.pricePerDay * d;
+      if (state.options.driver) t += 15 * d;
+      if (state.options.gps)    t += 8  * d;
+      if (state.options.delivery) t += 49;
+      return t;
     }
 
-    function updatePriceSummary() {
-      var days = getNbDays();
-      var priceVal = document.getElementById('price-value');
-      var pricePlaceholder = document.getElementById('price-placeholder');
-      var priceLabel = document.getElementById('price-label');
-
-      if (days > 0) {
-        var total = calcTotal();
-        priceVal.textContent = days + ' jour' + (days > 1 ? 's' : '') + ' · ' + formatPrice(total);
-        priceVal.classList.remove('hidden');
-        pricePlaceholder.style.display = 'none';
-        priceLabel.textContent = 'Estimation';
+    function updPrice() {
+      var d = days();
+      var val = document.getElementById('price-val');
+      var ph  = document.getElementById('price-ph');
+      var lbl = document.getElementById('price-label');
+      if (d > 0) {
+        val.textContent = d + ' jour' + (d > 1 ? 's' : '') + ' · ' + fmt(total());
+        val.classList.remove('hide');
+        ph.classList.add('hide');
+        lbl.textContent = 'Estimation';
       } else {
-        priceVal.classList.add('hidden');
-        pricePlaceholder.style.display = '';
-        priceLabel.textContent = 'Durée & prix';
+        val.classList.add('hide');
+        ph.classList.remove('hide');
+        lbl.textContent = 'Durée & prix';
       }
     }
 
-    // ─── OPTIONS ───────────────────────────────────────────────────
-    function toggleOption(key) {
+    /* ─ Options ─ */
+    function toggleOpt(key) {
       state.options[key] = !state.options[key];
       var el = document.getElementById('opt-' + key);
-      if (state.options[key]) {
-        el.classList.add('selected');
-        el.setAttribute('aria-checked', 'true');
-      } else {
-        el.classList.remove('selected');
-        el.setAttribute('aria-checked', 'false');
-      }
-      updatePriceSummary();
+      el.classList.toggle('sel', state.options[key]);
+      el.setAttribute('aria-checked', String(state.options[key]));
+      updPrice();
     }
 
-    // ─── FORMAT PRIX ───────────────────────────────────────────────
-    function formatPrice(n) {
-      return n.toLocaleString('fr-FR') + ' €';
+    /* ─ Format helpers ─ */
+    function fmt(n) { return n.toLocaleString('fr-FR') + ' €'; }
+    function fmtDate(s) {
+      if (!s) return '—';
+      var p = s.split('-');
+      return p[2] + '/' + p[1] + '/' + p[0];
     }
 
-    function formatDate(str) {
-      if (!str) return '—';
-      var parts = str.split('-');
-      return parts[2] + '/' + parts[1] + '/' + parts[0];
-    }
-
-    // ─── STEPPER UI ────────────────────────────────────────────────
-    function updateStepperUI() {
+    /* ─ Stepper UI ─ */
+    function updStepper() {
+      var chk = '<svg width="13" height="11" viewBox="0 0 14 11" fill="none"><path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       for (var i = 1; i <= 3; i++) {
-        var item = document.getElementById('stepper-' + i);
-        var circle = item.querySelector('.step-circle');
-        item.classList.remove('active', 'completed');
-
+        var item = document.getElementById('st-' + i);
+        var dot  = item.querySelector('.step-dot');
+        item.classList.remove('active', 'done');
         if (i < state.step) {
-          item.classList.add('completed');
-          circle.innerHTML = '<svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          item.classList.add('done');
+          dot.innerHTML = chk;
           item.setAttribute('tabindex', '0');
         } else if (i === state.step) {
           item.classList.add('active');
-          circle.textContent = i;
+          dot.textContent = i;
           item.setAttribute('tabindex', '0');
         } else {
-          circle.textContent = i;
+          dot.textContent = i;
           item.setAttribute('tabindex', i <= state.maxReached ? '0' : '-1');
         }
       }
     }
 
-    // ─── NAVIGATION ────────────────────────────────────────────────
+    /* ─ Navigation ─ */
     function goToStep(n) {
-      if (n > state.maxReached) return;
-      if (n === state.step) return;
+      if (n > state.maxReached || n === state.step) return;
       state.step = n;
       showPanel(n);
     }
 
     function showPanel(n) {
       for (var i = 1; i <= 3; i++) {
-        var p = document.getElementById('panel-' + i);
-        p.classList.remove('active');
+        document.getElementById('panel-' + i).classList.remove('on');
       }
-      var target = document.getElementById('panel-' + n);
-      target.classList.add('active');
+      document.getElementById('panel-' + n).classList.add('on');
       state.step = n;
-      updateStepperUI();
-      scrollToTunnel();
+      updStepper();
+      updChips();
+      document.getElementById('tunnel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function scrollToTunnel() {
-      var tunnel = document.getElementById('tunnel');
-      if (tunnel) {
-        tunnel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    function updChips() {
+      var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
+      ['2','3'].forEach(function (s) {
+        var chip = document.getElementById('chip-' + s);
+        if (!chip) return;
+        if (v && state.step > 1) {
+          document.getElementById('chip-' + s + '-img').src = v.img;
+          document.getElementById('chip-' + s + '-img').alt = v.brand + ' ' + v.name;
+          document.getElementById('chip-' + s + '-name').textContent = v.brand + ' ' + v.name;
+          document.getElementById('chip-' + s + '-price').textContent = 'dès ' + v.pricePerDay + ' €/jour';
+          chip.classList.add('vis');
+        } else {
+          chip.classList.remove('vis');
+        }
+      });
     }
 
     function nextStep() {
@@ -1283,7 +2006,7 @@
         showPanel(2);
       } else if (state.step === 2) {
         if (!validateDates()) return;
-        updateRecap();
+        updRecap();
         state.step = 3;
         if (state.maxReached < 3) state.maxReached = 3;
         showPanel(3);
@@ -1291,118 +2014,90 @@
     }
 
     function prevStep() {
-      if (state.step > 1) {
-        state.step--;
-        showPanel(state.step);
-      }
+      if (state.step > 1) { state.step--; showPanel(state.step); }
     }
 
-    // ─── VALIDATION DATES ──────────────────────────────────────────
+    /* ─ Validation dates ─ */
     function validateDates() {
       var ok = true;
-      if (!state.dateStart) {
-        showError('date-start');
-        document.getElementById('date-start').classList.add('error');
-        ok = false;
-      }
-      if (!state.dateEnd || getNbDays() < 1) {
-        showError('date-end');
-        document.getElementById('date-end').classList.add('error');
-        ok = false;
-      }
+      if (!state.dateStart) { showErr('d-start'); ok = false; }
+      if (!state.dateEnd || days() < 1) { showErr('d-end'); ok = false; }
       return ok;
     }
 
-    function showError(id) {
-      var err = document.getElementById('err-' + id);
-      var input = document.getElementById(id) || document.getElementById('field-' + id);
-      if (err) err.classList.add('visible');
-      if (input) input.classList.add('error');
+    function showErr(id) {
+      var e = document.getElementById('err-' + id);
+      var i = document.getElementById(id) || document.getElementById('f-' + id);
+      if (e) e.classList.add('vis');
+      if (i) i.classList.add('err');
     }
 
-    function clearError(id) {
-      var err = document.getElementById('err-' + id);
-      var input = document.getElementById(id) || document.getElementById('field-' + id);
-      if (err) err.classList.remove('visible');
-      if (input) input.classList.remove('error');
+    function clrErr(id) {
+      var e = document.getElementById('err-' + id);
+      var i = document.getElementById(id) || document.getElementById('f-' + id);
+      if (e) e.classList.remove('vis');
+      if (i) i.classList.remove('err');
     }
 
-    // ─── RECAP ÉTAPE 3 ─────────────────────────────────────────────
-    function updateRecap() {
+    /* ─ Recap ─ */
+    function updRecap() {
       var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
       if (!v) return;
-      var days = getNbDays();
+      var d = days();
+      document.getElementById('rc-vehicle').textContent = v.brand + ' ' + v.name;
+      document.getElementById('rc-dates').textContent   = fmtDate(state.dateStart) + ' → ' + fmtDate(state.dateEnd);
+      document.getElementById('rc-dur').textContent     = d + ' jour' + (d > 1 ? 's' : '');
 
-      document.getElementById('recap-vehicle').textContent = v.brand + ' ' + v.name;
-      document.getElementById('recap-dates').textContent = formatDate(state.dateStart) + ' → ' + formatDate(state.dateEnd);
-      document.getElementById('recap-duration').textContent = days + ' jour' + (days > 1 ? 's' : '');
+      document.getElementById('rc-row-driver').style.display   = state.options.driver ? '' : 'none';
+      if (state.options.driver) document.getElementById('rc-driver').textContent = '+' + fmt(15 * d);
 
-      if (state.options.driver) {
-        document.getElementById('recap-row-driver').style.display = '';
-        document.getElementById('recap-driver-price').textContent = '+' + formatPrice(15 * days);
-      } else {
-        document.getElementById('recap-row-driver').style.display = 'none';
-      }
+      document.getElementById('rc-row-gps').style.display = state.options.gps ? '' : 'none';
+      if (state.options.gps) document.getElementById('rc-gps').textContent = '+' + fmt(8 * d);
 
-      if (state.options.gps) {
-        document.getElementById('recap-row-gps').style.display = '';
-        document.getElementById('recap-gps-price').textContent = '+' + formatPrice(8 * days);
-      } else {
-        document.getElementById('recap-row-gps').style.display = 'none';
-      }
+      document.getElementById('rc-row-delivery').style.display = state.options.delivery ? '' : 'none';
+      document.getElementById('rc-total').textContent = fmt(total());
 
-      if (state.options.delivery) {
-        document.getElementById('recap-row-delivery').style.display = '';
-      } else {
-        document.getElementById('recap-row-delivery').style.display = 'none';
-      }
-
-      document.getElementById('recap-total').textContent = formatPrice(calcTotal());
+      /* also update chip-3 */
+      updChips();
     }
 
-    // ─── VALIDATION FORMULAIRE CONTACT ────────────────────────────
+    /* ─ Validation contact ─ */
     function validateContact() {
       var ok = true;
+      var fname = document.getElementById('f-fname').value.trim();
+      var lname = document.getElementById('f-lname').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+      var phone = document.getElementById('f-phone').value.trim();
 
-      var firstname = document.getElementById('field-firstname').value.trim();
-      var lastname = document.getElementById('field-lastname').value.trim();
-      var email = document.getElementById('field-email').value.trim();
-      var phone = document.getElementById('field-phone').value.trim();
-
-      if (!firstname) { showError('firstname'); ok = false; } else { clearError('firstname'); }
-      if (!lastname) { showError('lastname'); ok = false; } else { clearError('lastname'); }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email'); ok = false; } else { clearError('email'); }
-      if (!phone || !/^[\d\s\+\-\.\(\)]{8,}$/.test(phone)) { showError('phone'); ok = false; } else { clearError('phone'); }
+      if (!fname) { showErr('fname'); ok = false; } else { clrErr('fname'); }
+      if (!lname) { showErr('lname'); ok = false; } else { clrErr('lname'); }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('email'); ok = false; } else { clrErr('email'); }
+      if (!phone || !/^[\d\s+\-.() ]{8,}$/.test(phone))        { showErr('phone'); ok = false; } else { clrErr('phone'); }
 
       return ok;
     }
 
-    // ─── SOUMISSION ────────────────────────────────────────────────
+    /* ─ Submit ─ */
     function submitReservation() {
       if (!validateContact()) return;
-
       var v = VEHICLES.find(function (x) { return x.id === state.vehicle; });
-      var days = getNbDays();
+      var d = days();
 
-      // Masquer les panels et stepper
-      document.querySelectorAll('.step-panel').forEach(function (p) { p.style.display = 'none'; });
+      document.querySelectorAll('.t-panel').forEach(function (p) { p.style.display = 'none'; });
       document.querySelector('.stepper').style.display = 'none';
+      document.querySelector('.tunnel-top').style.display = 'none';
 
-      // Remplir la carte de confirmation
-      document.getElementById('confirm-vehicle-img').src = v.img;
-      document.getElementById('confirm-vehicle-img').alt = v.brand + ' ' + v.name;
-      document.getElementById('confirm-vehicle-name').textContent = v.brand + ' ' + v.name;
-      document.getElementById('confirm-vehicle-detail').textContent =
-        formatDate(state.dateStart) + ' → ' + formatDate(state.dateEnd)
-        + ' · ' + days + ' jour' + (days > 1 ? 's' : '')
-        + ' · ' + formatPrice(calcTotal());
+      document.getElementById('conf-img').src  = v.img;
+      document.getElementById('conf-img').alt  = v.brand + ' ' + v.name;
+      document.getElementById('conf-name').textContent   = v.brand + ' ' + v.name;
+      document.getElementById('conf-detail').textContent =
+        fmtDate(state.dateStart) + ' → ' + fmtDate(state.dateEnd)
+        + ' · ' + d + ' jour' + (d > 1 ? 's' : '')
+        + ' · ' + fmt(total());
 
-      // Afficher l'état de confirmation
-      var conf = document.getElementById('confirmation');
-      conf.classList.add('visible');
+      document.getElementById('confirmation').classList.add('vis');
       document.getElementById('tunnel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   </script>
-
 </body>
 </html>
