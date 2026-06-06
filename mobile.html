@@ -32,6 +32,10 @@
       --sans: 'Inter', sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     html, body {
       margin: 0;
       overflow-x: hidden;
@@ -94,7 +98,7 @@
     .hero-bottom {
       position: relative;
       z-index: 2;
-      padding: 0 20px 36px;
+      padding: 0 20px max(36px, calc(env(safe-area-inset-bottom) + 20px));
     }
 
     .hero-title {
@@ -816,13 +820,16 @@
 
   <!-- ─── SECTION 1 : HERO ──────────────────────────────────────── -->
   <section class="hero" id="hero">
-    <img
-      class="hero-img"
-      src="assets/rs3-action.avif"
-      alt="Audi RS3 en action"
-      loading="eager"
-      decoding="async"
-    />
+    <picture>
+      <source srcset="assets/rs3-action.avif" type="image/avif" />
+      <img
+        class="hero-img"
+        src="assets/rs3-studio.jpg"
+        alt="Audi RS3 en action"
+        loading="eager"
+        decoding="async"
+      />
+    </picture>
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="hero-top">
@@ -1049,7 +1056,7 @@
   <script>
     // ─── DONNÉES VÉHICULES ─────────────────────────────────────────
     var VEHICLES = [
-      { id: 'rs3',    brand: 'Audi',    name: 'RS3',             type: 'Sport',       pricePerDay: 349, img: 'assets/rs3-action.avif' },
+      { id: 'rs3',    brand: 'Audi',    name: 'RS3',             type: 'Sport',       pricePerDay: 349, img: 'assets/rs3-studio.jpg' },
       { id: 'golfr',  brand: 'VW',      name: 'Golf 8R',         type: 'Sport',       pricePerDay: 219, img: 'assets/golfr-track.jpg' },
       { id: 'golf8',  brand: 'VW',      name: 'Golf 8',          type: 'Polyvalente', pricePerDay: 119, img: 'assets/golf8-black.png' },
       { id: 'clio6',  brand: 'Renault', name: 'Clio 6 Alpine',   type: 'Sport',       pricePerDay: 129, img: 'assets/clio6-red.jpg' },
