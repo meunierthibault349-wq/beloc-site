@@ -25,7 +25,10 @@ function App() {
   else if (route === "detail") page = <DetailPage nav={nav} params={params} onFav={onFav} />;
   else if (route === "booking") page = <BookingPage nav={nav} params={params} toast={toast} />;
   else if (route === "how") page = <HowPage nav={nav} />;
+  else if (route === "offers") page = <OffersPage nav={nav} />;
+  else if (route === "presence") page = <PresencePage nav={nav} />;
   else if (route === "about") page = <AboutPage nav={nav} toast={toast} />;
+  else if (route === "contact") page = <ContactPage nav={nav} toast={toast} />;
   else page = <HomePage nav={nav} onFav={onFav} />;
 
   const solid = route !== "home";
