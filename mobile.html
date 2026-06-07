@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0A0A0C" />
+  <title>BeLoc — Location premium · Auvergne-Rhône-Alpes</title>
+  <meta name="description" content="Location de vehicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Reservez en 3 minutes en Auvergne-Rhone-Alpes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+:root{
+  --bg:#0A0A0C;--bg1:#111114;--bg2:#18181C;
+  --bdr:rgba(255,255,255,.08);--bdhi:rgba(255,255,255,.16);
+  --red:#E8342A;--redk:#C42A20;
+  --gold:#C9A96E;--goldd:rgba(201,169,110,.12);
+  --blue:#3B82F6;--green:#22C55E;
+  --t1:#FAFAFA;--t2:#A1A1AA;--t3:rgba(255,255,255,.28);
+  --fbg:#F3F4F6;--fc:#FFFFFF;--ft1:#18181B;--ft2:#71717A;--fbdr:#E4E4E7;--fsel:#EFF6FF;
+  --fh:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --fb:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --rs:6px;--rm:12px;--rl:16px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;padding-top:env(safe-area-inset-top,0px);background:transparent;transition:background .25s,border-color .25s}
+.hdr.stuck{background:rgba(10,10,12,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr)}
+.hdr-logo{font-family:var(--fh);font-weight:700;font-size:20px;color:#fff;letter-spacing:-.3px}
+.hdr-btn{display:flex;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--red);color:#fff;font-family:var(--fh);font-weight:600;font-size:13px;border-radius:var(--rs);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s}
+.hdr-btn:active{background:var(--redk);transform:scale(.97)}
+.hero{position:relative;width:100%;height:100dvh;min-height:580px;background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;z-index:0}
+.hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(10,10,12,.55) 0%,rgba(10,10,12,.05) 28%,rgba(10,10,12,.62) 58%,rgba(10,10,12,.96) 88%)}
+.hero-top{position:relative;z-index:2;padding:calc(env(safe-area-inset-top,0px) + 68px) 24px 0}
+.hero-ey{font-family:var(--fb);font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+.hero-bot{position:relative;z-index:2;padding:0 24px calc(max(44px,env(safe-area-inset-bottom,0px) + 28px))}
+.hero-title{font-family:var(--fh);font-weight:700;font-size:clamp(38px,11vw,56px);line-height:1.02;letter-spacing:-1.8px;color:#fff;max-width:12ch;margin-bottom:10px}
+.hero-sub{font-family:var(--fb);font-size:14px;line-height:1.5;color:rgba(255,255,255,.52);margin-bottom:28px}
+.cta{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:54px;background:var(--red);color:#fff;font-family:var(--fh);font-weight:600;font-size:16px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s}
+.cta:active{background:var(--redk);transform:scale(.98)}
+.sec{background:var(--bg);padding:60px 0 56px}
+.sec-alt{background:var(--bg1);padding:60px 0 56px}
+.sh{padding:0 24px;margin-bottom:32px}
+.ey{font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.st{font-family:var(--fh);font-weight:700;font-size:clamp(22px,6vw,30px);line-height:1.1;letter-spacing:-.4px;color:var(--t1)}
+.ss{font-family:var(--fb);font-size:14px;line-height:1.6;color:var(--t2);margin-top:6px}
+.fleet{display:flex;gap:14px;padding:4px 24px 20px;overflow-x:scroll;scroll-snap-type:x mandatory;scroll-padding-left:24px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none}
+.fleet::-webkit-scrollbar{display:none}
+.fc{flex-shrink:0;width:72vw;max-width:270px;scroll-snap-align:start;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,transform .15s}
+.fc:active{transform:scale(.98);border-color:var(--bdhi)}
+.fc-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2)}
+.fc-body{padding:14px 16px 16px}
+.fbadge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.bs{background:rgba(232,52,42,.15);color:#F87171}
+.bc{background:rgba(59,130,246,.15);color:#60A5FA}
+.bp{background:rgba(34,197,94,.15);color:#4ADE80}
+.fc-name{font-family:var(--fh);font-weight:700;font-size:18px;color:var(--t1);line-height:1.1}
+.fc-brand{font-family:var(--fb);font-size:12px;color:var(--t2);margin-top:2px;margin-bottom:12px}
+.fc-bot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fprice{font-family:var(--fh);font-weight:700;font-size:17px;color:var(--t1)}
+.fprice em{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--t2);font-style:normal}
+.fbtn{height:36px;padding:0 14px;background:var(--red);color:#fff;font-family:var(--fb);font-weight:600;font-size:12px;border:none;border-radius:var(--rs);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.dots{display:flex;justify-content:center;gap:6px;padding:0 24px}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.18);transition:width .2s,background .2s}
+.dot.on{width:18px;background:var(--gold)}
+.why{padding:0 24px;display:flex;flex-direction:column}
+.wi{display:flex;align-items:flex-start;gap:16px;padding:22px 0;border-bottom:1px solid var(--bdr)}
+.wi:last-child{border-bottom:none}
+.wico{width:44px;height:44px;min-width:44px;border-radius:var(--rs);background:var(--goldd);display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.wt{font-family:var(--fh);font-weight:600;font-size:15px;color:var(--t1);line-height:1.25;margin-bottom:4px}
+.wd{font-family:var(--fb);font-size:13px;line-height:1.55;color:var(--t2)}
+#tunnel{background:var(--fbg)}
+.tband{background:var(--bg1);padding:40px 24px 32px}
+.tband .ey{color:var(--gold)}
+.tb-title{font-family:var(--fh);font-weight:700;font-size:clamp(20px,5.5vw,26px);color:var(--t1);letter-spacing:-.3px;line-height:1.1}
+.stepper{display:flex;align-items:center;padding:20px 24px 18px;background:var(--fbg);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--fbdr)}
+.si{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.si::after{content:'';position:absolute;top:17px;left:calc(50% + 18px);right:calc(-50% + 18px);height:2px;background:var(--fbdr);transition:background .25s}
+.si:last-child::after{display:none}
+.si.done::after{background:var(--blue)}
+.si-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:600;font-size:14px;border:2px solid var(--fbdr);background:var(--fc);color:var(--ft2);position:relative;z-index:1;transition:border-color .2s,background .2s,color .2s}
+.si.active .si-dot{border-color:var(--blue);background:var(--blue);color:#fff}
+.si.done .si-dot{border-color:var(--green);background:var(--green);color:#fff}
+.si-lbl{font-family:var(--fb);font-size:11px;font-weight:500;color:var(--ft2);text-align:center}
+.si.active .si-lbl{color:var(--blue);font-weight:600}
+.si.done .si-lbl{color:var(--green)}
+.panel{display:none;padding:24px 16px 0;animation:up .25s ease}
+.panel.show{display:block}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.pt{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--ft1);margin-bottom:4px}
+.ph{font-family:var(--fb);font-size:13px;color:var(--ft2);margin-bottom:20px}
+.vlist{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.vcard{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .15s}
+.vcard:active{opacity:.92}
+.vcard.sel{border-color:var(--blue);background:var(--fsel)}
+.vcard-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#D4D4D8}
+.vcard-body{padding:10px 14px 12px}
+.vcard-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.vcard-name{font-family:var(--fh);font-weight:700;font-size:16px;color:var(--ft1)}
+.vcard-brand{font-family:var(--fb);font-size:12px;color:var(--ft2);margin-top:1px}
+.vcard-price{font-family:var(--fh);font-weight:700;font-size:15px;color:var(--red);white-space:nowrap}
+.vcard-price em{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--ft2);font-style:normal}
+.vcard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:11px;font-weight:600}
+.ts{background:rgba(239,68,68,.1);color:#DC2626}
+.tc{background:rgba(37,99,235,.1);color:#2563EB}
+.tp{background:rgba(34,197,94,.1);color:#16A34A}
+.btn-sel{height:34px;padding:0 14px;font-family:var(--fb);font-weight:600;font-size:12px;border:1.5px solid var(--blue);background:transparent;color:var(--blue);border-radius:var(--rs);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;white-space:nowrap;transition:background .15s,color .15s}
+.vcard.sel .btn-sel{background:var(--blue);color:#fff}
+.fg{margin-bottom:14px}
+.fl{display:block;font-family:var(--fb);font-weight:600;font-size:12px;color:var(--ft1);letter-spacing:.2px;margin-bottom:6px}
+.fi{display:block;width:100%;height:50px;font-family:var(--fb);font-size:16px;color:var(--ft1);background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rs);padding:0 14px;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s}
+.fi:focus{border-color:var(--blue)}
+.fi.err{border-color:var(--red)}
+.fe{font-family:var(--fb);font-size:11px;color:var(--red);margin-top:4px;display:none}
+.fe.show{display:block}
+.pstrip{background:var(--bg1);border-radius:var(--rm);padding:14px 16px;margin:4px 0 18px;display:flex;align-items:center;justify-content:space-between}
+.psl{font-family:var(--fb);font-size:13px;color:rgba(255,255,255,.55)}
+.psv{font-family:var(--fh);font-weight:700;font-size:18px;color:#fff}
+.psv.hide{display:none}
+.psp{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.35);font-style:italic}
+.ot{font-family:var(--fh);font-weight:600;font-size:15px;color:var(--ft1);margin:18px 0 10px}
+.opt{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
+.opt.on{border-color:var(--blue);background:var(--fsel)}
+.opt-info{flex:1}
+.opt-name{font-family:var(--fb);font-weight:600;font-size:13px;color:var(--ft1);margin-bottom:2px}
+.opt-price{font-family:var(--fb);font-size:12px;color:var(--ft2)}
+.opt-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--fbdr);background:var(--fc);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .15s,background .15s}
+.opt.on .opt-box{border-color:var(--blue);background:var(--blue)}
+.opt-box svg{display:none}
+.opt.on .opt-box svg{display:block}
+.recap{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);padding:16px;margin-bottom:18px}
+.recap-ttl{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--ft1);padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--fbdr)}
+.rrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px}
+.rrow:last-child{margin-bottom:0}
+.rk{font-family:var(--fb);font-size:12px;color:var(--ft2)}
+.rv{font-family:var(--fb);font-size:12px;font-weight:600;color:var(--ft1);text-align:right}
+.rtotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1.5px solid var(--fbdr)}
+.rtk{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--ft1)}
+.rtv{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--red)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.fgrid .fg{margin-bottom:0}
+.ffull{margin-bottom:14px}
+.btn-next{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--blue);color:#fff;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s,opacity .15s;margin-top:8px}
+.btn-next:active{transform:scale(.98)}
+.btn-next:disabled{opacity:.38;cursor:not-allowed}
+.btn-back{display:flex;align-items:center;justify-content:center;width:100%;height:44px;background:transparent;color:var(--ft2);font-family:var(--fb);font-weight:500;font-size:13px;border:1.5px solid var(--fbdr);border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;margin-top:8px;transition:border-color .15s}
+.btn-back:active{border-color:var(--ft2)}
+.btn-confirm{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--red);color:#fff;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s;margin-top:8px}
+.btn-confirm:active{background:var(--redk);transform:scale(.98)}
+.pbs{padding-bottom:calc(max(48px,env(safe-area-inset-bottom,0px) + 32px))}
+#conf{display:none;padding:52px 24px;text-align:center;animation:up .4s ease}
+#conf.show{display:block}
+.cc{width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;animation:pop .5s cubic-bezier(.175,.885,.32,1.275) forwards}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.ct{font-family:var(--fh);font-weight:700;font-size:24px;color:var(--ft1);margin-bottom:8px}
+.cs{font-family:var(--fb);font-size:14px;color:var(--ft2);line-height:1.6;max-width:26ch;margin:0 auto}
+.cc2{margin-top:28px;background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);overflow:hidden}
+.cc2-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#D4D4D8}
+.cc2-info{padding:14px}
+.cc2-name{font-family:var(--fh);font-weight:700;font-size:17px;color:var(--ft1)}
+.cc2-det{font-family:var(--fb);font-size:12px;color:var(--ft2);margin-top:4px}
+.reviews{padding:0 24px;display:flex;flex-direction:column;gap:12px}
+.rc{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);padding:18px 16px}
+.rct{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.rca{font-family:var(--fh);font-weight:600;font-size:13px;color:var(--t1)}
+.stars{display:flex;gap:2px;color:var(--gold)}
+.rcx{font-family:var(--fb);font-size:13px;line-height:1.6;color:var(--t2);margin-bottom:10px}
+.rctag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;background:var(--goldd);color:var(--gold)}
+.footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:40px 24px calc(max(36px,env(safe-area-inset-bottom,0px) + 24px))}
+.fl-logo{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--t1);margin-bottom:6px}
+.fl-line{font-family:var(--fb);font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:28px}
+.fl-links{display:flex;flex-direction:column;gap:2px;margin-bottom:28px}
+.fl-link{display:flex;align-items:center;gap:10px;min-height:44px;font-family:var(--fb);font-size:13px;color:var(--t2);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.fl-soc{display:flex;gap:10px;margin-bottom:32px}
+.fl-sb{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--rs);background:rgba(255,255,255,.06);border:1px solid var(--bdr);color:var(--t2);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.fl-sb:active{background:rgba(255,255,255,.12)}
+.fl-div{height:1px;background:var(--bdr);margin-bottom:18px}
+.fl-legal{font-family:var(--fb);font-size:11px;color:var(--t3);line-height:1.6}
+  </style>
+</head>
+<body>
+<header class="hdr" id="hdr" role="banner">
+  <a href="#hero" class="hdr-logo">BeLoc.</a>
+  <a href="#tunnel" class="hdr-btn">Réserver &rarr;</a>
+</header>
+
+<section id="hero" class="hero" aria-label="Accueil">
+  <img class="hero-img" src="assets/rs3-action.avif" alt="Audi RS3"
+    loading="eager" decoding="async" fetchpriority="high"
+    onerror="this.src='assets/rs3-studio.jpg'" />
+  <div class="hero-grad" aria-hidden="true"></div>
+  <div class="hero-top"><p class="hero-ey">Auvergne-Rhône-Alpes</p></div>
+  <div class="hero-bot">
+    <h1 class="hero-title">Conduis l'extraordinaire.</h1>
+    <p class="hero-sub">Location premium 100 % en ligne · Réservation en 3 min</p>
+    <a href="#tunnel" class="cta" role="button">
+      Réserver maintenant
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="sec" aria-label="Notre flotte">
+  <div class="sh">
+    <span class="ey">La flotte</span>
+    <h2 class="st">Choisissez votre sensation.</h2>
+    <p class="ss">5 véhicules, des centaines de chevaux, une réservation en ligne.</p>
+  </div>
+  <div class="fleet" id="fleet" role="list"></div>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+</section>
+
+<section class="sec-alt" aria-label="Pourquoi BeLoc">
+  <div class="sh">
+    <span class="ey">Pourquoi BeLoc</span>
+    <h2 class="st">Simple, rapide, sans mauvaise surprise.</h2>
+  </div>
+  <ul class="why" role="list">
+    <li class="wi">
+      <div class="wico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2.5 2.5"/></svg></div>
+      <div><p class="wt">Réservation 100 % en ligne en 3 min</p><p class="wd">Pas d'agence, pas d'attente. Tout depuis votre téléphone, à n'importe quelle heure.</p></div>
+    </li>
+    <li class="wi">
+      <div class="wico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h14M3 10l4-4M3 10l4 4"/></svg></div>
+      <div><p class="wt">Livraison partout en Auvergne-Rhône-Alpes</p><p class="wd">On vous amène le véhicule à l'adresse de votre choix. Votre week-end commence à votre porte.</p></div>
+    </li>
+    <li class="wi">
+      <div class="wico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10l4 4 6-8"/></svg></div>
+      <div><p class="wt">Tarifs transparents, zéro engagement</p><p class="wd">Vous voyez le total avant de confirmer. Annulation flexible. Zéro mauvaise surprise.</p></div>
+    </li>
+  </ul>
+</section>
+
+<section id="tunnel" aria-label="Réservation en ligne">
+  <div class="tband">
+    <span class="ey">Réservation en ligne</span>
+    <p class="tb-title">Quel véhicule vous fait envie ?</p>
+  </div>
+  <nav class="stepper" aria-label="Étapes de réservation">
+    <div class="si active" id="si1" role="button" tabindex="0" onclick="goto(1)"><div class="si-dot">1</div><span class="si-lbl">Véhicule</span></div>
+    <div class="si" id="si2" role="button" tabindex="-1" onclick="goto(2)"><div class="si-dot">2</div><span class="si-lbl">Dates</span></div>
+    <div class="si" id="si3" role="button" tabindex="-1" onclick="goto(3)"><div class="si-dot">3</div><span class="si-lbl">Contact</span></div>
+  </nav>
+  <div class="panel show" id="p1" role="region">
+    <h2 class="pt">Votre véhicule</h2>
+    <p class="ph">Sélectionnez le véhicule souhaité pour continuer.</p>
+    <div class="vlist" id="vlist" role="list"></div>
+    <button class="btn-next" id="btn1" onclick="nxt()" disabled>Continuer &rarr;</button>
+    <div class="pbs"></div>
+  </div>
+  <div class="panel" id="p2" role="region">
+    <h2 class="pt">Dates &amp; options</h2>
+    <p class="ph">Choisissez vos dates et les options souhaitées.</p>
+    <div class="fg">
+      <label class="fl" for="ds">Date de début</label>
+      <input class="fi" type="date" id="ds" autocomplete="off" aria-required="true" />
+      <span class="fe" id="eds">Choisissez une date de début.</span>
+    </div>
+    <div class="fg">
+      <label class="fl" for="de">Date de fin</label>
+      <input class="fi" type="date" id="de" autocomplete="off" aria-required="true" />
+      <span class="fe" id="ede">La date de fin doit être après la date de début.</span>
+    </div>
+    <div class="pstrip" aria-live="polite">
+      <span class="psl" id="psl">Durée &amp; prix</span>
+      <span class="psv hide" id="psv"></span>
+      <span class="psp" id="psp">Sélectionnez vos dates</span>
+    </div>
+    <p class="ot">Options</p>
+    <div class="opt" id="o-driver" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('driver')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('driver');event.preventDefault()}">
+      <div class="opt-info"><p class="opt-name">Conducteur supplémentaire</p><p class="opt-price">+15 euros/jour</p></div>
+      <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="opt" id="o-gps" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('gps')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('gps');event.preventDefault()}">
+      <div class="opt-info"><p class="opt-name">GPS intégré</p><p class="opt-price">+8 euros/jour</p></div>
+      <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="opt" id="o-delivery" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('delivery')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('delivery');event.preventDefault()}">
+      <div class="opt-info"><p class="opt-name">Livraison à domicile</p><p class="opt-price">+49 euros forfait</p></div>
+      <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <button class="btn-next" style="margin-top:20px" onclick="nxt()">Continuer &rarr;</button>
+    <button class="btn-back" onclick="prv()">Retour</button>
+    <div class="pbs"></div>
+  </div>
+  <div class="panel" id="p3" role="region">
+    <h2 class="pt">Vos coordonnées</h2>
+    <p class="ph">Vérifiez le récapitulatif puis confirmez.</p>
+    <div class="recap" id="recap">
+      <p class="recap-ttl">Récapitulatif</p>
+      <div class="rrow"><span class="rk">Véhicule</span><span class="rv" id="rvc"></span></div>
+      <div class="rrow"><span class="rk">Dates</span><span class="rv" id="rdt"></span></div>
+      <div class="rrow"><span class="rk">Durée</span><span class="rv" id="rdu"></span></div>
+      <div class="rrow" id="rrd" style="display:none"><span class="rk">Conducteur suppl.</span><span class="rv" id="rrda"></span></div>
+      <div class="rrow" id="rrg" style="display:none"><span class="rk">GPS</span><span class="rv" id="rrga"></span></div>
+      <div class="rrow" id="rrl" style="display:none"><span class="rk">Livraison</span><span class="rv">+49 euros</span></div>
+      <div class="rtotal"><span class="rtk">Total</span><span class="rtv" id="rto"></span></div>
+    </div>
+    <div class="fgrid">
+      <div class="fg"><label class="fl" for="ffn">Prénom</label><input class="fi" type="text" id="ffn" autocomplete="given-name" aria-required="true" placeholder="Marie" /><span class="fe" id="effn">Requis.</span></div>
+      <div class="fg"><label class="fl" for="fln">Nom</label><input class="fi" type="text" id="fln" autocomplete="family-name" aria-required="true" placeholder="Dupont" /><span class="fe" id="efln">Requis.</span></div>
+    </div>
+    <div class="ffull"><label class="fl" for="fem">Email</label><input class="fi" type="email" id="fem" autocomplete="email" aria-required="true" placeholder="marie@email.com" /><span class="fe" id="efem">Email invalide.</span></div>
+    <div class="ffull"><label class="fl" for="fph">Téléphone</label><input class="fi" type="tel" id="fph" autocomplete="tel" aria-required="true" placeholder="06 12 34 56 78" /><span class="fe" id="efph">Numéro invalide.</span></div>
+    <button class="btn-confirm" onclick="sub()">Confirmer la réservation</button>
+    <button class="btn-back" onclick="prv()">Retour</button>
+    <div class="pbs"></div>
+  </div>
+  <div id="conf" role="status" aria-live="polite">
+    <div class="cc" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 16.5L12.5 23 26 9" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 class="ct">Demande envoyée !</h2>
+    <p class="cs">Nous vous contactons sous 2h pour finaliser votre réservation.</p>
+    <div class="cc2">
+      <img class="cc2-img" id="cimg" src="" alt="" loading="lazy" onerror="this.style.background='#D4D4D8'" />
+      <div class="cc2-info"><p class="cc2-name" id="cname"></p><p class="cc2-det" id="cdet"></p></div>
+    </div>
+    <div class="pbs"></div>
+  </div>
+</section>
+
+<section class="sec" aria-label="Avis clients">
+  <div class="sh">
+    <span class="ey">Ils l'ont conduit</span>
+    <h2 class="st">Ce que disent nos clients.</h2>
+  </div>
+  <div class="reviews">
+    <article class="rc">
+      <div class="rct"><span class="rca">Thomas B.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <p class="rcx">"Expérience parfaite du début à la fin. RS3 livrée le matin, on roule l'après-midi. Je comprends pas pourquoi j'ai attendu si longtemps."</p>
+      <span class="rctag">Audi RS3 2025</span>
+    </article>
+    <article class="rc">
+      <div class="rct"><span class="rca">Camille D.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <p class="rcx">"Cadeau d'anniversaire pour mon copain. Réservation en 5 min, livraison à l'heure. Il en parle encore deux semaines après."</p>
+      <span class="rctag">VW Golf 8R 2025</span>
+    </article>
+    <article class="rc">
+      <div class="rct"><span class="rca">Romain V.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <p class="rcx">"Séminaire d'équipe. Clio Alpine en véhicule de direction, effet immédiat. Tarif sérieux, équipe réactive, on repart en septembre."</p>
+      <span class="rctag">Renault Clio 6 Alpine</span>
+    </article>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <p class="fl-logo">BeLoc.</p>
+  <p class="fl-line">Location de véhicules premium en Auvergne-Rhône-Alpes.<br>100 % en ligne. Sans agence. Sans attente.</p>
+  <div class="fl-links">
+    <a href="mailto:contact@beloc.fr" class="fl-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 6l7 4 7-4"/></svg>
+      contact@beloc.fr
+    </a>
+  </div>
+  <div class="fl-soc">
+    <a href="#" class="fl-sb" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="#" class="fl-sb" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M12 11a3 3 0 0 1 6 0v5M16 16v-5"/></svg></a>
+  </div>
+  <div class="fl-div"></div>
+  <p class="fl-legal">2026 BeLoc - Tous droits réservés - Auvergne-Rhône-Alpes</p>
+</footer>
+
+<script>
+var V=[
+  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-studio.jpg'},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-track.jpg'},
+  {id:'golf8', brand:'VW',      name:'Golf 8',        type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
+  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg'},
+  {id:'clio5', brand:'Renault', name:'Clio 5',        type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
+];
+var FB={Sport:'bs',Citadine:'bc',Polyvalente:'bp'};
+var TG={Sport:'ts',Citadine:'tc',Polyvalente:'tp'};
+var S={step:1,max:1,vid:null,d0:null,d1:null,opts:{driver:false,gps:false,delivery:false}};
+
+document.addEventListener('DOMContentLoaded',function(){
+  buildFleet();buildVList();initDates();
+  var h=document.getElementById('hdr'),t=false;
+  window.addEventListener('scroll',function(){
+    if(!t){requestAnimationFrame(function(){h.classList.toggle('stuck',window.scrollY>72);t=false;});t=true;}
+  },{passive:true});
+});
+
+function buildFleet(){
+  var el=document.getElementById('fleet'),dc=document.getElementById('dots');
+  el.innerHTML=V.map(function(v,i){
+    return '<div class="fc" role="listitem" tabindex="0"'
+      +' onclick="fpick(\''+v.id+'\')">'
+      +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+'"'
+      +' loading="'+(i===0?'eager':'lazy')+'" onerror="this.style.background=\'#18181C\'" />'
+      +'<div class="fc-body">'
+      +'<span class="fbadge '+FB[v.type]+'">'+v.type+'</span>'
+      +'<p class="fc-name">'+v.name+'</p>'
+      +'<p class="fc-brand">'+v.brand+' · '+v.power+'</p>'
+      +'<div class="fc-bot">'
+      +'<p class="fprice">dès '+v.price+' EUR <em>/ jour</em></p>'
+      +'<button class="fbtn" tabindex="-1" aria-hidden="true">Réserver</button>'
+      +'</div></div></div>';
+  }).join('');
+  dc.innerHTML=V.map(function(_,i){return '<div class="dot'+(i===0?' on':'')+'" id="dot'+i+'"></div>';}).join('');
+  el.addEventListener('scroll',function(){
+    var first=el.querySelector('.fc');if(!first)return;
+    var w=first.offsetWidth+14;
+    var idx=Math.round(el.scrollLeft/w);
+    V.forEach(function(_,i){var d=document.getElementById('dot'+i);if(d)d.classList.toggle('on',i===idx);});
+  },{passive:true});
+}
+
+function fpick(id){
+  pick(id);
+  if(S.step!==1){S.step=1;show(1);}
+  document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function buildVList(){
+  var el=document.getElementById('vlist');
+  el.innerHTML=V.map(function(v){
+    return '<div class="vcard" id="vc-'+v.id+'" role="listitem" tabindex="0" onclick="pick(\''+v.id+'\')">'
+      +'<img class="vcard-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+'" loading="lazy" onerror="this.style.background=\'#D4D4D8\'" />'
+      +'<div class="vcard-body">'
+      +'<div class="vcard-row">'
+      +'<div><p class="vcard-name">'+v.name+'</p><p class="vcard-brand">'+v.brand+'</p></div>'
+      +'<p class="vcard-price">dès '+v.price+' EUR <em>/ jour</em></p>'
+      +'</div>'
+      +'<div class="vcard-foot">'
+      +'<span class="tag '+TG[v.type]+'">'+v.type+'</span>'
+      +'<button class="btn-sel" tabindex="-1" aria-hidden="true">Choisir</button>'
+      +'</div></div></div>';
+  }).join('');
+}
+
+function pick(id){
+  S.vid=id;
+  V.forEach(function(v){
+    var c=document.getElementById('vc-'+v.id);
+    if(c)c.classList.toggle('sel',v.id===id);
+  });
+  var b=document.getElementById('btn1');if(b)b.disabled=false;
+}
+
+function initDates(){
+  var now=new Date();
+  var td=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
+  var s=document.getElementById('ds'),e=document.getElementById('de');
+  s.min=td;e.min=td;
+  s.addEventListener('change',function(){
+    S.d0=s.value||null;
+    if(S.d0){e.min=S.d0;if(S.d1&&S.d1<=S.d0){S.d1=null;e.value='';}}
+    rp();ce('ds');
+  });
+  e.addEventListener('change',function(){S.d1=e.value||null;rp();ce('de');});
+}
+function pad(n){return String(n).padStart(2,'0');}
+function days(){
+  if(!S.d0||!S.d1)return 0;
+  var n=Math.round((new Date(S.d1)-new Date(S.d0))/86400000);
+  return n>0?n:0;
+}
+function total(){
+  var v=V.find(function(x){return x.id===S.vid;});
+  if(!v)return 0;var d=days();if(!d)return 0;
+  var t=v.price*d;
+  if(S.opts.driver)t+=15*d;
+  if(S.opts.gps)t+=8*d;
+  if(S.opts.delivery)t+=49;
+  return t;
+}
+function rp(){
+  var d=days();
+  var val=document.getElementById('psv'),ph=document.getElementById('psp'),lbl=document.getElementById('psl');
+  if(d>0){
+    val.textContent=d+' jour'+(d>1?'s':'')+' · '+fmt(total());
+    val.classList.remove('hide');ph.style.display='none';lbl.textContent='Estimation';
+  }else{
+    val.classList.add('hide');ph.style.display='';lbl.textContent='Durée & prix';
+  }
+}
+function tog(k){
+  S.opts[k]=!S.opts[k];
+  var el=document.getElementById('o-'+k);
+  el.classList.toggle('on',S.opts[k]);
+  el.setAttribute('aria-checked',String(S.opts[k]));
+  rp();
+}
+function buildRecap(){
+  var v=V.find(function(x){return x.id===S.vid;});if(!v)return;
+  var d=days();
+  st('rvc',v.brand+' '+v.name);
+  st('rdt',fd(S.d0)+' >> '+fd(S.d1));
+  st('rdu',d+' jour'+(d>1?'s':''));
+  vs('rrd',S.opts.driver);if(S.opts.driver)st('rrda','+'+fmt(15*d));
+  vs('rrg',S.opts.gps);if(S.opts.gps)st('rrga','+'+fmt(8*d));
+  vs('rrl',S.opts.delivery);
+  st('rto',fmt(total()));
+}
+function st(id,t){var el=document.getElementById(id);if(el)el.textContent=t;}
+function vs(id,v){var el=document.getElementById(id);if(el)el.style.display=v?'':'none';}
+function updateStepper(){
+  var chk='<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5L5 8.5L11.5 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  for(var i=1;i<=3;i++){
+    var item=document.getElementById('si'+i),dot=item.querySelector('.si-dot');
+    item.classList.remove('active','done');
+    if(i<S.step){item.classList.add('done');dot.innerHTML=chk;}
+    else if(i===S.step){item.classList.add('active');dot.textContent=i;}
+    else{dot.textContent=i;}
+  }
+}
+function goto(n){if(n>S.max||n===S.step)return;S.step=n;show(n);}
+function show(n){
+  for(var i=1;i<=3;i++){var p=document.getElementById('p'+i);if(p)p.classList.remove('show');}
+  var tp=document.getElementById('p'+n);if(tp)tp.classList.add('show');
+  S.step=n;updateStepper();
+  document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function nxt(){
+  if(S.step===1){if(!S.vid)return;S.step=2;if(S.max<2)S.max=2;show(2);}
+  else if(S.step===2){if(!vd())return;buildRecap();S.step=3;if(S.max<3)S.max=3;show(3);}
+}
+function prv(){if(S.step>1){S.step--;show(S.step);}}
+function vd(){
+  var ok=true;
+  if(!S.d0){se('ds');ok=false;}
+  if(!S.d1||days()<1){se('de');ok=false;}
+  return ok;
+}
+function vc(){
+  var ok=true;
+  var fn=document.getElementById('ffn').value.trim();
+  var ln=document.getElementById('fln').value.trim();
+  var em=document.getElementById('fem').value.trim();
+  var ph=document.getElementById('fph').value.trim();
+  if(!fn){se('ffn');ok=false;}else ce('ffn');
+  if(!ln){se('fln');ok=false;}else ce('fln');
+  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){se('fem');ok=false;}else ce('fem');
+  if(!ph||!/^[\d\s+\-.()]{8,}$/.test(ph)){se('fph');ok=false;}else ce('fph');
+  return ok;
+}
+function se(id){
+  var e=document.getElementById('e'+id);if(e)e.classList.add('show');
+  var i=document.getElementById(id);if(i)i.classList.add('err');
+}
+function ce(id){
+  var e=document.getElementById('e'+id);if(e)e.classList.remove('show');
+  var i=document.getElementById(id);if(i)i.classList.remove('err');
+}
+function sub(){
+  if(!vc())return;
+  var v=V.find(function(x){return x.id===S.vid;});
+  var d=days();
+  document.querySelectorAll('.panel,.stepper,.tband').forEach(function(el){el.style.display='none';});
+  document.getElementById('cimg').src=v.img;
+  document.getElementById('cimg').alt=v.brand+' '+v.name;
+  document.getElementById('cname').textContent=v.brand+' '+v.name;
+  document.getElementById('cdet').textContent=fd(S.d0)+' >> '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
+  document.getElementById('conf').classList.add('show');
+  document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function fmt(n){return n.toLocaleString('fr-FR')+' EUR';}
+function fd(s){if(!s)return '-';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+</script>
+</body>
+</html>
