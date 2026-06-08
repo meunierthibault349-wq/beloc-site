@@ -438,11 +438,105 @@ function Header(props) {
 /* ---------------- Footer ---------------- */
 function Footer(props) {
   const B = window.BELOC;
+  var _f1 = useState("");
+  var vehicleId = _f1[0];
+  var setVehicleId = _f1[1];
+  var _f2 = useState("day");
+  var tier = _f2[0];
+  var setTier = _f2[1];
+  var durLabels = {
+    day: "journée",
+    weekend: "week-end",
+    week: "semaine"
+  };
+  var vehicle = vehicleId ? B.byId(vehicleId) : null;
+  var base = vehicle ? vehicle.prices[tier] : 0;
+  var serviceFee = vehicle ? Math.round(base * 0.08) : 0;
+  var total = base + serviceFee;
+  function goDevis() {
+    if (vehicleId) {
+      props.nav("booking", {
+        id: vehicleId,
+        tier: tier
+      });
+    } else {
+      props.nav("fleet");
+    }
+  }
   return /*#__PURE__*/React.createElement("footer", {
     className: "ftr"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta-left"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ftr-cta-eyebrow"
+  }, "R\xE9servation directe"), /*#__PURE__*/React.createElement("h3", {
+    className: "ftr-cta-h"
+  }, "Obtenez votre devis", /*#__PURE__*/React.createElement("br", null), "en 30 secondes"), /*#__PURE__*/React.createElement("p", {
+    className: "ftr-cta-sub"
+  }, "Choisissez votre v\xE9hicule et la dur\xE9e de location. Le tarif complet est calcul\xE9 instantan\xE9ment avant votre confirmation."), /*#__PURE__*/React.createElement("ul", {
+    className: "ftr-cta-features"
+  }, /*#__PURE__*/React.createElement("li", null, Icons.check, " Annulation gratuite 48h avant"), /*#__PURE__*/React.createElement("li", null, Icons.check, " Assurance tous risques incluse"), /*#__PURE__*/React.createElement("li", null, Icons.check, " Livraison \xE0 domicile possible"))), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta-fields"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta-field"
+  }, /*#__PURE__*/React.createElement("label", null, "V\xE9hicule"), /*#__PURE__*/React.createElement("select", {
+    value: vehicleId,
+    onChange: function (e) {
+      setVehicleId(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Choisir un v\xE9hicule"), B.vehicles.map(function (v) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: v.id,
+      value: v.id
+    }, v.full);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-cta-field"
+  }, /*#__PURE__*/React.createElement("label", null, "Dur\xE9e"), /*#__PURE__*/React.createElement("select", {
+    value: tier,
+    onChange: function (e) {
+      setTier(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "day"
+  }, "\xC0 la journ\xE9e"), /*#__PURE__*/React.createElement("option", {
+    value: "weekend"
+  }, "Week-end (2 jours)"), /*#__PURE__*/React.createElement("option", {
+    value: "week"
+  }, "\xC0 la semaine")))), vehicle ? /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-head"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ftr-devis-vehicle"
+  }, vehicle.full), /*#__PURE__*/React.createElement("span", {
+    className: "ftr-devis-dur"
+  }, durLabels[tier])), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-rows"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-row"
+  }, /*#__PURE__*/React.createElement("span", null, "Location ", durLabels[tier]), /*#__PURE__*/React.createElement("span", null, eur(base))), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-row"
+  }, /*#__PURE__*/React.createElement("span", null, "Frais de service"), /*#__PURE__*/React.createElement("span", null, eur(serviceFee))), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-row ftr-devis-row--total"
+  }, /*#__PURE__*/React.createElement("span", null, "Total estim\xE9"), /*#__PURE__*/React.createElement("span", {
+    className: "ftr-devis-total"
+  }, eur(total)))), /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis-note"
+  }, "Assurance incluse \xB7 Livraison en option (+49 \u20AC)")) : /*#__PURE__*/React.createElement("div", {
+    className: "ftr-devis ftr-devis--empty"
+  }, Icons.calendar, /*#__PURE__*/React.createElement("span", null, "S\xE9lectionnez un v\xE9hicule pour voir votre devis d\xE9taill\xE9")), /*#__PURE__*/React.createElement(Button, {
+    onClick: goDevis,
+    icon: Icons.arrow,
+    block: true
+  }, vehicle ? "Confirmer et réserver →" : "Voir tous les véhicules"))), /*#__PURE__*/React.createElement("div", {
     className: "ftr-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ftr-col ftr-brand"

@@ -412,6 +412,74 @@ a { color: inherit; text-decoration: none; }
 .ftr-bottom p { color: #606058; }
 .ftr-bottom .links a { color: #606058; }
 
+/* ---------- Footer — Zone devis rapide ---------- */
+.ftr-cta {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,72px); align-items: start;
+  padding-bottom: clamp(44px,5vw,64px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  margin-bottom: clamp(44px,5vw,64px);
+}
+.ftr-cta-eyebrow {
+  display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-soft); margin-bottom: 14px;
+}
+.ftr-cta-h {
+  font-family: var(--serif); font-size: clamp(22px,2.8vw,36px); font-weight: 600;
+  color: #F5F5F3; margin: 0 0 12px; line-height: 1.22;
+}
+.ftr-cta-sub { color: #A0A09C; font-size: 14px; line-height: 1.65; margin: 0 0 22px; max-width: 38ch; }
+.ftr-cta-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.ftr-cta-features li {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13px; color: #A0A09C;
+}
+.ftr-cta-features li svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+/* Sélecteurs */
+.ftr-cta-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.ftr-cta-field { display: flex; flex-direction: column; gap: 5px; }
+.ftr-cta-field label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #767672;
+}
+.ftr-cta-field select {
+  background: #1A1A18; border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius);
+  color: #F5F5F3; font-family: var(--sans); font-size: 14px; font-weight: 500;
+  padding: 10px 12px; width: 100%; cursor: pointer;
+  transition: border-color .25s; -webkit-appearance: none; appearance: none;
+}
+.ftr-cta-field select:hover { border-color: rgba(255,255,255,.24); }
+.ftr-cta-field select:focus { outline: none; border-color: var(--red); }
+
+/* Devis estimé */
+.ftr-devis {
+  border-radius: var(--radius); border: 1px solid rgba(37,98,168,.32);
+  background: rgba(37,98,168,.10); margin-bottom: 14px; overflow: hidden;
+}
+.ftr-devis-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.ftr-devis-vehicle { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #A0A09C; }
+.ftr-devis-dur { font-family: var(--mono); font-size: 10.5px; color: var(--gold-soft); }
+.ftr-devis-rows { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+.ftr-devis-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #A0A09C; }
+.ftr-devis-row--total { padding-top: 8px; border-top: 1px solid rgba(255,255,255,.07); color: #F5F5F3; font-weight: 500; }
+.ftr-devis-total { font-family: var(--serif); font-size: 26px; font-weight: 700; color: #F5F5F3; }
+.ftr-devis-note { padding: 8px 16px 12px; font-size: 11px; color: #606058; border-top: 1px solid rgba(255,255,255,.05); }
+
+/* État vide */
+.ftr-devis--empty {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 16px; background: rgba(255,255,255,.03);
+  border: 1px dashed rgba(255,255,255,.10); border-radius: var(--radius);
+  margin-bottom: 14px; color: #606058; font-size: 13px; font-style: italic;
+}
+.ftr-devis--empty svg { width: 18px; height: 18px; color: #767672; flex-shrink: 0; }
+
+/* Mobile */
+@media (max-width: 1080px) { .ftr-cta { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .ftr-cta-fields { grid-template-columns: 1fr; } }
+
 /* ---------- Reveal animation ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
 .reveal.in { opacity: 1; transform: none; }

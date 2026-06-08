@@ -180,9 +180,99 @@ function Header(props) {
 /* ---------------- Footer ---------------- */
 function Footer(props) {
   const B = window.BELOC;
+  var _f1 = useState(""); var vehicleId = _f1[0]; var setVehicleId = _f1[1];
+  var _f2 = useState("day"); var tier = _f2[0]; var setTier = _f2[1];
+
+  var durLabels = { day: "journée", weekend: "week-end", week: "semaine" };
+  var vehicle = vehicleId ? B.byId(vehicleId) : null;
+  var base       = vehicle ? vehicle.prices[tier] : 0;
+  var serviceFee = vehicle ? Math.round(base * 0.08) : 0;
+  var total      = base + serviceFee;
+
+  function goDevis() {
+    if (vehicleId) {
+      props.nav("booking", { id: vehicleId, tier: tier });
+    } else {
+      props.nav("fleet");
+    }
+  }
+
   return (
     <footer className="ftr">
       <div className="wrap">
+
+        {/* ── Zone devis rapide ── */}
+        <div className="ftr-cta">
+          <div className="ftr-cta-left">
+            <span className="ftr-cta-eyebrow">Réservation directe</span>
+            <h3 className="ftr-cta-h">Obtenez votre devis<br />en 30 secondes</h3>
+            <p className="ftr-cta-sub">Choisissez votre véhicule et la durée de location. Le tarif complet est calculé instantanément avant votre confirmation.</p>
+            <ul className="ftr-cta-features">
+              <li>{Icons.check} Annulation gratuite 48h avant</li>
+              <li>{Icons.check} Assurance tous risques incluse</li>
+              <li>{Icons.check} Livraison à domicile possible</li>
+            </ul>
+          </div>
+
+          <div className="ftr-cta-right">
+            {/* Sélecteurs */}
+            <div className="ftr-cta-fields">
+              <div className="ftr-cta-field">
+                <label>Véhicule</label>
+                <select value={vehicleId} onChange={function (e) { setVehicleId(e.target.value); }}>
+                  <option value="">Choisir un véhicule</option>
+                  {B.vehicles.map(function (v) {
+                    return <option key={v.id} value={v.id}>{v.full}</option>;
+                  })}
+                </select>
+              </div>
+              <div className="ftr-cta-field">
+                <label>Durée</label>
+                <select value={tier} onChange={function (e) { setTier(e.target.value); }}>
+                  <option value="day">À la journée</option>
+                  <option value="weekend">Week-end (2 jours)</option>
+                  <option value="week">À la semaine</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Devis estimé */}
+            {vehicle ? (
+              <div className="ftr-devis">
+                <div className="ftr-devis-head">
+                  <span className="ftr-devis-vehicle">{vehicle.full}</span>
+                  <span className="ftr-devis-dur">{durLabels[tier]}</span>
+                </div>
+                <div className="ftr-devis-rows">
+                  <div className="ftr-devis-row">
+                    <span>Location {durLabels[tier]}</span>
+                    <span>{eur(base)}</span>
+                  </div>
+                  <div className="ftr-devis-row">
+                    <span>Frais de service</span>
+                    <span>{eur(serviceFee)}</span>
+                  </div>
+                  <div className="ftr-devis-row ftr-devis-row--total">
+                    <span>Total estimé</span>
+                    <span className="ftr-devis-total">{eur(total)}</span>
+                  </div>
+                </div>
+                <div className="ftr-devis-note">Assurance incluse · Livraison en option (+49 €)</div>
+              </div>
+            ) : (
+              <div className="ftr-devis ftr-devis--empty">
+                {Icons.calendar}
+                <span>Sélectionnez un véhicule pour voir votre devis détaillé</span>
+              </div>
+            )}
+
+            <Button onClick={goDevis} icon={Icons.arrow} block>
+              {vehicle ? "Confirmer et réserver →" : "Voir tous les véhicules"}
+            </Button>
+          </div>
+        </div>
+
+        {/* ── Liens ── */}
         <div className="ftr-grid">
           <div className="ftr-col ftr-brand">
             <Wordmark style={{ fontSize: 26 }} />
@@ -219,6 +309,7 @@ function Footer(props) {
             <a>Cookies</a>
           </div>
         </div>
+
       </div>
     </footer>
   );
