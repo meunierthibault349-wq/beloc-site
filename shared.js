@@ -320,6 +320,9 @@ function Img(props) {
 
 /* ---------------- Header ---------------- */
 const NAV = [{
+  id: "home",
+  label: "Accueil"
+}, {
   id: "fleet",
   label: "La Flotte"
 }, {

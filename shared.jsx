@@ -121,6 +121,7 @@ function Img(props) {
 
 /* ---------------- Header ---------------- */
 const NAV = [
+  { id: "home",    label: "Accueil" },
   { id: "fleet",   label: "La Flotte" },
   { id: "how",     label: "Comment ça marche" },
   { id: "contact", label: "Contact" },
