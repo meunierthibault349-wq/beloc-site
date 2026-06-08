@@ -183,6 +183,12 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-sp{width:1px;background:rgba(0,0,0,.08);flex-shrink:0;margin:6px 0}
 .mw-btn{display:flex;align-items:center;justify-content:center;width:36px;min-width:36px;background:var(--gold);color:#1C1A15;font-size:16px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s;flex-shrink:0}
 .mw-btn:active{background:#B8943D}
+.mw-dd-ov{position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.28)}
+.mw-dd{position:fixed;left:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:300;overflow:hidden}
+.mw-dd-opt{display:block;width:100%;padding:14px 18px;font-family:var(--fh);font-size:14px;font-weight:500;color:#1C1A15;border:none;background:transparent;text-align:left;border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .1s}
+.mw-dd-opt:last-child{border-bottom:none}
+.mw-dd-opt:active{background:#F5F5F5}
+.mw-dd-opt.mw-on{color:var(--gold);font-weight:700}
 .footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:40px 24px calc(max(36px,env(safe-area-inset-bottom,0px) + 24px))}
 .fl-logo{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--t1);margin-bottom:6px}
 .fl-line{font-family:var(--fb);font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:28px}
@@ -199,20 +205,14 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 <header class="hdr" id="hdr" role="banner">
   <a href="#hero" class="hdr-logo">BeLoc.</a>
   <div class="mw-inner" id="mw-inner" role="search" aria-label="Réservation rapide">
-    <div class="mw-field">
+    <div class="mw-field" onclick="mwShowDD('dur',this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Durée</span>
       <span class="mw-val" id="mw-dur-txt">Journée</span>
-      <select id="mw-dur" class="mw-sel" onchange="mwDurChange(this)" aria-label="Durée">
-        <option value="day">À la journée</option>
-        <option value="weekend">Week-end (2 j)</option>
-        <option value="week">À la semaine</option>
-      </select>
     </div>
     <div class="mw-sp"></div>
-    <div class="mw-field">
+    <div class="mw-field" onclick="mwShowDD('veh',this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Véhicule</span>
       <span class="mw-val mw-ph" id="mw-veh-txt">Tous</span>
-      <select id="mw-veh" class="mw-sel" onchange="mwVehChange(this)" aria-label="Véhicule"></select>
     </div>
     <div class="mw-sp"></div>
     <div class="mw-field">
@@ -605,28 +605,48 @@ function fd(s){if(!s)return '-';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0]
 var MW={dur:'day',vid:'',d0:null};
 var MW_DUR_MAP={day:1,weekend:2,week:7};
 var MW_DUR_LABELS={day:'Journée',weekend:'Week-end',week:'Semaine'};
+var MW_DUR_OPTS=[{v:'day',l:'À la journée'},{v:'weekend',l:'Week-end (2 jours)'},{v:'week',l:'À la semaine'}];
+var mwDD=null;
 
 function mwInit(){
-  var sel=document.getElementById('mw-veh');
-  var opts=['<option value="">Tous les véhicules</option>'];
-  V.forEach(function(v){opts.push('<option value="'+v.id+'">'+v.brand+' '+v.name+'</option>');});
-  sel.innerHTML=opts.join('');
   var now=new Date();
   document.getElementById('mw-d0').min=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
 }
 
-function mwDurChange(sel){
-  MW.dur=sel.value;
-  document.getElementById('mw-dur-txt').textContent=MW_DUR_LABELS[sel.value]||sel.options[sel.selectedIndex].text;
-  mwRecalc();
+function mwShowDD(type,anchor){
+  mwHideDD();
+  var opts=type==='dur'?MW_DUR_OPTS:[{v:'',l:'Tous les véhicules'}].concat(V.map(function(v){return{v:v.id,l:v.brand+' '+v.name};}));
+  var current=type==='dur'?MW.dur:MW.vid;
+  var hdr=document.getElementById('hdr');
+  var top=(hdr?hdr.getBoundingClientRect().bottom:56)+6;
+  var ov=document.createElement('div');ov.className='mw-dd-ov';ov.onclick=mwHideDD;
+  var panel=document.createElement('div');panel.className='mw-dd';panel.style.top=top+'px';
+  opts.forEach(function(o){
+    var btn=document.createElement('button');
+    btn.className='mw-dd-opt'+(o.v===current?' mw-on':'');
+    btn.textContent=o.l;
+    btn.onclick=function(){
+      if(type==='dur'){
+        MW.dur=o.v;
+        document.getElementById('mw-dur-txt').textContent=MW_DUR_LABELS[o.v];
+        mwRecalc();
+      }else{
+        MW.vid=o.v;
+        var el=document.getElementById('mw-veh-txt');
+        var found=V.find(function(v){return v.id===o.v;});
+        if(found){el.textContent=found.brand+' '+found.name;el.classList.remove('mw-ph');}
+        else{el.textContent='Tous';el.classList.add('mw-ph');}
+      }
+      mwHideDD();
+    };
+    panel.appendChild(btn);
+  });
+  document.body.appendChild(ov);document.body.appendChild(panel);
+  mwDD={ov:ov,panel:panel};
 }
 
-function mwVehChange(sel){
-  MW.vid=sel.value;
-  var el=document.getElementById('mw-veh-txt');
-  var found=V.find(function(v){return v.id===sel.value;});
-  if(found){el.textContent=found.brand+' '+found.name;el.classList.remove('mw-ph');}
-  else{el.textContent='Tous';el.classList.add('mw-ph');}
+function mwHideDD(){
+  if(mwDD){mwDD.ov.remove();mwDD.panel.remove();mwDD=null;}
 }
 
 function mwDateChange(input){
