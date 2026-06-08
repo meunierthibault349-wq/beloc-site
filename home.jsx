@@ -43,7 +43,6 @@ function HomePage(props) {
   const B = window.BELOC;
   const rs3 = B.byId("audi-rs3");
   const heroImg = useRef(null);
-  const railRef = useRef(null);
 
   useEffect(function () {
     const el = heroImg.current;
@@ -62,37 +61,29 @@ function HomePage(props) {
     return function () { window.removeEventListener("scroll", onScroll); };
   }, []);
 
-  const railScroll = function (dir) {
-    const el = railRef.current; if (!el) return;
-    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
-  };
+  const ticker = ["Lyon", "Grenoble", "Annecy", "Chambéry", "Clermont-Ferrand", "Saint-Étienne", "Valence", "Réservation en 3 min", "Livraison à domicile", "Assurance incluse", "7j/7"];
 
   return (
     <div className="page">
-      {/* HERO */}
+
+      {/* ─── HERO ─── */}
       <section className="hero">
         <div className="hero-media">
           <img ref={heroImg} src={rs3.hero} alt="Audi RS3" />
         </div>
         <div className="hero-content">
-          <Reveal><Eyebrow>BeLoc · {B.region}</Eyebrow></Reveal>
+          <Reveal>
+            <h1 className="display hero-h1">
+              <span className="l1">L'exception,</span>
+              <span className="l2 italic serif">en location.</span>
+            </h1>
+          </Reveal>
           <Reveal delay={1}>
-            <h1 className="display hero-h1"><span className="l1">Conduis l'extraordinaire.</span><span className="l2 italic serif">Pour un jour.</span></h1>
-          </Reveal>
-          <Reveal delay={2}>
             <div className="hero-sub">
-              <Button size="lg" onClick={function () { props.nav("fleet"); }}>Voir la flotte</Button>
-              <a className="tlink" onClick={function () { props.nav("detail", "audi-rs3"); }}>Découvrir l'Audi RS3 {Icons.arrow}</a>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <Stars /><span className="mono-label">4,9 · 100% en ligne</span>
+              <Button size="lg" onClick={function () { props.nav("fleet"); }} icon={Icons.arrow}>Réserver maintenant</Button>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <Stars /><span className="mono-label" style={{ color: "rgba(255,255,255,.55)" }}>4,9 · 100% en ligne · 7j/7</span>
               </div>
-            </div>
-          </Reveal>
-          <Reveal delay={3}>
-            <div className="hero-stats" style={{ marginTop: 48 }}>
-              <div className="hero-stat"><div className="n">5</div><div className="l">modèles d'exception</div></div>
-              <div className="hero-stat"><div className="n">100%</div><div className="l">réservation en ligne</div></div>
-              <div className="hero-stat"><div className="n">7j/7</div><div className="l">assistance incluse</div></div>
             </div>
           </Reveal>
         </div>
@@ -102,69 +93,97 @@ function HomePage(props) {
         </div>
       </section>
 
-      {/* FLEET RAIL */}
-      <section className="section" id="flotte">
+      {/* ─── MARQUEE ─── */}
+      <div className="marquee-band">
+        <div className="marquee-track">
+          {[...ticker, ...ticker].map(function (item, i) {
+            return (
+              <span key={i} className="marquee-item">
+                {item}<span className="marquee-sep">·</span>
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ─── FLEET EDITORIAL ─── */}
+      <section className="section">
         <div className="wrap">
           <div className="shead">
             <div>
               <Reveal><Eyebrow>Notre flotte</Eyebrow></Reveal>
               <Reveal delay={1}><h2 className="display">Cinq voitures.<br />Aucune ordinaire.</h2></Reveal>
             </div>
-            <Reveal delay={2} className="cal-nav" style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <button onClick={function () { railScroll(-1); }} aria-label="Précédent">{Icons.arrowL}</button>
-              <button onClick={function () { railScroll(1); }} aria-label="Suivant">{Icons.arrowR}</button>
+            <Reveal delay={2}>
+              <a className="tlink" onClick={function () { props.nav("fleet"); }}>Voir la flotte complète {Icons.arrow}</a>
             </Reveal>
           </div>
         </div>
-        <Reveal style={{ marginTop: 18 }}>
-          <div className="rail rail-pad" ref={railRef}>
-            {B.vehicles.map(function (v, i) {
-              return <VehicleCard key={v.id} v={v} nav={props.nav} className="card-w-rail" onFav={props.onFav} eager={i < 2} />;
-            })}
+        <Reveal style={{ marginTop: 32 }}>
+          <div className="fleet-ed">
+            <div className="fleet-ed-main" onClick={function () { props.nav("detail", "audi-rs3"); }}>
+              <Img src={rs3.hero} alt={rs3.full} style={{ width: "100%", height: "100%", objectFit: "cover" }} eager />
+              <div className="fleet-ed-overlay">
+                <div><span className="badge badge-gold">{Icons.sparkle} Vaisseau amiral</span></div>
+                <div className="fleet-ed-info">
+                  <div className="mono-label" style={{ color: "rgba(255,255,255,.5)", marginBottom: 6 }}>{rs3.brand} · {rs3.year}</div>
+                  <div className="fleet-ed-name">{rs3.name}</div>
+                  <div className="fleet-ed-price">dès {eur(rs3.prices.day)}<span style={{ color: "rgba(255,255,255,.45)", fontSize: 13, fontFamily: "var(--mono)" }}> /jour</span></div>
+                </div>
+              </div>
+            </div>
+            <div className="fleet-ed-list">
+              {B.vehicles.filter(function (v) { return v.id !== "audi-rs3"; }).map(function (v) {
+                return (
+                  <div className="fleet-ed-row" key={v.id} onClick={function () { props.nav("detail", v.id); }}>
+                    <div className="fleet-ed-row-img">
+                      <Img src={v.hero} alt={v.full} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                    <div className="fleet-ed-row-body">
+                      <span className="mono-label">{v.brand}</span>
+                      <strong className="fleet-ed-row-name">{v.name}</strong>
+                      {v.isNew && <span className="badge badge-new" style={{ fontSize: 9, padding: "3px 7px" }}>Nouveau</span>}
+                    </div>
+                    <div className="fleet-ed-row-price">{eur(priceFrom(v))}<span className="per">/j</span></div>
+                    <span className="fleet-ed-row-arrow">{Icons.chevR}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Reveal>
-        <div className="wrap" style={{ marginTop: 28 }}>
-          <a className="tlink" onClick={function () { props.nav("fleet"); }}>Voir toute la flotte & les filtres {Icons.arrow}</a>
+      </section>
+
+      {/* ─── PILLARS ─── */}
+      <section className="section-tight">
+        <div className="wrap">
+          <Reveal>
+            <div className="pillars">
+              <div className="pillar">
+                <span className="pillar-n">01</span>
+                <h3>Réservez en 3 minutes.</h3>
+                <p>Tout depuis votre mobile — sans agence, sans comptoir, sans paperasse. La clé vous attend.</p>
+              </div>
+              <div className="pillar-sep"></div>
+              <div className="pillar">
+                <span className="pillar-n">02</span>
+                <h3>On vient à vous.</h3>
+                <p>Livraison à l'adresse de votre choix dans toute l'Auvergne-Rhône-Alpes. Pour 49 €, on amène le véhicule.</p>
+              </div>
+              <div className="pillar-sep"></div>
+              <div className="pillar">
+                <span className="pillar-n">03</span>
+                <h3>Zéro surprise.</h3>
+                <p>Assurance tous risques, assistance 7j/7 et annulation gratuite jusqu'à 48h avant le départ.</p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <div className="wrap"><hr className="divider" /></div>
 
-      {/* HOW IT WORKS */}
-      <section className="section">
-        <div className="wrap">
-          <div className="shead">
-            <div>
-              <Reveal><Eyebrow>Comment ça marche</Eyebrow></Reveal>
-              <Reveal delay={1}><h2 className="display">Trois gestes, et la route est à toi.</h2></Reveal>
-            </div>
-            <Reveal delay={2}><p className="lede">Pas d'agence, pas de file d'attente, pas de paperasse. Tout se passe depuis ton téléphone — la clé t'attend.</p></Reveal>
-          </div>
-          <Reveal>
-            <div className="steps">
-              {[
-                { ic: Icons.sparkle, t: "Choisis", p: "Parcours la flotte, compare puissances et tarifs, et trouve la voiture qui fait battre ton cœur." },
-                { ic: Icons.calendar, t: "Réserve", p: "Sélectionne tes dates, ton lieu de prise en charge, paie en ligne en toute sécurité. Quatre étapes, montre en main." },
-                { ic: Icons.key, t: "Roule", p: "Récupère les clés au point convenu — ou fais-toi livrer. Il ne te reste plus qu'à profiter." },
-              ].map(function (s, i) {
-                return (
-                  <div className="step" key={i}>
-                    <span className="step-n">0{i + 1}</span>
-                    <span className="step-ic">{s.ic}</span>
-                    <h3>{s.t}</h3>
-                    <p>{s.p}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </Reveal>
-          <Reveal delay={2} style={{ marginTop: 32 }}>
-            <a className="tlink" onClick={function () { props.nav("how"); }}>Tout savoir sur le déroulé {Icons.arrow}</a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* SPLIT FEATURE — flagship */}
+      {/* ─── RS3 FEATURE ─── */}
       <section className="section-tight">
         <div className="wrap">
           <Reveal>
@@ -188,64 +207,42 @@ function HomePage(props) {
         </div>
       </section>
 
-      {/* REASSURANCE */}
+      {/* ─── PULLQUOTE ─── */}
       <section className="section">
         <div className="wrap">
-          <Reveal><Eyebrow center style={{ display: "flex", justifyContent: "center" }}>La promesse BeLoc</Eyebrow></Reveal>
-          <Reveal delay={1}><h2 className="display" style={{ textAlign: "center", fontSize: "clamp(30px,4vw,56px)", margin: "16px 0 clamp(40px,5vw,64px)" }}>Le premium, sans la friction.</h2></Reveal>
           <Reveal>
-            <div className="assure">
-              {[
-                { ic: Icons.online, t: "100% en ligne", p: "Réservation, paiement, contrat et état des lieux : tout se fait depuis ton mobile, en quelques minutes." },
-                { ic: Icons.truck, t: "Livraison possible", p: "On t'apporte la voiture là où tu veux dans toute la région — domicile, gare, aéroport, hôtel." },
-                { ic: Icons.shield, t: "Assistance incluse", p: "Assurance tous risques, assistance 7j/7 et hotline dédiée. Tu roules l'esprit tranquille." },
-              ].map(function (a, i) {
-                return (
-                  <div className="assure-item" key={i}>
-                    <span className="ic">{a.ic}</span>
-                    <h4>{a.t}</h4>
-                    <p>{a.p}</p>
-                  </div>
-                );
-              })}
+            <div className="pullquote-layout">
+              <div className="pullquote">
+                <Stars n={5} />
+                <blockquote>"La RS3 pour l'anniversaire de mon mari. Service impeccable, voiture immaculée — livrée en avance à notre hôtel."</blockquote>
+                <cite>Sofia L. — Lyon · Client BeLoc</cite>
+              </div>
+              <div className="pullquote-meta">
+                <div className="pm-stat"><span className="pm-n">4,9</span><span className="pm-l">Note moyenne</span></div>
+                <div className="pm-stat"><span className="pm-n">100%</span><span className="pm-l">En ligne</span></div>
+                <div className="pm-stat"><span className="pm-n">7j/7</span><span className="pm-l">Disponible</span></div>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* REVIEWS STRIP */}
-      <section className="section-tight">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 22 }}>
-              {[
-                { q: "Livraison de la Golf R devant chez moi à Annecy, clés en main en 5 minutes. Bluffant.", n: "Camille R.", c: "Annecy" },
-                { q: "La RS3 pour l'anniversaire de mon mari. Service impeccable, voiture immaculée.", n: "Sofia L.", c: "Lyon" },
-                { q: "Premier essai avec la Clio, tout était limpide depuis le téléphone. Je reviendrai.", n: "Thomas B.", c: "Grenoble" },
-              ].map(function (r, i) {
-                return (
-                  <div key={i} style={{ background: "var(--ink-850)", border: "1px solid var(--line-soft)", borderRadius: 8, padding: 26 }}>
-                    <Stars />
-                    <p className="serif" style={{ fontSize: 21, lineHeight: 1.4, margin: "16px 0 18px", color: "var(--bone)" }}>“{r.q}”</p>
-                    <div className="mono-label">{r.n} — {r.c}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
+      {/* ─── FINAL CTA ─── */}
       <section className="section">
         <div className="wrap">
           <Reveal>
-            <div className="cta-banner" style={{ textAlign: "center" }}>
+            <div className="final-cta">
               <Eyebrow center style={{ display: "inline-flex" }}>Prêt à prendre le volant ?</Eyebrow>
-              <h2 className="display" style={{ margin: "16px auto 26px" }}>Ta prochaine voiture n'attend qu'un clic.</h2>
-              <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-                <Button size="lg" onClick={function () { props.nav("fleet"); }}>Réserver maintenant</Button>
-                <Button size="lg" variant="ghost" onClick={function () { props.nav("how"); }} icon={Icons.arrow}>Comment ça marche</Button>
+              <h2 className="display final-cta-h">Réservez maintenant.<br /><span className="italic" style={{ color: "var(--gold-soft)" }}>En 3 minutes.</span></h2>
+              <div className="final-cta-actions">
+                <Button size="lg" onClick={function () { props.nav("fleet"); }} icon={Icons.arrow}>Choisir un véhicule</Button>
+                <a className="final-cta-phone" href={"tel:" + B.phone.replace(/\s/g, "")}>
+                  <span className="final-cta-phone-ic">{Icons.phone}</span>
+                  <div>
+                    <div className="final-cta-phone-num">{B.phone}</div>
+                    <div className="mono-label">Conciergerie · 7j/7</div>
+                  </div>
+                </a>
               </div>
             </div>
           </Reveal>
