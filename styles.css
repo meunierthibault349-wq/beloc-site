@@ -1,42 +1,42 @@
 /* ============================================================
    BeLoc — Design System
-   Dark premium · or électrique · rouge vif
+   Dark neutre · or lisible · rouge CTA
    Display: Space Grotesk · UI: Inter
    ============================================================ */
 
 :root {
-  /* Surfaces — nuit bleu-violet, profondeur galactique */
-  --ink-1000: #040410;
-  --ink-900:  #070714;
-  --ink-850:  #0D0D20;
-  --ink-800:  #13132C;
-  --ink-750:  #1A1A38;
-  --ink-700:  #222244;
-  --ink-650:  #2A2A52;
-  --ink-600:  #343465;
+  /* Surfaces — noir chaud, sans teinte parasite */
+  --ink-1000: #070706;
+  --ink-900:  #0B0B0A;
+  --ink-850:  #121211;
+  --ink-800:  #1A1A18;
+  --ink-750:  #212120;
+  --ink-700:  #2A2A28;
+  --ink-650:  #333330;
+  --ink-600:  #3E3E3A;
 
-  /* Texte — blanc pur, max contraste */
-  --bone:     #FFFFFF;
-  --bone-dim: #C4C4E0;
-  --muted:    #7474A8;
-  --muted-2:  #5050808;
+  /* Texte — lisibilité maximale */
+  --bone:     #F5F5F3;
+  --bone-dim: #BEBEB8;
+  --muted:    #808078;
+  --muted-2:  #606058;
 
-  /* Lines — teinte bleue subtile */
-  --line:        rgba(130,130,230,.14);
-  --line-soft:   rgba(130,130,230,.07);
-  --line-strong: rgba(130,130,230,.26);
+  /* Lines — neutres */
+  --line:        rgba(255,255,255,.09);
+  --line-soft:   rgba(255,255,255,.05);
+  --line-strong: rgba(255,255,255,.16);
 
-  /* Or électrique — accent vif */
-  --gold:      #F0B429;
-  --gold-soft: #F7C94C;
-  --gold-deep: #C8920E;
-  --gold-glow: rgba(240,180,41,.18);
+  /* Or — accent sobre et lisible */
+  --gold:      #D4A832;
+  --gold-soft: #E8C050;
+  --gold-deep: #A87E18;
+  --gold-glow: rgba(212,168,50,.13);
 
-  /* Rouge BeLoc — CTA punch */
+  /* Rouge — LA couleur d'action, exclusive aux CTA */
   --red:      #FF2B1C;
-  --red-hi:   #FF5547;
+  --red-hi:   #FF5347;
   --red-deep: #E01810;
-  --red-glow: rgba(255,43,28,.30);
+  --red-glow: rgba(255,43,28,.22);
 
   /* Fonts */
   --serif: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -62,8 +62,8 @@ body {
   color: var(--bone);
   font-family: var(--sans);
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  line-height: 1.65;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -74,27 +74,7 @@ button { font-family: inherit; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--gold); color: var(--ink-900); }
 
-/* Film grain — texture premium sur fond sombre */
-@keyframes grain-shift {
-  0%   { transform: translate(0,0); }
-  20%  { transform: translate(-3%,-4%); }
-  40%  { transform: translate(3%, 2%); }
-  60%  { transform: translate(-2%, 5%); }
-  80%  { transform: translate(4%,-2%); }
-  100% { transform: translate(-1%, 3%); }
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  opacity: 0.032;
-  pointer-events: none;
-  z-index: 10000;
-  animation: grain-shift .4s steps(1) infinite;
-}
+/* Grain désactivé — surfaces propres */
 
 /* ---------- Typographic helpers ---------- */
 .display {
@@ -312,13 +292,13 @@ body::before {
 
 /* ---------- Hero ---------- */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
-.hero-media { position: absolute; inset: 0; z-index: 0; background: #07071A; }
+.hero-media { position: absolute; inset: 0; z-index: 0; background: #0B0B0A; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
 .hero-media::after {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(6,6,18,.52) 0%, rgba(6,6,18,0) 22%, rgba(6,6,18,0) 42%, rgba(6,6,18,.78) 80%, #070714 100%),
-    linear-gradient(85deg, rgba(6,6,18,.80) 0%, rgba(6,6,18,.24) 42%, transparent 70%);
+    linear-gradient(180deg, rgba(10,10,9,.50) 0%, rgba(10,10,9,0) 20%, rgba(10,10,9,0) 42%, rgba(10,10,9,.76) 80%, #0B0B0A 100%),
+    linear-gradient(85deg, rgba(10,10,9,.78) 0%, rgba(10,10,9,.22) 42%, transparent 70%);
 }
 /* Hero content — always white text over dark image overlay */
 .hero-content { position: relative; z-index: 2; width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter) clamp(54px, 8vh, 92px); color: #FFFFFF; }
@@ -663,12 +643,15 @@ body::before {
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast svg { width: 17px; height: 17px; color: var(--gold); }
 
-/* ---------- Marquee ---------- */
-@keyframes marquee-roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-band { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-900); }
-.marquee-track { display: flex; width: max-content; white-space: nowrap; animation: marquee-roll 28s linear infinite; }
-.marquee-item { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); padding: 14px 0; }
-.marquee-sep { color: var(--gold); margin: 0 20px; font-size: 14px; }
+/* ---------- Home fleet header ---------- */
+.home-fleet-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 32px; margin-bottom: clamp(24px,3vw,40px); flex-wrap: wrap; }
+
+/* ---------- Garanties strip ---------- */
+.gtee-strip { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; margin-block: clamp(32px,4vw,56px); }
+.gtee-item { display: flex; align-items: center; justify-content: center; gap: 10px; flex: 1; padding: 18px 20px; font-size: 13px; font-weight: 500; color: var(--bone-dim); border-right: 1px solid var(--line); white-space: nowrap; }
+.gtee-item:last-child { border-right: none; }
+.gtee-ic { color: var(--gold); display: flex; flex-shrink: 0; }
+.gtee-ic svg { width: 15px; height: 15px; }
 
 /* ---------- Fleet editorial (homepage) ---------- */
 .fleet-ed { display: grid; grid-template-columns: 1.55fr 1fr; height: 540px; margin-inline: var(--gutter); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); }
@@ -763,14 +746,17 @@ body::before {
   .hero-media::after {
     background: linear-gradient(
       to bottom,
-      rgba(5,5,16,.55) 0%,
-      rgba(5,5,16,.14) 22%,
-      rgba(5,5,16,.50) 50%,
-      rgba(5,5,16,.88) 76%,
-      rgba(5,5,16,.94) 90%,
-      rgba(5,5,16,.65) 100%
+      rgba(10,10,9,.52) 0%,
+      rgba(10,10,9,.12) 22%,
+      rgba(10,10,9,.50) 50%,
+      rgba(10,10,9,.88) 76%,
+      rgba(10,10,9,.94) 90%,
+      rgba(10,10,9,.65) 100%
     );
   }
+  .gtee-strip { flex-direction: column; }
+  .gtee-item { border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
+  .gtee-item:last-child { border-bottom: none; }
   .hero-content {
     padding-bottom: max(72px, env(safe-area-inset-bottom, 0px) + 48px);
     padding-bottom: clamp(72px, 12vh, 100px);
