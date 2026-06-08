@@ -185,7 +185,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-btn{display:flex;align-items:center;justify-content:center;width:32px;min-width:32px;background:var(--gold);color:#1C1A15;font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s;flex-shrink:0}
 .mw-btn:active{background:#B8943D}
 .mw-dd-ov{position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.22)}
-.mw-dd{position:fixed;left:50%;transform:translateX(-50%);width:260px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.16);z-index:300;overflow:hidden}
+.mw-dd{position:fixed;width:260px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.16);z-index:300;overflow:hidden}
 .mw-dd-opt{display:block;width:100%;padding:11px 16px;font-family:var(--fh);font-size:13px;font-weight:500;color:#1C1A15;border:none;background:transparent;text-align:left;border-bottom:1px solid rgba(0,0,0,.05);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .1s}
 .mw-dd-opt:last-child{border-bottom:none}
 .mw-dd-opt:active{background:#F5F5F5}
@@ -637,9 +637,11 @@ function mwShowDD(type,anchor){
   var opts=type==='dur'?MW_DUR_OPTS:[{v:'',l:'Tous les véhicules'}].concat(V.map(function(v){return{v:v.id,l:v.brand+' '+v.name};}));
   var current=type==='dur'?MW.dur:MW.vid;
   var hdr=document.getElementById('hdr');
-  var top=(hdr?hdr.getBoundingClientRect().bottom:56)+6;
+  var hdrBottom=(hdr?hdr.getBoundingClientRect().bottom:56)+6;
+  var rect=anchor.getBoundingClientRect();
+  var left=Math.max(8,Math.min(rect.left,window.innerWidth-260-8));
   var ov=document.createElement('div');ov.className='mw-dd-ov';ov.onclick=mwHideDD;
-  var panel=document.createElement('div');panel.className='mw-dd';panel.style.top=top+'px';
+  var panel=document.createElement('div');panel.className='mw-dd';panel.style.top=hdrBottom+'px';panel.style.left=left+'px';
   opts.forEach(function(o){
     var btn=document.createElement('button');
     btn.className='mw-dd-opt'+(o.v===current?' mw-on':'');
