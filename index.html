@@ -263,6 +263,20 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+/* ---- Tarifs ---- */
+.tarifs-wrap{padding:0 24px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tarifs-wrap::-webkit-scrollbar{display:none}
+.tarifs-tbl{width:100%;min-width:340px;border-collapse:separate;border-spacing:0}
+.tarifs-tbl th{padding:10px 14px;font-family:var(--fh);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--t2);background:var(--bg2);text-align:center;border-bottom:1px solid var(--bdr)}
+.tarifs-tbl th:first-child{text-align:left;border-radius:var(--rs) 0 0 0}
+.tarifs-tbl th:last-child{border-radius:0 var(--rs) 0 0}
+.tarifs-tbl td{padding:14px 14px;border-bottom:1px solid var(--bdr);vertical-align:middle}
+.tarifs-tbl td:not(:first-child){text-align:center;font-family:var(--fh);font-weight:700;font-size:15px;color:var(--t1)}
+.tarifs-tbl tr:last-child td{border-bottom:none}
+.tv-name{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--t1)}
+.tv-brand{font-family:var(--fb);font-size:11px;color:var(--t2);margin-top:2px}
+.tv-day{color:var(--gold)!important}
+.tarifs-note{margin:12px 24px 0;font-family:var(--fb);font-size:12px;color:var(--t3);line-height:1.6}
 /* ---- Zones de livraison ---- */
 .zones-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 20px}
 .zone-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);padding:14px 14px 12px}
@@ -343,6 +357,49 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </div>
   <div class="fleet" id="fleet" role="list"></div>
   <div class="dots" id="dots" aria-hidden="true"></div>
+</section>
+
+<section class="sec-alt" aria-label="Tarifs">
+  <div class="sh">
+    <span class="ey">Tarifs</span>
+    <h2 class="st">Des prix clairs, sans surprise.</h2>
+    <p class="ss">Assurance tous risques incluse. Estimations basées sur le tarif journalier.</p>
+  </div>
+  <div class="tarifs-wrap">
+    <table class="tarifs-tbl" role="table" aria-label="Grille tarifaire BeLoc">
+      <thead>
+        <tr>
+          <th scope="col">Véhicule</th>
+          <th scope="col">Journée</th>
+          <th scope="col">Week-end</th>
+          <th scope="col">Semaine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><p class="tv-name">Audi RS3</p><p class="tv-brand">355 ch · Sport</p></td>
+          <td class="tv-day">349 €</td><td>698 €</td><td>2 443 €</td>
+        </tr>
+        <tr>
+          <td><p class="tv-name">VW Golf 8R</p><p class="tv-brand">350 ch · Sport</p></td>
+          <td class="tv-day">219 €</td><td>438 €</td><td>1 533 €</td>
+        </tr>
+        <tr>
+          <td><p class="tv-name">VW Golf 8</p><p class="tv-brand">130 ch · Polyvalente</p></td>
+          <td class="tv-day">119 €</td><td>238 €</td><td>833 €</td>
+        </tr>
+        <tr>
+          <td><p class="tv-name">Renault Clio 6 Alpine</p><p class="tv-brand">128 ch · Sport</p></td>
+          <td class="tv-day">129 €</td><td>258 €</td><td>903 €</td>
+        </tr>
+        <tr>
+          <td><p class="tv-name">Renault Clio 5</p><p class="tv-brand">90 ch · Citadine</p></td>
+          <td class="tv-day">89 €</td><td>178 €</td><td>623 €</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tarifs-note">Assurance tous risques incluse · Options disponibles : conducteur supplémentaire +15 €/j, GPS portable +8 €/j, livraison à domicile +49 € forfait · Caution par carte bancaire à la remise des clés.</p>
 </section>
 
 <section class="sec" aria-label="Comment ça marche">
