@@ -36,10 +36,9 @@ function App() {
   return (
     <React.Fragment>
       <Header route={route} nav={nav} solid={solid} />
-      <main style={{ paddingBottom: 110 }}>{page}</main>
+      <main>{page}</main>
       <Footer nav={nav} />
       {toastNode}
-      <ReservationWidget nav={nav} route={route} />
     </React.Fragment>
   );
 }

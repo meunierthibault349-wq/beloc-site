@@ -323,14 +323,8 @@ const NAV = [{
   id: "fleet",
   label: "La Flotte"
 }, {
-  id: "offers",
-  label: "Nos offres"
-}, {
-  id: "presence",
-  label: "Notre présence"
-}, {
-  id: "about",
-  label: "À propos"
+  id: "how",
+  label: "Comment ça marche"
 }, {
   id: "contact",
   label: "Contact"
@@ -338,45 +332,6 @@ const NAV = [{
 function Header(props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  var _r1 = useState("");
-  var drVehicle = _r1[0];
-  var setDrVehicle = _r1[1];
-  var _r2 = useState("day");
-  var drDur = _r2[0];
-  var setDrDur = _r2[1];
-  var _r3 = useState("");
-  var drDate = _r3[0];
-  var setDrDate = _r3[1];
-  var drDurMap = {
-    day: 1,
-    weekend: 2,
-    week: 7
-  };
-  var drDurLabels = {
-    day: "À la journée",
-    weekend: "Week-end",
-    week: "À la semaine"
-  };
-  var drDateTo = "";
-  if (drDate) {
-    try {
-      var _dt = new Date(drDate + "T12:00");
-      _dt.setDate(_dt.getDate() + (drDurMap[drDur] || 1));
-      drDateTo = _dt.toISOString().split("T")[0];
-    } catch (_ex) {}
-  }
-  function fmtDr(iso) {
-    if (!iso) return null;
-    try {
-      return new Date(iso + "T12:00").toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "short"
-      });
-    } catch (_ex) {
-      return null;
-    }
-  }
-  var drToday = new Date().toISOString().split("T")[0];
   useEffect(function () {
     const onScroll = function () {
       setScrolled(window.scrollY > 24);
@@ -396,7 +351,6 @@ function Header(props) {
     setOpen(false);
     props.nav(id);
   };
-  const B = window.BELOC;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("header", {
     className: "hdr" + (scrolled || props.solid ? " scrolled" : "")
   }, /*#__PURE__*/React.createElement("div", {
@@ -420,14 +374,12 @@ function Header(props) {
     }, n.label);
   })), /*#__PURE__*/React.createElement("div", {
     className: "hdr-right"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "hdr-phone"
-  }, Icons.headset, /*#__PURE__*/React.createElement("span", null, "Assistance 7j/7")), /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(Button, {
     size: "sm",
     onClick: function () {
       go("fleet");
     },
-    icon: Icons.arrow
+    icon: false
   }, "R\xE9server"), /*#__PURE__*/React.createElement("button", {
     className: "burger",
     onClick: function () {
@@ -460,202 +412,23 @@ function Header(props) {
     }, "0", i + 1));
   })), /*#__PURE__*/React.createElement("div", {
     className: "drawer-foot"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-fields"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-field"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-lbl"
-  }, "Dur\xE9e"), /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-val"
-  }, drDurLabels[drDur]), /*#__PURE__*/React.createElement("select", {
-    className: "drawer-resa-sel",
-    value: drDur,
-    onChange: function (e) {
-      setDrDur(e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "day"
-  }, "\xC0 la journ\xE9e"), /*#__PURE__*/React.createElement("option", {
-    value: "weekend"
-  }, "Week-end"), /*#__PURE__*/React.createElement("option", {
-    value: "week"
-  }, "\xC0 la semaine"))), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-sep"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-field"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-lbl"
-  }, "V\xE9hicule"), /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-val"
-  }, drVehicle && B.byId(drVehicle) ? B.byId(drVehicle).name : "Tous les véhicules"), /*#__PURE__*/React.createElement("select", {
-    className: "drawer-resa-sel",
-    value: drVehicle,
-    onChange: function (e) {
-      setDrVehicle(e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: ""
-  }, "Tous les v\xE9hicules"), B.vehicles.map(function (v) {
-    return /*#__PURE__*/React.createElement("option", {
-      key: v.id,
-      value: v.id
-    }, v.full);
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-divider"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-field"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-lbl"
-  }, "Date de d\xE9part"), /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-val"
-  }, fmtDr(drDate) || "Choisir une date"), /*#__PURE__*/React.createElement("input", {
-    type: "date",
-    className: "drawer-resa-sel",
-    value: drDate,
-    min: drToday,
-    onChange: function (e) {
-      setDrDate(e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-sep"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-resa-field"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-lbl"
-  }, "Date de retour"), /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-val"
-  }, fmtDr(drDateTo) || "Calculée auto.")))), /*#__PURE__*/React.createElement("button", {
-    className: "drawer-resa-btn",
+  }, /*#__PURE__*/React.createElement(Button, {
     onClick: function () {
-      setOpen(false);
-      if (drVehicle) {
-        props.nav("booking", {
-          id: drVehicle,
-          tier: drDur
-        });
-      } else {
-        props.nav("fleet");
-      }
-    }
-  }, "Continuer ", /*#__PURE__*/React.createElement("span", {
-    className: "drawer-resa-arrow"
-  }, "\u2192"))), /*#__PURE__*/React.createElement("span", {
-    className: "hdr-phone",
-    style: {
-      display: "inline-flex"
-    }
-  }, Icons.phone, /*#__PURE__*/React.createElement("span", null, B.phone)))));
+      go("fleet");
+    },
+    block: true,
+    icon: Icons.arrow
+  }, "R\xE9server un v\xE9hicule"))));
 }
 
 /* ---------------- Footer ---------------- */
 function Footer(props) {
   const B = window.BELOC;
-  var _f1 = useState("");
-  var vehicleId = _f1[0];
-  var setVehicleId = _f1[1];
-  var _f2 = useState("day");
-  var tier = _f2[0];
-  var setTier = _f2[1];
-  var durLabels = {
-    day: "journée",
-    weekend: "week-end",
-    week: "semaine"
-  };
-  var vehicle = vehicleId ? B.byId(vehicleId) : null;
-  var base = vehicle ? vehicle.prices[tier] : 0;
-  var serviceFee = vehicle ? Math.round(base * 0.08) : 0;
-  var total = base + serviceFee;
-  function goDevis() {
-    if (vehicleId) {
-      props.nav("booking", {
-        id: vehicleId,
-        tier: tier
-      });
-    } else {
-      props.nav("fleet");
-    }
-  }
   return /*#__PURE__*/React.createElement("footer", {
     className: "ftr"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta-left"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "ftr-cta-eyebrow"
-  }, "R\xE9servation directe"), /*#__PURE__*/React.createElement("h3", {
-    className: "ftr-cta-h"
-  }, "Obtenez votre devis", /*#__PURE__*/React.createElement("br", null), "en 30 secondes"), /*#__PURE__*/React.createElement("p", {
-    className: "ftr-cta-sub"
-  }, "Choisissez votre v\xE9hicule et la dur\xE9e de location. Le tarif complet est calcul\xE9 instantan\xE9ment avant votre confirmation."), /*#__PURE__*/React.createElement("ul", {
-    className: "ftr-cta-features"
-  }, /*#__PURE__*/React.createElement("li", null, Icons.check, " Annulation gratuite 48h avant"), /*#__PURE__*/React.createElement("li", null, Icons.check, " Assurance tous risques incluse"), /*#__PURE__*/React.createElement("li", null, Icons.check, " Livraison \xE0 domicile possible"))), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta-right"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta-fields"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta-field"
-  }, /*#__PURE__*/React.createElement("label", null, "V\xE9hicule"), /*#__PURE__*/React.createElement("select", {
-    value: vehicleId,
-    onChange: function (e) {
-      setVehicleId(e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: ""
-  }, "Choisir un v\xE9hicule"), B.vehicles.map(function (v) {
-    return /*#__PURE__*/React.createElement("option", {
-      key: v.id,
-      value: v.id
-    }, v.full);
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-cta-field"
-  }, /*#__PURE__*/React.createElement("label", null, "Dur\xE9e"), /*#__PURE__*/React.createElement("select", {
-    value: tier,
-    onChange: function (e) {
-      setTier(e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "day"
-  }, "\xC0 la journ\xE9e"), /*#__PURE__*/React.createElement("option", {
-    value: "weekend"
-  }, "Week-end (2 jours)"), /*#__PURE__*/React.createElement("option", {
-    value: "week"
-  }, "\xC0 la semaine")))), vehicle ? /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-head"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "ftr-devis-vehicle"
-  }, vehicle.full), /*#__PURE__*/React.createElement("span", {
-    className: "ftr-devis-dur"
-  }, durLabels[tier])), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-rows"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-row"
-  }, /*#__PURE__*/React.createElement("span", null, "Location ", durLabels[tier]), /*#__PURE__*/React.createElement("span", null, eur(base))), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-row"
-  }, /*#__PURE__*/React.createElement("span", null, "Frais de service"), /*#__PURE__*/React.createElement("span", null, eur(serviceFee))), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-row ftr-devis-row--total"
-  }, /*#__PURE__*/React.createElement("span", null, "Total estim\xE9"), /*#__PURE__*/React.createElement("span", {
-    className: "ftr-devis-total"
-  }, eur(total)))), /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis-note"
-  }, "Assurance incluse \xB7 Livraison en option (+49 \u20AC)")) : /*#__PURE__*/React.createElement("div", {
-    className: "ftr-devis ftr-devis--empty"
-  }, Icons.calendar, /*#__PURE__*/React.createElement("span", null, "S\xE9lectionnez un v\xE9hicule pour voir votre devis d\xE9taill\xE9")), /*#__PURE__*/React.createElement(Button, {
-    onClick: goDevis,
-    icon: Icons.arrow,
-    block: true
-  }, vehicle ? "Confirmer et réserver →" : "Voir tous les véhicules"))), /*#__PURE__*/React.createElement("div", {
     className: "ftr-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ftr-col ftr-brand"
@@ -697,17 +470,13 @@ function Footer(props) {
     className: "ftr-col"
   }, /*#__PURE__*/React.createElement("h5", null, "Contact"), /*#__PURE__*/React.createElement("a", {
     onClick: function () {
-      props.nav("about");
+      props.nav("contact");
     }
   }, B.phone), /*#__PURE__*/React.createElement("a", {
     onClick: function () {
-      props.nav("about");
+      props.nav("contact");
     }
   }, B.email), /*#__PURE__*/React.createElement("a", {
-    onClick: function () {
-      props.nav("about");
-    }
-  }, "Nous \xE9crire"), /*#__PURE__*/React.createElement("a", {
     onClick: function () {
       props.nav("how");
     }
@@ -715,7 +484,7 @@ function Footer(props) {
     className: "ftr-bottom"
   }, /*#__PURE__*/React.createElement("p", null, "\xA9 2026 BeLoc \u2014 ", B.region), /*#__PURE__*/React.createElement("div", {
     className: "links"
-  }, /*#__PURE__*/React.createElement("a", null, "Mentions l\xE9gales"), /*#__PURE__*/React.createElement("a", null, "CGV / CGU"), /*#__PURE__*/React.createElement("a", null, "Confidentialit\xE9"), /*#__PURE__*/React.createElement("a", null, "Cookies")))));
+  }, /*#__PURE__*/React.createElement("a", null, "Mentions l\xE9gales"), /*#__PURE__*/React.createElement("a", null, "CGV / CGU"), /*#__PURE__*/React.createElement("a", null, "Confidentialit\xE9")))));
 }
 
 /* ---------------- Toast ---------------- */

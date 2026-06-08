@@ -68,15 +68,8 @@ function App() {
     route: route,
     nav: nav,
     solid: solid
-  }), /*#__PURE__*/React.createElement("main", {
-    style: {
-      paddingBottom: 110
-    }
-  }, page), /*#__PURE__*/React.createElement(Footer, {
+  }), /*#__PURE__*/React.createElement("main", null, page), /*#__PURE__*/React.createElement(Footer, {
     nav: nav
-  }), toastNode, /*#__PURE__*/React.createElement(ReservationWidget, {
-    nav: nav,
-    route: route
-  }));
+  }), toastNode);
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));

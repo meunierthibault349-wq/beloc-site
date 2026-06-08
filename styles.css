@@ -290,45 +290,6 @@ a { color: inherit; text-decoration: none; }
 .drawer-nav a .idx { font-family: var(--mono); font-size: 12px; color: var(--gold-soft); letter-spacing: .1em; }
 .drawer-foot { margin-top: auto; display: flex; flex-direction: column; gap: 16px; }
 
-/* ---- Drawer mini-widget réservation ---- */
-.drawer-resa {
-  background: var(--ink-800);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.09);
-  box-shadow: 0 4px 20px rgba(0,0,0,.30);
-  overflow: hidden;
-}
-.drawer-resa-fields { display: flex; flex-direction: column; }
-.drawer-resa-row { display: flex; align-items: stretch; }
-.drawer-resa-divider { height: 1px; background: rgba(255,255,255,.07); }
-.drawer-resa-field {
-  position: relative; flex: 1; padding: 11px 16px;
-  display: flex; flex-direction: column; gap: 2px; cursor: pointer;
-}
-.drawer-resa-field:hover { background: rgba(255,255,255,.04); }
-.drawer-resa-lbl {
-  font-size: 10px; font-weight: 700; color: var(--bone);
-  letter-spacing: .06em; text-transform: uppercase; pointer-events: none;
-}
-.drawer-resa-val {
-  font-size: 13px; color: var(--bone-dim);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
-}
-.drawer-resa-sep { width: 1px; background: rgba(255,255,255,.09); flex-shrink: 0; margin: 8px 0; }
-.drawer-resa-sel {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  opacity: 0; cursor: pointer; font-size: 16px;
-}
-.drawer-resa-btn {
-  width: 100%; background: var(--red); color: #FFFFFF;
-  border: none; padding: 13px 20px;
-  font-family: var(--sans); font-size: 14px; font-weight: 700;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: background .2s;
-}
-.drawer-resa-btn:hover { background: var(--gold-soft); }
-.drawer-resa-arrow { font-size: 17px; line-height: 1; }
-
 /* ---------- Hero ---------- */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
 .hero-media { position: absolute; inset: 0; z-index: 0; background: #0B0B0A; }
@@ -450,74 +411,6 @@ a { color: inherit; text-decoration: none; }
 .ftr .paychip { color: #808078; border-color: rgba(255,255,255,.09); }
 .ftr-bottom p { color: #606058; }
 .ftr-bottom .links a { color: #606058; }
-
-/* ---------- Footer — Zone devis rapide ---------- */
-.ftr-cta {
-  display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,72px); align-items: start;
-  padding-bottom: clamp(44px,5vw,64px);
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  margin-bottom: clamp(44px,5vw,64px);
-}
-.ftr-cta-eyebrow {
-  display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold-soft); margin-bottom: 14px;
-}
-.ftr-cta-h {
-  font-family: var(--serif); font-size: clamp(22px,2.8vw,36px); font-weight: 600;
-  color: #F5F5F3; margin: 0 0 12px; line-height: 1.22;
-}
-.ftr-cta-sub { color: #A0A09C; font-size: 14px; line-height: 1.65; margin: 0 0 22px; max-width: 38ch; }
-.ftr-cta-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.ftr-cta-features li {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 13px; color: #A0A09C;
-}
-.ftr-cta-features li svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
-
-/* Sélecteurs */
-.ftr-cta-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-.ftr-cta-field { display: flex; flex-direction: column; gap: 5px; }
-.ftr-cta-field label {
-  font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #767672;
-}
-.ftr-cta-field select {
-  background: #1A1A18; border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius);
-  color: #F5F5F3; font-family: var(--sans); font-size: 14px; font-weight: 500;
-  padding: 10px 12px; width: 100%; cursor: pointer;
-  transition: border-color .25s; -webkit-appearance: none; appearance: none;
-}
-.ftr-cta-field select:hover { border-color: rgba(255,255,255,.24); }
-.ftr-cta-field select:focus { outline: none; border-color: var(--red); }
-
-/* Devis estimé */
-.ftr-devis {
-  border-radius: var(--radius); border: 1px solid rgba(255,92,0,.28);
-  background: rgba(255,92,0,.09); margin-bottom: 14px; overflow: hidden;
-}
-.ftr-devis-head {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.ftr-devis-vehicle { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #A0A09C; }
-.ftr-devis-dur { font-family: var(--mono); font-size: 10.5px; color: var(--gold-soft); }
-.ftr-devis-rows { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
-.ftr-devis-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #A0A09C; }
-.ftr-devis-row--total { padding-top: 8px; border-top: 1px solid rgba(255,255,255,.07); color: #F5F5F3; font-weight: 500; }
-.ftr-devis-total { font-family: var(--serif); font-size: 26px; font-weight: 700; color: #F5F5F3; }
-.ftr-devis-note { padding: 8px 16px 12px; font-size: 11px; color: #606058; border-top: 1px solid rgba(255,255,255,.05); }
-
-/* État vide */
-.ftr-devis--empty {
-  display: flex; align-items: center; gap: 12px;
-  padding: 18px 16px; background: rgba(255,255,255,.03);
-  border: 1px dashed rgba(255,255,255,.10); border-radius: var(--radius);
-  margin-bottom: 14px; color: #606058; font-size: 13px; font-style: italic;
-}
-.ftr-devis--empty svg { width: 18px; height: 18px; color: #767672; flex-shrink: 0; }
-
-/* Mobile */
-@media (max-width: 1080px) { .ftr-cta { grid-template-columns: 1fr; } }
-@media (max-width: 768px)  { .ftr-cta-fields { grid-template-columns: 1fr; } }
 
 /* ---------- Reveal animation ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
@@ -825,88 +718,6 @@ a { color: inherit; text-decoration: none; }
 .final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; }
 .final-cta .mono-label { color: var(--muted); }
 
-/* ============================================================
-   BANDEAU RÉSERVATION — Barre sticky compacte (toutes pages)
-   ============================================================ */
-.resa-bar-widget {
-  position: fixed; top: 88px; left: 50%; transform: translateX(-50%);
-  z-index: 980;
-  display: flex; align-items: center;
-  background: var(--ink-800);
-  border-radius: 20px;
-  box-shadow: 0 8px 48px -8px rgba(0,0,0,.60), 0 2px 12px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.06);
-  padding: 6px 6px 6px 0;
-  width: min(960px, calc(100vw - 48px));
-  border: 1px solid rgba(255,255,255,.07);
-}
-
-.resa-bar-fields { display: flex; align-items: center; flex: 1; min-width: 0; }
-
-.resa-bar-field {
-  position: relative;
-  display: flex; flex-direction: column;
-  padding: 16px 24px;
-  cursor: pointer; flex: 1; min-width: 0;
-  border-radius: 16px;
-  transition: background .15s ease;
-  user-select: none; -webkit-user-select: none;
-}
-.resa-bar-field:hover { background: rgba(255,255,255,.05); }
-.resa-bar-field:focus-within { background: rgba(255,255,255,.06); }
-
-.resa-bar-field-label {
-  font-size: 16px; font-weight: 700; color: var(--bone);
-  letter-spacing: -.01em;
-  white-space: nowrap; pointer-events: none; margin-bottom: 4px;
-}
-
-.resa-bar-field-value {
-  font-size: 13px; font-weight: 400; color: var(--muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
-}
-.resa-bar-field-value--ph { color: var(--muted); }
-
-.resa-bar-field-select,
-.resa-bar-field-date {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  opacity: 0; cursor: pointer; font-size: 16px;
-  -webkit-appearance: none; appearance: none;
-}
-
-.resa-bar-sep { width: 1px; height: 36px; background: rgba(255,255,255,.10); flex-shrink: 0; }
-
-.resa-bar-btn {
-  flex-shrink: 0;
-  background: var(--red); color: #FFFFFF;
-  border: none; border-radius: 16px;
-  padding: 14px 22px; margin: 0 4px;
-  font-family: var(--sans); font-size: 14px; font-weight: 700;
-  cursor: pointer; display: flex; align-items: center; gap: 8px;
-  transition: background .2s ease, transform .1s ease;
-  white-space: nowrap; letter-spacing: .01em;
-}
-.resa-bar-btn:hover { background: var(--gold); transform: scale(1.02); }
-.resa-bar-btn-arrow { font-size: 16px; line-height: 1; }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .resa-bar-widget {
-    bottom: 12px; flex-direction: column; padding: 0;
-    border-radius: 16px; width: calc(100vw - 24px);
-  }
-  .resa-bar-widget--no-mobile { display: none; }
-  .resa-bar-fields { flex-direction: column; width: 100%; }
-  .resa-bar-field {
-    flex-direction: row; align-items: center; justify-content: space-between;
-    padding: 12px 16px; border-radius: 0;
-    border-bottom: 1px solid var(--line-soft); flex: none; width: 100%;
-  }
-  .resa-bar-field:first-child { border-radius: 16px 16px 0 0; }
-  .resa-bar-field:last-of-type { border-bottom: none; }
-  .resa-bar-field-label { margin-bottom: 0; }
-  .resa-bar-sep { display: none; }
-  .resa-bar-btn { width: calc(100% - 12px); justify-content: center; margin: 6px; border-radius: 12px; }
-}
 
 /* ============================================================
    TABLETTE / PETIT DESKTOP — 1080px
@@ -940,7 +751,7 @@ a { color: inherit; text-decoration: none; }
   }
 
   /* ---- Header ---- */
-  .hdr-nav, .hdr-phone, .hdr-right .btn { display: none; }
+  .hdr-nav, .hdr-right .btn { display: none; }
   .burger { display: inline-flex; }
   .hdr-inner { height: 60px; }
   .pad-top { padding-top: 60px; }

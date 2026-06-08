@@ -121,34 +121,14 @@ function Img(props) {
 
 /* ---------------- Header ---------------- */
 const NAV = [
-  { id: "fleet", label: "La Flotte" },
-  { id: "offers", label: "Nos offres" },
-  { id: "presence", label: "Notre présence" },
-  { id: "about", label: "À propos" },
+  { id: "fleet",   label: "La Flotte" },
+  { id: "how",     label: "Comment ça marche" },
   { id: "contact", label: "Contact" },
 ];
 
 function Header(props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  var _r1 = useState("");    var drVehicle = _r1[0]; var setDrVehicle = _r1[1];
-  var _r2 = useState("day"); var drDur     = _r2[0]; var setDrDur     = _r2[1];
-  var _r3 = useState("");    var drDate    = _r3[0]; var setDrDate    = _r3[1];
-  var drDurMap    = { day: 1, weekend: 2, week: 7 };
-  var drDurLabels = { day: "À la journée", weekend: "Week-end", week: "À la semaine" };
-  var drDateTo = "";
-  if (drDate) {
-    try {
-      var _dt = new Date(drDate + "T12:00");
-      _dt.setDate(_dt.getDate() + (drDurMap[drDur] || 1));
-      drDateTo = _dt.toISOString().split("T")[0];
-    } catch (_ex) {}
-  }
-  function fmtDr(iso) {
-    if (!iso) return null;
-    try { return new Date(iso + "T12:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); } catch (_ex) { return null; }
-  }
-  var drToday = new Date().toISOString().split("T")[0];
   useEffect(function () {
     const onScroll = function () { setScrolled(window.scrollY > 24); };
     onScroll();
@@ -157,7 +137,6 @@ function Header(props) {
   }, []);
   useEffect(function () { document.body.style.overflow = open ? "hidden" : ""; }, [open]);
   const go = function (id) { setOpen(false); props.nav(id); };
-  const B = window.BELOC;
   return (
     <React.Fragment>
       <header className={"hdr" + (scrolled || props.solid ? " scrolled" : "")}>
@@ -169,8 +148,7 @@ function Header(props) {
             })}
           </nav>
           <div className="hdr-right">
-            <span className="hdr-phone">{Icons.headset}<span>Assistance 7j/7</span></span>
-            <Button size="sm" onClick={function () { go("fleet"); }} icon={Icons.arrow}>Réserver</Button>
+            <Button size="sm" onClick={function () { go("fleet"); }} icon={false}>Réserver</Button>
             <button className="burger" onClick={function () { setOpen(true); }} aria-label="Menu">{Icons.menu}</button>
           </div>
         </div>
@@ -187,51 +165,7 @@ function Header(props) {
           })}
         </nav>
         <div className="drawer-foot">
-          <div className="drawer-resa">
-            <div className="drawer-resa-fields">
-              <div className="drawer-resa-row">
-                <div className="drawer-resa-field">
-                  <span className="drawer-resa-lbl">Durée</span>
-                  <span className="drawer-resa-val">{drDurLabels[drDur]}</span>
-                  <select className="drawer-resa-sel" value={drDur} onChange={function(e){setDrDur(e.target.value);}}>
-                    <option value="day">À la journée</option>
-                    <option value="weekend">Week-end</option>
-                    <option value="week">À la semaine</option>
-                  </select>
-                </div>
-                <div className="drawer-resa-sep" />
-                <div className="drawer-resa-field">
-                  <span className="drawer-resa-lbl">Véhicule</span>
-                  <span className="drawer-resa-val">{drVehicle && B.byId(drVehicle) ? B.byId(drVehicle).name : "Tous les véhicules"}</span>
-                  <select className="drawer-resa-sel" value={drVehicle} onChange={function(e){setDrVehicle(e.target.value);}}>
-                    <option value="">Tous les véhicules</option>
-                    {B.vehicles.map(function(v){ return <option key={v.id} value={v.id}>{v.full}</option>; })}
-                  </select>
-                </div>
-              </div>
-              <div className="drawer-resa-divider" />
-              <div className="drawer-resa-row">
-                <div className="drawer-resa-field">
-                  <span className="drawer-resa-lbl">Date de départ</span>
-                  <span className="drawer-resa-val">{fmtDr(drDate) || "Choisir une date"}</span>
-                  <input type="date" className="drawer-resa-sel" value={drDate} min={drToday} onChange={function(e){setDrDate(e.target.value);}} />
-                </div>
-                <div className="drawer-resa-sep" />
-                <div className="drawer-resa-field">
-                  <span className="drawer-resa-lbl">Date de retour</span>
-                  <span className="drawer-resa-val">{fmtDr(drDateTo) || "Calculée auto."}</span>
-                </div>
-              </div>
-            </div>
-            <button className="drawer-resa-btn" onClick={function(){
-              setOpen(false);
-              if (drVehicle) { props.nav("booking", { id: drVehicle, tier: drDur }); }
-              else { props.nav("fleet"); }
-            }}>
-              Continuer <span className="drawer-resa-arrow">→</span>
-            </button>
-          </div>
-          <span className="hdr-phone" style={{ display: "inline-flex" }}>{Icons.phone}<span>{B.phone}</span></span>
+          <Button onClick={function () { go("fleet"); }} block icon={Icons.arrow}>Réserver un véhicule</Button>
         </div>
       </div>
     </React.Fragment>
@@ -241,99 +175,9 @@ function Header(props) {
 /* ---------------- Footer ---------------- */
 function Footer(props) {
   const B = window.BELOC;
-  var _f1 = useState(""); var vehicleId = _f1[0]; var setVehicleId = _f1[1];
-  var _f2 = useState("day"); var tier = _f2[0]; var setTier = _f2[1];
-
-  var durLabels = { day: "journée", weekend: "week-end", week: "semaine" };
-  var vehicle = vehicleId ? B.byId(vehicleId) : null;
-  var base       = vehicle ? vehicle.prices[tier] : 0;
-  var serviceFee = vehicle ? Math.round(base * 0.08) : 0;
-  var total      = base + serviceFee;
-
-  function goDevis() {
-    if (vehicleId) {
-      props.nav("booking", { id: vehicleId, tier: tier });
-    } else {
-      props.nav("fleet");
-    }
-  }
-
   return (
     <footer className="ftr">
       <div className="wrap">
-
-        {/* ── Zone devis rapide ── */}
-        <div className="ftr-cta">
-          <div className="ftr-cta-left">
-            <span className="ftr-cta-eyebrow">Réservation directe</span>
-            <h3 className="ftr-cta-h">Obtenez votre devis<br />en 30 secondes</h3>
-            <p className="ftr-cta-sub">Choisissez votre véhicule et la durée de location. Le tarif complet est calculé instantanément avant votre confirmation.</p>
-            <ul className="ftr-cta-features">
-              <li>{Icons.check} Annulation gratuite 48h avant</li>
-              <li>{Icons.check} Assurance tous risques incluse</li>
-              <li>{Icons.check} Livraison à domicile possible</li>
-            </ul>
-          </div>
-
-          <div className="ftr-cta-right">
-            {/* Sélecteurs */}
-            <div className="ftr-cta-fields">
-              <div className="ftr-cta-field">
-                <label>Véhicule</label>
-                <select value={vehicleId} onChange={function (e) { setVehicleId(e.target.value); }}>
-                  <option value="">Choisir un véhicule</option>
-                  {B.vehicles.map(function (v) {
-                    return <option key={v.id} value={v.id}>{v.full}</option>;
-                  })}
-                </select>
-              </div>
-              <div className="ftr-cta-field">
-                <label>Durée</label>
-                <select value={tier} onChange={function (e) { setTier(e.target.value); }}>
-                  <option value="day">À la journée</option>
-                  <option value="weekend">Week-end (2 jours)</option>
-                  <option value="week">À la semaine</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Devis estimé */}
-            {vehicle ? (
-              <div className="ftr-devis">
-                <div className="ftr-devis-head">
-                  <span className="ftr-devis-vehicle">{vehicle.full}</span>
-                  <span className="ftr-devis-dur">{durLabels[tier]}</span>
-                </div>
-                <div className="ftr-devis-rows">
-                  <div className="ftr-devis-row">
-                    <span>Location {durLabels[tier]}</span>
-                    <span>{eur(base)}</span>
-                  </div>
-                  <div className="ftr-devis-row">
-                    <span>Frais de service</span>
-                    <span>{eur(serviceFee)}</span>
-                  </div>
-                  <div className="ftr-devis-row ftr-devis-row--total">
-                    <span>Total estimé</span>
-                    <span className="ftr-devis-total">{eur(total)}</span>
-                  </div>
-                </div>
-                <div className="ftr-devis-note">Assurance incluse · Livraison en option (+49 €)</div>
-              </div>
-            ) : (
-              <div className="ftr-devis ftr-devis--empty">
-                {Icons.calendar}
-                <span>Sélectionnez un véhicule pour voir votre devis détaillé</span>
-              </div>
-            )}
-
-            <Button onClick={goDevis} icon={Icons.arrow} block>
-              {vehicle ? "Confirmer et réserver →" : "Voir tous les véhicules"}
-            </Button>
-          </div>
-        </div>
-
-        {/* ── Liens ── */}
         <div className="ftr-grid">
           <div className="ftr-col ftr-brand">
             <Wordmark style={{ fontSize: 26 }} />
@@ -355,9 +199,8 @@ function Footer(props) {
           </div>
           <div className="ftr-col">
             <h5>Contact</h5>
-            <a onClick={function () { props.nav("about"); }}>{B.phone}</a>
-            <a onClick={function () { props.nav("about"); }}>{B.email}</a>
-            <a onClick={function () { props.nav("about"); }}>Nous écrire</a>
+            <a onClick={function () { props.nav("contact"); }}>{B.phone}</a>
+            <a onClick={function () { props.nav("contact"); }}>{B.email}</a>
             <a onClick={function () { props.nav("how"); }}>Aide & FAQ</a>
           </div>
         </div>
@@ -367,10 +210,8 @@ function Footer(props) {
             <a>Mentions légales</a>
             <a>CGV / CGU</a>
             <a>Confidentialité</a>
-            <a>Cookies</a>
           </div>
         </div>
-
       </div>
     </footer>
   );
