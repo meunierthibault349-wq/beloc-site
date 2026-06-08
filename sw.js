@@ -1,4 +1,5 @@
-var CACHE='beloc-v1';
+/* Incrémenter CACHE_VER à chaque déploiement pour invalider l'ancien cache */
+var CACHE_VER='beloc-v2';
 var SHELL=[
   '/beloc-site/',
   '/beloc-site/index.html',
@@ -13,29 +14,32 @@ var SHELL=[
 ];
 
 self.addEventListener('install',function(e){
-  e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(SHELL);}));
+  e.waitUntil(caches.open(CACHE_VER).then(function(c){return c.addAll(SHELL);}));
   self.skipWaiting();
 });
 
 self.addEventListener('activate',function(e){
   e.waitUntil(caches.keys().then(function(keys){
-    return Promise.all(keys.filter(function(k){return k!==CACHE;}).map(function(k){return caches.delete(k);}));
+    return Promise.all(keys.filter(function(k){return k!==CACHE_VER;}).map(function(k){return caches.delete(k);}));
   }));
   self.clients.claim();
 });
 
 self.addEventListener('fetch',function(e){
   if(e.request.method!=='GET')return;
+  /* Stratégie stale-while-revalidate : on sert le cache immédiatement
+     et on met à jour en arrière-plan pour le prochain chargement */
   e.respondWith(
-    caches.match(e.request).then(function(cached){
-      var net=fetch(e.request).then(function(r){
-        if(r&&r.status===200&&r.type==='basic'){
-          var c=r.clone();
-          caches.open(CACHE).then(function(cache){cache.put(e.request,c);});
-        }
-        return r;
+    caches.open(CACHE_VER).then(function(cache){
+      return cache.match(e.request).then(function(cached){
+        var netFetch=fetch(e.request).then(function(r){
+          if(r&&r.status===200&&r.type==='basic'){
+            cache.put(e.request,r.clone());
+          }
+          return r;
+        }).catch(function(){return cached;});
+        return cached||netFetch;
       });
-      return cached||net;
     })
   );
 });

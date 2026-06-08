@@ -41,14 +41,17 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
   <meta property="og:description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes en Auvergne-Rhône-Alpes." />
-  <meta property="og:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-action.avif" />
+  <meta property="og:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-studio.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://meunierthibault349-wq.github.io/beloc-site/" />
   <meta property="og:locale" content="fr_FR" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
   <meta name="twitter:description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes." />
-  <meta name="twitter:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-action.avif" />
+  <meta name="twitter:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-studio.jpg" />
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -109,6 +112,16 @@
     "@type": "HowTo",
     "name": "Comment louer un véhicule premium avec BeLoc",
     "description": "Réservation de véhicule premium 100% en ligne en Auvergne-Rhône-Alpes en 3 étapes.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-studio.jpg"
+    },
+    "totalTime": "PT3M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": "89"
+    },
     "step": [
       {"@type":"HowToStep","position":"1","name":"Choisissez votre véhicule en ligne","text":"Parcourez la flotte, sélectionnez vos dates et options depuis votre téléphone en 3 minutes."},
       {"@type":"HowToStep","position":"2","name":"Livraison à votre adresse","text":"BeLoc livre le véhicule directement chez vous, à votre hôtel ou lieu de travail en Auvergne-Rhône-Alpes."},
@@ -217,7 +230,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .vcard-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
 .vcard-name{font-family:var(--fh);font-weight:700;font-size:16px;color:var(--ft1)}
 .vcard-brand{font-family:var(--fb);font-size:12px;color:var(--ft2);margin-top:1px}
-.vcard-price{font-family:var(--fh);font-weight:700;font-size:15px;color:var(--red);white-space:nowrap}
+.vcard-price{font-family:var(--fh);font-weight:700;font-size:15px;color:var(--gold);white-space:nowrap}
 .vcard-price em{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--ft2);font-style:normal}
 .vcard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:11px;font-weight:600}
@@ -257,7 +270,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .rv{font-family:var(--fb);font-size:12px;font-weight:600;color:var(--ft1);text-align:right}
 .rtotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1.5px solid var(--fbdr)}
 .rtk{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--ft1)}
-.rtv{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--red)}
+.rtv{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--gold)}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .fgrid .fg{margin-bottom:0}
 .ffull{margin-bottom:14px}
@@ -394,6 +407,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </style>
 </head>
 <body>
+<noscript><style>.noscript-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#C9A96E;color:#1C1A15;padding:12px 20px;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;text-align:center}</style><div class="noscript-bar">Ce site nécessite JavaScript pour fonctionner. Activez JavaScript dans votre navigateur ou <a href="mailto:contact@beloc.fr" style="color:#1C1A15;text-decoration:underline">contactez-nous directement</a>.</div></noscript>
 <div class="cookie-bar" id="cookie-bar" role="dialog" aria-label="Gestion des cookies" aria-live="polite">
   <p class="cookie-txt">Nous utilisons des cookies analytiques (Google Analytics) et marketing (Meta Pixel) pour mesurer nos performances et améliorer nos campagnes. <a href="mentions-legales.html">En savoir plus</a>.</p>
   <div class="cookie-btns">
@@ -416,22 +430,22 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   <a href="#hero" class="hdr-logo">BeLoc<span style="color:var(--gold)">.</span></a>
   <div class="hdr-sep"></div>
   <div class="mw-inner" id="mw-inner" role="search" aria-label="Réservation rapide">
-    <div class="mw-field" onclick="mwShowDD('dur',this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
+    <div class="mw-field" role="button" tabindex="0" onclick="mwShowDD('dur',this)" onkeydown="if(event.key==='Enter'||event.key===' '){mwShowDD('dur',this);event.preventDefault()}" aria-label="Sélectionner la durée" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Durée</span>
       <span class="mw-val" id="mw-dur-txt">Journée</span>
     </div>
     <div class="mw-sp"></div>
-    <div class="mw-field" onclick="mwShowDD('veh',this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
+    <div class="mw-field" role="button" tabindex="0" onclick="mwShowDD('veh',this)" onkeydown="if(event.key==='Enter'||event.key===' '){mwShowDD('veh',this);event.preventDefault()}" aria-label="Sélectionner le véhicule" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Véhicule</span>
       <span class="mw-val mw-ph" id="mw-veh-txt">Tous</span>
     </div>
     <div class="mw-sp"></div>
-    <div class="mw-field" onclick="mwShowCal(this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
+    <div class="mw-field" role="button" tabindex="0" onclick="mwShowCal(this)" onkeydown="if(event.key==='Enter'||event.key===' '){mwShowCal(this);event.preventDefault()}" aria-label="Sélectionner la date de départ" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Départ</span>
       <span class="mw-val mw-ph" id="mw-d0-txt">Date</span>
     </div>
     <div class="mw-sp"></div>
-    <div class="mw-field" onclick="mwShowCalRet(this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
+    <div class="mw-field" role="button" tabindex="0" onclick="mwShowCalRet(this)" onkeydown="if(event.key==='Enter'||event.key===' '){mwShowCalRet(this);event.preventDefault()}" aria-label="Sélectionner la date de retour" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Retour</span>
       <span class="mw-val mw-ph" id="mw-d1-txt">Auto.</span>
     </div>
@@ -1261,7 +1275,15 @@ function mwRecalc(){
 
 function mwSubmit(){
   if(MW.vid)pick(MW.vid);
-  if(MW.d0){var ds=document.getElementById('ds');if(ds){ds.value=MW.d0;S.d0=MW.d0;rp();}}
+  if(MW.d0){
+    var ds=document.getElementById('ds');
+    if(ds){ds.value=MW.d0;S.d0=MW.d0;}
+  }
+  if(MW.d1){
+    var de=document.getElementById('de');
+    if(de){de.value=MW.d1;S.d1=MW.d1;}
+  }
+  rp();
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
