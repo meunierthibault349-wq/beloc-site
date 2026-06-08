@@ -190,21 +190,21 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-dd-opt:active{background:#F5F5F5}
 .mw-dd-opt.mw-on{color:var(--gold);font-weight:700}
 /* ---- Calendrier custom ---- */
-.mw-cal{position:fixed;left:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.2);z-index:300;padding:16px}
-.mw-cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.mw-cal-mo{font-family:var(--fh);font-size:15px;font-weight:700;color:#1C1A15}
-.mw-cal-nav{width:32px;height:32px;border:none;background:#F3F3F5;border-radius:8px;font-size:18px;cursor:pointer;color:#1C1A15;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+.mw-cal{position:fixed;left:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.2);z-index:300;padding:12px}
+.mw-cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.mw-cal-mo{font-family:var(--fh);font-size:13px;font-weight:700;color:#1C1A15}
+.mw-cal-nav{width:26px;height:26px;border:none;background:#F3F3F5;border-radius:6px;font-size:15px;cursor:pointer;color:#1C1A15;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
 .mw-cal-nav:active{background:#E8E8E8}
-.mw-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.mw-cal-dow{font-family:var(--fb);font-size:9px;font-weight:700;color:#bbb;text-align:center;padding:4px 0;letter-spacing:.4px;text-transform:uppercase}
-.mw-cal-d{font-family:var(--fh);font-size:13px;font-weight:500;color:#1C1A15;border:none;background:transparent;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:6px;aspect-ratio:1;width:100%;display:flex;align-items:center;justify-content:center;transition:background .1s}
+.mw-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
+.mw-cal-dow{font-family:var(--fb);font-size:8px;font-weight:700;color:#ccc;text-align:center;padding:3px 0;letter-spacing:.3px;text-transform:uppercase}
+.mw-cal-d{font-family:var(--fh);font-size:12px;font-weight:500;color:#1C1A15;border:none;background:transparent;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:5px;height:30px;width:100%;display:flex;align-items:center;justify-content:center;transition:background .1s}
 .mw-cal-d:active:not(:disabled){background:#F3F3F5}
 .mw-cal-d:disabled{color:#D8D8D8;cursor:default}
 .mw-cal-d.mw-busy:disabled{color:#E8BCBA;text-decoration:line-through}
 .mw-cal-d.mw-sel{background:var(--gold);color:#1C1A15;font-weight:700}
-.mw-cal-leg{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06)}
-.mw-cal-li{display:flex;align-items:center;gap:5px;font-family:var(--fb);font-size:10px;color:#888}
-.mw-cal-li i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.mw-cal-leg{display:flex;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06)}
+.mw-cal-li{display:flex;align-items:center;gap:4px;font-family:var(--fb);font-size:9px;color:#888}
+.mw-cal-li i{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:40px 24px calc(max(36px,env(safe-area-inset-bottom,0px) + 24px))}
 .fl-logo{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--t1);margin-bottom:6px}
 .fl-line{font-family:var(--fb);font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:28px}
