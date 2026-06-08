@@ -385,7 +385,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .faq{padding:0 24px;display:flex;flex-direction:column;gap:8px}
 .faq-item{border:1px solid var(--bdr);border-radius:var(--rm);overflow:hidden;background:var(--bg2);transition:border-color .2s}
 .faq-item.open{border-color:rgba(201,169,110,.35)}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;width:100%;background:transparent;border:none;text-align:left}
 .faq-qt{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--t1);line-height:1.3}
 .faq-ico{width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--goldd);display:flex;align-items:center;justify-content:center;color:var(--gold);transition:transform .2s;flex-shrink:0}
 .faq-item.open .faq-ico{transform:rotate(45deg)}
@@ -700,8 +700,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </div>
   <div id="conf" role="status" aria-live="polite">
     <div class="cc" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 16.5L12.5 23 26 9" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <h2 class="ct">Demande envoyée !</h2>
-    <p class="cs">Votre messagerie va s'ouvrir avec votre demande pré-remplie. Envoyez l'email pour finaliser.</p>
+    <h2 class="ct" id="conf-title">Demande envoyée !</h2>
+    <p class="cs" id="conf-msg">Votre demande a bien été reçue. Nous vous confirmons la disponibilité sous 2h.</p>
     <div class="cc2">
       <img class="cc2-img" id="cimg" src="" alt="" loading="lazy" onerror="this.style.background='#D4D4D8'" />
       <div class="cc2-info"><p class="cc2-name" id="cname"></p><p class="cc2-det" id="cdet"></p></div>
@@ -739,41 +739,41 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
     <span class="ey">FAQ</span>
     <h2 class="st">Vos questions, nos réponses.</h2>
   </div>
-  <div class="faq" role="list">
-    <div class="faq-item" role="listitem">
-      <div class="faq-q" onclick="faqToggle(this.parentElement)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){faqToggle(this.parentElement);event.preventDefault()}">
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faqToggle(this.parentElement)" aria-expanded="false" aria-controls="faq-a1">
         <span class="faq-qt">Quelles sont les conditions pour louer un véhicule ?</span>
         <div class="faq-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
-      </div>
-      <p class="faq-a">Il vous faut un permis de conduire valide depuis au moins 2 ans, être âgé de 21 ans minimum, et présenter une pièce d'identité ainsi qu'un justificatif de domicile. Une caution par carte bancaire est demandée à la remise des clés, dont le montant dépend du véhicule.</p>
+      </button>
+      <p class="faq-a" id="faq-a1">Il vous faut un permis de conduire valide depuis au moins 2 ans, être âgé de 21 ans minimum, et présenter une pièce d'identité ainsi qu'un justificatif de domicile. Une caution par carte bancaire est demandée à la remise des clés, dont le montant dépend du véhicule.</p>
     </div>
-    <div class="faq-item" role="listitem">
-      <div class="faq-q" onclick="faqToggle(this.parentElement)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){faqToggle(this.parentElement);event.preventDefault()}">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faqToggle(this.parentElement)" aria-expanded="false" aria-controls="faq-a2">
         <span class="faq-qt">Dans quelles zones livrez-vous les véhicules ?</span>
         <div class="faq-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
-      </div>
-      <p class="faq-a">Nous livrons partout en Auvergne-Rhône-Alpes : Lyon, Clermont-Ferrand, Grenoble, Saint-Étienne, Annecy, Chambéry, Vichy, Moulins, et toutes les communes de la région. Les frais de livraison sont de 49 € forfaitaires, quelle que soit la distance.</p>
+      </button>
+      <p class="faq-a" id="faq-a2">Nous livrons partout en Auvergne-Rhône-Alpes : Lyon, Clermont-Ferrand, Grenoble, Saint-Étienne, Annecy, Chambéry, Vichy, Moulins, et toutes les communes de la région. Les frais de livraison sont de 49 € forfaitaires, quelle que soit la distance.</p>
     </div>
-    <div class="faq-item" role="listitem">
-      <div class="faq-q" onclick="faqToggle(this.parentElement)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){faqToggle(this.parentElement);event.preventDefault()}">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faqToggle(this.parentElement)" aria-expanded="false" aria-controls="faq-a3">
         <span class="faq-qt">L'assurance est-elle incluse dans le tarif ?</span>
         <div class="faq-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
-      </div>
-      <p class="faq-a">Oui, tous nos tarifs incluent l'assurance tous risques. Vous conduisez l'esprit tranquille. Une franchise reste à la charge du conducteur en cas de sinistre — son montant vous est communiqué lors de la confirmation de réservation.</p>
+      </button>
+      <p class="faq-a" id="faq-a3">Oui, tous nos tarifs incluent l'assurance tous risques. Vous conduisez l'esprit tranquille. Une franchise reste à la charge du conducteur en cas de sinistre, son montant vous est communiqué lors de la confirmation de réservation.</p>
     </div>
-    <div class="faq-item" role="listitem">
-      <div class="faq-q" onclick="faqToggle(this.parentElement)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){faqToggle(this.parentElement);event.preventDefault()}">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faqToggle(this.parentElement)" aria-expanded="false" aria-controls="faq-a4">
         <span class="faq-qt">Puis-je annuler ou modifier ma réservation ?</span>
         <div class="faq-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
-      </div>
-      <p class="faq-a">Annulation et modification gratuites jusqu'à 48h avant la date de prise en charge. Au-delà, des frais peuvent s'appliquer. Pour toute demande, contactez-nous à contact@beloc.fr — nous répondons dans la journée.</p>
+      </button>
+      <p class="faq-a" id="faq-a4">Annulation et modification gratuites jusqu'à 48h avant la date de prise en charge. Au-delà, des frais peuvent s'appliquer. Pour toute demande, contactez-nous à contact@beloc.fr, nous répondons dans la journée.</p>
     </div>
-    <div class="faq-item" role="listitem">
-      <div class="faq-q" onclick="faqToggle(this.parentElement)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){faqToggle(this.parentElement);event.preventDefault()}">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faqToggle(this.parentElement)" aria-expanded="false" aria-controls="faq-a5">
         <span class="faq-qt">Y a-t-il une limite de kilométrage ?</span>
         <div class="faq-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
-      </div>
-      <p class="faq-a">Chaque véhicule dispose d'un forfait kilométrique journalier, détaillé dans la confirmation de réservation. Les kilomètres supplémentaires sont facturés à un tarif fixe selon le véhicule — toujours communiqué clairement avant la location.</p>
+      </button>
+      <p class="faq-a" id="faq-a5">Chaque véhicule dispose d'un forfait kilométrique journalier, détaillé dans la confirmation de réservation. Les kilomètres supplémentaires sont facturés à un tarif fixe selon le véhicule, toujours communiqué clairement avant la location.</p>
     </div>
   </div>
 </section>
@@ -955,9 +955,19 @@ function updateStepper(){
   for(var i=1;i<=3;i++){
     var item=document.getElementById('si'+i),dot=item.querySelector('.si-dot');
     item.classList.remove('active','done');
-    if(i<S.step){item.classList.add('done');dot.innerHTML=chk;}
-    else if(i===S.step){item.classList.add('active');dot.textContent=i;}
-    else{dot.textContent=i;}
+    if(i<S.step){
+      item.classList.add('done');dot.innerHTML=chk;
+      item.setAttribute('tabindex','0');
+      item.setAttribute('aria-disabled','false');
+    }else if(i===S.step){
+      item.classList.add('active');dot.textContent=i;
+      item.setAttribute('tabindex','0');
+      item.setAttribute('aria-disabled','false');
+    }else{
+      dot.textContent=i;
+      item.setAttribute('tabindex',i<=S.max?'0':'-1');
+      item.setAttribute('aria-disabled',i>S.max?'true':'false');
+    }
   }
 }
 function goto(n){if(n>S.max||n===S.step)return;S.step=n;show(n);}
@@ -992,7 +1002,9 @@ function nxt(){
 function prv(){if(S.step>1){S.step--;show(S.step);}}
 function vd(){
   var ok=true;
+  var today=new Date();today.setHours(0,0,0,0);
   if(!S.d0){se('ds');ok=false;}
+  else if(new Date(S.d0+'T12:00')<today){se('ds');ok=false;}
   if(!S.d1||days()<1){se('de');ok=false;}
   return ok;
 }
@@ -1034,12 +1046,19 @@ function sub(){
   /* TODO: remplacer XXXXXXXX par l'ID Formspree (créer un formulaire sur formspree.io) */
   var FORM_ENDPOINT='https://formspree.io/f/XXXXXXXX';
 
-  function showConf(){
+  function showConf(mode){
     document.querySelectorAll('.panel,.stepper,.tband').forEach(function(el){el.style.display='none';});
     document.getElementById('cimg').src=v.img;
     document.getElementById('cimg').alt=v.brand+' '+v.name;
     document.getElementById('cname').textContent=v.brand+' '+v.name;
     document.getElementById('cdet').textContent=fd(S.d0)+' → '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
+    if(mode==='mailto'){
+      document.getElementById('conf-title').textContent='Email pré-rempli ouvert';
+      document.getElementById('conf-msg').textContent='Votre messagerie s\'est ouverte avec votre demande. Envoyez l\'email pour finaliser la réservation.';
+    }else{
+      document.getElementById('conf-title').textContent='Demande envoyée !';
+      document.getElementById('conf-msg').textContent='Votre demande a bien été reçue. Nous vous confirmons la disponibilité sous 2h.';
+    }
     document.getElementById('conf').classList.add('show');
     document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
   }
@@ -1047,7 +1066,7 @@ function sub(){
     var s=encodeURIComponent('Réservation BeLoc — '+v.brand+' '+v.name+' — '+fd(S.d0));
     var b=encodeURIComponent('Prénom : '+fn+'\nNom : '+ln+'\nEmail : '+em+'\nTéléphone : '+ph+'\n\nVéhicule : '+v.brand+' '+v.name+'\nDates : '+fd(S.d0)+' → '+fd(S.d1)+'\nDurée : '+d+' jour'+(d>1?'s':'')+'\nOptions : '+(opts.length?opts.join(', '):'Aucune')+'\nTotal estimé : '+fmt(total())+'\n\n---\nEnvoyé depuis beloc.fr');
     window.location.href='mailto:contact@beloc.fr?subject='+s+'&body='+b;
-    showConf();
+    showConf('mailto');
   }
 
   if(FORM_ENDPOINT.indexOf('XXXXXXXX')>-1){mailtoFallback();return;}
@@ -1065,7 +1084,7 @@ function sub(){
       options:opts.length?opts.join(', '):'Aucune',
       total:fmt(total())
     })
-  }).then(function(){showConf();}).catch(function(){mailtoFallback();});
+  }).then(function(){showConf('form');}).catch(function(){mailtoFallback();});
 }
 function fmt(n){return n.toLocaleString('fr-FR')+' €';}
 function fd(s){if(!s)return '-';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
@@ -1300,7 +1319,17 @@ if('serviceWorker' in navigator){
 }
 
 function faqToggle(el){
-  el.classList.toggle('open');
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(item){
+    item.classList.remove('open');
+    var btn=item.querySelector('.faq-q');
+    if(btn)btn.setAttribute('aria-expanded','false');
+  });
+  if(!isOpen){
+    el.classList.add('open');
+    var btn=el.querySelector('.faq-q');
+    if(btn)btn.setAttribute('aria-expanded','true');
+  }
 }
 
 function mwCheck(){
