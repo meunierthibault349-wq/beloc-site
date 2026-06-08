@@ -1,42 +1,42 @@
 /* ============================================================
    BeLoc — Design System
-   Blanc · marine profond · or champagne — premium sobre
+   Blanc lumineux · orange vif · crème chaud
    Display: Space Grotesk · UI: Inter
    ============================================================ */
 
 :root {
-  /* Surfaces — blanc pur vers gris clair */
+  /* Surfaces — blanc et crème chauds, lumineux */
   --ink-1000: #FFFFFF;
   --ink-900:  #FFFFFF;   /* fond principal */
-  --ink-850:  #F7F7F5;   /* sections légèrement teintées */
-  --ink-800:  #EFEFED;   /* cards, panneaux */
-  --ink-750:  #E5E5E3;   /* hover, inputs */
-  --ink-700:  #D5D5D3;
-  --ink-650:  #C2C2C0;
-  --ink-600:  #ADADAB;
+  --ink-850:  #FAF7F2;   /* papier chaud */
+  --ink-800:  #F3EAE0;   /* crème doux */
+  --ink-750:  #E8DDD0;   /* crème moyen */
+  --ink-700:  #D8CCBC;
+  --ink-650:  #C2B4A4;
+  --ink-600:  #AAA090;
 
-  /* Texte — sombre sur clair */
-  --bone:     #111110;
-  --bone-dim: #444442;
-  --muted:    #767674;
-  --muted-2:  #9E9E9C;
+  /* Texte — brun chaud, jamais froid */
+  --bone:     #1C1A15;
+  --bone-dim: #3C3930;
+  --muted:    #7A7060;
+  --muted-2:  #A09A8E;
 
-  /* Lines — rgba sombre */
-  --line:        rgba(0,0,0,.10);
-  --line-soft:   rgba(0,0,0,.06);
-  --line-strong: rgba(0,0,0,.18);
+  /* Lines — chaud */
+  --line:        rgba(0,0,0,.08);
+  --line-soft:   rgba(0,0,0,.05);
+  --line-strong: rgba(0,0,0,.14);
 
-  /* Or champagne — accent luxe, icônes, soulignements */
-  --gold:      #B99750;
-  --gold-soft: #D4AF68;
-  --gold-deep: #8A7030;
-  --gold-glow: rgba(185,151,80,.09);
+  /* Orange — accent principal et accents décoratifs */
+  --gold:      #FF5C00;
+  --gold-soft: #FF7E33;
+  --gold-deep: #CC4400;
+  --gold-glow: rgba(255,92,0,.10);
 
-  /* Bleu cobalt — couleur d'action, CTA exclusif */
-  --red:      #2562A8;
-  --red-hi:   #3375C0;
-  --red-deep: #184280;
-  --red-glow: rgba(37,98,168,.20);
+  /* Orange — CTA, même famille */
+  --red:      #FF5C00;
+  --red-hi:   #FF7E33;
+  --red-deep: #CC4400;
+  --red-glow: rgba(255,92,0,.20);
 
   /* Fonts */
   --serif: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -452,8 +452,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Devis estimé */
 .ftr-devis {
-  border-radius: var(--radius); border: 1px solid rgba(37,98,168,.32);
-  background: rgba(37,98,168,.10); margin-bottom: 14px; overflow: hidden;
+  border-radius: var(--radius); border: 1px solid rgba(255,92,0,.28);
+  background: rgba(255,92,0,.09); margin-bottom: 14px; overflow: hidden;
 }
 .ftr-devis-head {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -770,10 +770,10 @@ a { color: inherit; text-decoration: none; }
 .pm-n { display: block; font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--bone); line-height: 1; }
 .pm-l { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 
-/* ---------- Final CTA — panneau bleu ciel lumineux ---------- */
+/* ---------- Final CTA — panneau orange lumineux ---------- */
 .final-cta {
-  background: linear-gradient(145deg, #EEF4FD 0%, #E4EFF9 100%);
-  border: 1px solid rgba(37,98,168,.14);
+  background: linear-gradient(145deg, #FFF4EC 0%, #FFE8D5 100%);
+  border: 1px solid rgba(255,92,0,.16);
   border-radius: var(--radius-lg);
   text-align: center;
   padding: clamp(60px,8vw,100px) clamp(32px,6vw,80px);
@@ -783,7 +783,7 @@ a { color: inherit; text-decoration: none; }
 .final-cta-h .italic { color: var(--gold-deep); }
 .final-cta-actions { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
 .final-cta-phone { display: inline-flex; align-items: center; gap: 14px; color: var(--bone); text-decoration: none; }
-.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(37,98,168,.09); border: 1px solid rgba(37,98,168,.25); color: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, border-color .25s; }
+.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,92,0,.10); border: 1px solid rgba(255,92,0,.28); color: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, border-color .25s; }
 .final-cta-phone:hover .final-cta-phone-ic { background: var(--red); border-color: var(--red); color: #FFFFFF; }
 .final-cta-phone-ic svg { width: 20px; height: 20px; }
 .final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; }
@@ -796,10 +796,10 @@ a { color: inherit; text-decoration: none; }
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 980;
   background: #FFFFFF;
   border-top: 2px solid var(--red);
-  box-shadow: 0 -4px 40px -8px rgba(37,98,168,.14), 0 -1px 0 var(--line);
+  box-shadow: 0 -4px 40px -8px rgba(255,92,0,.12), 0 -1px 0 var(--line);
   transition: box-shadow .35s ease;
 }
-.resa-widget.open { box-shadow: 0 -8px 56px -8px rgba(37,98,168,.22); }
+.resa-widget.open { box-shadow: 0 -8px 56px -8px rgba(255,92,0,.20); }
 
 /* Barre compacte (toujours visible) */
 .resa-bar {
@@ -861,7 +861,7 @@ a { color: inherit; text-decoration: none; }
 .resa-est {
   display: flex; align-items: baseline; gap: 5px;
   padding: 9px 12px; border-radius: var(--radius);
-  background: rgba(37,98,168,.07); border: 1.5px solid rgba(37,98,168,.22);
+  background: rgba(255,92,0,.07); border: 1.5px solid rgba(255,92,0,.22);
 }
 .resa-est-price { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--red); }
 .resa-est-unit { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--muted); }
