@@ -301,14 +301,14 @@ a { color: inherit; text-decoration: none; }
     linear-gradient(85deg, rgba(10,10,9,.78) 0%, rgba(10,10,9,.22) 42%, transparent 70%);
 }
 /* Hero content — always white text over dark image overlay */
-.hero-content { position: relative; z-index: 2; width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter) clamp(54px, 8vh, 92px); color: #FFFFFF; }
+.hero-content { position: relative; z-index: 2; width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter) clamp(72px, 11vh, 120px); color: #FFFFFF; }
 .hero h1 { font-size: clamp(44px, 7.2vw, 104px); margin: 20px 0 0; line-height: 1.02; letter-spacing: -0.02em; }
-.hero-h1 { display: flex; flex-direction: column; }
+.hero-h1 { display: flex; flex-direction: column; gap: 0.04em; }
 .hero-h1 .l1 { display: block; max-width: 14ch; }
-.hero-h1 .l2 { display: block; color: var(--gold-soft); margin-top: 0.06em; }
+.hero-h1 .l2 { display: block; color: var(--gold-soft); }
 .hero-content .eyebrow { color: var(--gold-soft); }
 .hero-content .eyebrow::before { background: linear-gradient(90deg, var(--gold-soft), transparent); }
-.hero-sub { margin-top: 38px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+.hero-sub { margin-top: clamp(36px, 5vh, 56px); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .hero-sub .tlink { white-space: nowrap; color: rgba(255,255,255,.8); }
 .hero-sub .tlink:hover { color: var(--gold-soft); }
 .hero-sub .tlink::after { background: var(--gold-soft); }
@@ -350,15 +350,15 @@ a { color: inherit; text-decoration: none; }
 .vcard-fav:hover { color: var(--gold); border-color: var(--gold-deep); }
 .vcard-fav.on { color: var(--red); border-color: var(--red); }
 .vcard-fav svg { width: 17px; height: 17px; }
-.vcard-body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.vcard-body { padding: 28px 26px 28px; display: flex; flex-direction: column; gap: 20px; flex: 1; }
 .vcard-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
 .vcard-name { font-family: var(--serif); font-size: 27px; font-weight: 600; line-height: 1.04; }
 .vcard-brand { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; }
-.vcard-specs { display: flex; gap: 18px; flex-wrap: wrap; padding-top: 4px; border-top: 1px solid var(--line-soft); }
+.vcard-specs { display: flex; gap: 22px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--line-soft); }
 .vspec { display: flex; flex-direction: column; gap: 3px; }
 .vspec .v { font-family: var(--serif); font-size: 19px; font-weight: 600; }
 .vspec .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-2); }
-.vcard-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 6px; }
+.vcard-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; }
 .price { display: flex; align-items: baseline; gap: 5px; }
 .price .amt { font-family: var(--serif); font-size: 30px; font-weight: 600; }
 .price .per { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .04em; white-space: nowrap; }

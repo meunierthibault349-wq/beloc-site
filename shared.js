@@ -320,17 +320,20 @@ function Img(props) {
 
 /* ---------------- Header ---------------- */
 const NAV = [{
-  id: "home",
-  label: "Accueil"
-}, {
   id: "fleet",
   label: "La Flotte"
 }, {
-  id: "how",
-  label: "Comment ça marche"
+  id: "offers",
+  label: "Nos offres"
+}, {
+  id: "presence",
+  label: "Notre présence"
 }, {
   id: "about",
   label: "À propos"
+}, {
+  id: "contact",
+  label: "Contact"
 }];
 function Header(props) {
   const [scrolled, setScrolled] = useState(false);

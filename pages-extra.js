@@ -354,7 +354,404 @@ function AboutPage(props) {
     block: true
   }, "Envoyer le message"))))))));
 }
+function OffersPage(props) {
+  const B = window.BELOC;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "page pad-top"
+  }, /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Nos offres")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "display",
+    style: {
+      fontSize: "clamp(40px,6vw,88px)",
+      margin: "16px 0 18px"
+    }
+  }, "Une formule", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    className: "italic",
+    style: {
+      color: "var(--gold-soft)"
+    }
+  }, "pour chaque aventure."))), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 2
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "lede"
+  }, "Journ\xE9e, week-end ou semaine \u2014 chaque mod\xE8le est disponible dans les trois formules. Assurance tous risques et assistance 7j/7 incluses dans chaque tarif.")))), /*#__PURE__*/React.createElement("section", {
+    className: "section-tight"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "offers-grid"
+  }, B.vehicles.map(function (v) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "offer-card",
+      key: v.id
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "offer-img"
+    }, /*#__PURE__*/React.createElement(Img, {
+      src: v.hero,
+      alt: v.full,
+      style: {
+        width: "100%",
+        height: "100%",
+        objectFit: "cover"
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "offer-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "offer-title"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "mono-label"
+    }, v.brand), /*#__PURE__*/React.createElement("h3", {
+      className: "serif offer-name"
+    }, v.name), v.isNew && /*#__PURE__*/React.createElement("span", {
+      className: "badge badge-new",
+      style: {
+        marginLeft: "auto"
+      }
+    }, "Nouveau"), v.sport && !v.isNew && /*#__PURE__*/React.createElement("span", {
+      className: "badge badge-sport",
+      style: {
+        marginLeft: "auto"
+      }
+    }, v.type)), /*#__PURE__*/React.createElement("div", {
+      className: "offer-prices"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "offer-price"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "label"
+    }, "Journ\xE9e"), /*#__PURE__*/React.createElement("span", {
+      className: "amount"
+    }, v.prices.day, " \u20AC")), /*#__PURE__*/React.createElement("div", {
+      className: "offer-price feat"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "label"
+    }, "Week-end"), /*#__PURE__*/React.createElement("span", {
+      className: "amount"
+    }, v.prices.weekend, " \u20AC")), /*#__PURE__*/React.createElement("div", {
+      className: "offer-price"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "label"
+    }, "Semaine"), /*#__PURE__*/React.createElement("span", {
+      className: "amount"
+    }, v.prices.week, " \u20AC"))), /*#__PURE__*/React.createElement(Button, {
+      block: true,
+      onClick: function () {
+        props.nav("booking", {
+          vehicleId: v.id
+        });
+      }
+    }, "R\xE9server ce v\xE9hicule")));
+  }))))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "shead"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Toujours inclus")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(30px,4vw,54px)"
+    }
+  }, "Sans surprise,", /*#__PURE__*/React.createElement("br", null), "sans ast\xE9risque.")))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "assure"
+  }, [{
+    ic: Icons.shield,
+    t: "Assurance tous risques",
+    p: "Incluse dans chaque location. Franchise réductible en option au moment de réserver."
+  }, {
+    ic: Icons.headset,
+    t: "Assistance 7j/7",
+    p: "Un imprévu sur la route ? Notre équipe est joignable à toute heure, toute la semaine."
+  }, {
+    ic: Icons.infinity,
+    t: "Annulation gratuite",
+    p: "Jusqu'à 48h avant le départ — sans frais, sans justification, remboursement immédiat."
+  }].map(function (a, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "assure-item",
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ic"
+    }, a.ic), /*#__PURE__*/React.createElement("h4", null, a.t), /*#__PURE__*/React.createElement("p", null, a.p));
+  }))))), /*#__PURE__*/React.createElement("section", {
+    className: "section-tight",
+    style: {
+      paddingBottom: "clamp(64px,9vw,132px)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Options \xE0 la carte")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(28px,3.5vw,48px)",
+      margin: "16px 0 32px"
+    }
+  }, "Personnalisez votre exp\xE9rience.")), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "options-list"
+  }, [{
+    t: "Conducteur supplémentaire",
+    p: "+15 €/jour · Partagez le volant — même couverture assurance."
+  }, {
+    t: "GPS premium",
+    p: "+8 €/jour · Navigation temps réel, mises à jour garanties, support offline."
+  }, {
+    t: "Livraison à domicile",
+    p: "+49 € · On amène le véhicule à l'adresse de votre choix dans toute la région."
+  }, {
+    t: "Réduction de franchise",
+    p: "À partir de +19 €/jour · Roulez sans retenue, sans arrière-pensée."
+  }].map(function (o, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "option-item",
+      key: i
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "option-title"
+    }, o.t), /*#__PURE__*/React.createElement("div", {
+      className: "option-price"
+    }, o.p));
+  }))))));
+}
+function PresencePage(props) {
+  const B = window.BELOC;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "page pad-top"
+  }, /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Notre pr\xE9sence")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "display",
+    style: {
+      fontSize: "clamp(40px,6vw,88px)",
+      margin: "16px 0 18px"
+    }
+  }, "L'Auvergne-Rh\xF4ne-Alpes,", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    className: "italic",
+    style: {
+      color: "var(--gold-soft)"
+    }
+  }, "\xE0 port\xE9e de volant."))), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 2
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "lede"
+  }, "BeLoc livre et r\xE9cup\xE8re vos v\xE9hicules dans toute la r\xE9gion \u2014 \xE0 domicile, en gare, \xE0 l'a\xE9roport ou \xE0 l'h\xF4tel. Une seule r\xE8gle : c'est nous qui venons \xE0 vous.")))), /*#__PURE__*/React.createElement("section", {
+    className: "section-tight"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Villes desservies")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(30px,4vw,52px)",
+      margin: "16px 0 32px"
+    }
+  }, B.cities.length, " villes,", /*#__PURE__*/React.createElement("br", null), "1 000+ points de remise.")), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "cities-grid"
+  }, B.cities.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "city-card",
+      key: c
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "city-num"
+    }, "0", i + 1), /*#__PURE__*/React.createElement("span", {
+      className: "city-name"
+    }, c), /*#__PURE__*/React.createElement("span", {
+      className: "city-arrow"
+    }, Icons.chevR));
+  }))))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "presence-info"
+  }, [{
+    ic: Icons.pin,
+    t: "Livraison à l'adresse de votre choix",
+    p: "Pour 49 €, nous livrons le véhicule où vous le souhaitez : domicile, gare, aéroport, hôtel. Le retour se fait au même endroit, à l'heure convenue."
+  }, {
+    ic: Icons.clock,
+    t: "Disponible 7j/7",
+    p: "Réservez au minimum 24h à l'avance. Nous confirmons le créneau de livraison par SMS dans l'heure. En cas d'urgence, notre conciergerie vous répond directement."
+  }, {
+    ic: Icons.shield,
+    t: "Couverture régionale complète",
+    p: "Toute la région Auvergne-Rhône-Alpes est couverte. Pour les demandes hors-région ou les événements spéciaux, contactez-nous — nous étudions chaque cas."
+  }].map(function (b, i) {
+    return /*#__PURE__*/React.createElement(Reveal, {
+      key: i,
+      delay: i
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "presence-block"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "presence-ic"
+    }, b.ic), /*#__PURE__*/React.createElement("h3", null, b.t), /*#__PURE__*/React.createElement("p", null, b.p)));
+  }))))), /*#__PURE__*/React.createElement("section", {
+    className: "section-tight",
+    style: {
+      paddingBottom: "clamp(64px,9vw,132px)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "cta-banner",
+    style: {
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "display",
+    style: {
+      margin: "0 0 26px"
+    }
+  }, "On vient \xE0 vous. O\xF9 vous voulez."), /*#__PURE__*/React.createElement(Button, {
+    size: "lg",
+    onClick: function () {
+      props.nav("fleet");
+    }
+  }, "Choisir un v\xE9hicule"))))));
+}
+function ContactPage(props) {
+  const B = window.BELOC;
+  const [sent, setSent] = useState(false);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "page pad-top"
+  }, /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "contact-grid"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(Eyebrow, null, "Contact")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "display",
+    style: {
+      fontSize: "clamp(36px,5vw,72px)",
+      margin: "16px 0 24px"
+    }
+  }, "Parlons de votre", /*#__PURE__*/React.createElement("br", null), "prochain trajet.")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 2
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "lede",
+    style: {
+      marginBottom: 32
+    }
+  }, "Une demande particuli\xE8re, un \xE9v\xE9nement, une question sur un mod\xE8le ? Notre conciergerie vous r\xE9pond sous quelques minutes, 7j/7.")), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 2
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "contact-info-item"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ic"
+  }, Icons.phone), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "t"
+  }, B.phone), /*#__PURE__*/React.createElement("div", {
+    className: "s"
+  }, "Assistance & conciergerie \xB7 7j/7"))), /*#__PURE__*/React.createElement("div", {
+    className: "contact-info-item"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ic"
+  }, Icons.mail), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "t"
+  }, B.email), /*#__PURE__*/React.createElement("div", {
+    className: "s"
+  }, "R\xE9ponse sous quelques minutes"))), /*#__PURE__*/React.createElement("div", {
+    className: "contact-info-item"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ic"
+  }, Icons.pin), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "t"
+  }, B.region), /*#__PURE__*/React.createElement("div", {
+    className: "s"
+  }, "Livraison dans toute la r\xE9gion")))))), /*#__PURE__*/React.createElement(Reveal, {
+    delay: 1
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "var(--ink-800)",
+      border: "1px solid var(--line)",
+      borderRadius: 8,
+      padding: "clamp(24px,3vw,36px)"
+    }
+  }, sent ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      padding: "30px 0"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "confirm-check",
+    style: {
+      width: 64,
+      height: 64,
+      marginBottom: 22
+    }
+  }, Icons.check), /*#__PURE__*/React.createElement("h3", {
+    className: "serif",
+    style: {
+      fontSize: 28,
+      fontWeight: 600,
+      margin: "0 0 10px"
+    }
+  }, "Message envoy\xE9."), /*#__PURE__*/React.createElement("p", {
+    className: "oc-s"
+  }, "On revient vers vous tr\xE8s vite."), /*#__PURE__*/React.createElement(Button, {
+    variant: "ghost",
+    icon: false,
+    onClick: function () {
+      setSent(false);
+    },
+    style: {
+      marginTop: 18
+    }
+  }, "Nouveau message")) : /*#__PURE__*/React.createElement("form", {
+    onSubmit: function (e) {
+      e.preventDefault();
+      setSent(true);
+      props.toast && props.toast("Message envoyé !");
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "field-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", null, "Pr\xE9nom"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    placeholder: "Camille"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", null, "Nom"), /*#__PURE__*/React.createElement("input", {
+    required: true,
+    placeholder: "Roux"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", null, "Email"), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    required: true,
+    placeholder: "camille@email.fr"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", null, "Sujet"), /*#__PURE__*/React.createElement("select", null, /*#__PURE__*/React.createElement("option", null, "Une question sur un v\xE9hicule"), /*#__PURE__*/React.createElement("option", null, "Une demande pour un \xE9v\xE9nement"), /*#__PURE__*/React.createElement("option", null, "R\xE9server une livraison"), /*#__PURE__*/React.createElement("option", null, "Autre"))), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", null, "Message"), /*#__PURE__*/React.createElement("textarea", {
+    rows: "4",
+    required: true,
+    placeholder: "Dis-nous tout\u2026"
+  })), /*#__PURE__*/React.createElement(Button, {
+    type: "submit",
+    block: true
+  }, "Envoyer le message"))))))));
+}
 Object.assign(window, {
   HowPage,
-  AboutPage
+  AboutPage,
+  OffersPage,
+  PresencePage,
+  ContactPage
 });

@@ -49,7 +49,14 @@ function App() {
     toast: toast
   });else if (route === "how") page = /*#__PURE__*/React.createElement(HowPage, {
     nav: nav
+  });else if (route === "offers") page = /*#__PURE__*/React.createElement(OffersPage, {
+    nav: nav
+  });else if (route === "presence") page = /*#__PURE__*/React.createElement(PresencePage, {
+    nav: nav
   });else if (route === "about") page = /*#__PURE__*/React.createElement(AboutPage, {
+    nav: nav,
+    toast: toast
+  });else if (route === "contact") page = /*#__PURE__*/React.createElement(ContactPage, {
     nav: nav,
     toast: toast
   });else page = /*#__PURE__*/React.createElement(HomePage, {
