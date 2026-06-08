@@ -189,6 +189,22 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-dd-opt:last-child{border-bottom:none}
 .mw-dd-opt:active{background:#F5F5F5}
 .mw-dd-opt.mw-on{color:var(--gold);font-weight:700}
+/* ---- Calendrier custom ---- */
+.mw-cal{position:fixed;left:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.2);z-index:300;padding:16px}
+.mw-cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.mw-cal-mo{font-family:var(--fh);font-size:15px;font-weight:700;color:#1C1A15}
+.mw-cal-nav{width:32px;height:32px;border:none;background:#F3F3F5;border-radius:8px;font-size:18px;cursor:pointer;color:#1C1A15;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+.mw-cal-nav:active{background:#E8E8E8}
+.mw-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.mw-cal-dow{font-family:var(--fb);font-size:9px;font-weight:700;color:#bbb;text-align:center;padding:4px 0;letter-spacing:.4px;text-transform:uppercase}
+.mw-cal-d{font-family:var(--fh);font-size:13px;font-weight:500;color:#1C1A15;border:none;background:transparent;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:6px;aspect-ratio:1;width:100%;display:flex;align-items:center;justify-content:center;transition:background .1s}
+.mw-cal-d:active:not(:disabled){background:#F3F3F5}
+.mw-cal-d:disabled{color:#D8D8D8;cursor:default}
+.mw-cal-d.mw-busy:disabled{color:#E8BCBA;text-decoration:line-through}
+.mw-cal-d.mw-sel{background:var(--gold);color:#1C1A15;font-weight:700}
+.mw-cal-leg{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06)}
+.mw-cal-li{display:flex;align-items:center;gap:5px;font-family:var(--fb);font-size:10px;color:#888}
+.mw-cal-li i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 .footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:40px 24px calc(max(36px,env(safe-area-inset-bottom,0px) + 24px))}
 .fl-logo{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--t1);margin-bottom:6px}
 .fl-line{font-family:var(--fb);font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:28px}
@@ -215,10 +231,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       <span class="mw-val mw-ph" id="mw-veh-txt">Tous</span>
     </div>
     <div class="mw-sp"></div>
-    <div class="mw-field">
+    <div class="mw-field" onclick="mwShowCal(this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Départ</span>
       <span class="mw-val mw-ph" id="mw-d0-txt">Date</span>
-      <input type="date" id="mw-d0" class="mw-sel" onchange="mwDateChange(this)" aria-label="Date de départ" />
     </div>
     <div class="mw-sp"></div>
     <div class="mw-field">
@@ -649,12 +664,82 @@ function mwHideDD(){
   if(mwDD){mwDD.ov.remove();mwDD.panel.remove();mwDD=null;}
 }
 
-function mwDateChange(input){
-  MW.d0=input.value||null;
+/* ---- Calendrier ---- */
+var mwCal=null;
+var mwCalView={y:new Date().getFullYear(),m:new Date().getMonth()};
+var MW_MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+var MW_DOW=['L','M','M','J','V','S','D'];
+
+function mwBusySet(seed){
+  var s={};var x=seed*9301+49297;
+  for(var i=0;i<8;i++){x=(x*233280+49297)%233281;s[(x%27)+1]=true;}
+  return s;
+}
+function mwGetBusy(){
+  if(!MW.vid)return{};
+  var v=V.find(function(x){return x.id===MW.vid;});
+  return v?mwBusySet((v.brand+' '+v.name).length):{};
+}
+function mwShowCal(anchor){
+  mwHideCal();mwHideDD();
+  mwCalView={y:new Date().getFullYear(),m:new Date().getMonth()};
+  var top=(document.getElementById('hdr').getBoundingClientRect().bottom||56)+6;
+  var ov=document.createElement('div');ov.className='mw-dd-ov';ov.onclick=mwHideCal;
+  var panel=document.createElement('div');panel.className='mw-cal';panel.style.top=top+'px';
+  document.body.appendChild(ov);document.body.appendChild(panel);
+  mwCal={ov:ov,panel:panel};
+  mwBuildCal();
+}
+function mwHideCal(){
+  if(mwCal){mwCal.ov.remove();mwCal.panel.remove();mwCal=null;}
+}
+function mwBuildCal(){
+  if(!mwCal)return;
+  var y=mwCalView.y,m=mwCalView.m;
+  var today=new Date();
+  var busy=mwGetBusy();
+  var isThisMonth=(y===today.getFullYear()&&m===today.getMonth());
+  var startDow=(new Date(y,m,1).getDay()+6)%7;
+  var daysInMonth=new Date(y,m+1,0).getDate();
+  var selY=MW.d0?parseInt(MW.d0.split('-')[0]):null;
+  var selM=MW.d0?parseInt(MW.d0.split('-')[1])-1:null;
+  var selD=MW.d0?parseInt(MW.d0.split('-')[2]):null;
+
+  var h='<div class="mw-cal-hd">';
+  h+='<button class="mw-cal-nav" onclick="mwNavCal(-1)">‹</button>';
+  h+='<span class="mw-cal-mo">'+MW_MONTHS[m]+' '+y+'</span>';
+  h+='<button class="mw-cal-nav" onclick="mwNavCal(1)">›</button>';
+  h+='</div><div class="mw-cal-grid">';
+  MW_DOW.forEach(function(d){h+='<div class="mw-cal-dow">'+d+'</div>';});
+  for(var i=0;i<startDow;i++)h+='<button class="mw-cal-d" disabled style="visibility:hidden"></button>';
+  for(var d=1;d<=daysInMonth;d++){
+    var past=(y<today.getFullYear())||(y===today.getFullYear()&&m<today.getMonth())||(isThisMonth&&d<today.getDate());
+    var bz=isThisMonth&&busy[d];
+    var sel=selY===y&&selM===m&&selD===d;
+    var cls='mw-cal-d'+(sel?' mw-sel':'')+(bz?' mw-busy':'');
+    h+='<button class="'+cls+'"'+(past||bz?' disabled':'')+' onclick="mwPickDate('+d+','+y+','+m+')">'+d+'</button>';
+  }
+  h+='</div>';
+  if(MW.vid){
+    h+='<div class="mw-cal-leg">';
+    h+='<div class="mw-cal-li"><i style="background:var(--gold)"></i>Sélectionné</div>';
+    h+='<div class="mw-cal-li"><i style="background:#F4D0CE"></i>Indisponible</div>';
+    h+='</div>';
+  }
+  mwCal.panel.innerHTML=h;
+}
+function mwNavCal(delta){
+  mwCalView.m+=delta;
+  if(mwCalView.m<0){mwCalView.m=11;mwCalView.y--;}
+  if(mwCalView.m>11){mwCalView.m=0;mwCalView.y++;}
+  mwBuildCal();
+}
+function mwPickDate(d,y,m){
+  var mm=String(m+1).padStart(2,'0'),dd=String(d).padStart(2,'0');
+  MW.d0=y+'-'+mm+'-'+dd;
   var el=document.getElementById('mw-d0-txt');
-  if(MW.d0){var p=MW.d0.split('-');el.textContent=p[2]+'/'+p[1]+'/'+p[0];el.classList.remove('mw-ph');}
-  else{el.textContent='Choisir';el.classList.add('mw-ph');}
-  mwRecalc();
+  el.textContent=dd+'/'+mm+'/'+y;el.classList.remove('mw-ph');
+  mwRecalc();mwHideCal();
 }
 
 function mwRecalc(){
