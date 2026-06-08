@@ -338,6 +338,45 @@ const NAV = [{
 function Header(props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  var _r1 = useState("");
+  var drVehicle = _r1[0];
+  var setDrVehicle = _r1[1];
+  var _r2 = useState("day");
+  var drDur = _r2[0];
+  var setDrDur = _r2[1];
+  var _r3 = useState("");
+  var drDate = _r3[0];
+  var setDrDate = _r3[1];
+  var drDurMap = {
+    day: 1,
+    weekend: 2,
+    week: 7
+  };
+  var drDurLabels = {
+    day: "À la journée",
+    weekend: "Week-end",
+    week: "À la semaine"
+  };
+  var drDateTo = "";
+  if (drDate) {
+    try {
+      var _dt = new Date(drDate + "T12:00");
+      _dt.setDate(_dt.getDate() + (drDurMap[drDur] || 1));
+      drDateTo = _dt.toISOString().split("T")[0];
+    } catch (_ex) {}
+  }
+  function fmtDr(iso) {
+    if (!iso) return null;
+    try {
+      return new Date(iso + "T12:00").toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "short"
+      });
+    } catch (_ex) {
+      return null;
+    }
+  }
+  var drToday = new Date().toISOString().split("T")[0];
   useEffect(function () {
     const onScroll = function () {
       setScrolled(window.scrollY > 24);
@@ -421,13 +460,93 @@ function Header(props) {
     }, "0", i + 1));
   })), /*#__PURE__*/React.createElement("div", {
     className: "drawer-foot"
-  }, /*#__PURE__*/React.createElement(Button, {
-    block: true,
-    size: "lg",
-    onClick: function () {
-      go("fleet");
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-fields"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-lbl"
+  }, "Dur\xE9e"), /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-val"
+  }, drDurLabels[drDur]), /*#__PURE__*/React.createElement("select", {
+    className: "drawer-resa-sel",
+    value: drDur,
+    onChange: function (e) {
+      setDrDur(e.target.value);
     }
-  }, "R\xE9server un v\xE9hicule"), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "day"
+  }, "\xC0 la journ\xE9e"), /*#__PURE__*/React.createElement("option", {
+    value: "weekend"
+  }, "Week-end"), /*#__PURE__*/React.createElement("option", {
+    value: "week"
+  }, "\xC0 la semaine"))), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-sep"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-lbl"
+  }, "V\xE9hicule"), /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-val"
+  }, drVehicle && B.byId(drVehicle) ? B.byId(drVehicle).name : "Tous les véhicules"), /*#__PURE__*/React.createElement("select", {
+    className: "drawer-resa-sel",
+    value: drVehicle,
+    onChange: function (e) {
+      setDrVehicle(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Tous les v\xE9hicules"), B.vehicles.map(function (v) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: v.id,
+      value: v.id
+    }, v.full);
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-divider"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-lbl"
+  }, "Date de d\xE9part"), /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-val"
+  }, fmtDr(drDate) || "Choisir une date"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    className: "drawer-resa-sel",
+    value: drDate,
+    min: drToday,
+    onChange: function (e) {
+      setDrDate(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-sep"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "drawer-resa-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-lbl"
+  }, "Date de retour"), /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-val"
+  }, fmtDr(drDateTo) || "Calculée auto.")))), /*#__PURE__*/React.createElement("button", {
+    className: "drawer-resa-btn",
+    onClick: function () {
+      setOpen(false);
+      if (drVehicle) {
+        props.nav("booking", {
+          id: drVehicle,
+          tier: drDur
+        });
+      } else {
+        props.nav("fleet");
+      }
+    }
+  }, "Continuer ", /*#__PURE__*/React.createElement("span", {
+    className: "drawer-resa-arrow"
+  }, "\u2192"))), /*#__PURE__*/React.createElement("span", {
     className: "hdr-phone",
     style: {
       display: "inline-flex"
