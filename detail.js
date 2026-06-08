@@ -115,7 +115,6 @@ function DetailPage(props) {
   const [active, setActive] = useState(0);
   const [tier, setTier] = useState("day");
   const [range, setRange] = useState(null);
-  const [showSticky, setShowSticky] = useState(false);
   const ctaRef = useRef(null);
   useEffect(function () {
     window.scrollTo(0, 0);
@@ -123,17 +122,6 @@ function DetailPage(props) {
     setTier("day");
     setRange(null);
   }, [props.params]);
-  useEffect(function () {
-    const onScroll = function () {
-      setShowSticky(window.scrollY > 600);
-    };
-    window.addEventListener("scroll", onScroll, {
-      passive: true
-    });
-    return function () {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
   if (!v) return /*#__PURE__*/React.createElement("div", {
     className: "page pad-top section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -501,22 +489,7 @@ function DetailPage(props) {
     className: "t"
   }, Icons.shield, " Assurance tous risques & assistance incluses"), /*#__PURE__*/React.createElement("div", {
     className: "t"
-  }, Icons.truck, " Livraison possible dans toute la r\xE9gion"))))))), /*#__PURE__*/React.createElement("div", {
-    className: "sticky-cta" + (showSticky ? " show" : "")
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "mono-label",
-    style: {
-      marginBottom: 2
-    }
-  }, v.full, " \xB7 ", tierObj.t), /*#__PURE__*/React.createElement("div", {
-    className: "serif",
-    style: {
-      fontSize: 26,
-      fontWeight: 600
-    }
-  }, eur(tierObj.price))), /*#__PURE__*/React.createElement(Button, {
-    onClick: goBook
-  }, "R\xE9server")));
+  }, Icons.truck, " Livraison possible dans toute la r\xE9gion"))))))));
 }
 Object.assign(window, {
   DetailPage,

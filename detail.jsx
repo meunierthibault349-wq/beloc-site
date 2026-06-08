@@ -76,16 +76,9 @@ function DetailPage(props) {
   const [active, setActive] = useState(0);
   const [tier, setTier] = useState("day");
   const [range, setRange] = useState(null);
-  const [showSticky, setShowSticky] = useState(false);
   const ctaRef = useRef(null);
 
   useEffect(function () { window.scrollTo(0, 0); setActive(0); setTier("day"); setRange(null); }, [props.params]);
-
-  useEffect(function () {
-    const onScroll = function () { setShowSticky(window.scrollY > 600); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return function () { window.removeEventListener("scroll", onScroll); };
-  }, []);
 
   if (!v) return <div className="page pad-top section"><div className="wrap">Véhicule introuvable.</div></div>;
 
@@ -262,14 +255,6 @@ function DetailPage(props) {
         </div>
       </section>
 
-      {/* sticky mobile CTA */}
-      <div className={"sticky-cta" + (showSticky ? " show" : "")}>
-        <div>
-          <div className="mono-label" style={{ marginBottom: 2 }}>{v.full} · {tierObj.t}</div>
-          <div className="serif" style={{ fontSize: 26, fontWeight: 600 }}>{eur(tierObj.price)}</div>
-        </div>
-        <Button onClick={goBook}>Réserver</Button>
-      </div>
     </div>
   );
 }

@@ -310,7 +310,7 @@ function ReservationWidget(props) {
       props.nav("fleet");
     }
   }
-  var cls = "resa-bar-widget" + (props.route === "detail" ? " resa-bar-widget--no-mobile" : "");
+  var cls = "resa-bar-widget";
   return /*#__PURE__*/React.createElement("form", {
     className: cls,
     onSubmit: handleSubmit
