@@ -32,7 +32,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 10px 0 14px;padding-top:env(safe-area-inset-top,0px);gap:8px;background:transparent;transition:background .25s}
 .hdr.stuck{background:rgba(10,10,12,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr)}
-.hdr-logo{font-family:var(--fh);font-weight:700;font-size:18px;color:#fff;letter-spacing:-.3px;flex-shrink:0;white-space:nowrap}
+.hdr-logo{font-family:var(--fh);font-weight:700;font-size:24px;color:#fff;letter-spacing:-.5px;flex-shrink:0;white-space:nowrap}
 .hero{position:relative;width:100%;height:100dvh;min-height:580px;background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;z-index:0}
 .hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(10,10,12,.55) 0%,rgba(10,10,12,.05) 28%,rgba(10,10,12,.62) 58%,rgba(10,10,12,.96) 88%)}
@@ -173,15 +173,15 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .rcx{font-family:var(--fb);font-size:13px;line-height:1.6;color:var(--t2);margin-bottom:10px}
 .rctag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;background:var(--goldd);color:var(--gold)}
 /* ---- Widget réservation intégré au header ---- */
-.mw-inner{flex:1;display:flex;align-items:stretch;height:36px;background:#fff;border-radius:8px;overflow:hidden;min-width:0;transition:opacity .2s}
+.mw-inner{flex:1;display:flex;align-items:stretch;height:30px;background:#fff;border-radius:7px;overflow:hidden;min-width:0;transition:opacity .2s}
 .mw-inner.mw-hide{opacity:0;pointer-events:none}
-.mw-field{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 7px;position:relative;min-width:0}
-.mw-lbl{font-family:var(--fb);font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#999;line-height:1;margin-bottom:2px}
-.mw-val{font-family:var(--fh);font-size:11px;font-weight:600;color:#1C1A15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
-.mw-ph{color:#bbb;font-weight:400}
+.mw-field{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 6px;position:relative;min-width:0}
+.mw-lbl{font-family:var(--fb);font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#aaa;line-height:1;margin-bottom:2px}
+.mw-val{font-family:var(--fh);font-size:10px;font-weight:600;color:#1C1A15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.mw-ph{color:#ccc;font-weight:400}
 .mw-sel{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;font-size:16px;border:none;background:transparent}
-.mw-sp{width:1px;background:rgba(0,0,0,.08);flex-shrink:0;margin:6px 0}
-.mw-btn{display:flex;align-items:center;justify-content:center;width:36px;min-width:36px;background:var(--gold);color:#1C1A15;font-size:16px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s;flex-shrink:0}
+.mw-sp{width:1px;background:rgba(0,0,0,.08);flex-shrink:0;margin:5px 0}
+.mw-btn{display:flex;align-items:center;justify-content:center;width:32px;min-width:32px;background:var(--gold);color:#1C1A15;font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s;flex-shrink:0}
 .mw-btn:active{background:#B8943D}
 .mw-dd-ov{position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.28)}
 .mw-dd{position:fixed;left:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:300;overflow:hidden}
@@ -219,7 +219,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 </head>
 <body>
 <header class="hdr" id="hdr" role="banner">
-  <a href="#hero" class="hdr-logo">BeLoc.</a>
+  <a href="#hero" class="hdr-logo">BeLoc<span style="color:var(--gold)">.</span></a>
   <div class="mw-inner" id="mw-inner" role="search" aria-label="Réservation rapide">
     <div class="mw-field" onclick="mwShowDD('dur',this)" style="cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent">
       <span class="mw-lbl">Durée</span>
