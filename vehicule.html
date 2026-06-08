@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A0A0C" />
+  <title id="pg-title">Véhicule — BeLoc Location Premium</title>
+  <meta id="pg-desc" name="description" content="Location premium en Auvergne-Rhône-Alpes." />
+  <link rel="canonical" id="pg-canonical" href="https://meunierthibault349-wq.github.io/beloc-site/vehicule.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230A0A0C'/><text y='75' x='8' font-size='72' font-weight='700' font-family='system-ui,sans-serif' fill='%23C9A96E'>B.</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%}
+button,a{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:root{
+  --bg:#0A0A0C;--bg1:#111114;--bg2:#18181C;
+  --bdr:rgba(255,255,255,.08);--bdhi:rgba(255,255,255,.16);
+  --gold:#C9A96E;--goldd:rgba(201,169,110,.12);
+  --red:#E8342A;--blue:#3B82F6;--green:#22C55E;
+  --t1:#FAFAFA;--t2:#A1A1AA;--t3:rgba(255,255,255,.28);
+  --fh:'Space Grotesk',-apple-system,sans-serif;
+  --fb:'Inter',-apple-system,sans-serif;
+  --rs:6px;--rm:12px;--rl:16px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 16px;gap:12px;background:rgba(10,10,12,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr)}
+.hdr-logo{font-family:var(--fh);font-weight:700;font-size:28px;color:#fff;letter-spacing:-.7px}
+.hdr-back{display:flex;align-items:center;gap:6px;font-family:var(--fb);font-size:13px;color:var(--t2);margin-left:auto}
+/* Hero */
+.v-hero{position:relative;width:100%;height:65dvh;min-height:360px;background:var(--bg2);margin-top:56px;overflow:hidden}
+.v-hero-img{width:100%;height:100%;object-fit:cover;object-position:center}
+.v-hero-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,12,.2) 0%,rgba(10,10,12,.7) 60%,rgba(10,10,12,1) 100%)}
+.v-hero-bot{position:absolute;bottom:0;left:0;right:0;padding:0 24px 28px}
+.v-badge{display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;font-family:var(--fb);font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.v-name{font-family:var(--fh);font-weight:700;font-size:clamp(34px,10vw,52px);line-height:1.02;letter-spacing:-1.5px;color:#fff}
+.v-brand{font-family:var(--fb);font-size:14px;color:var(--t2);margin-top:4px}
+/* Sections */
+.sec{padding:40px 24px}
+.sec-alt{padding:40px 24px;background:var(--bg1)}
+.ey{font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.st{font-family:var(--fh);font-weight:700;font-size:clamp(20px,5.5vw,26px);line-height:1.1;letter-spacing:-.3px;color:var(--t1)}
+/* Prix */
+.price-strip{display:flex;gap:10px;margin-top:22px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.price-strip::-webkit-scrollbar{display:none}
+.pc{flex-shrink:0;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);padding:16px 18px;text-align:center;min-width:100px}
+.pc-lbl{font-family:var(--fb);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--t2);margin-bottom:8px}
+.pc-price{font-family:var(--fh);font-weight:700;font-size:22px;color:var(--gold)}
+.pc-sub{font-family:var(--fb);font-size:11px;color:var(--t2);margin-top:3px}
+/* Specs */
+.specs-list{margin-top:20px;display:flex;flex-direction:column;gap:0}
+.spec-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--bdr)}
+.spec-row:last-child{border-bottom:none}
+.spec-ico{width:36px;height:36px;min-width:36px;border-radius:var(--rs);background:var(--goldd);display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.spec-lbl{font-family:var(--fb);font-size:12px;color:var(--t2)}
+.spec-val{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--t1);margin-top:1px}
+/* Description */
+.v-desc{font-family:var(--fb);font-size:15px;line-height:1.75;color:var(--t2)}
+/* CTA */
+.cta-section{padding:32px 24px;display:flex;flex-direction:column;gap:12px}
+.cta-main{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:56px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:16px;border:none;border-radius:var(--rm)}
+.cta-main:active{background:#B8943D}
+.cta-back{display:flex;align-items:center;justify-content:center;width:100%;height:44px;background:transparent;color:var(--t2);font-family:var(--fb);font-weight:500;font-size:13px;border:1.5px solid var(--bdr);border-radius:var(--rm)}
+/* Fleet mini */
+.fleet-mini{display:flex;gap:12px;padding:4px 24px 24px;overflow-x:scroll;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.fleet-mini::-webkit-scrollbar{display:none}
+.fmc{flex-shrink:0;width:58vw;max-width:210px;scroll-snap-align:start;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);overflow:hidden}
+.fmc-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2)}
+.fmc-body{padding:10px 12px 12px}
+.fmc-name{font-family:var(--fh);font-weight:700;font-size:14px;color:var(--t1)}
+.fmc-price{font-family:var(--fh);font-weight:600;font-size:13px;color:var(--gold);margin-top:4px}
+/* Footer */
+.footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:40px 24px calc(max(40px,env(safe-area-inset-bottom,0px)+24px));text-align:center}
+.footer-logo{font-family:var(--fh);font-weight:700;font-size:24px;color:var(--t1);margin-bottom:8px}
+.footer-sub{font-family:var(--fb);font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px}
+.footer-legal{font-family:var(--fb);font-size:12px;color:var(--t3)}
+.footer-legal a{color:var(--gold)}
+/* 404 */
+.not-found{padding:80px 24px;text-align:center}
+.nf-title{font-family:var(--fh);font-weight:700;font-size:28px;color:var(--t1);margin-bottom:8px}
+.nf-sub{font-family:var(--fb);font-size:14px;color:var(--t2);margin-bottom:28px}
+  </style>
+</head>
+<body>
+<header class="hdr">
+  <a href="index.html" class="hdr-logo">BeLoc<span style="color:var(--gold)">.</span></a>
+  <a href="index.html#fleet" class="hdr-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2L4 7l5 5"/></svg>
+    La flotte
+  </a>
+</header>
+
+<main id="main"></main>
+
+<footer class="footer">
+  <p class="footer-logo">BeLoc.</p>
+  <p class="footer-sub">Location premium 100 % en ligne · Auvergne-Rhône-Alpes</p>
+  <p class="footer-legal">2026 BeLoc · <a href="mentions-legales.html">Mentions légales</a> · <a href="index.html">Retour au site</a></p>
+</footer>
+
+<script>
+var V=[
+  {id:'rs3',   brand:'Audi',    name:'RS3',           year:'2025',type:'Sport',power:'355 ch',price:349,img:'assets/rs3-placeholder.svg',
+   desc:"La reine de la compacité extrême. L'Audi RS3 2025 délivre 355 chevaux dans un format qui passe partout. Quatre roues motrices, boîte DCT, 3,8 secondes pour avaler le 0-100. Conduire une RS3, c'est comprendre ce que \"sport\" veut vraiment dire.",
+   specs:[{ico:'⚡',lbl:'Puissance',val:'355 ch'},{ico:'🔧',lbl:'Moteur',val:'2.5 TFSI 5 cylindres'},{ico:'⏱',lbl:'0-100 km/h',val:'3,8 secondes'},{ico:'🔄',lbl:'Transmission',val:'Quattro 4×4'},{ico:'⚙️',lbl:'Boîte',val:'DCT 7 rapports'}]},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',        year:'2025',type:'Sport',power:'350 ch',price:219,img:'assets/golfr-placeholder.svg',
+   desc:"La Golf la plus radicale jamais produite. 350 chevaux, 4Motion, différentiel vectoriel. La Golf 8R est la référence absolue de la compacte sportive — polyvalente au quotidien, redoutable quand vous l'y invitez.",
+   specs:[{ico:'⚡',lbl:'Puissance',val:'350 ch'},{ico:'🔧',lbl:'Moteur',val:'2.0 TSI 4 cylindres'},{ico:'⏱',lbl:'0-100 km/h',val:'4,7 secondes'},{ico:'🔄',lbl:'Transmission',val:'4Motion 4×4'},{ico:'⚙️',lbl:'Boîte',val:'DSG 7 rapports'}]},
+  {id:'golf8', brand:'VW',      name:'Golf 8',         year:'2025',type:'Polyvalente',power:'130 ch',price:119,img:'assets/golf8-black.png',
+   desc:"La référence de la compacte européenne. La Golf 8 combine confort, technologie et praticité dans un package sans concession. Idéale pour les longs trajets comme pour la ville.",
+   specs:[{ico:'⚡',lbl:'Puissance',val:'130 ch'},{ico:'🔧',lbl:'Moteur',val:'1.5 TSI evo2'},{ico:'⏱',lbl:'0-100 km/h',val:'8,6 secondes'},{ico:'🔄',lbl:'Transmission',val:'Traction avant'},{ico:'⚙️',lbl:'Boîte',val:'DSG 7 rapports'}]},
+  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine',  year:'2026',type:'Sport',power:'128 ch',price:129,img:'assets/clio6-red.jpg',
+   desc:"Le badge Alpine sur une Clio, c'est une déclaration. La Clio 6 Alpine 2026 embarque la sportivité dans le format le plus pratique qui soit. Un plaisir de conduite brut, enveloppé dans une carrosserie qui fait tourner les têtes.",
+   specs:[{ico:'⚡',lbl:'Puissance',val:'128 ch'},{ico:'🔧',lbl:'Moteur',val:'1.2 TCe turbo'},{ico:'⏱',lbl:'0-100 km/h',val:'9,0 secondes'},{ico:'🔄',lbl:'Transmission',val:'Traction avant'},{ico:'⚙️',lbl:'Boîte',val:'EDC 7 rapports'}]},
+  {id:'clio5', brand:'Renault', name:'Clio 5',          year:'2025',type:'Citadine',power:'90 ch',price:89,img:'assets/clio5-blue.jpg',
+   desc:"La citadine qui s'oublie. La Clio 5 est l'alliée des déplacements en ville comme des escapades du week-end. Maniable, économique, confortable — parfaite pour qui cherche l'efficacité sans se prendre la tête.",
+   specs:[{ico:'⚡',lbl:'Puissance',val:'90 ch'},{ico:'🔧',lbl:'Moteur',val:'1.0 TCe 90'},{ico:'⏱',lbl:'0-100 km/h',val:'11,8 secondes'},{ico:'🔄',lbl:'Transmission',val:'Traction avant'},{ico:'⚙️',lbl:'Boîte',val:'CVT ou manuelle'}]}
+];
+
+var FB={Sport:'bs',Citadine:'bc',Polyvalente:'bp'};
+var FBCSS={Sport:'background:rgba(232,52,42,.15);color:#F87171',Citadine:'background:rgba(59,130,246,.15);color:#60A5FA',Polyvalente:'background:rgba(34,197,94,.15);color:#4ADE80'};
+
+function getParam(k){
+  var p=new URLSearchParams(window.location.search);
+  return p.get(k);
+}
+
+function render(){
+  var id=getParam('id');
+  var v=V.find(function(x){return x.id===id;});
+  var main=document.getElementById('main');
+
+  if(!v){
+    main.innerHTML='<div class="not-found"><h1 class="nf-title">Véhicule introuvable</h1><p class="nf-sub">Ce véhicule n\'existe pas dans notre flotte.</p><a href="index.html#fleet" style="color:var(--gold);font-family:var(--fh);font-weight:600">Voir toute la flotte →</a></div>';
+    return;
+  }
+
+  document.getElementById('pg-title').textContent=v.brand+' '+v.name+' '+v.year+' — Location premium BeLoc';
+  document.getElementById('pg-desc').setAttribute('content','Louez la '+v.brand+' '+v.name+' '+v.year+' en Auvergne-Rhône-Alpes. '+v.power+', livraison à domicile. Dès '+v.price+' €/jour.');
+  document.getElementById('pg-canonical').setAttribute('href','https://meunierthibault349-wq.github.io/beloc-site/vehicule.html?id='+v.id);
+  document.title=v.brand+' '+v.name+' '+v.year+' — Location premium BeLoc';
+
+  var others=V.filter(function(x){return x.id!==v.id;});
+
+  main.innerHTML=
+    '<div class="v-hero">'
+      +'<img class="v-hero-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' '+v.year+' — BeLoc location premium" loading="eager" onerror="this.style.opacity=\'0\'" />'
+      +'<div class="v-hero-grad"></div>'
+      +'<div class="v-hero-bot">'
+        +'<span class="v-badge" style="'+FBCSS[v.type]+'">'+v.type+'</span>'
+        +'<h1 class="v-name">'+v.name+'</h1>'
+        +'<p class="v-brand">'+v.brand+' · '+v.year+' · '+v.power+'</p>'
+      +'</div>'
+    +'</div>'
+    +'<div class="sec">'
+      +'<span class="ey">Description</span>'
+      +'<p class="v-desc">'+v.desc+'</p>'
+      +'<div class="price-strip">'
+        +'<div class="pc"><p class="pc-lbl">Journée</p><p class="pc-price">'+v.price+' €</p><p class="pc-sub">assurance incluse</p></div>'
+        +'<div class="pc"><p class="pc-lbl">Week-end</p><p class="pc-price">'+(v.price*2)+' €</p><p class="pc-sub">2 jours</p></div>'
+        +'<div class="pc"><p class="pc-lbl">Semaine</p><p class="pc-price">'+(v.price*7)+' €</p><p class="pc-sub">7 jours</p></div>'
+      +'</div>'
+    +'</div>'
+    +'<div class="sec-alt">'
+      +'<span class="ey">Caractéristiques</span>'
+      +'<ul class="specs-list">'+v.specs.map(function(s){
+        return '<li class="spec-row">'
+          +'<div class="spec-ico" aria-hidden="true" style="font-size:18px">'+s.ico+'</div>'
+          +'<div><p class="spec-lbl">'+s.lbl+'</p><p class="spec-val">'+s.val+'</p></div>'
+          +'</li>';
+      }).join('')+'</ul>'
+    +'</div>'
+    +'<div class="cta-section">'
+      +'<a href="index.html?pick='+v.id+'#tunnel" class="cta-main">Réserver cette '+v.name+' <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>'
+      +'<a href="index.html#fleet" class="cta-back">← Voir toute la flotte</a>'
+    +'</div>'
+    +'<div class="sec">'
+      +'<span class="ey">Également disponibles</span>'
+      +'<div class="fleet-mini">'+others.map(function(o){
+        return '<a class="fmc" href="vehicule.html?id='+o.id+'">'
+          +'<img class="fmc-img" src="'+o.img+'" alt="'+o.brand+' '+o.name+'" loading="lazy" onerror="this.style.opacity=\'0\'" />'
+          +'<div class="fmc-body">'
+            +'<p class="fmc-name">'+o.brand+' '+o.name+'</p>'
+            +'<p class="fmc-price">dès '+o.price+' €/j</p>'
+          +'</div></a>';
+      }).join('')+'</div>'
+    +'</div>';
+}
+
+render();
+
+/* Pré-sélectionner le véhicule quand on revient sur index via le CTA Réserver */
+/* La page index.html lit le paramètre ?pick= au chargement */
+</script>
+</body>
+</html>

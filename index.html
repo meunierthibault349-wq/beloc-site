@@ -9,6 +9,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Google Analytics 4 — remplacer G-XXXXXXXXXX par le vrai Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-XXXXXXXXXX',{send_page_view:true});
+  </script>
+  <!-- Meta Pixel — remplacer XXXXXXXXXXXXXXX par le vrai Pixel ID -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','XXXXXXXXXXXXXXX');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230A0A0C'/><text y='75' x='8' font-size='72' font-weight='700' font-family='system-ui,sans-serif' fill='%23C9A96E'>B.</text></svg>" />
   <!-- SEO Canonical -->
@@ -25,7 +40,9 @@
   <meta name="twitter:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
   <meta name="twitter:description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes." />
   <meta name="twitter:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-action.avif" />
-  <!-- Schema.org -->
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+  <!-- Schema.org — LocalBusiness + AutoRental -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -54,6 +71,34 @@
         {"@type": "Offer", "itemOffered": {"@type": "Car", "name": "Renault Clio 6 Alpine 2026", "brand": {"@type": "Brand", "name": "Renault"}}, "price": "129", "priceCurrency": "EUR", "unitCode": "DAY"}
       ]
     }
+  }
+  </script>
+  <!-- Schema.org — FAQPage (rich snippets Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Quelles sont les conditions pour louer un véhicule ?","acceptedAnswer":{"@type":"Answer","text":"Permis de conduire valide depuis au moins 2 ans, âge minimum 21 ans, pièce d'identité, justificatif de domicile. Caution par carte bancaire selon le véhicule."}},
+      {"@type":"Question","name":"Dans quelles zones BeLoc livre-t-il les véhicules ?","acceptedAnswer":{"@type":"Answer","text":"BeLoc livre partout en Auvergne-Rhône-Alpes : Lyon, Clermont-Ferrand, Grenoble, Saint-Étienne, Annecy, Chambéry, Vichy, Moulins et toutes les communes de la région. Frais de livraison : 49 € forfait."}},
+      {"@type":"Question","name":"L'assurance est-elle incluse dans le tarif ?","acceptedAnswer":{"@type":"Answer","text":"Oui, l'assurance tous risques est incluse dans tous les tarifs BeLoc. Une franchise reste à la charge du conducteur en cas de sinistre."}},
+      {"@type":"Question","name":"Puis-je annuler ou modifier ma réservation BeLoc ?","acceptedAnswer":{"@type":"Answer","text":"Annulation et modification gratuites jusqu'à 48h avant la prise en charge. Contactez-nous à contact@beloc.fr."}},
+      {"@type":"Question","name":"Y a-t-il une limite de kilométrage ?","acceptedAnswer":{"@type":"Answer","text":"Chaque véhicule dispose d'un forfait kilométrique journalier. Les kilomètres supplémentaires sont facturés selon le véhicule, communiqué à la confirmation."}}
+    ]
+  }
+  </script>
+  <!-- Schema.org — HowTo (Comment ça marche) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Comment louer un véhicule premium avec BeLoc",
+    "description": "Réservation de véhicule premium 100% en ligne en Auvergne-Rhône-Alpes en 3 étapes.",
+    "step": [
+      {"@type":"HowToStep","position":"1","name":"Choisissez votre véhicule en ligne","text":"Parcourez la flotte, sélectionnez vos dates et options depuis votre téléphone en 3 minutes."},
+      {"@type":"HowToStep","position":"2","name":"Livraison à votre adresse","text":"BeLoc livre le véhicule directement chez vous, à votre hôtel ou lieu de travail en Auvergne-Rhône-Alpes."},
+      {"@type":"HowToStep","position":"3","name":"Profitez et rendez le véhicule","text":"Conduisez le véhicule. À la fin, BeLoc vient le récupérer à l'adresse de votre choix."}
+    ]
   }
   </script>
   <style>
@@ -113,6 +158,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fprice{font-family:var(--fh);font-weight:700;font-size:17px;color:var(--t1)}
 .fprice em{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--t2);font-style:normal}
 .fbtn{height:36px;padding:0 14px;background:var(--gold);color:#1C1A15;font-family:var(--fb);font-weight:600;font-size:12px;border:none;border-radius:var(--rs);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.fbtn-sec{height:36px;padding:0 12px;background:transparent;color:var(--t2);font-family:var(--fb);font-weight:500;font-size:12px;border:1px solid var(--bdr);border-radius:var(--rs);display:inline-flex;align-items:center;white-space:nowrap;text-decoration:none}
 .dots{display:flex;justify-content:center;gap:6px;padding:0 24px}
 .dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.18);transition:width .2s,background .2s}
 .dot.on{width:18px;background:var(--gold)}
@@ -702,6 +748,11 @@ var S={step:1,max:1,vid:null,d0:null,d1:null,opts:{driver:false,gps:false,delive
 
 document.addEventListener('DOMContentLoaded',function(){
   buildFleet();buildVList();initDates();mwInit();mwCheck();
+  var pickId=new URLSearchParams(window.location.search).get('pick');
+  if(pickId&&V.find(function(x){return x.id===pickId;})){
+    pick(pickId);
+    setTimeout(function(){document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});},400);
+  }
   var h=document.getElementById('hdr'),t=false;
   window.addEventListener('scroll',function(){
     if(!t){requestAnimationFrame(function(){h.classList.toggle('stuck',window.scrollY>72);mwCheck();t=false;});t=true;}
@@ -721,7 +772,10 @@ function buildFleet(){
       +'<p class="fc-brand">'+v.brand+' · '+v.power+'</p>'
       +'<div class="fc-bot">'
       +'<p class="fprice">dès '+v.price+' € <em>/ jour</em></p>'
-      +'<button class="fbtn" tabindex="-1" aria-hidden="true">Réserver</button>'
+      +'<div style="display:flex;gap:6px">'
+      +'<a class="fbtn-sec" href="vehicule.html?id='+v.id+'" onclick="event.stopPropagation()">Détails</a>'
+      +'<button class="fbtn" onclick="fpick(\''+v.id+'\')" tabindex="-1" aria-hidden="true">Réserver</button>'
+      +'</div>'
       +'</div></div></div>';
   }).join('');
   dc.innerHTML=V.map(function(_,i){return '<div class="dot'+(i===0?' on':'')+'" id="dot'+i+'"></div>';}).join('');
@@ -733,10 +787,19 @@ function buildFleet(){
   },{passive:true});
 }
 
+function track(ev,params){
+  if(typeof gtag!=='undefined')gtag('event',ev,params||{});
+  if(typeof fbq!=='undefined'){
+    var fbMap={begin_checkout:'InitiateCheckout',generate_lead:'Lead',select_item:'ViewContent',add_to_cart:'AddToCart'};
+    if(fbMap[ev])fbq('track',fbMap[ev],{value:(params&&params.value)||0,currency:'EUR'});
+  }
+}
+
 function fpick(id){
   pick(id);
   if(S.step!==1){S.step=1;show(1);}
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+  track('begin_checkout');
 }
 
 function buildVList(){
@@ -763,6 +826,8 @@ function pick(id){
     if(c)c.classList.toggle('sel',v.id===id);
   });
   var b=document.getElementById('btn1');if(b)b.disabled=false;
+  var v=V.find(function(x){return x.id===id;});
+  if(v)track('select_item',{item_list_id:'fleet',value:v.price,items:[{item_id:v.id,item_name:v.brand+' '+v.name,price:v.price,item_category:v.type}]});
 }
 
 function initDates(){
@@ -841,7 +906,12 @@ function show(n){
 }
 function nxt(){
   if(S.step===1){if(!S.vid)return;S.step=2;if(S.max<2)S.max=2;show(2);}
-  else if(S.step===2){if(!vd())return;buildRecap();S.step=3;if(S.max<3)S.max=3;show(3);}
+  else if(S.step===2){
+    if(!vd())return;
+    buildRecap();S.step=3;if(S.max<3)S.max=3;show(3);
+    var v=V.find(function(x){return x.id===S.vid;});
+    track('add_to_cart',{currency:'EUR',value:total(),items:v?[{item_id:v.id,item_name:v.brand+' '+v.name,price:total()}]:[]});
+  }
 }
 function prv(){if(S.step>1){S.step--;show(S.step);}}
 function vd(){
@@ -882,27 +952,44 @@ function sub(){
   if(S.opts.driver)opts.push('Conducteur supplémentaire (+'+fmt(15*d)+')');
   if(S.opts.gps)opts.push('GPS portable (+'+fmt(8*d)+')');
   if(S.opts.delivery)opts.push('Livraison à domicile (+49 €)');
-  var subj=encodeURIComponent('Réservation BeLoc — '+v.brand+' '+v.name+' — '+fd(S.d0));
-  var body=encodeURIComponent(
-    'Prénom : '+fn+'\n'
-    +'Nom : '+ln+'\n'
-    +'Email : '+em+'\n'
-    +'Téléphone : '+ph+'\n\n'
-    +'Véhicule : '+v.brand+' '+v.name+'\n'
-    +'Dates : '+fd(S.d0)+' → '+fd(S.d1)+'\n'
-    +'Durée : '+d+' jour'+(d>1?'s':'')+'\n'
-    +'Options : '+(opts.length?opts.join(', '):'Aucune')+'\n'
-    +'Total estimé : '+fmt(total())+'\n\n'
-    +'---\nEnvoyé depuis beloc.fr'
-  );
-  window.location.href='mailto:contact@beloc.fr?subject='+subj+'&body='+body;
-  document.querySelectorAll('.panel,.stepper,.tband').forEach(function(el){el.style.display='none';});
-  document.getElementById('cimg').src=v.img;
-  document.getElementById('cimg').alt=v.brand+' '+v.name;
-  document.getElementById('cname').textContent=v.brand+' '+v.name;
-  document.getElementById('cdet').textContent=fd(S.d0)+' → '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
-  document.getElementById('conf').classList.add('show');
-  document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+
+  track('generate_lead',{currency:'EUR',value:total(),items:[{item_id:S.vid,item_name:v.brand+' '+v.name,price:total()}]});
+
+  /* TODO: remplacer XXXXXXXX par l'ID Formspree (créer un formulaire sur formspree.io) */
+  var FORM_ENDPOINT='https://formspree.io/f/XXXXXXXX';
+
+  function showConf(){
+    document.querySelectorAll('.panel,.stepper,.tband').forEach(function(el){el.style.display='none';});
+    document.getElementById('cimg').src=v.img;
+    document.getElementById('cimg').alt=v.brand+' '+v.name;
+    document.getElementById('cname').textContent=v.brand+' '+v.name;
+    document.getElementById('cdet').textContent=fd(S.d0)+' → '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
+    document.getElementById('conf').classList.add('show');
+    document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function mailtoFallback(){
+    var s=encodeURIComponent('Réservation BeLoc — '+v.brand+' '+v.name+' — '+fd(S.d0));
+    var b=encodeURIComponent('Prénom : '+fn+'\nNom : '+ln+'\nEmail : '+em+'\nTéléphone : '+ph+'\n\nVéhicule : '+v.brand+' '+v.name+'\nDates : '+fd(S.d0)+' → '+fd(S.d1)+'\nDurée : '+d+' jour'+(d>1?'s':'')+'\nOptions : '+(opts.length?opts.join(', '):'Aucune')+'\nTotal estimé : '+fmt(total())+'\n\n---\nEnvoyé depuis beloc.fr');
+    window.location.href='mailto:contact@beloc.fr?subject='+s+'&body='+b;
+    showConf();
+  }
+
+  if(FORM_ENDPOINT.indexOf('XXXXXXXX')>-1){mailtoFallback();return;}
+
+  var btn=document.querySelector('.btn-confirm');
+  if(btn){btn.disabled=true;btn.textContent='Envoi en cours...';}
+  fetch(FORM_ENDPOINT,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      _subject:'Réservation BeLoc — '+v.brand+' '+v.name+' — '+fd(S.d0),
+      _replyto:em,prénom:fn,nom:ln,email:em,téléphone:ph,
+      véhicule:v.brand+' '+v.name,dates:fd(S.d0)+' → '+fd(S.d1),
+      durée:d+' jour'+(d>1?'s':''),
+      options:opts.length?opts.join(', '):'Aucune',
+      total:fmt(total())
+    })
+  }).then(function(){showConf();}).catch(function(){mailtoFallback();});
 }
 function fmt(n){return n.toLocaleString('fr-FR')+' €';}
 function fd(s){if(!s)return '-';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
