@@ -352,6 +352,21 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+/* Skip link */
+.skip-link{position:absolute;top:-100%;left:0;z-index:9999;padding:8px 20px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:14px;border-radius:0 0 8px 0;white-space:nowrap}
+.skip-link:focus{top:0}
+/* Social proof hero */
+.social-count{font-family:var(--fb);font-size:11px;color:rgba(255,255,255,.38);text-align:center;margin-top:10px}
+.social-count strong{color:var(--gold);font-weight:600}
+/* Fleet popularity badge */
+.pop-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;background:rgba(201,169,110,.18);color:var(--gold);margin-bottom:6px}
+/* Scroll-to-top button */
+.top-btn{position:fixed;bottom:calc(max(80px,env(safe-area-inset-bottom,0px) + 72px));right:16px;z-index:179;width:40px;height:40px;border-radius:50%;background:rgba(18,18,22,.92);border:1px solid var(--bdr);color:var(--t2);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.top-btn.show{opacity:1;pointer-events:auto}
+.top-btn:active{transform:scale(.92)}
+/* Spinner submit */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin-ico{animation:spin .8s linear infinite;flex-shrink:0}
 /* ---- Bandeau cookie RGPD ---- */
 .cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:var(--bg1);border-top:1px solid var(--bdr);padding:16px 20px calc(max(16px,env(safe-area-inset-bottom,0px)+12px));display:none;gap:12px;flex-direction:column}
 .cookie-bar.show{display:flex}
@@ -407,7 +422,12 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </style>
 </head>
 <body>
+<a href="#hero" class="skip-link">Aller au contenu principal</a>
 <noscript><style>.noscript-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#C9A96E;color:#1C1A15;padding:12px 20px;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;text-align:center}</style><div class="noscript-bar">Ce site nécessite JavaScript pour fonctionner. Activez JavaScript dans votre navigateur ou <a href="mailto:contact@beloc.fr" style="color:#1C1A15;text-decoration:underline">contactez-nous directement</a>.</div></noscript>
+<button class="top-btn" id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut de page">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg>
+</button>
+
 <div class="cookie-bar" id="cookie-bar" role="dialog" aria-label="Gestion des cookies" aria-live="polite">
   <p class="cookie-txt">Nous utilisons des cookies analytiques (Google Analytics) et marketing (Meta Pixel) pour mesurer nos performances et améliorer nos campagnes. <a href="mentions-legales.html">En savoir plus</a>.</p>
   <div class="cookie-btns">
@@ -466,6 +486,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       Réserver maintenant
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
+    <p class="social-count"><strong>47+</strong> locations ce mois · Noté 5/5</p>
     <div class="trust-row" aria-hidden="true">
       <span class="trust-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 1.5L2 3.5v3.3C2 9.5 4 11.5 6.5 12c2.5-.5 4.5-2.5 4.5-5.2V3.5z"/></svg>Assurance incluse</span>
       <span class="trust-sep">·</span>
@@ -813,10 +834,10 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 
 <script>
 var V=[
-  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-placeholder.svg'},
-  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-placeholder.svg'},
+  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-placeholder.svg', badge:'⭐ Populaire'},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-placeholder.svg',badge:'🔥 Coup de cœur'},
   {id:'golf8', brand:'VW',      name:'Golf 8',        type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
-  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg'},
+  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg',        badge:'Nouveau'},
   {id:'clio5', brand:'Renault', name:'Clio 5',        type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
 ];
 var FB={Sport:'bs',Citadine:'bc',Polyvalente:'bp'};
@@ -836,9 +857,14 @@ document.addEventListener('DOMContentLoaded',function(){
       });
     });
   }
-  var h=document.getElementById('hdr'),t=false;
+  var h=document.getElementById('hdr'),topBtn=document.getElementById('top-btn'),t=false;
   window.addEventListener('scroll',function(){
-    if(!t){requestAnimationFrame(function(){h.classList.toggle('stuck',window.scrollY>72);mwCheck();t=false;});t=true;}
+    if(!t){requestAnimationFrame(function(){
+      var y=window.scrollY;
+      h.classList.toggle('stuck',y>72);
+      if(topBtn)topBtn.classList.toggle('show',y>450);
+      mwCheck();t=false;
+    });t=true;}
   },{passive:true});
 });
 
@@ -850,6 +876,7 @@ function buildFleet(){
       +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' 2025 — location premium BeLoc"'
       +' loading="'+(i===0?'eager':'lazy')+'" onerror="this.style.background=\'#18181C\'" />'
       +'<div class="fc-body">'
+      +(v.badge?'<p class="pop-badge">'+v.badge+'</p>':'')
       +'<span class="fbadge '+FB[v.type]+'">'+v.type+'</span>'
       +'<p class="fc-name">'+v.name+'</p>'
       +'<p class="fc-brand">'+v.brand+' · '+v.power+'</p>'
@@ -896,7 +923,7 @@ function buildVList(){
       +'<p class="vcard-price">dès '+v.price+' € <em>/ jour</em></p>'
       +'</div>'
       +'<div class="vcard-foot">'
-      +'<span class="tag '+TG[v.type]+'">'+v.type+'</span>'
+      +'<div style="display:flex;align-items:center;gap:6px"><span class="tag '+TG[v.type]+'">'+v.type+'</span>'+(v.badge?'<span class="pop-badge" style="font-size:9px;padding:2px 7px">'+v.badge+'</span>':'')+'</div>'
       +'<button class="btn-sel" tabindex="-1" aria-hidden="true">Choisir</button>'
       +'</div></div></div>';
   }).join('');
@@ -1020,6 +1047,7 @@ function show(n){
   var tp=document.getElementById('p'+n);if(tp)tp.classList.add('show');
   S.step=n;updateStepper();
   if(n===2||n===3)updateVchip(n);
+  if(n===3)setTimeout(function(){var f=document.getElementById('ffn');if(f&&!f.value)f.focus();},320);
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function nxt(){
@@ -1104,7 +1132,7 @@ function sub(){
   if(FORM_ENDPOINT.indexOf('XXXXXXXX')>-1){mailtoFallback();return;}
 
   var btn=document.querySelector('.btn-confirm');
-  if(btn){btn.disabled=true;btn.textContent='Envoi en cours...';}
+  if(btn){btn.disabled=true;btn.innerHTML='<svg class="spin-ico" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M8 2a6 6 0 110 12A6 6 0 018 2z" opacity=".25"/><path d="M14 8a6 6 0 00-6-6"/></svg>&nbsp;Envoi en cours...';}
   fetch(FORM_ENDPOINT,{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},

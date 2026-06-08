@@ -222,6 +222,9 @@ function render(){
   var ld=document.createElement('script');ld.type='application/ld+json';
   ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'Product','name':v.brand+' '+v.name+' '+v.year,'description':v.desc,'brand':{'@type':'Brand','name':v.brand},'offers':{'@type':'Offer','priceCurrency':'EUR','price':v.price,'priceSpecification':{'@type':'UnitPriceSpecification','price':v.price,'priceCurrency':'EUR','unitText':'DAY'},'availability':'https://schema.org/InStock','seller':{'@type':'LocalBusiness','name':'BeLoc'}}});
   document.head.appendChild(ld);
+  var ld2=document.createElement('script');ld2.type='application/ld+json';
+  ld2.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Accueil','item':'https://meunierthibault349-wq.github.io/beloc-site/'},{'@type':'ListItem','position':2,'name':'La flotte','item':'https://meunierthibault349-wq.github.io/beloc-site/#fleet'},{'@type':'ListItem','position':3,'name':v.brand+' '+v.name,'item':pgUrl}]});
+  document.head.appendChild(ld2);
   document.getElementById('sb-name').textContent=v.brand+' '+v.name;
   document.getElementById('sb-price').textContent='dès '+v.price+' €/jour';
   document.getElementById('sb-cta').href='index.html?pick='+v.id+'#tunnel';
