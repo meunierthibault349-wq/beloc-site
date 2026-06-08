@@ -1,6 +1,6 @@
 /* ============================================================
    BeLoc — Design System
-   Blanc · orange Sixt · noir — thème clair premium
+   Blanc · marine profond · or champagne — premium sobre
    Display: Space Grotesk · UI: Inter
    ============================================================ */
 
@@ -26,17 +26,17 @@
   --line-soft:   rgba(0,0,0,.06);
   --line-strong: rgba(0,0,0,.18);
 
-  /* Orange — inspiré Sixt, accent premium */
-  --gold:      #FF5F00;
-  --gold-soft: #FF7A35;
-  --gold-deep: #D94800;
-  --gold-glow: rgba(255,95,0,.09);
+  /* Or champagne — accent luxe, icônes, soulignements */
+  --gold:      #B99750;
+  --gold-soft: #D4AF68;
+  --gold-deep: #8A7030;
+  --gold-glow: rgba(185,151,80,.09);
 
-  /* CTA — même orange, décliné pour la profondeur */
-  --red:      #FF5F00;
-  --red-hi:   #FF7A35;
-  --red-deep: #D94800;
-  --red-glow: rgba(255,95,0,.18);
+  /* Marine profond — couleur d'action, CTA exclusif */
+  --red:      #0C2040;
+  --red-hi:   #1A3660;
+  --red-deep: #060F20;
+  --red-glow: rgba(12,32,64,.22);
 
   /* Fonts */
   --serif: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -702,15 +702,28 @@ a { color: inherit; text-decoration: none; }
 .pm-n { display: block; font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--bone); line-height: 1; }
 .pm-l { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 
-/* ---------- Final CTA ---------- */
-.final-cta { text-align: center; padding: clamp(64px,8vw,110px) 0; }
-.final-cta-h { font-size: clamp(40px,6vw,84px); margin: 22px 0 44px; }
+/* ---------- Final CTA — panneau marine conversif ---------- */
+.final-cta {
+  background: #0C2040;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  padding: clamp(60px,8vw,100px) clamp(32px,6vw,80px);
+  color: #F5F5F3;
+}
+.final-cta-h { font-size: clamp(40px,6vw,84px); margin: 0 0 44px; color: #F5F5F3; }
 .final-cta-actions { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
-.final-cta-phone { display: inline-flex; align-items: center; gap: 14px; color: var(--bone); text-decoration: none; }
-.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: var(--gold-glow); border: 1px solid var(--gold-deep); color: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s; }
-.final-cta-phone:hover .final-cta-phone-ic { background: var(--gold); color: var(--ink-900); }
+
+/* Bouton blanc sur fond marine */
+.final-cta .btn-primary { background: #FFFFFF; color: #0C2040; box-shadow: 0 4px 28px -6px rgba(0,0,0,.35); }
+.final-cta .btn-primary:hover { background: #F0F0EE; transform: translateY(-2px); box-shadow: 0 10px 36px -8px rgba(0,0,0,.4); }
+.final-cta .btn-primary::after { background: linear-gradient(90deg, transparent, rgba(12,32,64,.06), transparent); }
+
+.final-cta-phone { display: inline-flex; align-items: center; gap: 14px; color: rgba(245,245,243,.72); text-decoration: none; }
+.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.20); color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, border-color .25s; }
+.final-cta-phone:hover .final-cta-phone-ic { background: var(--gold); border-color: var(--gold); color: #FFFFFF; }
 .final-cta-phone-ic svg { width: 20px; height: 20px; }
-.final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; }
+.final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; color: #F5F5F3; }
+.final-cta .mono-label { color: rgba(245,245,243,.48); }
 
 /* ============================================================
    TABLETTE / PETIT DESKTOP — 1080px
