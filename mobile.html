@@ -2,13 +2,60 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0A0A0C" />
   <title>BeLoc — Location premium · Auvergne-Rhône-Alpes</title>
-  <meta name="description" content="Location de vehicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Reservez en 3 minutes en Auvergne-Rhone-Alpes." />
+  <meta name="description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes en Auvergne-Rhône-Alpes." />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230A0A0C'/><text y='75' x='8' font-size='72' font-weight='700' font-family='system-ui,sans-serif' fill='%23C9A96E'>B.</text></svg>" />
+  <!-- SEO Canonical -->
+  <link rel="canonical" href="https://meunierthibault349-wq.github.io/beloc-site/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
+  <meta property="og:description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes en Auvergne-Rhône-Alpes." />
+  <meta property="og:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-action.avif" />
+  <meta property="og:url" content="https://meunierthibault349-wq.github.io/beloc-site/" />
+  <meta property="og:locale" content="fr_FR" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
+  <meta name="twitter:description" content="Location de véhicules premium 100% en ligne. Audi RS3, Golf 8R, Clio Alpine. Réservez en 3 minutes." />
+  <meta name="twitter:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/rs3-action.avif" />
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "AutoRental"],
+    "name": "BeLoc",
+    "description": "Location de véhicules premium 100% en ligne en Auvergne-Rhône-Alpes.",
+    "url": "https://meunierthibault349-wq.github.io/beloc-site/",
+    "email": "contact@beloc.fr",
+    "priceRange": "€€€",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Auvergne-Rhône-Alpes"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Flotte BeLoc",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Car", "name": "Audi RS3 2025", "brand": {"@type": "Brand", "name": "Audi"}}, "price": "349", "priceCurrency": "EUR", "unitCode": "DAY"},
+        {"@type": "Offer", "itemOffered": {"@type": "Car", "name": "VW Golf 8R 2025", "brand": {"@type": "Brand", "name": "Volkswagen"}}, "price": "219", "priceCurrency": "EUR", "unitCode": "DAY"},
+        {"@type": "Offer", "itemOffered": {"@type": "Car", "name": "Renault Clio 6 Alpine 2026", "brand": {"@type": "Brand", "name": "Renault"}}, "price": "129", "priceCurrency": "EUR", "unitCode": "DAY"}
+      ]
+    }
+  }
+  </script>
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 img{display:block;max-width:100%}
@@ -213,9 +260,6 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fl-line{font-family:var(--fb);font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:36px}
 .fl-links{display:flex;flex-direction:column;gap:4px;margin-bottom:36px}
 .fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-.fl-soc{display:flex;gap:12px;margin-bottom:40px}
-.fl-sb{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:var(--rs);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s}
-.fl-sb:active{background:rgba(255,255,255,.16)}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
   </style>
@@ -249,7 +293,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 </header>
 
 <section id="hero" class="hero" aria-label="Accueil">
-  <img class="hero-img" src="assets/rs3-action.avif" alt="Audi RS3"
+  <img class="hero-img" src="assets/rs3-action.avif" alt="Audi RS3 2025 en action sur route de montagne"
     loading="eager" decoding="async" fetchpriority="high"
     onerror="this.src='assets/rs3-studio.jpg'" />
   <div class="hero-grad" aria-hidden="true"></div>
@@ -332,15 +376,15 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
     </div>
     <p class="ot">Options</p>
     <div class="opt" id="o-driver" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('driver')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('driver');event.preventDefault()}">
-      <div class="opt-info"><p class="opt-name">Conducteur supplémentaire</p><p class="opt-price">+15 euros/jour</p></div>
+      <div class="opt-info"><p class="opt-name">Conducteur supplémentaire</p><p class="opt-price">+15 €/jour</p></div>
       <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
     <div class="opt" id="o-gps" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('gps')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('gps');event.preventDefault()}">
-      <div class="opt-info"><p class="opt-name">GPS intégré</p><p class="opt-price">+8 euros/jour</p></div>
+      <div class="opt-info"><p class="opt-name">GPS portable</p><p class="opt-price">+8 €/jour · appareil amovible indépendant</p></div>
       <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
     <div class="opt" id="o-delivery" role="checkbox" aria-checked="false" tabindex="0" onclick="tog('delivery')" onkeydown="if(event.key===' '||event.key==='Enter'){tog('delivery');event.preventDefault()}">
-      <div class="opt-info"><p class="opt-name">Livraison à domicile</p><p class="opt-price">+49 euros forfait</p></div>
+      <div class="opt-info"><p class="opt-name">Livraison à domicile</p><p class="opt-price">+49 € forfait</p></div>
       <div class="opt-box" aria-hidden="true"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8 11 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
     <button class="btn-next" style="margin-top:20px" onclick="nxt()">Continuer &rarr;</button>
@@ -356,8 +400,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       <div class="rrow"><span class="rk">Dates</span><span class="rv" id="rdt"></span></div>
       <div class="rrow"><span class="rk">Durée</span><span class="rv" id="rdu"></span></div>
       <div class="rrow" id="rrd" style="display:none"><span class="rk">Conducteur suppl.</span><span class="rv" id="rrda"></span></div>
-      <div class="rrow" id="rrg" style="display:none"><span class="rk">GPS</span><span class="rv" id="rrga"></span></div>
-      <div class="rrow" id="rrl" style="display:none"><span class="rk">Livraison</span><span class="rv">+49 euros</span></div>
+      <div class="rrow" id="rrg" style="display:none"><span class="rk">GPS portable</span><span class="rv" id="rrga"></span></div>
+      <div class="rrow" id="rrl" style="display:none"><span class="rk">Livraison</span><span class="rv">+49 €</span></div>
       <div class="rtotal"><span class="rtk">Total</span><span class="rtv" id="rto"></span></div>
     </div>
     <div class="fgrid">
@@ -373,7 +417,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   <div id="conf" role="status" aria-live="polite">
     <div class="cc" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 16.5L12.5 23 26 9" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h2 class="ct">Demande envoyée !</h2>
-    <p class="cs">Nous vous contactons sous 2h pour finaliser votre réservation.</p>
+    <p class="cs">Votre messagerie va s'ouvrir avec votre demande pré-remplie. Envoyez l'email pour finaliser.</p>
     <div class="cc2">
       <img class="cc2-img" id="cimg" src="" alt="" loading="lazy" onerror="this.style.background='#D4D4D8'" />
       <div class="cc2-info"><p class="cc2-name" id="cname"></p><p class="cc2-det" id="cdet"></p></div>
@@ -389,17 +433,17 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </div>
   <div class="reviews">
     <article class="rc">
-      <div class="rct"><span class="rca">Thomas B.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <div class="rct"><span class="rca">Thomas B. · Lyon</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
       <p class="rcx">"Expérience parfaite du début à la fin. RS3 livrée le matin, on roule l'après-midi. Je comprends pas pourquoi j'ai attendu si longtemps."</p>
       <span class="rctag">Audi RS3 2025</span>
     </article>
     <article class="rc">
-      <div class="rct"><span class="rca">Camille D.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <div class="rct"><span class="rca">Camille D. · Clermont-Ferrand</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
       <p class="rcx">"Cadeau d'anniversaire pour mon copain. Réservation en 5 min, livraison à l'heure. Il en parle encore deux semaines après."</p>
       <span class="rctag">VW Golf 8R 2025</span>
     </article>
     <article class="rc">
-      <div class="rct"><span class="rca">Romain V.</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
+      <div class="rct"><span class="rca">Romain V. · Grenoble</span><div class="stars" aria-label="5 étoiles"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M6.5 1l1.5 3.2L11 4.8l-2.3 2.3.6 3.4L6.5 9l-2.8 1.5.6-3.4L2 4.8l3-.6z"/></svg></div></div>
       <p class="rcx">"Séminaire d'équipe. Clio Alpine en véhicule de direction, effet immédiat. Tarif sérieux, équipe réactive, on repart en septembre."</p>
       <span class="rctag">Renault Clio 6 Alpine</span>
     </article>
@@ -414,10 +458,12 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 6l7 4 7-4"/></svg>
       contact@beloc.fr
     </a>
-  </div>
-  <div class="fl-soc">
-    <a href="#" class="fl-sb" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-    <a href="#" class="fl-sb" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5M12 11a3 3 0 0 1 6 0v5M16 16v-5"/></svg></a>
+    <!-- TODO: ajouter le numéro de téléphone BeLoc ici
+    <a href="tel:+33XXXXXXXXX" class="fl-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.95.68l1 3a1 1 0 01-.23 1.03L6.1 7.8A10 10 0 009.2 10.9l1.08-1.12a1 1 0 011.03-.23l3 1a1 1 0 01.69.95V14a1 1 0 01-1 1C6.5 15 1 9.5 1 3a1 1 0 011-1z"/></svg>
+      +33 X XX XX XX XX
+    </a>
+    -->
   </div>
   <div class="fl-div"></div>
   <p class="fl-legal">2026 BeLoc - Tous droits réservés - Auvergne-Rhône-Alpes</p>
@@ -448,14 +494,14 @@ function buildFleet(){
   el.innerHTML=V.map(function(v,i){
     return '<div class="fc" role="listitem" tabindex="0"'
       +' onclick="fpick(\''+v.id+'\')">'
-      +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+'"'
+      +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' 2025 — location premium BeLoc"'
       +' loading="'+(i===0?'eager':'lazy')+'" onerror="this.style.background=\'#18181C\'" />'
       +'<div class="fc-body">'
       +'<span class="fbadge '+FB[v.type]+'">'+v.type+'</span>'
       +'<p class="fc-name">'+v.name+'</p>'
       +'<p class="fc-brand">'+v.brand+' · '+v.power+'</p>'
       +'<div class="fc-bot">'
-      +'<p class="fprice">dès '+v.price+' EUR <em>/ jour</em></p>'
+      +'<p class="fprice">dès '+v.price+' € <em>/ jour</em></p>'
       +'<button class="fbtn" tabindex="-1" aria-hidden="true">Réserver</button>'
       +'</div></div></div>';
   }).join('');
@@ -478,11 +524,11 @@ function buildVList(){
   var el=document.getElementById('vlist');
   el.innerHTML=V.map(function(v){
     return '<div class="vcard" id="vc-'+v.id+'" role="listitem" tabindex="0" onclick="pick(\''+v.id+'\')">'
-      +'<img class="vcard-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+'" loading="lazy" onerror="this.style.background=\'#D4D4D8\'" />'
+      +'<img class="vcard-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' — location BeLoc" loading="lazy" onerror="this.style.background=\'#D4D4D8\'" />'
       +'<div class="vcard-body">'
       +'<div class="vcard-row">'
       +'<div><p class="vcard-name">'+v.name+'</p><p class="vcard-brand">'+v.brand+'</p></div>'
-      +'<p class="vcard-price">dès '+v.price+' EUR <em>/ jour</em></p>'
+      +'<p class="vcard-price">dès '+v.price+' € <em>/ jour</em></p>'
       +'</div>'
       +'<div class="vcard-foot">'
       +'<span class="tag '+TG[v.type]+'">'+v.type+'</span>'
@@ -548,7 +594,7 @@ function buildRecap(){
   var v=V.find(function(x){return x.id===S.vid;});if(!v)return;
   var d=days();
   st('rvc',v.brand+' '+v.name);
-  st('rdt',fd(S.d0)+' >> '+fd(S.d1));
+  st('rdt',fd(S.d0)+' → '+fd(S.d1));
   st('rdu',d+' jour'+(d>1?'s':''));
   vs('rrd',S.opts.driver);if(S.opts.driver)st('rrda','+'+fmt(15*d));
   vs('rrg',S.opts.gps);if(S.opts.gps)st('rrga','+'+fmt(8*d));
@@ -609,15 +655,37 @@ function sub(){
   if(!vc())return;
   var v=V.find(function(x){return x.id===S.vid;});
   var d=days();
+  var fn=document.getElementById('ffn').value.trim();
+  var ln=document.getElementById('fln').value.trim();
+  var em=document.getElementById('fem').value.trim();
+  var ph=document.getElementById('fph').value.trim();
+  var opts=[];
+  if(S.opts.driver)opts.push('Conducteur supplémentaire (+'+fmt(15*d)+')');
+  if(S.opts.gps)opts.push('GPS portable (+'+fmt(8*d)+')');
+  if(S.opts.delivery)opts.push('Livraison à domicile (+49 €)');
+  var subj=encodeURIComponent('Réservation BeLoc — '+v.brand+' '+v.name+' — '+fd(S.d0));
+  var body=encodeURIComponent(
+    'Prénom : '+fn+'\n'
+    +'Nom : '+ln+'\n'
+    +'Email : '+em+'\n'
+    +'Téléphone : '+ph+'\n\n'
+    +'Véhicule : '+v.brand+' '+v.name+'\n'
+    +'Dates : '+fd(S.d0)+' → '+fd(S.d1)+'\n'
+    +'Durée : '+d+' jour'+(d>1?'s':'')+'\n'
+    +'Options : '+(opts.length?opts.join(', '):'Aucune')+'\n'
+    +'Total estimé : '+fmt(total())+'\n\n'
+    +'---\nEnvoyé depuis beloc.fr'
+  );
+  window.location.href='mailto:contact@beloc.fr?subject='+subj+'&body='+body;
   document.querySelectorAll('.panel,.stepper,.tband').forEach(function(el){el.style.display='none';});
   document.getElementById('cimg').src=v.img;
   document.getElementById('cimg').alt=v.brand+' '+v.name;
   document.getElementById('cname').textContent=v.brand+' '+v.name;
-  document.getElementById('cdet').textContent=fd(S.d0)+' >> '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
+  document.getElementById('cdet').textContent=fd(S.d0)+' → '+fd(S.d1)+' · '+d+' jour'+(d>1?'s':'')+' · '+fmt(total());
   document.getElementById('conf').classList.add('show');
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function fmt(n){return n.toLocaleString('fr-FR')+' EUR';}
+function fmt(n){return n.toLocaleString('fr-FR')+' €';}
 function fd(s){if(!s)return '-';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
 
 /* ---- Widget réservation ---- */
@@ -629,7 +697,8 @@ var mwDD=null;
 
 function mwInit(){
   var now=new Date();
-  document.getElementById('mw-d0').min=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
+  var mwD0=document.getElementById('mw-d0');
+  if(mwD0)mwD0.min=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
 }
 
 function mwShowDD(type,anchor){
