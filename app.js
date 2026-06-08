@@ -64,19 +64,19 @@ function App() {
     onFav: onFav
   });
   const solid = route !== "home";
-  const showWidget = route === "home";
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Header, {
     route: route,
     nav: nav,
     solid: solid
   }), /*#__PURE__*/React.createElement("main", {
-    style: showWidget ? {
-      paddingBottom: 74
-    } : undefined
+    style: {
+      paddingBottom: 110
+    }
   }, page), /*#__PURE__*/React.createElement(Footer, {
     nav: nav
-  }), toastNode, showWidget && /*#__PURE__*/React.createElement(ReservationWidget, {
-    nav: nav
+  }), toastNode, /*#__PURE__*/React.createElement(ReservationWidget, {
+    nav: nav,
+    route: route
   }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));

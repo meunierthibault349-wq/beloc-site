@@ -176,106 +176,101 @@ function HomePage(props) {
   );
 }
 
-/* ── RESERVATION WIDGET — Bandeau flottant configurable ── */
+/* ── RESERVATION WIDGET — Barre sticky compacte, toutes pages ── */
 function ReservationWidget(props) {
   var B = window.BELOC;
-  var durLabels = { day: "journée", weekend: "week-end", week: "semaine" };
-  var durFull   = { day: "À la journée", weekend: "Week-end (2 jours)", week: "À la semaine" };
   var today = new Date().toISOString().split("T")[0];
 
-  var _s1 = useState(false);   var open      = _s1[0]; var setOpen      = _s1[1];
-  var _s2 = useState("");      var vehicleId = _s2[0]; var setVehicleId = _s2[1];
-  var _s3 = useState("");      var date      = _s3[0]; var setDate      = _s3[1];
-  var _s4 = useState("day");   var duration  = _s4[0]; var setDuration  = _s4[1];
+  var _s1 = useState("");      var vehicleId = _s1[0]; var setVehicleId = _s1[1];
+  var _s2 = useState("");      var dateFrom  = _s2[0]; var setDateFrom  = _s2[1];
+  var _s3 = useState("day");   var duration  = _s3[0]; var setDuration  = _s3[1];
 
   var vehicle = vehicleId ? B.byId(vehicleId) : null;
+  var durMap    = { day: 1, weekend: 2, week: 7 };
+  var durLabels = { day: "À la journée", weekend: "Week-end", week: "À la semaine" };
+
+  var dateTo = "";
+  if (dateFrom) {
+    try {
+      var d = new Date(dateFrom + "T12:00");
+      d.setDate(d.getDate() + durMap[duration]);
+      dateTo = d.toISOString().split("T")[0];
+    } catch (ex) {}
+  }
+
+  function fmt(iso) {
+    if (!iso) return null;
+    try { return new Date(iso + "T12:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); }
+    catch (ex) { return null; }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (vehicleId) {
-      props.nav("detail", vehicleId);
-    } else {
-      props.nav("fleet");
-    }
-    setOpen(false);
+    if (vehicleId) { props.nav("booking", { id: vehicleId, tier: duration }); }
+    else { props.nav("fleet"); }
   }
 
-  var dateLabel = "";
-  if (date) {
-    try { dateLabel = new Date(date + "T12:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); } catch (ex) {}
-  }
+  var cls = "resa-bar-widget" + (props.route === "detail" ? " resa-bar-widget--no-mobile" : "");
 
   return (
-    <div className={"resa-widget" + (open ? " open" : "")}>
+    <form className={cls} onSubmit={handleSubmit}>
+      <div className="resa-bar-fields">
 
-      {/* ── Barre compacte ── */}
-      <div className="resa-bar">
-        <span className="resa-bar-ico">{Icons.key}</span>
-        <div className="resa-bar-info">
-          {vehicle ? (
-            <React.Fragment>
-              <span className="resa-bar-vehicle">{vehicle.full}</span>
-              <span className="resa-bar-dot" />
-              <span className="resa-bar-meta">{durFull[duration]}{dateLabel ? " · " + dateLabel : ""}</span>
-              <span className="resa-bar-badge">{eur(vehicle.prices[duration])}</span>
-            </React.Fragment>
-          ) : (
-            <span className="resa-bar-hint">Configurez et réservez votre véhicule en 3 min</span>
-          )}
+        <label className="resa-bar-field">
+          <span className="resa-bar-field-label">Durée</span>
+          <span className={"resa-bar-field-value" + (!duration ? " resa-bar-field-value--ph" : "")}>
+            {durLabels[duration] || "Choisir"}
+          </span>
+          <select className="resa-bar-field-select" value={duration}
+            onChange={function(e) { setDuration(e.target.value); }}>
+            <option value="day">À la journée</option>
+            <option value="weekend">Week-end (2 jours)</option>
+            <option value="week">À la semaine</option>
+          </select>
+        </label>
+
+        <div className="resa-bar-sep" />
+
+        <label className="resa-bar-field">
+          <span className="resa-bar-field-label">Véhicule</span>
+          <span className={"resa-bar-field-value" + (!vehicleId ? " resa-bar-field-value--ph" : "")}>
+            {vehicle ? vehicle.full : "Tous les véhicules"}
+          </span>
+          <select className="resa-bar-field-select" value={vehicleId}
+            onChange={function(e) { setVehicleId(e.target.value); }}>
+            <option value="">Tous les véhicules</option>
+            {B.vehicles.map(function(v) {
+              return <option key={v.id} value={v.id}>{v.full}</option>;
+            })}
+          </select>
+        </label>
+
+        <div className="resa-bar-sep" />
+
+        <label className="resa-bar-field">
+          <span className="resa-bar-field-label">Date de départ</span>
+          <span className={"resa-bar-field-value" + (!dateFrom ? " resa-bar-field-value--ph" : "")}>
+            {fmt(dateFrom) || "Choisir une date"}
+          </span>
+          <input type="date" className="resa-bar-field-date" value={dateFrom} min={today}
+            onChange={function(e) { setDateFrom(e.target.value); }} />
+        </label>
+
+        <div className="resa-bar-sep" />
+
+        <div className="resa-bar-field">
+          <span className="resa-bar-field-label">Date de retour</span>
+          <span className={"resa-bar-field-value" + (!dateTo ? " resa-bar-field-value--ph" : "")}>
+            {fmt(dateTo) || "Calculée auto."}
+          </span>
         </div>
-        <button className="resa-toggle" type="button" onClick={function () { setOpen(!open); }}>
-          <span>{open ? "Réduire" : "Configurer"}</span>
-          {Icons.chevD}
-        </button>
+
       </div>
-
-      {/* ── Panneau dépliable ── */}
-      <div className={"resa-panel" + (open ? " open" : "")}>
-        <form className="resa-form" onSubmit={handleSubmit}>
-          <div className="resa-fields">
-
-            <div className="resa-field">
-              <label>Véhicule</label>
-              <select value={vehicleId} onChange={function (e) { setVehicleId(e.target.value); }}>
-                <option value="">Tous les véhicules</option>
-                {B.vehicles.map(function (v) {
-                  return <option key={v.id} value={v.id}>{v.full} — dès {eur(v.prices.day)} / jour</option>;
-                })}
-              </select>
-            </div>
-
-            <div className="resa-field">
-              <label>Date de départ</label>
-              <input type="date" value={date} min={today} onChange={function (e) { setDate(e.target.value); }} />
-            </div>
-
-            <div className="resa-field">
-              <label>Durée</label>
-              <select value={duration} onChange={function (e) { setDuration(e.target.value); }}>
-                <option value="day">À la journée</option>
-                <option value="weekend">Week-end (2 jours)</option>
-                <option value="week">À la semaine</option>
-              </select>
-            </div>
-
-            {vehicle && (
-              <div className="resa-field resa-est-field">
-                <label>Tarif estimé</label>
-                <div className="resa-est">
-                  <span className="resa-est-price">{eur(vehicle.prices[duration])}</span>
-                  <span className="resa-est-unit">/ {durLabels[duration]}</span>
-                </div>
-              </div>
-            )}
-
-          </div>
-          <Button type="submit" size="lg" icon={Icons.arrow} className="resa-cta-btn">
-            {vehicle ? "Réserver " + vehicle.name : "Voir la flotte"}
-          </Button>
-        </form>
-      </div>
-
-    </div>
+      <button className="resa-bar-btn" type="submit">
+        {vehicle ? "Réserver" : "Continuer"}
+        <span className="resa-bar-btn-arrow">→</span>
+      </button>
+    </form>
   );
 }
 

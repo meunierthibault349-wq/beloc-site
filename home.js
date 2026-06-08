@@ -256,108 +256,74 @@ function HomePage(props) {
   }, "Conciergerie \xB7 7j/7")))))))));
 }
 
-/* ── RESERVATION WIDGET — Bandeau flottant configurable ── */
+/* ── RESERVATION WIDGET — Barre sticky compacte, toutes pages ── */
 function ReservationWidget(props) {
   var B = window.BELOC;
-  var durLabels = {
-    day: "journée",
-    weekend: "week-end",
-    week: "semaine"
+  var today = new Date().toISOString().split("T")[0];
+  var _s1 = useState("");
+  var vehicleId = _s1[0];
+  var setVehicleId = _s1[1];
+  var _s2 = useState("");
+  var dateFrom = _s2[0];
+  var setDateFrom = _s2[1];
+  var _s3 = useState("day");
+  var duration = _s3[0];
+  var setDuration = _s3[1];
+  var vehicle = vehicleId ? B.byId(vehicleId) : null;
+  var durMap = {
+    day: 1,
+    weekend: 2,
+    week: 7
   };
-  var durFull = {
+  var durLabels = {
     day: "À la journée",
-    weekend: "Week-end (2 jours)",
+    weekend: "Week-end",
     week: "À la semaine"
   };
-  var today = new Date().toISOString().split("T")[0];
-  var _s1 = useState(false);
-  var open = _s1[0];
-  var setOpen = _s1[1];
-  var _s2 = useState("");
-  var vehicleId = _s2[0];
-  var setVehicleId = _s2[1];
-  var _s3 = useState("");
-  var date = _s3[0];
-  var setDate = _s3[1];
-  var _s4 = useState("day");
-  var duration = _s4[0];
-  var setDuration = _s4[1];
-  var vehicle = vehicleId ? B.byId(vehicleId) : null;
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (vehicleId) {
-      props.nav("detail", vehicleId);
-    } else {
-      props.nav("fleet");
-    }
-    setOpen(false);
-  }
-  var dateLabel = "";
-  if (date) {
+  var dateTo = "";
+  if (dateFrom) {
     try {
-      dateLabel = new Date(date + "T12:00").toLocaleDateString("fr-FR", {
+      var d = new Date(dateFrom + "T12:00");
+      d.setDate(d.getDate() + durMap[duration]);
+      dateTo = d.toISOString().split("T")[0];
+    } catch (ex) {}
+  }
+  function fmt(iso) {
+    if (!iso) return null;
+    try {
+      return new Date(iso + "T12:00").toLocaleDateString("fr-FR", {
         day: "numeric",
         month: "short"
       });
-    } catch (ex) {}
-  }
-  return /*#__PURE__*/React.createElement("div", {
-    className: "resa-widget" + (open ? " open" : "")
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "resa-bar"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-ico"
-  }, Icons.key), /*#__PURE__*/React.createElement("div", {
-    className: "resa-bar-info"
-  }, vehicle ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-vehicle"
-  }, vehicle.full), /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-dot"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-meta"
-  }, durFull[duration], dateLabel ? " · " + dateLabel : ""), /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-badge"
-  }, eur(vehicle.prices[duration]))) : /*#__PURE__*/React.createElement("span", {
-    className: "resa-bar-hint"
-  }, "Configurez et r\xE9servez votre v\xE9hicule en 3 min")), /*#__PURE__*/React.createElement("button", {
-    className: "resa-toggle",
-    type: "button",
-    onClick: function () {
-      setOpen(!open);
+    } catch (ex) {
+      return null;
     }
-  }, /*#__PURE__*/React.createElement("span", null, open ? "Réduire" : "Configurer"), Icons.chevD)), /*#__PURE__*/React.createElement("div", {
-    className: "resa-panel" + (open ? " open" : "")
-  }, /*#__PURE__*/React.createElement("form", {
-    className: "resa-form",
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (vehicleId) {
+      props.nav("booking", {
+        id: vehicleId,
+        tier: duration
+      });
+    } else {
+      props.nav("fleet");
+    }
+  }
+  var cls = "resa-bar-widget" + (props.route === "detail" ? " resa-bar-widget--no-mobile" : "");
+  return /*#__PURE__*/React.createElement("form", {
+    className: cls,
     onSubmit: handleSubmit
   }, /*#__PURE__*/React.createElement("div", {
-    className: "resa-fields"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "resa-field"
-  }, /*#__PURE__*/React.createElement("label", null, "V\xE9hicule"), /*#__PURE__*/React.createElement("select", {
-    value: vehicleId,
-    onChange: function (e) {
-      setVehicleId(e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: ""
-  }, "Tous les v\xE9hicules"), B.vehicles.map(function (v) {
-    return /*#__PURE__*/React.createElement("option", {
-      key: v.id,
-      value: v.id
-    }, v.full, " \u2014 d\xE8s ", eur(v.prices.day), " / jour");
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "resa-field"
-  }, /*#__PURE__*/React.createElement("label", null, "Date de d\xE9part"), /*#__PURE__*/React.createElement("input", {
-    type: "date",
-    value: date,
-    min: today,
-    onChange: function (e) {
-      setDate(e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "resa-field"
-  }, /*#__PURE__*/React.createElement("label", null, "Dur\xE9e"), /*#__PURE__*/React.createElement("select", {
+    className: "resa-bar-fields"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "resa-bar-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-label"
+  }, "Dur\xE9e"), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-value" + (!duration ? " resa-bar-field-value--ph" : "")
+  }, durLabels[duration] || "Choisir"), /*#__PURE__*/React.createElement("select", {
+    className: "resa-bar-field-select",
     value: duration,
     onChange: function (e) {
       setDuration(e.target.value);
@@ -368,20 +334,57 @@ function ReservationWidget(props) {
     value: "weekend"
   }, "Week-end (2 jours)"), /*#__PURE__*/React.createElement("option", {
     value: "week"
-  }, "\xC0 la semaine"))), vehicle && /*#__PURE__*/React.createElement("div", {
-    className: "resa-field resa-est-field"
-  }, /*#__PURE__*/React.createElement("label", null, "Tarif estim\xE9"), /*#__PURE__*/React.createElement("div", {
-    className: "resa-est"
+  }, "\xC0 la semaine"))), /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar-sep"
+  }), /*#__PURE__*/React.createElement("label", {
+    className: "resa-bar-field"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "resa-est-price"
-  }, eur(vehicle.prices[duration])), /*#__PURE__*/React.createElement("span", {
-    className: "resa-est-unit"
-  }, "/ ", durLabels[duration])))), /*#__PURE__*/React.createElement(Button, {
-    type: "submit",
-    size: "lg",
-    icon: Icons.arrow,
-    className: "resa-cta-btn"
-  }, vehicle ? "Réserver " + vehicle.name : "Voir la flotte"))));
+    className: "resa-bar-field-label"
+  }, "V\xE9hicule"), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-value" + (!vehicleId ? " resa-bar-field-value--ph" : "")
+  }, vehicle ? vehicle.full : "Tous les véhicules"), /*#__PURE__*/React.createElement("select", {
+    className: "resa-bar-field-select",
+    value: vehicleId,
+    onChange: function (e) {
+      setVehicleId(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Tous les v\xE9hicules"), B.vehicles.map(function (v) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: v.id,
+      value: v.id
+    }, v.full);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar-sep"
+  }), /*#__PURE__*/React.createElement("label", {
+    className: "resa-bar-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-label"
+  }, "Date de d\xE9part"), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-value" + (!dateFrom ? " resa-bar-field-value--ph" : "")
+  }, fmt(dateFrom) || "Choisir une date"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    className: "resa-bar-field-date",
+    value: dateFrom,
+    min: today,
+    onChange: function (e) {
+      setDateFrom(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar-sep"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar-field"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-label"
+  }, "Date de retour"), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-field-value" + (!dateTo ? " resa-bar-field-value--ph" : "")
+  }, fmt(dateTo) || "Calculée auto."))), /*#__PURE__*/React.createElement("button", {
+    className: "resa-bar-btn",
+    type: "submit"
+  }, vehicle ? "Réserver" : "Continuer", /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-btn-arrow"
+  }, "\u2192")));
 }
 Object.assign(window, {
   HomePage,

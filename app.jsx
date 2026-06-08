@@ -32,15 +32,14 @@ function App() {
   else page = <HomePage nav={nav} onFav={onFav} />;
 
   const solid = route !== "home";
-  const showWidget = route === "home";
 
   return (
     <React.Fragment>
       <Header route={route} nav={nav} solid={solid} />
-      <main style={showWidget ? { paddingBottom: 74 } : undefined}>{page}</main>
+      <main style={{ paddingBottom: 110 }}>{page}</main>
       <Footer nav={nav} />
       {toastNode}
-      {showWidget && <ReservationWidget nav={nav} />}
+      <ReservationWidget nav={nav} route={route} />
     </React.Fragment>
   );
 }
