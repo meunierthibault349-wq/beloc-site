@@ -1,30 +1,30 @@
 /* ============================================================
    BeLoc — Design System
-   Blanc lumineux · orange vif · crème chaud
+   Fond sombre · orange vif · premium
    Display: Space Grotesk · UI: Inter
    ============================================================ */
 
 :root {
-  /* Surfaces — blanc et crème chauds, lumineux */
-  --ink-1000: #FFFFFF;
-  --ink-900:  #FFFFFF;   /* fond principal */
-  --ink-850:  #FAF7F2;   /* papier chaud */
-  --ink-800:  #F3EAE0;   /* crème doux */
-  --ink-750:  #E8DDD0;   /* crème moyen */
-  --ink-700:  #D8CCBC;
-  --ink-650:  #C2B4A4;
-  --ink-600:  #AAA090;
+  /* Surfaces — sombre premium */
+  --ink-1000: #0A0A0C;
+  --ink-900:  #0A0A0C;   /* fond principal */
+  --ink-850:  #111114;   /* légèrement clair */
+  --ink-800:  #18181C;   /* cartes */
+  --ink-750:  #1E1E24;
+  --ink-700:  #26262E;
+  --ink-650:  #32323C;
+  --ink-600:  #3E3E4A;
 
-  /* Texte — brun chaud, jamais froid */
-  --bone:     #1C1A15;
-  --bone-dim: #3C3930;
-  --muted:    #7A7060;
-  --muted-2:  #A09A8E;
+  /* Texte — clair sur fond sombre */
+  --bone:     #F4F1EA;
+  --bone-dim: #C4BFB6;
+  --muted:    #7A7570;
+  --muted-2:  #50504A;
 
-  /* Lines — chaud */
-  --line:        rgba(0,0,0,.08);
-  --line-soft:   rgba(0,0,0,.05);
-  --line-strong: rgba(0,0,0,.14);
+  /* Lines — clair */
+  --line:        rgba(255,255,255,.08);
+  --line-soft:   rgba(255,255,255,.05);
+  --line-strong: rgba(255,255,255,.14);
 
   /* Orange — accent principal et accents décoratifs */
   --gold:      #FF5C00;
@@ -245,7 +245,7 @@ a { color: inherit; text-decoration: none; }
   height: 76px;
   max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter);
 }
-.hdr.scrolled { background: rgba(255,255,255,.94); backdrop-filter: blur(18px) saturate(1.1); border-color: rgba(0,0,0,.08); box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+.hdr.scrolled { background: rgba(10,10,12,.92); backdrop-filter: blur(18px) saturate(1.1); border-color: rgba(255,255,255,.08); box-shadow: 0 1px 0 rgba(0,0,0,.40); }
 .hdr.scrolled .wordmark { color: var(--bone); }
 .hdr.scrolled .hdr-link { color: var(--muted); }
 .hdr.scrolled .hdr-link:hover, .hdr.scrolled .hdr-link.active { color: var(--bone); }
@@ -283,7 +283,7 @@ a { color: inherit; text-decoration: none; }
 .drawer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
 .drawer-nav { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .drawer-nav a {
-  font-family: var(--serif); font-size: 38px; font-weight: 600; color: rgba(0,0,0,.42);
+  font-family: var(--serif); font-size: 38px; font-weight: 600; color: var(--bone-dim);
   padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center;
 }
 .drawer-nav a:hover { color: var(--bone); }
@@ -292,41 +292,41 @@ a { color: inherit; text-decoration: none; }
 
 /* ---- Drawer mini-widget réservation ---- */
 .drawer-resa {
-  background: #FFFFFF;
+  background: var(--ink-800);
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,.09);
-  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  border: 1px solid rgba(255,255,255,.09);
+  box-shadow: 0 4px 20px rgba(0,0,0,.30);
   overflow: hidden;
 }
 .drawer-resa-fields { display: flex; flex-direction: column; }
 .drawer-resa-row { display: flex; align-items: stretch; }
-.drawer-resa-divider { height: 1px; background: rgba(0,0,0,.07); }
+.drawer-resa-divider { height: 1px; background: rgba(255,255,255,.07); }
 .drawer-resa-field {
   position: relative; flex: 1; padding: 11px 16px;
   display: flex; flex-direction: column; gap: 2px; cursor: pointer;
 }
-.drawer-resa-field:hover { background: rgba(0,0,0,.03); }
+.drawer-resa-field:hover { background: rgba(255,255,255,.04); }
 .drawer-resa-lbl {
-  font-size: 10px; font-weight: 700; color: #1C1A15;
+  font-size: 10px; font-weight: 700; color: var(--bone);
   letter-spacing: .06em; text-transform: uppercase; pointer-events: none;
 }
 .drawer-resa-val {
-  font-size: 13px; color: #3C3930;
+  font-size: 13px; color: var(--bone-dim);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
 }
-.drawer-resa-sep { width: 1px; background: rgba(0,0,0,.09); flex-shrink: 0; margin: 8px 0; }
+.drawer-resa-sep { width: 1px; background: rgba(255,255,255,.09); flex-shrink: 0; margin: 8px 0; }
 .drawer-resa-sel {
   position: absolute; inset: 0; width: 100%; height: 100%;
   opacity: 0; cursor: pointer; font-size: 16px;
 }
 .drawer-resa-btn {
-  width: 100%; background: #1C1A15; color: #FFFFFF;
+  width: 100%; background: var(--red); color: #FFFFFF;
   border: none; padding: 13px 20px;
   font-family: var(--sans); font-size: 14px; font-weight: 700;
   cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
   transition: background .2s;
 }
-.drawer-resa-btn:hover { background: var(--gold); }
+.drawer-resa-btn:hover { background: var(--gold-soft); }
 .drawer-resa-arrow { font-size: 17px; line-height: 1; }
 
 /* ---------- Hero ---------- */
@@ -806,10 +806,10 @@ a { color: inherit; text-decoration: none; }
 .pm-n { display: block; font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--bone); line-height: 1; }
 .pm-l { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 
-/* ---------- Final CTA — panneau orange lumineux ---------- */
+/* ---------- Final CTA — panneau sombre premium ---------- */
 .final-cta {
-  background: linear-gradient(145deg, #FFF4EC 0%, #FFE8D5 100%);
-  border: 1px solid rgba(255,92,0,.16);
+  background: linear-gradient(145deg, #14120E 0%, #1C1814 100%);
+  border: 1px solid rgba(255,92,0,.18);
   border-radius: var(--radius-lg);
   text-align: center;
   padding: clamp(60px,8vw,100px) clamp(32px,6vw,80px);
@@ -832,12 +832,12 @@ a { color: inherit; text-decoration: none; }
   position: fixed; top: 88px; left: 50%; transform: translateX(-50%);
   z-index: 980;
   display: flex; align-items: center;
-  background: #FFFFFF;
+  background: var(--ink-800);
   border-radius: 20px;
-  box-shadow: 0 8px 48px -8px rgba(0,0,0,.28), 0 2px 12px rgba(0,0,0,.10), 0 0 0 1px rgba(0,0,0,.06);
+  box-shadow: 0 8px 48px -8px rgba(0,0,0,.60), 0 2px 12px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.06);
   padding: 6px 6px 6px 0;
   width: min(960px, calc(100vw - 48px));
-  border: 1px solid rgba(0,0,0,.07);
+  border: 1px solid rgba(255,255,255,.07);
 }
 
 .resa-bar-fields { display: flex; align-items: center; flex: 1; min-width: 0; }
@@ -851,20 +851,20 @@ a { color: inherit; text-decoration: none; }
   transition: background .15s ease;
   user-select: none; -webkit-user-select: none;
 }
-.resa-bar-field:hover { background: rgba(0,0,0,.04); }
-.resa-bar-field:focus-within { background: rgba(0,0,0,.05); }
+.resa-bar-field:hover { background: rgba(255,255,255,.05); }
+.resa-bar-field:focus-within { background: rgba(255,255,255,.06); }
 
 .resa-bar-field-label {
-  font-size: 16px; font-weight: 700; color: #111;
+  font-size: 16px; font-weight: 700; color: var(--bone);
   letter-spacing: -.01em;
   white-space: nowrap; pointer-events: none; margin-bottom: 4px;
 }
 
 .resa-bar-field-value {
-  font-size: 13px; font-weight: 400; color: #888;
+  font-size: 13px; font-weight: 400; color: var(--muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
 }
-.resa-bar-field-value--ph { color: #aaa; }
+.resa-bar-field-value--ph { color: var(--muted); }
 
 .resa-bar-field-select,
 .resa-bar-field-date {
@@ -873,11 +873,11 @@ a { color: inherit; text-decoration: none; }
   -webkit-appearance: none; appearance: none;
 }
 
-.resa-bar-sep { width: 1px; height: 36px; background: rgba(0,0,0,.10); flex-shrink: 0; }
+.resa-bar-sep { width: 1px; height: 36px; background: rgba(255,255,255,.10); flex-shrink: 0; }
 
 .resa-bar-btn {
   flex-shrink: 0;
-  background: var(--bone); color: #FFFFFF;
+  background: var(--red); color: #FFFFFF;
   border: none; border-radius: 16px;
   padding: 14px 22px; margin: 0 4px;
   font-family: var(--sans); font-size: 14px; font-weight: 700;

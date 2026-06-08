@@ -269,9 +269,6 @@ function ReservationWidget(props) {
   var _s3 = useState("day");
   var duration = _s3[0];
   var setDuration = _s3[1];
-  var _s4 = useState("");
-  var dateTo = _s4[0];
-  var setDateTo = _s4[1];
   var vehicle = vehicleId ? B.byId(vehicleId) : null;
   var durMap = {
     day: 1,
@@ -283,14 +280,14 @@ function ReservationWidget(props) {
     weekend: "Week-end",
     week: "À la semaine"
   };
-  useEffect(function() {
-    if (!dateFrom) { setDateTo(""); return; }
+  var dateTo = "";
+  if (dateFrom) {
     try {
       var d = new Date(dateFrom + "T12:00");
       d.setDate(d.getDate() + durMap[duration]);
-      setDateTo(d.toISOString().split("T")[0]);
-    } catch(ex) {}
-  }, [dateFrom, duration]);
+      dateTo = d.toISOString().split("T")[0];
+    } catch (ex) {}
+  }
   function fmt(iso) {
     if (!iso) return null;
     try {
@@ -376,19 +373,13 @@ function ReservationWidget(props) {
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "resa-bar-sep"
-  }), /*#__PURE__*/React.createElement("label", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "resa-bar-field"
   }, /*#__PURE__*/React.createElement("span", {
     className: "resa-bar-field-label"
   }, "Date de retour"), /*#__PURE__*/React.createElement("span", {
     className: "resa-bar-field-value" + (!dateTo ? " resa-bar-field-value--ph" : "")
-  }, fmt(dateTo) || "Choisir une date"), /*#__PURE__*/React.createElement("input", {
-    type: "date",
-    className: "resa-bar-field-date",
-    value: dateTo,
-    min: dateFrom || today,
-    onChange: function(e) { setDateTo(e.target.value); }
-  }))), /*#__PURE__*/React.createElement("button", {
+  }, fmt(dateTo) || "Calculée auto."))), /*#__PURE__*/React.createElement("button", {
     className: "resa-bar-btn",
     type: "submit"
   }, vehicle ? "Réserver" : "Continuer", /*#__PURE__*/React.createElement("span", {
