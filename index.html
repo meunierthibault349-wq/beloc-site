@@ -47,6 +47,7 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://meunierthibault349-wq.github.io/beloc-site/" />
   <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="BeLoc" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BeLoc — Location premium · Auvergne-Rhône-Alpes" />
@@ -69,6 +70,7 @@
     "description": "Location de véhicules premium 100% en ligne en Auvergne-Rhône-Alpes.",
     "url": "https://meunierthibault349-wq.github.io/beloc-site/",
     "email": "contact@beloc.fr",
+    "telephone": "+33XXXXXXXXX",
     "priceRange": "€€€",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -157,7 +159,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 }
 .hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 10px 0 14px;padding-top:env(safe-area-inset-top,0px);gap:8px;background:transparent;transition:background .25s}
 .hdr.stuck{background:rgba(10,10,12,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr)}
-.hdr-logo{font-family:var(--fh);font-weight:700;font-size:36px;color:#fff;letter-spacing:-.9px;flex-shrink:0;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.3)}
+.hdr-logo{font-family:var(--fh);font-weight:700;font-size:36px;color:#fff;letter-spacing:-1px;flex-shrink:0;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.3);position:relative;padding-left:14px;border-radius:4px;outline:none}
+.hdr-logo:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.hdr-logo::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:68%;background:linear-gradient(to bottom,#E0C48A,#8A6830);border-radius:2px}
 .hdr-sep{width:1px;height:20px;background:rgba(255,255,255,.2);flex-shrink:0}
 .hero{position:relative;width:100%;height:100dvh;min-height:580px;background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;z-index:0}
@@ -167,8 +171,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .hero-bot{position:relative;z-index:2;padding:0 24px calc(max(44px,env(safe-area-inset-bottom,0px) + 28px))}
 .hero-title{font-family:var(--fh);font-weight:700;font-size:clamp(38px,11vw,56px);line-height:1.02;letter-spacing:-1.8px;color:#fff;max-width:12ch;margin-bottom:10px}
 .hero-sub{font-family:var(--fb);font-size:14px;line-height:1.5;color:rgba(255,255,255,.52);margin-bottom:28px}
-.cta{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:54px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:16px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s}
-.cta:active{background:#B8943D;transform:scale(.98)}
+.cta{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:54px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:16px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .2s,transform .1s,box-shadow .2s}
+.cta:hover{background:#D4B47A;box-shadow:0 4px 20px rgba(201,169,110,.35)}
+.cta:active{background:#B8943D;transform:scale(.98);box-shadow:none}
 .sec{background:var(--bg);padding:60px 0 56px}
 .sec-alt{background:var(--bg1);padding:60px 0 56px}
 .sh{padding:0 24px;margin-bottom:32px}
@@ -177,8 +182,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .ss{font-family:var(--fb);font-size:14px;line-height:1.6;color:var(--t2);margin-top:6px}
 .fleet{display:flex;gap:14px;padding:4px 24px 20px;overflow-x:scroll;scroll-snap-type:x mandatory;scroll-padding-left:24px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none}
 .fleet::-webkit-scrollbar{display:none}
-.fc{flex-shrink:0;width:72vw;max-width:270px;scroll-snap-align:start;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,transform .15s}
+.fc{flex-shrink:0;width:72vw;max-width:270px;scroll-snap-align:start;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,transform .2s,box-shadow .2s}
 .fc:active{transform:scale(.98);border-color:var(--bdhi)}
+.fc:hover{border-color:rgba(201,169,110,.4);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
 .fc-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2)}
 .fc-body{padding:14px 16px 16px}
 .fbadge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
@@ -190,7 +196,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fc-bot{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .fprice{font-family:var(--fh);font-weight:700;font-size:17px;color:var(--t1)}
 .fprice em{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--t2);font-style:normal}
-.fbtn{height:36px;padding:0 14px;background:var(--gold);color:#1C1A15;font-family:var(--fb);font-weight:600;font-size:12px;border:none;border-radius:var(--rs);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.fbtn{height:36px;padding:0 14px;background:var(--gold);color:#1C1A15;font-family:var(--fb);font-weight:600;font-size:12px;border:none;border-radius:var(--rs);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;white-space:nowrap;transition:background .15s,transform .1s}
+.fbtn:hover{background:#D4B47A}
+.fbtn:active{background:#B8943D;transform:scale(.97)}
 .fbtn-sec{height:36px;padding:0 12px;background:transparent;color:var(--t2);font-family:var(--fb);font-weight:500;font-size:12px;border:1px solid var(--bdr);border-radius:var(--rs);display:inline-flex;align-items:center;white-space:nowrap;text-decoration:none}
 .dots{display:flex;justify-content:center;gap:6px;padding:0 24px}
 .dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.18);transition:width .2s,background .2s}
@@ -222,7 +230,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .pt{font-family:var(--fh);font-weight:700;font-size:20px;color:var(--ft1);margin-bottom:4px}
 .ph{font-family:var(--fb);font-size:13px;color:var(--ft2);margin-bottom:20px}
 .vlist{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-.vcard{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .15s}
+.vcard{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .15s;outline:none}
+.vcard:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .vcard:active{opacity:.92}
 .vcard.sel{border-color:var(--blue);background:var(--fsel)}
 .vcard-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#D4D4D8}
@@ -242,7 +251,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fg{margin-bottom:14px}
 .fl{display:block;font-family:var(--fb);font-weight:600;font-size:12px;color:var(--ft1);letter-spacing:.2px;margin-bottom:6px}
 .fi{display:block;width:100%;height:50px;font-family:var(--fb);font-size:16px;color:var(--ft1);background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rs);padding:0 14px;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .15s}
-.fi:focus{border-color:var(--blue)}
+.fi:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.15);outline:none}
 .fi::placeholder{color:rgba(255,255,255,.28)}
 .fi.err{border-color:var(--red)}
 .fe{font-family:var(--fb);font-size:11px;color:var(--red);margin-top:4px;display:none}
@@ -253,7 +262,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .psv.hide{display:none}
 .psp{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.35);font-style:italic}
 .ot{font-family:var(--fh);font-weight:600;font-size:15px;color:var(--ft1);margin:18px 0 10px}
-.opt{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
+.opt{background:var(--fc);border:1.5px solid var(--fbdr);border-radius:var(--rm);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s;outline:none}
+.opt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .opt.on{border-color:var(--blue);background:var(--fsel)}
 .opt-info{flex:1}
 .opt-name{font-family:var(--fb);font-weight:600;font-size:13px;color:var(--ft1);margin-bottom:2px}
@@ -274,13 +284,17 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .fgrid .fg{margin-bottom:0}
 .ffull{margin-bottom:14px}
-.btn-next{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--blue);color:#fff;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s,opacity .15s;margin-top:8px}
+.btn-next{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--blue);color:#fff;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s,opacity .15s;margin-top:8px;outline:none}
+.btn-next:hover:not(:disabled){background:#2563EB}
 .btn-next:active{transform:scale(.98)}
+.btn-next:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .btn-next:disabled{opacity:.38;cursor:not-allowed}
 .btn-back{display:flex;align-items:center;justify-content:center;width:100%;height:44px;background:transparent;color:var(--ft2);font-family:var(--fb);font-weight:500;font-size:13px;border:1.5px solid var(--fbdr);border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;margin-top:8px;transition:border-color .15s}
 .btn-back:active{border-color:var(--ft2)}
-.btn-confirm{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s;margin-top:8px}
-.btn-confirm:active{background:#B8943D;transform:scale(.98)}
+.btn-confirm{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .2s,transform .1s,box-shadow .2s;margin-top:8px;outline:none}
+.btn-confirm:hover{background:#D4B47A;box-shadow:0 4px 16px rgba(201,169,110,.3)}
+.btn-confirm:active{background:#B8943D;transform:scale(.98);box-shadow:none}
+.btn-confirm:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .pbs{padding-bottom:calc(max(48px,env(safe-area-inset-bottom,0px) + 32px))}
 .vchip{display:none;align-items:center;gap:10px;background:var(--fc);border:1px solid var(--fbdr);border-radius:var(--rm);padding:10px 12px;margin-bottom:18px}
 .vchip.show{display:flex}
@@ -311,7 +325,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .trust-item{display:flex;align-items:center;gap:5px;font-family:var(--fb);font-size:11px;font-weight:500;color:rgba(255,255,255,.55)}
 .trust-sep{color:rgba(255,255,255,.2);font-size:10px}
 /* ---- Widget réservation intégré au header ---- */
-.mw-inner{flex:1;display:flex;align-items:stretch;height:30px;background:#fff;border-radius:7px;overflow:hidden;min-width:0;transition:opacity .2s}
+/* Sur mobile la hauteur 30px est intentionnellement compacte car le widget est en header fixe.
+   Les cibles tactiles réelles sont les mw-field (toute la hauteur du header) + le mw-btn. */
+.mw-inner{flex:1;display:flex;align-items:stretch;height:36px;background:#fff;border-radius:7px;overflow:hidden;min-width:0;transition:opacity .2s}
 .mw-inner.mw-hide{opacity:0;pointer-events:none}
 .mw-field{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 6px;position:relative;min-width:0}
 .mw-lbl{font-family:var(--fb);font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#444;line-height:1;margin-bottom:2px}
@@ -322,16 +338,16 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-btn{display:flex;align-items:center;justify-content:center;width:32px;min-width:32px;background:var(--gold);color:#1C1A15;font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s;flex-shrink:0}
 .mw-btn:active{background:#B8943D}
 .mw-dd-ov{position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.22)}
-.mw-dd{position:fixed;width:260px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.16);z-index:300;overflow:hidden}
+.mw-dd{position:fixed;width:min(260px,calc(100vw - 16px));background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.16);z-index:300;overflow:hidden}
 .mw-dd-opt{display:block;width:100%;padding:11px 16px;font-family:var(--fh);font-size:13px;font-weight:500;color:#1C1A15;border:none;background:transparent;text-align:left;border-bottom:1px solid rgba(0,0,0,.05);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .1s}
 .mw-dd-opt:last-child{border-bottom:none}
 .mw-dd-opt:active{background:#F5F5F5}
 .mw-dd-opt.mw-on{color:var(--gold);font-weight:700}
 /* ---- Calendrier custom ---- */
-.mw-cal{position:fixed;width:294px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);z-index:300;padding:12px 10px 10px}
+.mw-cal{position:fixed;width:min(294px,calc(100vw - 16px));background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);z-index:300;padding:12px 10px 10px}
 .mw-cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:0 2px}
 .mw-cal-mo{font-family:var(--fh);font-size:13px;font-weight:700;color:#1C1A15;letter-spacing:-.2px}
-.mw-cal-nav{width:26px;height:26px;border:none;background:#F3F3F5;border-radius:6px;font-size:14px;cursor:pointer;color:#555;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+.mw-cal-nav{width:36px;height:36px;border:none;background:#F3F3F5;border-radius:6px;font-size:16px;cursor:pointer;color:#555;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
 .mw-cal-nav:active{background:#E5E5E5}
 .mw-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0}
 .mw-cal-dow{font-family:var(--fb);font-size:9px;font-weight:600;color:#C0C0C0;text-align:center;height:28px;display:flex;align-items:center;justify-content:center}
@@ -346,10 +362,13 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-cal-li{display:flex;align-items:center;gap:4px;font-family:var(--fb);font-size:9px;color:#999}
 .mw-cal-li i{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .footer{background:var(--bg1);border-top:1px solid var(--bdr);padding:56px 24px calc(max(48px,env(safe-area-inset-bottom,0px) + 32px))}
-.fl-logo{font-family:var(--fh);font-weight:700;font-size:28px;color:var(--t1);margin-bottom:10px;letter-spacing:-.5px}
+.fl-logo{font-family:var(--fh);font-weight:700;font-size:28px;color:var(--t1);margin-bottom:10px;letter-spacing:-1px;position:relative;padding-left:14px;display:inline-block}
+.fl-logo::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:68%;background:linear-gradient(to bottom,#E0C48A,#8A6830);border-radius:2px}
 .fl-line{font-family:var(--fb);font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:36px}
 .fl-links{display:flex;flex-direction:column;gap:4px;margin-bottom:36px}
-.fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:color .15s;outline:none}
+.fl-link:hover{color:var(--gold)}
+.fl-link:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
 /* Skip link */
@@ -411,7 +430,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .step-desc{font-family:var(--fb);font-size:13px;line-height:1.55;color:var(--t2)}
 /* ---- FAQ ---- */
 .faq{padding:0 24px;display:flex;flex-direction:column;gap:8px}
-.faq-item{border:1px solid var(--bdr);border-radius:var(--rm);overflow:hidden;background:var(--bg2);transition:border-color .2s}
+.faq-item{border:1px solid var(--bdr);border-radius:var(--rm);overflow:hidden;background:var(--bg2);transition:border-color .2s,background .2s}
+.faq-item:hover{border-color:rgba(255,255,255,.14)}
 .faq-item.open{border-color:rgba(201,169,110,.35)}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;width:100%;background:transparent;border:none;text-align:left}
 .faq-qt{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--t1);line-height:1.3}
@@ -611,16 +631,20 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   /* Footer 3 colonnes */
   .footer{
     display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:48px;
+    grid-template-columns:2fr 1fr;
+    grid-template-rows:auto auto;
+    gap:0 80px;
     align-items:start;
     padding:64px 80px 48px;
     text-align:left;
   }
+  .fl-brand{grid-column:1;grid-row:1}
+  .fl-nav{grid-column:2;grid-row:1 / span 2;border-left:1px solid var(--bdr);padding-left:48px}
+  .fl-div{grid-column:1 / span 2;grid-row:2;margin:36px 0 24px;display:block}
+  .fl-legal{grid-column:1;grid-row:3}
   .fl-logo{margin-bottom:8px}
   .fl-line{margin-bottom:0}
   .fl-links{margin-bottom:0}
-  .fl-div{display:none}
 
   /* Tarifs centré */
   .sec-alt > .sh,
@@ -1042,31 +1066,35 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 </section>
 
 <footer class="footer" role="contentinfo">
-  <p class="fl-logo">BeLoc.</p>
-  <p class="fl-line">Location de véhicules premium en Auvergne-Rhône-Alpes.<br>100 % en ligne. Sans agence. Sans attente.</p>
-  <div class="fl-links">
-    <a href="mailto:contact@beloc.fr" class="fl-link">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 6l7 4 7-4"/></svg>
-      contact@beloc.fr
-    </a>
-    <!-- TODO: ajouter le numéro de téléphone BeLoc ici
-    <a href="tel:+33XXXXXXXXX" class="fl-link">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.95.68l1 3a1 1 0 01-.23 1.03L6.1 7.8A10 10 0 009.2 10.9l1.08-1.12a1 1 0 011.03-.23l3 1a1 1 0 01.69.95V14a1 1 0 01-1 1C6.5 15 1 9.5 1 3a1 1 0 011-1z"/></svg>
-      +33 X XX XX XX XX
-    </a>
-    -->
+  <div class="fl-brand">
+    <p class="fl-logo">BeLoc<span style="color:var(--gold)">.</span></p>
+    <p class="fl-line">Location de véhicules premium en Auvergne-Rhône-Alpes.<br>100 % en ligne. Sans agence. Sans attente.</p>
   </div>
+  <nav class="fl-nav" aria-label="Liens footer">
+    <div class="fl-links">
+      <a href="mailto:contact@beloc.fr" class="fl-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 6l7 4 7-4"/></svg>
+        contact@beloc.fr
+      </a>
+      <!-- TODO: ajouter le numéro de téléphone BeLoc ici
+      <a href="tel:+33XXXXXXXXX" class="fl-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.95.68l1 3a1 1 0 01-.23 1.03L6.1 7.8A10 10 0 009.2 10.9l1.08-1.12a1 1 0 011.03-.23l3 1a1 1 0 01.69.95V14a1 1 0 01-1 1C6.5 15 1 9.5 1 3a1 1 0 011-1z"/></svg>
+        +33 X XX XX XX XX
+      </a>
+      -->
+    </div>
+  </nav>
   <div class="fl-div"></div>
   <p class="fl-legal">2026 BeLoc · Tous droits réservés · Auvergne-Rhône-Alpes · <a href="mentions-legales.html" style="color:var(--gold)">Mentions légales</a></p>
 </footer>
 
 <script>
 var V=[
-  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-photo.jpg',    badge:'⭐ Populaire'},
-  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-photo.jpg',   badge:'🔥 Coup de cœur'},
-  {id:'golf8', brand:'VW',      name:'Golf 8',        type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
-  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg',        badge:'Nouveau'},
-  {id:'clio5', brand:'Renault', name:'Clio 5',        type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
+  {id:'rs3',   brand:'Audi',    name:'RS3',           year:'2025',type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-photo.jpg',    badge:'Populaire'},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',       year:'2025',type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-photo.jpg',   badge:'Coup de cœur'},
+  {id:'golf8', brand:'VW',      name:'Golf 8',        year:'2025',type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
+  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', year:'2026',type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg',     badge:'Nouveau 2026'},
+  {id:'clio5', brand:'Renault', name:'Clio 5',        year:'2025',type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
 ];
 var FB={Sport:'bs',Citadine:'bc',Polyvalente:'bp'};
 var TG={Sport:'ts',Citadine:'tc',Polyvalente:'tp'};
@@ -1101,7 +1129,7 @@ function buildFleet(){
   el.innerHTML=V.map(function(v,i){
     return '<div class="fc" role="listitem" tabindex="0"'
       +' onclick="fpick(\''+v.id+'\')">'
-      +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' 2025 — location premium BeLoc"'
+      +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' '+v.year+' — location premium BeLoc"'
       +' loading="'+(i===0?'eager':'lazy')+'" onerror="this.style.background=\'#18181C\'" />'
       +'<div class="fc-body">'
       +(v.badge?'<p class="pop-badge">'+v.badge+'</p>':'')
@@ -1265,7 +1293,7 @@ function updateVchip(n){
   var chip=document.getElementById('vchip'+n);
   if(!chip)return;
   document.getElementById('vchip'+n+'-img').src=v.img;
-  document.getElementById('vchip'+n+'-img').alt=v.brand+' '+v.name;
+  document.getElementById('vchip'+n+'-img').alt=v.brand+' '+v.name+' '+v.year;
   document.getElementById('vchip'+n+'-name').textContent=v.brand+' '+v.name;
   document.getElementById('vchip'+n+'-price').textContent='dès '+v.price+' €/jour';
   chip.classList.add('show');
@@ -1385,9 +1413,9 @@ var MW_DUR_OPTS=[{v:'day',l:'À la journée'},{v:'weekend',l:'Week-end (2 jours)
 var mwDD=null;
 
 function mwInit(){
+  /* Initialisation du widget calendrier — préparer la date min pour les sélecteurs */
   var now=new Date();
-  var mwD0=document.getElementById('mw-d0');
-  if(mwD0)mwD0.min=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
+  MW._today=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
 }
 
 function mwShowDD(type,anchor){
