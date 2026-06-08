@@ -137,6 +137,11 @@ ul,ol{list-style:none}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(prefers-reduced-motion:no-preference){
+  .anim{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+  .anim.in{opacity:1;transform:translateY(0)}
+  .anim-d1{transition-delay:.07s}.anim-d2{transition-delay:.14s}.anim-d3{transition-delay:.21s}.anim-d4{transition-delay:.28s}
+}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 10px 0 14px;padding-top:env(safe-area-inset-top,0px);gap:8px;background:transparent;transition:background .25s}
 .hdr.stuck{background:rgba(10,10,12,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr)}
 .hdr-logo{font-family:var(--fh);font-weight:700;font-size:36px;color:#fff;letter-spacing:-.9px;flex-shrink:0;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.3)}
@@ -282,6 +287,10 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .stars{display:flex;gap:2px;color:var(--gold)}
 .rcx{font-family:var(--fb);font-size:13px;line-height:1.6;color:var(--t2);margin-bottom:10px}
 .rctag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;background:var(--goldd);color:var(--gold)}
+/* Trust indicators hero */
+.trust-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:5px;font-family:var(--fb);font-size:11px;font-weight:500;color:rgba(255,255,255,.55)}
+.trust-sep{color:rgba(255,255,255,.2);font-size:10px}
 /* ---- Widget réservation intégré au header ---- */
 .mw-inner{flex:1;display:flex;align-items:stretch;height:30px;background:#fff;border-radius:7px;overflow:hidden;min-width:0;transition:opacity .2s}
 .mw-inner.mw-hide{opacity:0;pointer-events:none}
@@ -437,6 +446,13 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       Réserver maintenant
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
+    <div class="trust-row" aria-hidden="true">
+      <span class="trust-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 1.5L2 3.5v3.3C2 9.5 4 11.5 6.5 12c2.5-.5 4.5-2.5 4.5-5.2V3.5z"/></svg>Assurance incluse</span>
+      <span class="trust-sep">·</span>
+      <span class="trust-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="11" height="6" rx="1.5"/><path d="M4 4V3a1.5 1.5 0 013 0v1"/><circle cx="9.5" cy="8" r=".7" fill="currentColor"/></svg>Livraison à domicile</span>
+      <span class="trust-sep">·</span>
+      <span class="trust-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="6.5" cy="6.5" r="5"/><path d="M6.5 3.5v3l2 1.5"/></svg>Réservation 3 min</span>
+    </div>
   </div>
 </section>
 
@@ -1229,6 +1245,25 @@ function cookieConsent(choice){
       fab.classList.toggle('show',!inTunnel);
     },{passive:true});
   },3000);
+})();
+
+/* Scroll animations */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+  },{threshold:0.07,rootMargin:'0px 0px -32px 0px'});
+  function anim(sel,delay){
+    document.querySelectorAll(sel).forEach(function(el,i){
+      el.classList.add('anim');
+      if(delay)el.classList.add('anim-d'+Math.min(i+1,4));
+      obs.observe(el);
+    });
+  }
+  anim('.sh');
+  anim('.tarifs-wrap');anim('.tarifs-note');anim('.zones-more');
+  anim('.wi',true);anim('.step',true);
+  anim('.zone-card',true);anim('.rc',true);anim('.faq-item',true);
 })();
 
 if('serviceWorker' in navigator){
