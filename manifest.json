@@ -1,0 +1,36 @@
+{
+  "name": "BeLoc - Location Premium",
+  "short_name": "BeLoc",
+  "description": "Location de véhicules premium 100% en ligne en Auvergne-Rhône-Alpes.",
+  "start_url": "/beloc-site/",
+  "scope": "/beloc-site/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0A0C",
+  "theme_color": "#C9A96E",
+  "lang": "fr",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/rs3-action.avif",
+      "sizes": "800x600",
+      "type": "image/avif",
+      "label": "BeLoc - Audi RS3 2025"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Réserver maintenant",
+      "url": "/beloc-site/#tunnel",
+      "description": "Accéder directement au formulaire de réservation"
+    }
+  ]
+}
