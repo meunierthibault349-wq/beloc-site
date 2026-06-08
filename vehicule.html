@@ -25,6 +25,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <script>
+    /* Preload hero image LCP dès que l'ID véhicule est connu */
+    (function(){
+      var id=new URLSearchParams(window.location.search).get('id');
+      var imgMap={rs3:'assets/rs3-placeholder.svg',golfr:'assets/golfr-placeholder.svg',golf8:'assets/golf8-black.png',clio6:'assets/clio6-red.jpg',clio5:'assets/clio5-blue.jpg'};
+      var src=id&&imgMap[id]?imgMap[id]:null;
+      if(src){
+        var l=document.createElement('link');l.rel='preload';l.as='image';l.href=src;
+        /* Pour AVIF/WebP éventuels futurs, pas de type strict ici */
+        document.head.appendChild(l);
+      }
+    })();
+  </script>
+  <script>
     var GA4_ID='G-XXXXXXXXXX';var PIXEL_ID='XXXXXXXXXXXXXXX';var CONSENT_KEY='beloc_consent_v1';
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
     function loadGA4(){if(GA4_ID.indexOf('X')>-1)return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(s);gtag('js',new Date());gtag('config',GA4_ID);}

@@ -914,10 +914,22 @@ function initDates(){
   s.min=td;e.min=td;
   s.addEventListener('change',function(){
     S.d0=s.value||null;
-    if(S.d0){e.min=S.d0;if(S.d1&&S.d1<=S.d0){S.d1=null;e.value='';}}
+    if(S.d0){
+      /* La date de fin doit être après la date de début */
+      var nextDay=new Date(S.d0+'T12:00');
+      nextDay.setDate(nextDay.getDate()+1);
+      var nextDayStr=nextDay.getFullYear()+'-'+pad(nextDay.getMonth()+1)+'-'+pad(nextDay.getDate());
+      e.min=nextDayStr;
+      if(S.d1&&S.d1<=S.d0){S.d1=null;e.value='';}
+    }
     rp();ce('ds');
   });
-  e.addEventListener('change',function(){S.d1=e.value||null;rp();ce('de');});
+  e.addEventListener('change',function(){
+    S.d1=e.value||null;
+    /* Corriger d0 si d1 a été remplie en premier et est antérieure */
+    if(S.d1&&S.d0&&S.d1<=S.d0){S.d0=null;s.value='';}
+    rp();ce('de');
+  });
 }
 function pad(n){return String(n).padStart(2,'0');}
 function days(){
