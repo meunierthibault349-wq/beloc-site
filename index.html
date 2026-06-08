@@ -419,6 +419,234 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .faq-item.open .faq-ico{transform:rotate(45deg)}
 .faq-a{display:none;padding:0 16px 16px;font-family:var(--fb);font-size:13px;line-height:1.65;color:var(--t2)}
 .faq-item.open .faq-a{display:block}
+
+/* ============================================================
+   BREAKPOINTS DESKTOP — index.html
+   768px  : widget header agrandi, hero, hero-bot
+   1024px : flotte en grille 3 colonnes, steps horizontal
+   1200px : conteneur max-width, footer 3 colonnes, avis 3 col
+   ============================================================ */
+
+/* ---- 768px+ : widget header premium ---- */
+@media(min-width:768px){
+  .hdr{
+    height:68px;
+    padding:0 24px;
+    gap:16px;
+  }
+  .hdr-logo{font-size:40px}
+  .hdr-sep{height:28px}
+
+  /* Structure 3 colonnes du header */
+  .hdr{display:flex;align-items:center}
+  .hdr-logo{flex-shrink:0}
+  .mw-inner{
+    flex:1;
+    max-width:560px;
+    height:48px;
+    border-radius:12px;
+    box-shadow:0 2px 16px rgba(0,0,0,.25);
+  }
+  .mw-lbl{
+    font-size:9px;
+    letter-spacing:.8px;
+  }
+  .mw-val{font-size:13px}
+  .mw-btn{
+    width:48px;
+    min-width:48px;
+    font-size:18px;
+    border-radius:0 10px 10px 0;
+  }
+  .mw-sp{margin:8px 0}
+
+  /* Hero bot repositionné */
+  .hero-bot{
+    max-width:640px;
+    padding-bottom:80px;
+    padding-left:80px;
+  }
+  .hero-title{
+    font-size:72px;
+    max-width:10ch;
+  }
+  .hero-sub{font-size:16px}
+  .cta{
+    width:auto;
+    min-width:220px;
+    display:inline-flex;
+  }
+  .trust-row{
+    justify-content:flex-start;
+    gap:20px;
+  }
+  .social-count{text-align:left}
+
+  /* Section header */
+  .sh{padding:0 48px;margin-bottom:40px}
+
+  /* Tarifs */
+  .tarifs-wrap{padding:0 48px}
+  .tarifs-note{margin:12px 48px 0}
+
+  /* FAQ */
+  .faq{
+    max-width:800px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  /* Tunnel centré */
+  .tband{padding:40px 48px 32px;max-width:720px;margin:0 auto}
+  .stepper{max-width:720px;margin:0 auto}
+  .panel{max-width:520px;margin:0 auto}
+  #conf{max-width:520px;margin:0 auto}
+}
+
+/* ---- 1024px+ : flotte grille, steps horizontal ---- */
+@media(min-width:1024px){
+  /* Flotte en grille 3 colonnes */
+  .fleet{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    padding:0 48px 24px;
+    overflow:visible;
+    scroll-snap-type:none;
+  }
+  .fc{
+    width:auto;
+    max-width:none;
+    flex-shrink:unset;
+  }
+  /* Masquer les dots sur desktop */
+  .dots{display:none}
+
+  /* Steps en horizontal */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0 40px;
+    padding:0 48px;
+    flex-direction:unset;
+  }
+  .step{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding:0;
+  }
+  /* Remplacer le connecteur vertical par un connecteur horizontal */
+  .step:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    top:22px;
+    left:auto;
+    right:-20px;
+    bottom:auto;
+    width:40px;
+    height:2px;
+    background:linear-gradient(to right,rgba(201,169,110,.35),transparent);
+  }
+
+  /* Pourquoi BeLoc en grille 2 colonnes */
+  .why{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    padding:0 48px;
+    flex-direction:unset;
+  }
+  .wi:nth-child(odd){border-right:1px solid var(--bdr)}
+  .wi:nth-child(even){padding-left:32px}
+  /* Retirer le border-bottom du dernier seulement si c'est en colonne paire */
+  .wi:nth-last-child(-n+2){border-bottom:none}
+
+  /* Zones en 2 colonnes dans zones-more */
+  .zones-more{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 16px;
+    align-items:start;
+    max-width:none;
+  }
+  .zones-more svg{grid-column:1;grid-row:1}
+}
+
+/* ---- 1200px+ : conteneur max-width global, avis 3 col, footer 3 col ---- */
+@media(min-width:1200px){
+  /* Contraindre tous les .sec et .sec-alt */
+  .sec > *,
+  .sec-alt > *{
+    max-width:1280px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  /* Exceptions : le fleet et les reviews ont leur propre padding */
+  .sec > .fleet,
+  .sec > .dots,
+  .sec-alt > .tarifs-wrap,
+  .sec-alt > .tarifs-note,
+  .sec > .reviews,
+  .sec-alt > .why,
+  .sec > .steps,
+  .sec > .faq,
+  .sec-alt > .faq,
+  .sec > .zones-wrap,
+  .sec > .zones-more{
+    max-width:1280px;
+  }
+
+  /* Avis clients en 3 colonnes */
+  .reviews{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    padding:0 48px;
+    max-width:1280px;
+    margin:0 auto;
+    flex-direction:unset;
+  }
+
+  /* Footer 3 colonnes */
+  .footer{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:48px;
+    align-items:start;
+    padding:64px 80px 48px;
+    text-align:left;
+  }
+  .fl-logo{margin-bottom:8px}
+  .fl-line{margin-bottom:0}
+  .fl-links{margin-bottom:0}
+  .fl-div{display:none}
+
+  /* Tarifs centré */
+  .sec-alt > .sh,
+  .sec > .sh{
+    padding:0 48px;
+    max-width:1280px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:40px;
+  }
+
+  /* Zones wrap 4 colonnes sur grand écran */
+  .zones-wrap{
+    grid-template-columns:repeat(4,1fr);
+    padding:0 48px 20px;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  .zones-more{
+    max-width:1280px;
+    margin:4px auto 0;
+    padding:14px 16px;
+    display:flex;
+    grid-template-columns:unset;
+  }
+}
   </style>
 </head>
 <body>
