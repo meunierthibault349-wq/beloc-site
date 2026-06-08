@@ -269,6 +269,12 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .btn-confirm{display:flex;align-items:center;justify-content:center;width:100%;height:52px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:15px;border:none;border-radius:var(--rm);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s;margin-top:8px}
 .btn-confirm:active{background:#B8943D;transform:scale(.98)}
 .pbs{padding-bottom:calc(max(48px,env(safe-area-inset-bottom,0px) + 32px))}
+.vchip{display:none;align-items:center;gap:10px;background:var(--fc);border:1px solid var(--fbdr);border-radius:var(--rm);padding:10px 12px;margin-bottom:18px}
+.vchip.show{display:flex}
+.vchip-img{width:52px;height:36px;object-fit:cover;border-radius:var(--rs);background:var(--fbg);flex-shrink:0}
+.vchip-name{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--ft1)}
+.vchip-price{font-family:var(--fb);font-size:12px;color:var(--gold);margin-top:1px}
+.vchip-chg{margin-left:auto;font-family:var(--fb);font-size:12px;color:var(--ft2);text-decoration:underline;cursor:pointer;flex-shrink:0}
 #conf{display:none;padding:52px 24px;text-align:center;animation:up .4s ease}
 #conf.show{display:block}
 .cc{width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;animation:pop .5s cubic-bezier(.175,.885,.32,1.275) forwards}
@@ -625,6 +631,11 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
     <div class="pbs"></div>
   </div>
   <div class="panel" id="p2" role="region">
+    <div class="vchip" id="vchip2" aria-label="Véhicule sélectionné">
+      <img class="vchip-img" id="vchip2-img" src="" alt="" />
+      <div><p class="vchip-name" id="vchip2-name"></p><p class="vchip-price" id="vchip2-price"></p></div>
+      <span class="vchip-chg" onclick="prv()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')prv()">Changer</span>
+    </div>
     <h2 class="pt">Dates &amp; options</h2>
     <p class="ph">Choisissez vos dates et les options souhaitées.</p>
     <div class="fg">
@@ -660,6 +671,11 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
     <div class="pbs"></div>
   </div>
   <div class="panel" id="p3" role="region">
+    <div class="vchip" id="vchip3" aria-label="Véhicule sélectionné">
+      <img class="vchip-img" id="vchip3-img" src="" alt="" />
+      <div><p class="vchip-name" id="vchip3-name"></p><p class="vchip-price" id="vchip3-price"></p></div>
+      <span class="vchip-chg" onclick="show(1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')show(1)">Changer</span>
+    </div>
     <h2 class="pt">Vos coordonnées</h2>
     <p class="ph">Vérifiez le récapitulatif puis confirmez.</p>
     <div class="recap" id="recap">
@@ -945,10 +961,23 @@ function updateStepper(){
   }
 }
 function goto(n){if(n>S.max||n===S.step)return;S.step=n;show(n);}
+function updateVchip(n){
+  if(!S.vid)return;
+  var v=V.find(function(x){return x.id===S.vid;});
+  if(!v)return;
+  var chip=document.getElementById('vchip'+n);
+  if(!chip)return;
+  document.getElementById('vchip'+n+'-img').src=v.img;
+  document.getElementById('vchip'+n+'-img').alt=v.brand+' '+v.name;
+  document.getElementById('vchip'+n+'-name').textContent=v.brand+' '+v.name;
+  document.getElementById('vchip'+n+'-price').textContent='dès '+v.price+' €/jour';
+  chip.classList.add('show');
+}
 function show(n){
   for(var i=1;i<=3;i++){var p=document.getElementById('p'+i);if(p)p.classList.remove('show');}
   var tp=document.getElementById('p'+n);if(tp)tp.classList.add('show');
   S.step=n;updateStepper();
+  if(n===2||n===3)updateVchip(n);
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function nxt(){

@@ -8,8 +8,18 @@
   <meta id="pg-desc" name="description" content="Location premium en Auvergne-Rhône-Alpes." />
   <link rel="canonical" id="pg-canonical" href="https://meunierthibault349-wq.github.io/beloc-site/vehicule.html" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230A0A0C'/><text y='75' x='8' font-size='72' font-weight='700' font-family='system-ui,sans-serif' fill='%23C9A96E'>B.</text></svg>" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="BeLoc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    var GA4_ID='G-XXXXXXXXXX';var PIXEL_ID='XXXXXXXXXXXXXXX';var CONSENT_KEY='beloc_consent_v1';
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+    function loadGA4(){if(GA4_ID.indexOf('X')>-1)return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(s);gtag('js',new Date());gtag('config',GA4_ID);}
+    function loadPixel(){if(PIXEL_ID.indexOf('X')>-1)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',PIXEL_ID);fbq('track','PageView');}
+    if(localStorage.getItem(CONSENT_KEY)==='accepted'){loadGA4();loadPixel();}
+  </script>
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 img{display:block;max-width:100%}
@@ -83,6 +93,14 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);-webkit-font-smo
 .not-found{padding:80px 24px;text-align:center}
 .nf-title{font-family:var(--fh);font-weight:700;font-size:28px;color:var(--t1);margin-bottom:8px}
 .nf-sub{font-family:var(--fb);font-size:14px;color:var(--t2);margin-bottom:28px}
+/* Cookie bar */
+.cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,24,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--bdr);padding:16px 20px 20px;display:none;flex-direction:column;gap:10px}
+.cookie-bar.show{display:flex}
+.cookie-txt{font-family:var(--fb);font-size:13px;color:var(--t2);line-height:1.6}
+.cookie-txt a{color:var(--gold);text-decoration:underline}
+.cookie-btns{display:flex;gap:8px}
+.cookie-accept{flex:1;height:42px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:14px;border:none;border-radius:var(--rs)}
+.cookie-refuse{flex:1;height:42px;background:transparent;color:var(--t2);font-family:var(--fb);font-size:13px;border:1px solid var(--bdr);border-radius:var(--rs)}
   </style>
 </head>
 <body>
@@ -95,6 +113,14 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);-webkit-font-smo
 </header>
 
 <main id="main"></main>
+
+<div class="cookie-bar" id="cookie-bar">
+  <p class="cookie-txt">Nous utilisons des cookies analytiques (Google Analytics) et marketing (Meta Pixel) pour améliorer votre expérience. <a href="mentions-legales.html">En savoir plus</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="cookieConsent('accepted')">Accepter</button>
+    <button class="cookie-refuse" onclick="cookieConsent('refused')">Refuser</button>
+  </div>
+</div>
 
 <footer class="footer">
   <p class="footer-logo">BeLoc.</p>
@@ -193,8 +219,16 @@ function render(){
 
 render();
 
-/* Pré-sélectionner le véhicule quand on revient sur index via le CTA Réserver */
-/* La page index.html lit le paramètre ?pick= au chargement */
+function cookieConsent(v){
+  localStorage.setItem(CONSENT_KEY,v);
+  document.getElementById('cookie-bar').classList.remove('show');
+  if(v==='accepted'){loadGA4();loadPixel();}
+}
+(function(){
+  if(!localStorage.getItem(CONSENT_KEY))document.getElementById('cookie-bar').classList.add('show');
+})();
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
 </html>
