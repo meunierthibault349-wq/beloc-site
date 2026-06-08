@@ -32,11 +32,11 @@
   --gold-deep: #8A7030;
   --gold-glow: rgba(185,151,80,.09);
 
-  /* Marine profond — couleur d'action, CTA exclusif */
-  --red:      #0C2040;
-  --red-hi:   #1A3660;
-  --red-deep: #060F20;
-  --red-glow: rgba(12,32,64,.22);
+  /* Bleu cobalt — couleur d'action, CTA exclusif */
+  --red:      #2562A8;
+  --red-hi:   #3375C0;
+  --red-deep: #184280;
+  --red-glow: rgba(37,98,168,.20);
 
   /* Fonts */
   --serif: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -702,28 +702,112 @@ a { color: inherit; text-decoration: none; }
 .pm-n { display: block; font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--bone); line-height: 1; }
 .pm-l { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 
-/* ---------- Final CTA — panneau marine conversif ---------- */
+/* ---------- Final CTA — panneau bleu ciel lumineux ---------- */
 .final-cta {
-  background: #0C2040;
+  background: linear-gradient(145deg, #EEF4FD 0%, #E4EFF9 100%);
+  border: 1px solid rgba(37,98,168,.14);
   border-radius: var(--radius-lg);
   text-align: center;
   padding: clamp(60px,8vw,100px) clamp(32px,6vw,80px);
-  color: #F5F5F3;
+  color: var(--bone);
 }
-.final-cta-h { font-size: clamp(40px,6vw,84px); margin: 0 0 44px; color: #F5F5F3; }
+.final-cta-h { font-size: clamp(40px,6vw,84px); margin: 0 0 44px; }
+.final-cta-h .italic { color: var(--gold-deep); }
 .final-cta-actions { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
-
-/* Bouton blanc sur fond marine */
-.final-cta .btn-primary { background: #FFFFFF; color: #0C2040; box-shadow: 0 4px 28px -6px rgba(0,0,0,.35); }
-.final-cta .btn-primary:hover { background: #F0F0EE; transform: translateY(-2px); box-shadow: 0 10px 36px -8px rgba(0,0,0,.4); }
-.final-cta .btn-primary::after { background: linear-gradient(90deg, transparent, rgba(12,32,64,.06), transparent); }
-
-.final-cta-phone { display: inline-flex; align-items: center; gap: 14px; color: rgba(245,245,243,.72); text-decoration: none; }
-.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.20); color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, border-color .25s; }
-.final-cta-phone:hover .final-cta-phone-ic { background: var(--gold); border-color: var(--gold); color: #FFFFFF; }
+.final-cta-phone { display: inline-flex; align-items: center; gap: 14px; color: var(--bone); text-decoration: none; }
+.final-cta-phone-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(37,98,168,.09); border: 1px solid rgba(37,98,168,.25); color: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .25s, border-color .25s; }
+.final-cta-phone:hover .final-cta-phone-ic { background: var(--red); border-color: var(--red); color: #FFFFFF; }
 .final-cta-phone-ic svg { width: 20px; height: 20px; }
-.final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; color: #F5F5F3; }
-.final-cta .mono-label { color: rgba(245,245,243,.48); }
+.final-cta-phone-num { font-family: var(--mono); font-size: 18px; font-weight: 600; letter-spacing: .04em; }
+.final-cta .mono-label { color: var(--muted); }
+
+/* ============================================================
+   BANDEAU RÉSERVATION — Widget flottant configurable
+   ============================================================ */
+.resa-widget {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 980;
+  background: #FFFFFF;
+  border-top: 2px solid var(--red);
+  box-shadow: 0 -4px 40px -8px rgba(37,98,168,.14), 0 -1px 0 var(--line);
+  transition: box-shadow .35s ease;
+}
+.resa-widget.open { box-shadow: 0 -8px 56px -8px rgba(37,98,168,.22); }
+
+/* Barre compacte (toujours visible) */
+.resa-bar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px var(--gutter); min-height: 62px;
+}
+.resa-bar-ico { color: var(--red); display: flex; flex-shrink: 0; }
+.resa-bar-ico svg { width: 18px; height: 18px; }
+.resa-bar-info { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; overflow: hidden; flex-wrap: wrap; }
+.resa-bar-vehicle { font-family: var(--serif); font-size: 15px; font-weight: 600; white-space: nowrap; }
+.resa-bar-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex-shrink: 0; }
+.resa-bar-meta { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.resa-bar-badge {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em;
+  background: var(--red); color: #FFFFFF; border-radius: 100px; padding: 3px 11px; flex-shrink: 0;
+}
+.resa-bar-hint { font-size: 13.5px; color: var(--muted); font-style: italic; }
+.resa-toggle {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--red); color: #FFFFFF;
+  border: none; border-radius: 100px; padding: 10px 20px; cursor: pointer;
+  transition: background .25s;
+}
+.resa-toggle:hover { background: var(--red-hi); }
+.resa-toggle svg { width: 13px; height: 13px; transition: transform .35s var(--ease); }
+.resa-widget.open .resa-toggle svg { transform: rotate(180deg); }
+
+/* Panneau dépliable */
+.resa-panel { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease); }
+.resa-panel.open { max-height: 360px; }
+.resa-form {
+  border-top: 1px solid var(--line-soft);
+  background: var(--ink-850);
+  padding: 18px var(--gutter) 22px;
+  display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
+}
+.resa-fields { display: flex; gap: 12px; flex: 1; flex-wrap: wrap; min-width: 0; }
+.resa-field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
+.resa-field label {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
+}
+.resa-field select,
+.resa-field input[type="date"] {
+  background: #FFFFFF; border: 1.5px solid var(--line);
+  border-radius: var(--radius); color: var(--bone);
+  font-family: var(--sans); font-size: 14px; font-weight: 500;
+  padding: 10px 12px; width: 100%; cursor: pointer;
+  transition: border-color .25s;
+  -webkit-appearance: none; appearance: none;
+}
+.resa-field select:hover,
+.resa-field input[type="date"]:hover { border-color: var(--line-strong); }
+.resa-field select:focus,
+.resa-field input[type="date"]:focus { outline: none; border-color: var(--red); }
+
+/* Tarif estimé */
+.resa-est-field { flex: 0 1 auto; min-width: 130px; }
+.resa-est {
+  display: flex; align-items: baseline; gap: 5px;
+  padding: 9px 12px; border-radius: var(--radius);
+  background: rgba(37,98,168,.07); border: 1.5px solid rgba(37,98,168,.22);
+}
+.resa-est-price { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--red); }
+.resa-est-unit { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--muted); }
+
+.resa-cta-btn { flex-shrink: 0; white-space: nowrap; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .resa-bar-meta, .resa-bar-badge, .resa-bar-dot { display: none; }
+  .resa-form { flex-direction: column; }
+  .resa-fields { flex-direction: column; }
+  .resa-cta-btn { width: 100%; justify-content: center; }
+  .resa-panel.open { max-height: 580px; }
+}
 
 /* ============================================================
    TABLETTE / PETIT DESKTOP — 1080px

@@ -235,10 +235,7 @@ function HomePage(props) {
   }, /*#__PURE__*/React.createElement("h2", {
     className: "display final-cta-h"
   }, "Pr\xEAt \xE0 prendre le volant ?", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
-    className: "italic",
-    style: {
-      color: "var(--gold-soft)"
-    }
+    className: "italic"
   }, "R\xE9servez en 3 minutes.")), /*#__PURE__*/React.createElement("div", {
     className: "final-cta-actions"
   }, /*#__PURE__*/React.createElement(Button, {
@@ -258,7 +255,136 @@ function HomePage(props) {
     className: "mono-label"
   }, "Conciergerie \xB7 7j/7")))))))));
 }
+
+/* ── RESERVATION WIDGET — Bandeau flottant configurable ── */
+function ReservationWidget(props) {
+  var B = window.BELOC;
+  var durLabels = {
+    day: "journée",
+    weekend: "week-end",
+    week: "semaine"
+  };
+  var durFull = {
+    day: "À la journée",
+    weekend: "Week-end (2 jours)",
+    week: "À la semaine"
+  };
+  var today = new Date().toISOString().split("T")[0];
+  var _s1 = useState(false);
+  var open = _s1[0];
+  var setOpen = _s1[1];
+  var _s2 = useState("");
+  var vehicleId = _s2[0];
+  var setVehicleId = _s2[1];
+  var _s3 = useState("");
+  var date = _s3[0];
+  var setDate = _s3[1];
+  var _s4 = useState("day");
+  var duration = _s4[0];
+  var setDuration = _s4[1];
+  var vehicle = vehicleId ? B.byId(vehicleId) : null;
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (vehicleId) {
+      props.nav("detail", vehicleId);
+    } else {
+      props.nav("fleet");
+    }
+    setOpen(false);
+  }
+  var dateLabel = "";
+  if (date) {
+    try {
+      dateLabel = new Date(date + "T12:00").toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "short"
+      });
+    } catch (ex) {}
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "resa-widget" + (open ? " open" : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-ico"
+  }, Icons.key), /*#__PURE__*/React.createElement("div", {
+    className: "resa-bar-info"
+  }, vehicle ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-vehicle"
+  }, vehicle.full), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-dot"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-meta"
+  }, durFull[duration], dateLabel ? " · " + dateLabel : ""), /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-badge"
+  }, eur(vehicle.prices[duration]))) : /*#__PURE__*/React.createElement("span", {
+    className: "resa-bar-hint"
+  }, "Configurez et r\xE9servez votre v\xE9hicule en 3 min")), /*#__PURE__*/React.createElement("button", {
+    className: "resa-toggle",
+    type: "button",
+    onClick: function () {
+      setOpen(!open);
+    }
+  }, /*#__PURE__*/React.createElement("span", null, open ? "Réduire" : "Configurer"), Icons.chevD)), /*#__PURE__*/React.createElement("div", {
+    className: "resa-panel" + (open ? " open" : "")
+  }, /*#__PURE__*/React.createElement("form", {
+    className: "resa-form",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "resa-fields"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "resa-field"
+  }, /*#__PURE__*/React.createElement("label", null, "V\xE9hicule"), /*#__PURE__*/React.createElement("select", {
+    value: vehicleId,
+    onChange: function (e) {
+      setVehicleId(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Tous les v\xE9hicules"), B.vehicles.map(function (v) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: v.id,
+      value: v.id
+    }, v.full, " \u2014 d\xE8s ", eur(v.prices.day), " / jour");
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "resa-field"
+  }, /*#__PURE__*/React.createElement("label", null, "Date de d\xE9part"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    value: date,
+    min: today,
+    onChange: function (e) {
+      setDate(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "resa-field"
+  }, /*#__PURE__*/React.createElement("label", null, "Dur\xE9e"), /*#__PURE__*/React.createElement("select", {
+    value: duration,
+    onChange: function (e) {
+      setDuration(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "day"
+  }, "\xC0 la journ\xE9e"), /*#__PURE__*/React.createElement("option", {
+    value: "weekend"
+  }, "Week-end (2 jours)"), /*#__PURE__*/React.createElement("option", {
+    value: "week"
+  }, "\xC0 la semaine"))), vehicle && /*#__PURE__*/React.createElement("div", {
+    className: "resa-field resa-est-field"
+  }, /*#__PURE__*/React.createElement("label", null, "Tarif estim\xE9"), /*#__PURE__*/React.createElement("div", {
+    className: "resa-est"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "resa-est-price"
+  }, eur(vehicle.prices[duration])), /*#__PURE__*/React.createElement("span", {
+    className: "resa-est-unit"
+  }, "/ ", durLabels[duration])))), /*#__PURE__*/React.createElement(Button, {
+    type: "submit",
+    size: "lg",
+    icon: Icons.arrow,
+    className: "resa-cta-btn"
+  }, vehicle ? "Réserver " + vehicle.name : "Voir la flotte"))));
+}
 Object.assign(window, {
   HomePage,
-  VehicleCard
+  VehicleCard,
+  ReservationWidget
 });

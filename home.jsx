@@ -155,7 +155,7 @@ function HomePage(props) {
             <div className="final-cta">
               <h2 className="display final-cta-h">
                 Prêt à prendre le volant ?<br />
-                <span className="italic" style={{ color: "var(--gold-soft)" }}>Réservez en 3 minutes.</span>
+                <span className="italic">Réservez en 3 minutes.</span>
               </h2>
               <div className="final-cta-actions">
                 <Button size="lg" onClick={function () { props.nav("fleet"); }} icon={Icons.arrow}>Choisir un véhicule</Button>
@@ -176,4 +176,107 @@ function HomePage(props) {
   );
 }
 
-Object.assign(window, { HomePage, VehicleCard });
+/* ── RESERVATION WIDGET — Bandeau flottant configurable ── */
+function ReservationWidget(props) {
+  var B = window.BELOC;
+  var durLabels = { day: "journée", weekend: "week-end", week: "semaine" };
+  var durFull   = { day: "À la journée", weekend: "Week-end (2 jours)", week: "À la semaine" };
+  var today = new Date().toISOString().split("T")[0];
+
+  var _s1 = useState(false);   var open      = _s1[0]; var setOpen      = _s1[1];
+  var _s2 = useState("");      var vehicleId = _s2[0]; var setVehicleId = _s2[1];
+  var _s3 = useState("");      var date      = _s3[0]; var setDate      = _s3[1];
+  var _s4 = useState("day");   var duration  = _s4[0]; var setDuration  = _s4[1];
+
+  var vehicle = vehicleId ? B.byId(vehicleId) : null;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (vehicleId) {
+      props.nav("detail", vehicleId);
+    } else {
+      props.nav("fleet");
+    }
+    setOpen(false);
+  }
+
+  var dateLabel = "";
+  if (date) {
+    try { dateLabel = new Date(date + "T12:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); } catch (ex) {}
+  }
+
+  return (
+    <div className={"resa-widget" + (open ? " open" : "")}>
+
+      {/* ── Barre compacte ── */}
+      <div className="resa-bar">
+        <span className="resa-bar-ico">{Icons.key}</span>
+        <div className="resa-bar-info">
+          {vehicle ? (
+            <React.Fragment>
+              <span className="resa-bar-vehicle">{vehicle.full}</span>
+              <span className="resa-bar-dot" />
+              <span className="resa-bar-meta">{durFull[duration]}{dateLabel ? " · " + dateLabel : ""}</span>
+              <span className="resa-bar-badge">{eur(vehicle.prices[duration])}</span>
+            </React.Fragment>
+          ) : (
+            <span className="resa-bar-hint">Configurez et réservez votre véhicule en 3 min</span>
+          )}
+        </div>
+        <button className="resa-toggle" type="button" onClick={function () { setOpen(!open); }}>
+          <span>{open ? "Réduire" : "Configurer"}</span>
+          {Icons.chevD}
+        </button>
+      </div>
+
+      {/* ── Panneau dépliable ── */}
+      <div className={"resa-panel" + (open ? " open" : "")}>
+        <form className="resa-form" onSubmit={handleSubmit}>
+          <div className="resa-fields">
+
+            <div className="resa-field">
+              <label>Véhicule</label>
+              <select value={vehicleId} onChange={function (e) { setVehicleId(e.target.value); }}>
+                <option value="">Tous les véhicules</option>
+                {B.vehicles.map(function (v) {
+                  return <option key={v.id} value={v.id}>{v.full} — dès {eur(v.prices.day)} / jour</option>;
+                })}
+              </select>
+            </div>
+
+            <div className="resa-field">
+              <label>Date de départ</label>
+              <input type="date" value={date} min={today} onChange={function (e) { setDate(e.target.value); }} />
+            </div>
+
+            <div className="resa-field">
+              <label>Durée</label>
+              <select value={duration} onChange={function (e) { setDuration(e.target.value); }}>
+                <option value="day">À la journée</option>
+                <option value="weekend">Week-end (2 jours)</option>
+                <option value="week">À la semaine</option>
+              </select>
+            </div>
+
+            {vehicle && (
+              <div className="resa-field resa-est-field">
+                <label>Tarif estimé</label>
+                <div className="resa-est">
+                  <span className="resa-est-price">{eur(vehicle.prices[duration])}</span>
+                  <span className="resa-est-unit">/ {durLabels[duration]}</span>
+                </div>
+              </div>
+            )}
+
+          </div>
+          <Button type="submit" size="lg" icon={Icons.arrow} className="resa-cta-btn">
+            {vehicle ? "Réserver " + vehicle.name : "Voir la flotte"}
+          </Button>
+        </form>
+      </div>
+
+    </div>
+  );
+}
+
+Object.assign(window, { HomePage, VehicleCard, ReservationWidget });
