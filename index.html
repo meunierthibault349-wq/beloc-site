@@ -263,6 +263,15 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+/* ---- Zones de livraison ---- */
+.zones-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 20px}
+.zone-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);padding:14px 14px 12px}
+.zone-dep{font-family:var(--fh);font-weight:700;font-size:12px;color:var(--t1);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.zone-num{font-family:var(--fb);font-size:11px;font-weight:400;color:var(--gold);background:var(--goldd);padding:1px 6px;border-radius:99px}
+.zone-cities{font-family:var(--fb);font-size:11px;color:var(--t2);line-height:1.9}
+.zones-more{margin:4px 24px 0;padding:14px 16px;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);font-family:var(--fb);font-size:13px;color:var(--t2);line-height:1.5;display:flex;align-items:flex-start;gap:10px}
+.zones-more svg{flex-shrink:0;margin-top:1px;color:var(--gold)}
+.zones-more a{color:var(--gold)}
 /* ---- Comment ça marche ---- */
 .steps{padding:0 24px;display:flex;flex-direction:column}
 .step{display:flex;align-items:flex-start;gap:18px;padding:22px 0;position:relative}
@@ -313,7 +322,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 <section id="hero" class="hero" aria-label="Accueil">
   <img class="hero-img" src="assets/rs3-action.avif" alt="Audi RS3 2025 en action sur route de montagne"
     loading="eager" decoding="async" fetchpriority="high"
-    onerror="this.src='assets/rs3-studio.jpg'" />
+    onerror="this.style.opacity='0'" />
   <div class="hero-grad" aria-hidden="true"></div>
   <div class="hero-top"><p class="hero-ey">Auvergne-Rhône-Alpes</p></div>
   <div class="hero-bot">
@@ -386,6 +395,52 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       <div><p class="wt">Tarifs transparents, zéro engagement</p><p class="wd">Vous voyez le total avant de confirmer. Annulation flexible. Zéro mauvaise surprise.</p></div>
     </li>
   </ul>
+</section>
+
+<section class="sec" aria-label="Zones de livraison">
+  <div class="sh">
+    <span class="ey">Zones de livraison</span>
+    <h2 class="st">On vient à vous, partout.</h2>
+    <p class="ss">Livraison à domicile dans toute l'Auvergne-Rhône-Alpes pour 49 € forfait — à votre porte, à votre hôtel, sur votre lieu de travail.</p>
+  </div>
+  <div class="zones-wrap">
+    <div class="zone-card">
+      <p class="zone-dep">Rhône <span class="zone-num">69</span></p>
+      <p class="zone-cities">Lyon · Villeurbanne · Bron · Saint-Priest · Vénissieux</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Puy-de-Dôme <span class="zone-num">63</span></p>
+      <p class="zone-cities">Clermont-Ferrand · Riom · Thiers · Issoire</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Isère <span class="zone-num">38</span></p>
+      <p class="zone-cities">Grenoble · Vienne · Bourgoin-Jallieu · Voiron</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Loire <span class="zone-num">42</span></p>
+      <p class="zone-cities">Saint-Étienne · Roanne · Saint-Chamond</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Haute-Savoie <span class="zone-num">74</span></p>
+      <p class="zone-cities">Annecy · Annemasse · Thonon-les-Bains</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Savoie <span class="zone-num">73</span></p>
+      <p class="zone-cities">Chambéry · Aix-les-Bains · Albertville</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Allier <span class="zone-num">03</span></p>
+      <p class="zone-cities">Vichy · Moulins · Montluçon · Cusset</p>
+    </div>
+    <div class="zone-card">
+      <p class="zone-dep">Ain <span class="zone-num">01</span></p>
+      <p class="zone-cities">Bourg-en-Bresse · Oyonnax · Ambérieu-en-Bugey</p>
+    </div>
+  </div>
+  <p class="zones-more">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 5v3l2 1.5"/></svg>
+    Vous ne voyez pas votre ville ? <a href="mailto:contact@beloc.fr">Contactez-nous</a> — on livre dans toute la région, même hors liste.
+  </p>
 </section>
 
 <section id="tunnel" aria-label="Réservation en ligne">
@@ -564,8 +619,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 
 <script>
 var V=[
-  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-studio.jpg'},
-  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-track.jpg'},
+  {id:'rs3',   brand:'Audi',    name:'RS3',           type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-placeholder.svg'},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',       type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-placeholder.svg'},
   {id:'golf8', brand:'VW',      name:'Golf 8',        type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
   {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg'},
   {id:'clio5', brand:'Renault', name:'Clio 5',        type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
