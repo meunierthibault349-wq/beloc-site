@@ -338,7 +338,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .mw-cal-d{font-family:var(--fh);font-size:12px;font-weight:500;color:#222;border:none;background:transparent;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:50%;height:34px;width:34px;margin:1px auto;display:flex;align-items:center;justify-content:center;transition:background .1s}
 .mw-cal-d:active:not(:disabled){background:#F0F0F0}
 .mw-cal-d:disabled{color:#D4D4D4;cursor:default}
-.mw-cal-d.mw-busy:disabled{color:#F0C4C2;text-decoration:line-through}
+.mw-cal-d.mw-busy:disabled{color:#C49090;text-decoration:line-through}
 .mw-cal-d.mw-sel{background:var(--gold);color:#1C1A15;font-weight:700}
 .mw-cal-d.mw-today{font-weight:700;color:var(--gold)}
 .mw-cal-d.mw-today.mw-sel{color:#1C1A15}
@@ -828,7 +828,13 @@ document.addEventListener('DOMContentLoaded',function(){
   var pickId=new URLSearchParams(window.location.search).get('pick');
   if(pickId&&V.find(function(x){return x.id===pickId;})){
     pick(pickId);
-    setTimeout(function(){document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});},400);
+    /* Attendre le premier paint pour que le scroll soit précis */
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var t=document.getElementById('tunnel');
+        if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
   }
   var h=document.getElementById('hdr'),t=false;
   window.addEventListener('scroll',function(){
@@ -1248,7 +1254,7 @@ function mwBuildCal(){
   if(MW.vid){
     h+='<div class="mw-cal-leg">';
     h+='<div class="mw-cal-li"><i style="background:var(--gold)"></i>Sélectionné</div>';
-    h+='<div class="mw-cal-li"><i style="background:#F4D0CE"></i>Indisponible</div>';
+    h+='<div class="mw-cal-li"><i style="background:#C49090"></i>Indisponible</div>';
     h+='</div>';
   }
   mwCal.panel.innerHTML=h;

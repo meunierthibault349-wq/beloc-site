@@ -20,9 +20,10 @@
   ],
   "screenshots": [
     {
-      "src": "assets/rs3-action.avif",
-      "sizes": "800x600",
-      "type": "image/avif",
+      "src": "assets/rs3-studio.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
       "label": "BeLoc - Audi RS3 2025"
     }
   ],
