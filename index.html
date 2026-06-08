@@ -263,6 +263,10 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fl-link{display:flex;align-items:center;gap:12px;min-height:48px;font-family:var(--fb);font-size:15px;color:rgba(255,255,255,.8);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .fl-div{height:1px;background:rgba(255,255,255,.12);margin-bottom:22px}
 .fl-legal{font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+/* ---- WhatsApp flottant ---- */
+.wa-fab{position:fixed;bottom:calc(max(24px,env(safe-area-inset-bottom,0px) + 16px));right:16px;z-index:180;display:flex;align-items:center;gap:9px;background:#1a1a1e;border:1px solid rgba(37,211,102,.35);color:#fff;padding:11px 16px 11px 12px;border-radius:99px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 4px 24px rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .4s,transform .15s;text-decoration:none}
+.wa-fab.show{opacity:1;pointer-events:auto}
+.wa-fab:active{transform:scale(.95)}
 /* ---- Tarifs ---- */
 .tarifs-wrap{padding:0 24px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .tarifs-wrap::-webkit-scrollbar{display:none}
@@ -306,6 +310,16 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
   </style>
 </head>
 <body>
+<!-- WhatsApp FAB — remplacer 33600000000 par le numéro BeLoc (format international sans +) -->
+<a class="wa-fab" id="wa-fab" href="https://wa.me/33600000000?text=Bonjour%2C%20je%20souhaite%20louer%20un%20v%C3%A9hicule%20BeLoc." target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+  <svg class="wa-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="16" cy="16" r="16" fill="#25D366"/>
+    <path d="M22.5 9.5A9.1 9.1 0 0 0 16 7a9 9 0 0 0-7.8 13.5L7 25l4.7-1.2A9 9 0 0 0 16 25a9 9 0 0 0 9-9 9.1 9.1 0 0 0-2.5-6.5z" fill="#fff"/>
+    <path d="M21 18.9c-.3-.1-1.6-.8-1.8-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3a3.4 3.4 0 0 0-1.1 2.6c0 1.5 1.1 3 1.2 3.2.2.2 2.2 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.4.2-.7.2-1.3.2-1.4 0-.1-.3-.2-.6-.3z" fill="#25D366"/>
+  </svg>
+  WhatsApp
+</a>
+
 <header class="hdr" id="hdr" role="banner">
   <a href="#hero" class="hdr-logo">BeLoc<span style="color:var(--gold)">.</span></a>
   <div class="hdr-sep"></div>
@@ -671,7 +685,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
     -->
   </div>
   <div class="fl-div"></div>
-  <p class="fl-legal">2026 BeLoc - Tous droits réservés - Auvergne-Rhône-Alpes</p>
+  <p class="fl-legal">2026 BeLoc · Tous droits réservés · Auvergne-Rhône-Alpes · <a href="mentions-legales.html" style="color:var(--gold)">Mentions légales</a></p>
 </footer>
 
 <script>
@@ -1068,6 +1082,22 @@ function mwSubmit(){
   if(MW.d0){var ds=document.getElementById('ds');if(ds){ds.value=MW.d0;S.d0=MW.d0;rp();}}
   document.getElementById('tunnel').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+/* WhatsApp FAB — apparaît après 3s, masqué quand le tunnel est visible */
+(function(){
+  var fab=document.getElementById('wa-fab');
+  if(!fab)return;
+  setTimeout(function(){
+    fab.classList.add('show');
+    window.addEventListener('scroll',function(){
+      var t=document.getElementById('tunnel');
+      if(!t){return;}
+      var r=t.getBoundingClientRect();
+      var inTunnel=r.top<window.innerHeight*0.7&&r.bottom>0;
+      fab.classList.toggle('show',!inTunnel);
+    },{passive:true});
+  },3000);
+})();
 
 function faqToggle(el){
   el.classList.toggle('open');
