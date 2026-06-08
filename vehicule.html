@@ -7,6 +7,16 @@
   <title id="pg-title">Véhicule — BeLoc Location Premium</title>
   <meta id="pg-desc" name="description" content="Location premium en Auvergne-Rhône-Alpes." />
   <link rel="canonical" id="pg-canonical" href="https://meunierthibault349-wq.github.io/beloc-site/vehicule.html" />
+  <meta id="og-title" property="og:title" content="BeLoc — Location premium" />
+  <meta id="og-desc" property="og:description" content="Location de véhicules premium en Auvergne-Rhône-Alpes." />
+  <meta id="og-url" property="og:url" content="https://meunierthibault349-wq.github.io/beloc-site/vehicule.html" />
+  <meta id="og-img" property="og:image" content="https://meunierthibault349-wq.github.io/beloc-site/assets/og-default.jpg" />
+  <meta property="og:type" content="product" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="BeLoc" />
+  <meta id="tw-title" name="twitter:title" content="BeLoc — Location premium" />
+  <meta id="tw-desc" name="twitter:description" content="Location de véhicules premium en Auvergne-Rhône-Alpes." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230A0A0C'/><text y='75' x='8' font-size='72' font-weight='700' font-family='system-ui,sans-serif' fill='%23C9A96E'>B.</text></svg>" />
   <link rel="manifest" href="manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -93,6 +103,14 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);-webkit-font-smo
 .not-found{padding:80px 24px;text-align:center}
 .nf-title{font-family:var(--fh);font-weight:700;font-size:28px;color:var(--t1);margin-bottom:8px}
 .nf-sub{font-family:var(--fb);font-size:14px;color:var(--t2);margin-bottom:28px}
+/* Sticky reserve bar */
+.stickybar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(10,10,12,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--bdr);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));display:none;align-items:center;gap:12px;transform:translateY(100%);transition:transform .3s ease}
+.stickybar.visible{display:flex;transform:translateY(0)}
+.stickybar-info{flex:1;min-width:0}
+.stickybar-name{font-family:var(--fh);font-weight:600;font-size:15px;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stickybar-price{font-family:var(--fb);font-size:12px;color:var(--gold);margin-top:1px}
+.stickybar-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;padding:0 20px;background:var(--gold);color:#1C1A15;font-family:var(--fh);font-weight:600;font-size:15px;border-radius:var(--rm);white-space:nowrap;flex-shrink:0}
+.stickybar-cta:active{background:#B8943D}
 /* Cookie bar */
 .cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(20,20,24,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--bdr);padding:16px 20px 20px;display:none;flex-direction:column;gap:10px}
 .cookie-bar.show{display:flex}
@@ -113,6 +131,16 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);-webkit-font-smo
 </header>
 
 <main id="main"></main>
+
+<div class="stickybar" id="stickybar">
+  <div class="stickybar-info">
+    <p class="stickybar-name" id="sb-name"></p>
+    <p class="stickybar-price" id="sb-price"></p>
+  </div>
+  <a class="stickybar-cta" id="sb-cta" href="#">Réserver
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+  </a>
+</div>
 
 <div class="cookie-bar" id="cookie-bar">
   <p class="cookie-txt">Nous utilisons des cookies analytiques (Google Analytics) et marketing (Meta Pixel) pour améliorer votre expérience. <a href="mentions-legales.html">En savoir plus</a>.</p>
@@ -165,10 +193,24 @@ function render(){
     return;
   }
 
-  document.getElementById('pg-title').textContent=v.brand+' '+v.name+' '+v.year+' — Location premium BeLoc';
-  document.getElementById('pg-desc').setAttribute('content','Louez la '+v.brand+' '+v.name+' '+v.year+' en Auvergne-Rhône-Alpes. '+v.power+', livraison à domicile. Dès '+v.price+' €/jour.');
-  document.getElementById('pg-canonical').setAttribute('href','https://meunierthibault349-wq.github.io/beloc-site/vehicule.html?id='+v.id);
-  document.title=v.brand+' '+v.name+' '+v.year+' — Location premium BeLoc';
+  var pgTitle=v.brand+' '+v.name+' '+v.year+' — Location premium BeLoc';
+  var pgDesc='Louez la '+v.brand+' '+v.name+' '+v.year+' en Auvergne-Rhône-Alpes. '+v.power+', livraison à domicile. Dès '+v.price+' €/jour.';
+  var pgUrl='https://meunierthibault349-wq.github.io/beloc-site/vehicule.html?id='+v.id;
+  document.title=pgTitle;
+  document.getElementById('pg-title').textContent=pgTitle;
+  document.getElementById('pg-desc').setAttribute('content',pgDesc);
+  document.getElementById('pg-canonical').setAttribute('href',pgUrl);
+  document.getElementById('og-title').setAttribute('content',pgTitle);
+  document.getElementById('og-desc').setAttribute('content',pgDesc);
+  document.getElementById('og-url').setAttribute('content',pgUrl);
+  document.getElementById('tw-title').setAttribute('content',pgTitle);
+  document.getElementById('tw-desc').setAttribute('content',pgDesc);
+  var ld=document.createElement('script');ld.type='application/ld+json';
+  ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'Product','name':v.brand+' '+v.name+' '+v.year,'description':v.desc,'brand':{'@type':'Brand','name':v.brand},'offers':{'@type':'Offer','priceCurrency':'EUR','price':v.price,'priceSpecification':{'@type':'UnitPriceSpecification','price':v.price,'priceCurrency':'EUR','unitText':'DAY'},'availability':'https://schema.org/InStock','seller':{'@type':'LocalBusiness','name':'BeLoc'}}});
+  document.head.appendChild(ld);
+  document.getElementById('sb-name').textContent=v.brand+' '+v.name;
+  document.getElementById('sb-price').textContent='dès '+v.price+' €/jour';
+  document.getElementById('sb-cta').href='index.html?pick='+v.id+'#tunnel';
 
   var others=V.filter(function(x){return x.id!==v.id;});
 
@@ -218,6 +260,23 @@ function render(){
 }
 
 render();
+
+(function(){
+  var bar=document.getElementById('stickybar');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.target.classList.contains('v-hero')){
+        bar.classList.toggle('visible',!e.isIntersecting);
+      }
+      if(e.target.classList.contains('cta-section')){
+        if(e.isIntersecting)bar.classList.remove('visible');
+      }
+    });
+  },{threshold:0.1});
+  var hero=document.querySelector('.v-hero'),cta=document.querySelector('.cta-section');
+  if(hero)io.observe(hero);
+  if(cta)io.observe(cta);
+})();
 
 function cookieConsent(v){
   localStorage.setItem(CONSENT_KEY,v);
