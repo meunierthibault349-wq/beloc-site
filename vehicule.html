@@ -28,7 +28,7 @@
     /* Preload hero image LCP dès que l'ID véhicule est connu */
     (function(){
       var id=new URLSearchParams(window.location.search).get('id');
-      var imgMap={rs3:'assets/rs3-placeholder.svg',golfr:'assets/golfr-placeholder.svg',golf8:'assets/golf8-black.png',clio6:'assets/clio6-red.jpg',clio5:'assets/clio5-blue.jpg'};
+      var imgMap={rs3:'assets/rs3-photo.jpg',golfr:'assets/golfr-photo.jpg',golf8:'assets/golf8-black.png',clio6:'assets/clio6-red.jpg',clio5:'assets/clio5-blue.jpg'};
       var src=id&&imgMap[id]?imgMap[id]:null;
       if(src){
         var l=document.createElement('link');l.rel='preload';l.as='image';l.href=src;
