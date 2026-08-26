@@ -185,7 +185,10 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .fc{flex-shrink:0;width:72vw;max-width:270px;scroll-snap-align:start;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);overflow:hidden;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:border-color .2s,transform .2s,box-shadow .2s}
 .fc:active{transform:scale(.98);border-color:var(--bdhi)}
 .fc:hover{border-color:rgba(201,169,110,.4);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
-.fc-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2)}
+.fc{position:relative}
+.fc::after{content:'';position:absolute;top:0;left:0;right:0;aspect-ratio:4/3;background:linear-gradient(to bottom,rgba(10,10,12,.18) 0%,rgba(10,10,12,0) 30%,rgba(10,10,12,.55) 100%);pointer-events:none;z-index:1}
+.fc-body{position:relative;z-index:2}
+.fc-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2);filter:brightness(.82) contrast(1.06) saturate(.8)}
 .fc-body{padding:14px 16px 16px}
 .fbadge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
 .bs{background:rgba(232,52,42,.15);color:#F87171}
@@ -234,7 +237,10 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 .vcard:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .vcard:active{opacity:.92}
 .vcard.sel{border-color:var(--blue);background:var(--fsel)}
-.vcard-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#D4D4D8}
+.vcard{position:relative}
+.vcard::after{content:'';position:absolute;top:0;left:0;right:0;aspect-ratio:16/9;background:linear-gradient(to bottom,rgba(10,10,12,.15) 0%,rgba(10,10,12,0) 30%,rgba(10,10,12,.5) 100%);pointer-events:none;z-index:1}
+.vcard-body{position:relative;z-index:2}
+.vcard-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#18181C;filter:brightness(.82) contrast(1.06) saturate(.8)}
 .vcard-body{padding:10px 14px 12px}
 .vcard-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
 .vcard-name{font-family:var(--fh);font-weight:700;font-size:16px;color:var(--ft1)}
@@ -738,7 +744,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
       Réserver maintenant
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
-    <p class="social-count"><strong>47+</strong> locations ce mois · Noté 5/5</p>
+    <p class="social-count"><strong>5 modèles</strong> premium · Livrés en Auvergne-Rhône-Alpes</p>
     <div class="trust-row" aria-hidden="true">
       <span class="trust-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 1.5L2 3.5v3.3C2 9.5 4 11.5 6.5 12c2.5-.5 4.5-2.5 4.5-5.2V3.5z"/></svg>Assurance incluse</span>
       <span class="trust-sep">·</span>
@@ -1090,11 +1096,11 @@ body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidde
 
 <script>
 var V=[
-  {id:'rs3',   brand:'Audi',    name:'RS3',           year:'2025',type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-photo.jpg',    badge:'Populaire'},
-  {id:'golfr', brand:'VW',      name:'Golf 8R',       year:'2025',type:'Sport',       power:'350 ch',price:219,img:'assets/golfr-photo.jpg',   badge:'Coup de cœur'},
-  {id:'golf8', brand:'VW',      name:'Golf 8',        year:'2025',type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-black.png'},
-  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', year:'2026',type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-red.jpg',     badge:'Nouveau 2026'},
-  {id:'clio5', brand:'Renault', name:'Clio 5',        year:'2025',type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-blue.jpg'}
+  {id:'rs3',   brand:'Audi',    name:'RS3',           year:'2025',type:'Sport',       power:'355 ch',price:349,img:'assets/rs3-action.avif',  pos:'center 35%',  badge:'Populaire'},
+  {id:'golfr', brand:'VW',      name:'Golf 8R',       year:'2025',type:'Sport',       power:'350 ch',price:219,img:'assets/golf8r-studio.jpg', pos:'center',      badge:'Coup de cœur'},
+  {id:'golf8', brand:'VW',      name:'Golf 8',        year:'2025',type:'Polyvalente', power:'130 ch',price:119,img:'assets/golf8-blue.jpg',   pos:'center 40%'},
+  {id:'clio6', brand:'Renault', name:'Clio 6 Alpine', year:'2026',type:'Sport',       power:'128 ch',price:129,img:'assets/clio6-grey.jpg',   pos:'center',      badge:'Nouveau 2026'},
+  {id:'clio5', brand:'Renault', name:'Clio 5',        year:'2025',type:'Citadine',    power:'90 ch', price:89, img:'assets/clio5-city.jpg',   pos:'center'}
 ];
 var FB={Sport:'bs',Citadine:'bc',Polyvalente:'bp'};
 var TG={Sport:'ts',Citadine:'tc',Polyvalente:'tp'};
@@ -1130,6 +1136,7 @@ function buildFleet(){
     return '<div class="fc" role="listitem" tabindex="0"'
       +' onclick="fpick(\''+v.id+'\')">'
       +'<img class="fc-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' '+v.year+' — location premium BeLoc"'
+      +' style="object-position:'+(v.pos||'center')+'"'
       +' loading="'+(i===0?'eager':'lazy')+'" onerror="this.style.background=\'#18181C\'" />'
       +'<div class="fc-body">'
       +(v.badge?'<p class="pop-badge">'+v.badge+'</p>':'')
@@ -1172,7 +1179,7 @@ function buildVList(){
   var el=document.getElementById('vlist');
   el.innerHTML=V.map(function(v){
     return '<div class="vcard" id="vc-'+v.id+'" role="listitem" tabindex="0" onclick="pick(\''+v.id+'\')">'
-      +'<img class="vcard-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' — location BeLoc" loading="lazy" onerror="this.style.background=\'#D4D4D8\'" />'
+      +'<img class="vcard-img" src="'+v.img+'" alt="'+v.brand+' '+v.name+' — location BeLoc" style="object-position:'+(v.pos||'center')+'" loading="lazy" onerror="this.style.background=\'#D4D4D8\'" />'
       +'<div class="vcard-body">'
       +'<div class="vcard-row">'
       +'<div><p class="vcard-name">'+v.name+'</p><p class="vcard-brand">'+v.brand+'</p></div>'
@@ -1553,13 +1560,13 @@ function mwPickDate(d,y,m){
   var mm=String(m+1).padStart(2,'0'),dd=String(d).padStart(2,'0');
   if(mwCalMode==='d1'){
     MW.d1=y+'-'+mm+'-'+dd;mwD1Manual=true;
-    var el=document.getElementById('mw-d1-txt');
-    el.textContent=dd+'/'+mm+'/'+y;el.classList.remove('mw-ph');
+    var elD1=document.getElementById('mw-d1-txt');
+    elD1.textContent=dd+'/'+mm+'/'+y;elD1.classList.remove('mw-ph');
     mwHideCal();
   }else{
     MW.d0=y+'-'+mm+'-'+dd;mwD1Manual=false;
-    var el=document.getElementById('mw-d0-txt');
-    el.textContent=dd+'/'+mm+'/'+y;el.classList.remove('mw-ph');
+    var elD0=document.getElementById('mw-d0-txt');
+    elD0.textContent=dd+'/'+mm+'/'+y;elD0.classList.remove('mw-ph');
     mwRecalc();mwHideCal();
   }
 }
@@ -1576,6 +1583,11 @@ function mwRecalc(){
 }
 
 function mwSubmit(){
+  if(!MW.vid && !MW.d0){
+    var first=document.querySelector('.mw-field');
+    if(first)first.focus();
+    return;
+  }
   if(MW.vid)pick(MW.vid);
   if(MW.d0){
     var ds=document.getElementById('ds');
